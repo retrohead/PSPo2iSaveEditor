@@ -1,4 +1,4 @@
-﻿namespace pspo2seSaveEditorProgram.Properties
+﻿namespace pspo2se.Properties
 {
     using System;
     using System.CodeDom.Compiler;
@@ -26,7 +26,7 @@
             {
                 if (ReferenceEquals(resourceMan, null))
                 {
-                    resourceMan = new System.Resources.ResourceManager("pspo2seSaveEditorProgram.Properties.Resources", typeof(Resources).Assembly);
+                    resourceMan = new System.Resources.ResourceManager("pspo2se.Properties.Resources", typeof(Resources).Assembly);
                 }
                 return resourceMan;
             }

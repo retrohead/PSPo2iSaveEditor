@@ -1,6 +1,6 @@
-﻿namespace pspo2seSaveEditorProgram
+﻿namespace PSPo2iSaveEditor
 {
-    using pspo2seSaveEditorProgram.Properties;
+    using PSPo2iSaveEditor.Properties;
     using System;
     using System.ComponentModel;
     using System.Drawing;

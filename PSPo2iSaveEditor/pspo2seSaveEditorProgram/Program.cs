@@ -1,4 +1,4 @@
-﻿namespace pspo2seSaveEditorProgram
+﻿namespace PSPo2iSaveEditor
 {
     using System;
     using System.Windows.Forms;

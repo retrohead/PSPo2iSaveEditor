@@ -1,4 +1,4 @@
-﻿namespace pspo2seSaveEditorProgram.Properties
+﻿namespace PSPo2iSaveEditor.Properties
 {
     using System.CodeDom.Compiler;
     using System.Configuration;

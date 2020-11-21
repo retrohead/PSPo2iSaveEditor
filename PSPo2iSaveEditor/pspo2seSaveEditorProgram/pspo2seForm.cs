@@ -1,8 +1,8 @@
-﻿namespace pspo2seSaveEditorProgram
+﻿namespace PSPo2iSaveEditor
 {
     using CSEncryptDecrypt;
     using FolderZipper;
-    using pspo2seSaveEditorProgram.Properties;
+    using PSPo2iSaveEditor.Properties;
     using System;
     using System.Collections;
     using System.Collections.Generic;
@@ -1932,8 +1932,8 @@
             {
                 inventoryItemClass item = null;
                 item = !ReferenceEquals(page, this.tabPageStorage) ? this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].inventory.item[int.Parse(this.inventoryView.SelectedItems[0].SubItems[1].Text)] : this.saveData.sharedInventory.item[int.Parse(this.storageView.SelectedItems[0].SubItems[1].Text)];
-                this.entryForm.oldVal = (item.pa_level + 1);
-                this.entryForm.newVal = (item.pa_level + 1);
+                this.entryForm.oldVal = (item.pa_level + 1).ToString();
+                this.entryForm.newVal = (item.pa_level + 1).ToString();
                 this.entryForm.description = "PA disk level";
                 this.entryForm.maxLen = 2;
                 if (this.entryForm.ShowDialog(this) == DialogResult.OK)

@@ -22,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -31,8 +32,15 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FolderZipper">
+      <HintPath>dll\FolderZipper.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>dll\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -53,7 +61,6 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Global.cs" />
     <Compile Include="obj\Debug\.NETFramework,Version=v4.7.2.AssemblyAttributes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="pspo2seSaveEditorProgram\changeLogForm.cs">
@@ -92,6 +99,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="pspo2seSaveEditorProgram.changeLogForm.resources" />
     <EmbeddedResource Include="pspo2seSaveEditorProgram.Properties.Resources.resources" />
@@ -101,6 +109,9 @@
     <EmbeddedResource Include="pspo2seSaveEditorProgram.pspo2seTypeAbilitiesForm.resources" />
     <EmbeddedResource Include="pspo2seSaveEditorProgram.updateInfoForm.resources" />
     <EmbeddedResource Include="pspo2seSaveEditorProgram.weaponDbForm.resources" />
+    <EmbeddedResource Include="pspo2seSaveEditorProgram\pspo2seForm.resx">
+      <DependentUpon>pspo2seForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="NPJH50332\Mr. Ecoeco Stick %28えこえこステッキくん%29.pspo2item" />
     <None Include="NPJH50332\PARAM.SFO" />
     <None Include="NPJH50332\SAVEDATA.BIN" />
@@ -119,6 +130,130 @@
   <ItemGroup>
     <Content Include="NPJH50332\ICON0.PNG" />
     <Content Include="NPJH50332\PIC1.PNG" />
+    <None Include="Resources\weaponDbListViewBg.png" />
+    <None Include="Resources\weapon_whip.png" />
+    <None Include="Resources\weapon_wand.png" />
+    <None Include="Resources\weapon_tmag.png" />
+    <None Include="Resources\weapon_sword.png" />
+    <None Include="Resources\weapon_spear.png" />
+    <None Include="Resources\weapon_slicer.png" />
+    <None Include="Resources\weapon_shotgun.png" />
+    <None Include="Resources\weapon_shield.png" />
+    <None Include="Resources\weapon_sabers.png" />
+    <None Include="Resources\weapon_saber.png" />
+    <None Include="Resources\weapon_rod.png" />
+    <None Include="Resources\weapon_rmag.png" />
+    <None Include="Resources\weapon_rifle.png" />
+    <None Include="Resources\weapon_machinegun.png" />
+    <None Include="Resources\weapon_longbow.png" />
+    <None Include="Resources\weapon_laser.png" />
+    <None Include="Resources\weapon_knuckles.png" />
+    <None Include="Resources\weapon_handguns.png" />
+    <None Include="Resources\weapon_handgun.png" />
+    <None Include="Resources\weapon_grenade.png" />
+    <None Include="Resources\weapon_double_saber.png" />
+    <None Include="Resources\weapon_daggers.png" />
+    <None Include="Resources\weapon_dagger.png" />
+    <None Include="Resources\weapon_crossbow.png" />
+    <None Include="Resources\weapon_claws.png" />
+    <None Include="Resources\weapon_claw.png" />
+    <None Include="Resources\weapon_card.png" />
+    <None Include="Resources\weapon_axe.png" />
+    <None Include="Resources\TypeAbilitiesUsed.png" />
+    <None Include="Resources\TypeAbilitiesListBg.png" />
+    <None Include="Resources\TypeAbilitiesFree.png" />
+    <None Include="Resources\TypeAbilities_cost_4.png" />
+    <None Include="Resources\TypeAbilities_cost_3.png" />
+    <None Include="Resources\TypeAbilities_cost_2.png" />
+    <None Include="Resources\TypeAbilities_cost_1.png" />
+    <None Include="Resources\TypeAbilities.png" />
+    <None Include="Resources\type_weapons.png" />
+    <None Include="Resources\trap_ex.png" />
+    <None Include="Resources\trap.png" />
+    <None Include="Resources\star_s2.gif" />
+    <None Include="Resources\star_S.gif" />
+    <None Include="Resources\star_C.gif" />
+    <None Include="Resources\star_B.gif" />
+    <None Include="Resources\star_A.gif" />
+    <None Include="Resources\slot_visual.png" />
+    <None Include="Resources\slot_unit.png" />
+    <None Include="Resources\slot_suv.png" />
+    <None Include="Resources\slot_mirage.png" />
+    <None Include="Resources\saveicon.png" />
+    <None Include="Resources\save_icon.png" />
+    <None Include="Resources\rank_Unknown.png" />
+    <None Include="Resources\rank_S.png" />
+    <None Include="Resources\rank_C.png" />
+    <None Include="Resources\rank_B.png" />
+    <None Include="Resources\rank_A.png" />
+    <None Include="Resources\PSP2i_logo.png" />
+    <None Include="Resources\PSP2i.png" />
+    <None Include="Resources\PSP2_logo.png" />
+    <None Include="Resources\PSP2.png" />
+    <None Include="Resources\parts_torso.png" />
+    <None Include="Resources\parts_set.png" />
+    <None Include="Resources\parts_legs.png" />
+    <None Include="Resources\parts_arms.png" />
+    <None Include="Resources\open1.png" />
+    <None Include="Resources\open.png" />
+    <None Include="Resources\NOICON.png" />
+    <None Include="Resources\nagisa_panel_bg.png" />
+    <None Include="Resources\nagisa.png" />
+    <None Include="Resources\manlogo_Yohmei.gif" />
+    <None Include="Resources\manlogo_Tenora.png" />
+    <None Include="Resources\manlogo_Roar.gif" />
+    <None Include="Resources\manlogo_Miyab.png" />
+    <None Include="Resources\manlogo_Kubara.gif" />
+    <None Include="Resources\manlogo_GRM.png" />
+    <None Include="Resources\manlogo_Cubic.gif" />
+    <None Include="Resources\item_sol.png" />
+    <None Include="Resources\item_pm.png" />
+    <None Include="Resources\item_pa_disk.png" />
+    <None Include="Resources\item_meseta.png" />
+    <None Include="Resources\item_mate.png" />
+    <None Include="Resources\item_extend.png" />
+    <None Include="Resources\item_doll.png" />
+    <None Include="Resources\item_decoration.png" />
+    <None Include="Resources\item_calorie.png" />
+    <None Include="Resources\item_buff.png" />
+    <None Include="Resources\item.png" />
+    <None Include="Resources\infinity_item.png" />
+    <None Include="Resources\icon_10th.png" />
+    <None Include="Resources\group_box_top_right.png" />
+    <None Include="Resources\group_box_top_left.png" />
+    <None Include="Resources\group_box_top.png" />
+    <None Include="Resources\group_box_right.png" />
+    <None Include="Resources\group_box_left.png" />
+    <None Include="Resources\group_box_btm_right.png" />
+    <None Include="Resources\group_box_btm_left.png" />
+    <None Include="Resources\group_box_btm.png" />
+    <None Include="Resources\free_slot.png" />
+    <None Include="Resources\exit1.png" />
+    <None Include="Resources\exit.png" />
+    <None Include="Resources\equipped_now.png" />
+    <None Include="Resources\equipped.png" />
+    <None Include="Resources\element_thunder.gif" />
+    <None Include="Resources\element_neutral.gif" />
+    <None Include="Resources\element_light.gif" />
+    <None Include="Resources\element_ice.gif" />
+    <None Include="Resources\element_fire.gif" />
+    <None Include="Resources\element_earth.gif" />
+    <None Include="Resources\element_dark.gif" />
+    <None Include="Resources\drop_button_over.png" />
+    <None Include="Resources\drop_button.png" />
+    <None Include="Resources\database_import.png" />
+    <None Include="Resources\cross_icon1.png" />
+    <None Include="Resources\cross_icon.png" />
+    <None Include="Resources\clothes_top_set.png" />
+    <None Include="Resources\clothes_top.png" />
+    <None Include="Resources\clothes_shoes.png" />
+    <None Include="Resources\clothes_set.png" />
+    <None Include="Resources\clothes_bottom_set.png" />
+    <None Include="Resources\clothes_bottom.png" />
+    <None Include="Resources\check_for_update.png" />
+    <None Include="Resources\armor_icon.png" />
+    <None Include="Resources\____psuwiki.png" />
+    <None Include="Resources\printPreviewDialog1.Icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
