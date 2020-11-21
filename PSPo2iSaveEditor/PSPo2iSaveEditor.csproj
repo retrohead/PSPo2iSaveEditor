@@ -164,6 +164,14 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="pspo2seSaveEditorProgram.changeLogForm.resources" />
+    <EmbeddedResource Include="pspo2seSaveEditorProgram.Properties.Resources.resources" />
+    <EmbeddedResource Include="pspo2seSaveEditorProgram.pspo2seEntryForm.resources" />
+    <EmbeddedResource Include="pspo2seSaveEditorProgram.pspo2seForm.resources" />
+    <EmbeddedResource Include="pspo2seSaveEditorProgram.pspo2seInfinityMissionForm.resources" />
+    <EmbeddedResource Include="pspo2seSaveEditorProgram.pspo2seTypeAbilitiesForm.resources" />
+    <EmbeddedResource Include="pspo2seSaveEditorProgram.updateInfoForm.resources" />
+    <EmbeddedResource Include="pspo2seSaveEditorProgram.weaponDbForm.resources" />
     <None Include="apPatcherApp.Resources.ASCII.fon" />
     <None Include="apPatcherApp.Resources.ASCII.ttf" />
     <None Include="DS-Scene Rom Tool.csproj" />
@@ -180,6 +188,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="PSPo2 Save Editor.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
