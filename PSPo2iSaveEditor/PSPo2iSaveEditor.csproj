@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F737746B-EAE4-4D4B-AA7E-E63595259FA2}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>PSPo2iSaveEditor</RootNamespace>
+    <AssemblyName>PSPo2iSaveEditor</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="apPatcherApp\apPatcherAppForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="apPatcherApp\apPatcherNfoViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="apPatcherApp\ArchivePropId.cs" />
+    <Compile Include="apPatcherApp\AskMode.cs" />
+    <Compile Include="apPatcherApp\batchOrganiseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="apPatcherApp\batchPatchForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="apPatcherApp\changeLogForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="apPatcherApp\collectionDb.cs" />
+    <Compile Include="apPatcherApp\collectionViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="apPatcherApp\compressedArchiveOperator.cs" />
+    <Compile Include="apPatcherApp\Crc32.cs" />
+    <Compile Include="apPatcherApp\crcDupes.cs" />
+    <Compile Include="apPatcherApp\CreateObjectDelegate.cs" />
+    <Compile Include="apPatcherApp\DataAvailableEventArgs.cs" />
+    <Compile Include="apPatcherApp\DataAvailableHandler.cs" />
+    <Compile Include="apPatcherApp\emulatorConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="apPatcherApp\ExtractionProgressEventArgs.cs" />
+    <Compile Include="apPatcherApp\ExtractionProgressHandler.cs" />
+    <Compile Include="apPatcherApp\FileTimeType.cs" />
+    <Compile Include="apPatcherApp\GetHandlerProperty2Delegate.cs" />
+    <Compile Include="apPatcherApp\GetHandlerPropertyDelegate.cs" />
+    <Compile Include="apPatcherApp\GetNumberOfFormatsDelegate.cs" />
+    <Compile Include="apPatcherApp\hexAndMathFunctions.cs" />
+    <Compile Include="apPatcherApp\IArchiveExtractCallback.cs" />
+    <Compile Include="apPatcherApp\IArchiveOpenCallback.cs" />
+    <Compile Include="apPatcherApp\IArchiveOpenVolumeCallback.cs" />
+    <Compile Include="apPatcherApp\IArchiveUpdateCallback.cs" />
+    <Compile Include="apPatcherApp\IArchiveUpdateCallback2.cs" />
+    <Compile Include="apPatcherApp\ICryptoGetTextPassword.cs" />
+    <Compile Include="apPatcherApp\ICryptoGetTextPassword2.cs" />
+    <Compile Include="apPatcherApp\IInArchive.cs" />
+    <Compile Include="apPatcherApp\IInArchiveGetStream.cs" />
+    <Compile Include="apPatcherApp\IInStream.cs" />
+    <Compile Include="apPatcherApp\InStreamTimedWrapper.cs" />
+    <Compile Include="apPatcherApp\InStreamWrapper.cs" />
+    <Compile Include="apPatcherApp\IOutArchive.cs" />
+    <Compile Include="apPatcherApp\IOutStream.cs" />
+    <Compile Include="apPatcherApp\IOutStreamFlush.cs" />
+    <Compile Include="apPatcherApp\IProgress.cs" />
+    <Compile Include="apPatcherApp\ISequentialInStream.cs" />
+    <Compile Include="apPatcherApp\ISequentialOutStream.cs" />
+    <Compile Include="apPatcherApp\ISetProperties.cs" />
+    <Compile Include="apPatcherApp\IStreamGetSize.cs" />
+    <Compile Include="apPatcherApp\ItemPropId.cs" />
+    <Compile Include="apPatcherApp\KnownSevenZipFormat.cs" />
+    <Compile Include="apPatcherApp\MissingVolumeEventArgs.cs" />
+    <Compile Include="apPatcherApp\MissingVolumeHandler.cs" />
+    <Compile Include="apPatcherApp\NewFileEventArgs.cs" />
+    <Compile Include="apPatcherApp\NewFileHandler.cs" />
+    <Compile Include="apPatcherApp\NewVolumeEventArgs.cs" />
+    <Compile Include="apPatcherApp\NewVolumeHandler.cs" />
+    <Compile Include="apPatcherApp\OperationResult.cs" />
+    <Compile Include="apPatcherApp\optionsInfo.cs" />
+    <Compile Include="apPatcherApp\OutStreamWrapper.cs" />
+    <Compile Include="apPatcherApp\PasswordRequiredEventArgs.cs" />
+    <Compile Include="apPatcherApp\PasswordRequiredHandler.cs" />
+    <Compile Include="apPatcherApp\patchdb.cs" />
+    <Compile Include="apPatcherApp\Program.cs" />
+    <Compile Include="apPatcherApp\Properties\Resources.cs" />
+    <Compile Include="apPatcherApp\Properties\Settings.cs" />
+    <Compile Include="apPatcherApp\RARFileInfo.cs" />
+    <Compile Include="apPatcherApp\settings.cs" />
+    <Compile Include="apPatcherApp\SevenZipFormat.cs" />
+    <Compile Include="apPatcherApp\StreamWrapper.cs" />
+    <Compile Include="apPatcherApp\Unrar.cs" />
+    <Compile Include="apPatcherApp\updateInfoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="apPatcherApp\webInfo.cs" />
+    <Compile Include="Blue\Private\Win32Imports\Win32.cs" />
+    <Compile Include="Blue\Windows\StickyWindow.cs" />
+    <Compile Include="CSEncryptDecrypt\encryptRoutineType.cs" />
+    <Compile Include="dsRomHeaderFunctions\dsromHeader.cs" />
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Global.cs" />
+    <Compile Include="Microsoft\COM\PropVariant.cs" />
+    <Compile Include="obj\Debug\.NETFramework,Version=v4.7.2.AssemblyAttributes.cs" />
+    <Compile Include="obj\x86\Debug\.NETFramework,Version=v4.0.AssemblyAttributes.cs" />
+    <Compile Include="obj\x86\Release\.NETFramework,Version=v4.0.AssemblyAttributes.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="apPatcherApp.apPatcherAppForm.resources" />
+    <EmbeddedResource Include="apPatcherApp.apPatcherNfoViewer.resources" />
+    <EmbeddedResource Include="apPatcherApp.batchOrganiseForm.resources" />
+    <EmbeddedResource Include="apPatcherApp.batchPatchForm.resources" />
+    <EmbeddedResource Include="apPatcherApp.changeLogForm.resources" />
+    <EmbeddedResource Include="apPatcherApp.collectionViewer.resources" />
+    <EmbeddedResource Include="apPatcherApp.emulatorConfig.resources" />
+    <EmbeddedResource Include="apPatcherApp.Properties.Resources.resources" />
+    <EmbeddedResource Include="apPatcherApp.updateInfoForm.resources" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="apPatcherApp.Resources.ASCII.fon" />
+    <None Include="apPatcherApp.Resources.ASCII.ttf" />
+    <None Include="DS-Scene Rom Tool.csproj" />
+    <None Include="obj\Debug\DesignTimeResolveAssemblyReferences.cache" />
+    <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="obj\Debug\PSPo2iSaveEditor.csprojAssemblyReference.cache" />
+    <None Include="obj\x86\Debug\DS-Scene Rom Tool.csprojAssemblyReference.cache" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Debug\" />
+    <Folder Include="obj\Debug\TempPE\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
