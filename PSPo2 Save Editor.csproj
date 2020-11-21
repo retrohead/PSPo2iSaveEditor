@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!--Project was exported from assembly: C:\Development\PSPo2 Save Editor v3.0 build 1004 pack\PSPo2 Save Editor.exe-->
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{11DBABDC-28A3-4C73-980C-522CF02E4F6F}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AssemblyName>PSPo2 Save Editor</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <ApplicationVersion>1.0.0.0</ApplicationVersion>
+    <FileAlignment>512</FileAlignment>
+    <RootNamespace>pspo2seSaveEditorProgram</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="FolderZipper">
+      <HintPath>lib\FolderZipper.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CSEncryptDecrypt\encryptRoutineType.cs" />
+    <Compile Include="saveStructureIndexType.cs" />
+    <Compile Include="pspo2seSettings.cs" />
+    <Compile Include="pspo2seForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="updateInfoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="changeLogForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="pspo2seAbilityDb.cs" />
+    <Compile Include="hexAndMathFunctions.cs" />
+    <Compile Include="pspo2seEntryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="pspo2seInfinityMissionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="weaponDbForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="pspo2seTypeAbilitiesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\Resources.cs" />
+    <Compile Include="Properties\Settings.cs" />
+    <Compile Include="AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="changeLogForm.resx" />
+    <EmbeddedResource Include="Properties\Resources.resx" />
+    <EmbeddedResource Include="pspo2seEntryForm.resx" />
+    <EmbeddedResource Include="pspo2seForm.resx" />
+    <EmbeddedResource Include="pspo2seInfinityMissionForm.resx" />
+    <EmbeddedResource Include="pspo2seTypeAbilitiesForm.resx" />
+    <EmbeddedResource Include="updateInfoForm.resx" />
+    <EmbeddedResource Include="weaponDbForm.resx" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
