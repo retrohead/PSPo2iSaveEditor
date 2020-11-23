@@ -122,7 +122,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Content Include=".gitignore" />
     <Content Include="lib\FolderZipper.dll" />
     <None Include="Resources\%24this.Icon.ico" />
   </ItemGroup>

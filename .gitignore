@@ -1,5 +1,12 @@
-﻿################################################################################
+################################################################################
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/.vs/PSPo2 Save Editor/v16
+/.vs/PSPo2 Save Editor/v16/.suo
+/.vs/PSPo2 Save Editor/v16/Server/sqlite3
+/bin/Debug/data/temp
+/bin/Debug
+/PSPo2 Save Editor/bin
+/PSPo2 Save Editor/obj
+/PSPo2i Save Editor/bin
+/PSPo2i Save Editor/obj
