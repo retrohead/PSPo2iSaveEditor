@@ -39,57 +39,34 @@
       <HintPath>lib\FolderZipper.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CSEncryptDecrypt\encryptRoutineType.cs" />
-    <Compile Include="Forms\changeLogForm.Designer.cs">
-      <DependentUpon>changeLogForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\pspo2seEntryForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\pspo2seEntryForm.Designer.cs">
-      <DependentUpon>pspo2seEntryForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\pspo2seInfinityMissionForm.Designer.cs">
-      <DependentUpon>pspo2seInfinityMissionForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\pspo2seTypeAbilitiesForm.Designer.cs">
-      <DependentUpon>pspo2seTypeAbilitiesForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\updateInfoForm.Designer.cs">
-      <DependentUpon>updateInfoForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\weaponDbForm.Designer.cs">
-      <DependentUpon>weaponDbForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="pspo2seForm.Designer.cs">
-      <DependentUpon>pspo2seForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Classes\saveStructureIndexType.cs" />
-    <Compile Include="Classes\pspo2seSettings.cs" />
+    <Compile Include="saveStructureIndexType.cs" />
+    <Compile Include="pspo2seSettings.cs" />
     <Compile Include="pspo2seForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\updateInfoForm.cs">
+    <Compile Include="updateInfoForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\changeLogForm.cs">
+    <Compile Include="changeLogForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Classes\pspo2seAbilityDb.cs" />
-    <Compile Include="Classes\hexAndMathFunctions.cs" />
-    <Compile Include="Forms\pspo2seInfinityMissionForm.cs">
+    <Compile Include="pspo2seAbilityDb.cs" />
+    <Compile Include="hexAndMathFunctions.cs" />
+    <Compile Include="pspo2seEntryForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\weaponDbForm.cs">
+    <Compile Include="pspo2seInfinityMissionForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\pspo2seTypeAbilitiesForm.cs">
+    <Compile Include="weaponDbForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="pspo2seTypeAbilitiesForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Program.cs" />
@@ -98,33 +75,14 @@
     <Compile Include="AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Forms\changeLogForm.resx">
-      <DependentUpon>changeLogForm.cs</DependentUpon>
-    </EmbeddedResource>
+    <EmbeddedResource Include="changeLogForm.resx" />
     <EmbeddedResource Include="Properties\Resources.resx" />
-    <EmbeddedResource Include="Forms\pspo2seEntryForm.resx">
-      <DependentUpon>pspo2seEntryForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="pspo2seForm.resx">
-      <DependentUpon>pspo2seForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\pspo2seInfinityMissionForm.resx">
-      <DependentUpon>pspo2seInfinityMissionForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\pspo2seTypeAbilitiesForm.resx">
-      <DependentUpon>pspo2seTypeAbilitiesForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\updateInfoForm.resx">
-      <DependentUpon>updateInfoForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\weaponDbForm.resx">
-      <DependentUpon>weaponDbForm.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include=".gitignore" />
-    <Content Include="lib\FolderZipper.dll" />
-    <None Include="Resources\%24this.Icon.ico" />
+    <EmbeddedResource Include="pspo2seEntryForm.resx" />
+    <EmbeddedResource Include="pspo2seForm.resx" />
+    <EmbeddedResource Include="pspo2seInfinityMissionForm.resx" />
+    <EmbeddedResource Include="pspo2seTypeAbilitiesForm.resx" />
+    <EmbeddedResource Include="updateInfoForm.resx" />
+    <EmbeddedResource Include="weaponDbForm.resx" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -15,4 +15,3 @@ C:\Development\PSPo2 Save Editor\PSPo2 Save Editor\obj\Debug\PSPo2 Save Editor.c
 C:\Development\PSPo2 Save Editor\PSPo2 Save Editor\obj\Debug\PSPo2 Save Editor.csproj.CopyComplete
 C:\Development\PSPo2 Save Editor\PSPo2 Save Editor\obj\Debug\PSPo2 Save Editor.exe
 C:\Development\PSPo2 Save Editor\PSPo2 Save Editor\obj\Debug\PSPo2 Save Editor.pdb
-C:\Development\PSPo2 Save Editor\PSPo2 Save Editor\bin\Debug\ICSharpCode.SharpZipLib.dll
