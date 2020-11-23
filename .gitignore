@@ -14,18 +14,26 @@
 *.userprefs
 
 # Build results
-[Dd]ebug/
-[Dd]ebugPublic/
-[Rr]elease/
-[Rr]eleases/
+PSPo2 Save Editor/[Dd]ebug/
+PSPo2 Save Editor/[Dd]ebugPublic/
+PSPo2 Save Editor/[Rr]elease/
+PSPo2 Save Editor/[Rr]eleases/
+PSPo2i Save Editor/[Dd]ebug/
+PSPo2i Save Editor/[Dd]ebugPublic/
+PSPo2i Save Editor/[Rr]elease/
+PSPo2i Save Editor/[Rr]eleases/
 x64/
 x86/
 [Aa][Rr][Mm]/
 [Aa][Rr][Mm]64/
-bld/
-[Bb]in/
-[Oo]bj/
-[Ll]og/
+PSPo2 Save Editor/bld/
+PSPo2 Save Editor/[Bb]in/
+PSPo2 Save Editor/[Oo]bj/
+PSPo2 Save Editor/[Ll]og/
+PSPo2i Save Editor/bld/
+PSPo2i Save Editor/[Bb]in/
+PSPo2i Save Editor/[Oo]bj/
+PSPo2i Save Editor/[Ll]og/
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/
