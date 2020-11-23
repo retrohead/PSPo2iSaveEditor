@@ -71,6 +71,80 @@ namespace pspo2seSaveEditorProgram
         public pspo2seForm.itemDbClass item_db = new pspo2seForm.itemDbClass();
         public int item_db_filled;
 
+
+        private class imageFloatBox
+        {
+            public Point pnlloc = new Point();
+            public Point grploc = new Point();
+            public PictureBox picBox = new PictureBox();
+            public FileInfo[] imagelist = new FileInfo[1500];
+            public int filled;
+        }
+
+        public class typeWeaponRankFields
+        {
+            public PictureBox[] imgWeap = new PictureBox[29];
+            public PictureBox[] imgRank = new PictureBox[29];
+        }
+
+        public class pageFields
+        {
+            public PictureBox img_rank;
+            public PictureBox img_item;
+            public PictureBox img_manufaturer;
+            public PictureBox img_infinity_item;
+            public PictureBox img_element;
+            public PictureBox img_star_0;
+            public PictureBox img_star_1;
+            public PictureBox img_star_2;
+            public PictureBox img_star_3;
+            public PictureBox img_star_4;
+            public PictureBox img_star_5;
+            public PictureBox img_star_6;
+            public PictureBox img_star_7;
+            public PictureBox img_star_8;
+            public PictureBox img_star_9;
+            public PictureBox img_star_10;
+            public PictureBox img_star_11;
+            public PictureBox img_star_12;
+            public PictureBox img_star_13;
+            public PictureBox img_star_14;
+            public PictureBox img_star_15;
+            public Label txt_infinity_item;
+            public Label txt_name;
+            public Label txt_name_jp;
+            public Label txt_grinds;
+            public Label txt_percent;
+            public Label txt_qty;
+            public Label txt_hex;
+            public Label txt_meseta;
+            public Label txt_special;
+            public Label txt_effect;
+            public Label txt_atk;
+            public Label txt_acc;
+            public Label txt_level;
+            public Button btn_delete;
+            public Button btn_export_selected;
+            public Button btn_import_selected;
+            public CheckBox chk_delete_export;
+            public Button btn_withdraw;
+            public GroupBox grp_details;
+            public Panel pnl_details;
+        }
+
+        public class typeSectionFields
+        {
+            public Label txtLevel;
+            public Label txtExp;
+            public Label expBar;
+            public GroupBox grpExtend;
+        }
+
+        public class runFunctionsType
+        {
+            public hexAndMathFunctions hexAndMathFunction = new hexAndMathFunctions();
+        }
+
         private void loadImageFloaterImages()
         {
             string path = "data/weapon_images/";
@@ -3600,7 +3674,7 @@ namespace pspo2seSaveEditorProgram
                         streamReader.Close();
                     }
                 }
-                catch (Exception ex)
+                catch
                 {
                 }
                 if (str3 != progressTxt)
@@ -7172,73 +7246,17 @@ namespace pspo2seSaveEditorProgram
             return true;
         }
 
-        private class imageFloatBox
+        public enum partFileType
         {
-            public Point pnlloc = new Point();
-            public Point grploc = new Point();
-            public PictureBox picBox = new PictureBox();
-            public FileInfo[] imagelist = new FileInfo[1500];
-            public int filled;
+            character,
+            inventory,
+            storage,
+            item,
+            infinity_mission,
+            infinity_mission_pack,
         }
 
-        public class typeWeaponRankFields
-        {
-            public PictureBox[] imgWeap = new PictureBox[29];
-            public PictureBox[] imgRank = new PictureBox[29];
-        }
-
-        public class pageFields
-        {
-            public PictureBox img_rank;
-            public PictureBox img_item;
-            public PictureBox img_manufaturer;
-            public PictureBox img_infinity_item;
-            public PictureBox img_element;
-            public PictureBox img_star_0;
-            public PictureBox img_star_1;
-            public PictureBox img_star_2;
-            public PictureBox img_star_3;
-            public PictureBox img_star_4;
-            public PictureBox img_star_5;
-            public PictureBox img_star_6;
-            public PictureBox img_star_7;
-            public PictureBox img_star_8;
-            public PictureBox img_star_9;
-            public PictureBox img_star_10;
-            public PictureBox img_star_11;
-            public PictureBox img_star_12;
-            public PictureBox img_star_13;
-            public PictureBox img_star_14;
-            public PictureBox img_star_15;
-            public Label txt_infinity_item;
-            public Label txt_name;
-            public Label txt_name_jp;
-            public Label txt_grinds;
-            public Label txt_percent;
-            public Label txt_qty;
-            public Label txt_hex;
-            public Label txt_meseta;
-            public Label txt_special;
-            public Label txt_effect;
-            public Label txt_atk;
-            public Label txt_acc;
-            public Label txt_level;
-            public Button btn_delete;
-            public Button btn_export_selected;
-            public Button btn_import_selected;
-            public CheckBox chk_delete_export;
-            public Button btn_withdraw;
-            public GroupBox grp_details;
-            public Panel pnl_details;
-        }
-
-        public class typeSectionFields
-        {
-            public Label txtLevel;
-            public Label txtExp;
-            public Label expBar;
-            public GroupBox grpExtend;
-        }
+#region 'Save File'
 
         public class expDb_ItemClass
         {
@@ -7250,17 +7268,12 @@ namespace pspo2seSaveEditorProgram
 
         public class expDbType
         {
-            public pspo2seForm.expDb_ItemClass[] level = new pspo2seForm.expDb_ItemClass[355];
+            public expDb_ItemClass[] level = new expDb_ItemClass[355];
         }
 
         public class typeexpDbType
         {
-            public pspo2seForm.expDb_ItemClass[] level = new pspo2seForm.expDb_ItemClass[55];
-        }
-
-        public class runFunctionsType
-        {
-            public hexAndMathFunctions hexAndMathFunction = new hexAndMathFunctions();
+            public expDb_ItemClass[] level = new expDb_ItemClass[55];
         }
 
         public enum SaveType
@@ -7285,9 +7298,9 @@ namespace pspo2seSaveEditorProgram
             public string name = "";
             public string title = "";
             public string playtime = "";
-            public pspo2seForm.raceTypes race;
-            public pspo2seForm.sexType sex;
-            public pspo2seForm.jobType cur_type;
+            public raceTypes race;
+            public sexType sex;
+            public jobType cur_type;
             public int level;
             public int exp;
             public int exp_next;
@@ -7306,10 +7319,10 @@ namespace pspo2seSaveEditorProgram
             public string story_ep_1_points;
             public string story_ep_1_best_end;
             public string story_ep_2_points;
-            public pspo2seForm.paInfoType pa = new pspo2seForm.paInfoType();
-            public pspo2seForm.rebirthType rebirth = new pspo2seForm.rebirthType();
-            public pspo2seForm.jobClass[] job = new pspo2seForm.jobClass[4];
-            public pspo2seForm.inventoryClass inventory = new pspo2seForm.inventoryClass();
+            public paInfoType pa = new paInfoType();
+            public rebirthType rebirth = new rebirthType();
+            public jobClass[] job = new jobClass[4];
+            public inventoryClass inventory = new inventoryClass();
         }
 
         public enum raceTypes
@@ -7349,8 +7362,8 @@ namespace pspo2seSaveEditorProgram
             public int extendpoints;
             public int extendpointsused;
             public string attachedAbilities;
-            public pspo2seForm.jobType job;
-            public pspo2seForm.extendRankType[] weapons_extended = new pspo2seForm.extendRankType[29];
+            public jobType job;
+            public extendRankType[] weapons_extended = new extendRankType[29];
         }
 
         public class rebirthType
@@ -7372,7 +7385,7 @@ namespace pspo2seSaveEditorProgram
         public class paInfoType
         {
             public int count;
-            public pspo2seForm.inventoryItemClass[] items = new pspo2seForm.inventoryItemClass[256];
+            public inventoryItemClass[] items = new inventoryItemClass[256];
         }
 
         public class infinityMissionClass : IComparable
@@ -7406,25 +7419,25 @@ namespace pspo2seSaveEditorProgram
             public int clearCount_s;
             public int clearCount_inf;
 
-            public int CompareTo(object obj) => obj is pspo2seForm.infinityMissionClass ? this.hex.CompareTo(((pspo2seForm.infinityMissionClass)obj).hex) : throw new ArgumentException("Object is not of type infinityMissionClass.");
+            public int CompareTo(object obj) => obj is infinityMissionClass ? this.hex.CompareTo(((infinityMissionClass)obj).hex) : throw new ArgumentException("Object is not of type infinityMissionClass.");
         }
 
         public class infinityMissionSlotsClass
         {
             public int itemsUsed;
-            public pspo2seForm.infinityMissionClass[] slot = new pspo2seForm.infinityMissionClass[100];
+            public infinityMissionClass[] slot = new infinityMissionClass[100];
         }
 
         public class saveDataType
         {
-            public pspo2seForm.SaveType type;
-            public pspo2seForm.saveSlotType[] slot = new pspo2seForm.saveSlotType[8];
+            public SaveType type;
+            public saveSlotType[] slot = new saveSlotType[8];
             public int size;
-            public pspo2seForm.inventorySharedClass sharedInventory = new pspo2seForm.inventorySharedClass();
-            public pspo2seForm.infinityMissionSlotsClass infinityMissions = new pspo2seForm.infinityMissionSlotsClass();
+            public inventorySharedClass sharedInventory = new inventorySharedClass();
+            public infinityMissionSlotsClass infinityMissions = new infinityMissionSlotsClass();
             public long sharedMeseta;
 
-            public void set_type(pspo2seForm.SaveType new_type) => this.type = new_type;
+            public void set_type(SaveType new_type) => this.type = new_type;
         }
 
         public enum saveInfoDataType
@@ -7631,7 +7644,7 @@ namespace pspo2seSaveEditorProgram
 
         public class itemDbClass
         {
-            public pspo2seForm.itemDb_ItemClass[] item = new pspo2seForm.itemDb_ItemClass[4000];
+            public itemDb_ItemClass[] item = new itemDb_ItemClass[4000];
         }
 
         public enum abilityType
@@ -7695,7 +7708,7 @@ namespace pspo2seSaveEditorProgram
         {
             public bool used;
             public int id;
-            public pspo2seForm.itemType type;
+            public itemType type;
             public string name;
             public string name_jp;
             public string desc;
@@ -7703,20 +7716,20 @@ namespace pspo2seSaveEditorProgram
             public string infinity_item;
             public string hex;
             public string hex_reversed;
-            public pspo2seForm.abilityType ability;
+            public abilityType ability;
             public string spcl_effect;
             public string spcl_effect_info;
-            public pspo2seForm.itemInfExtendType inf_extended;
+            public itemInfExtendType inf_extended;
             public int grinds;
             public int extended;
             public bool locked;
             public int rarity;
-            public pspo2seForm.elementType element;
+            public elementType element;
             public int pa_level;
             public int percent;
-            public pspo2seForm.weaponStyleType style;
-            public pspo2seForm.weaponHandType hand;
-            public pspo2seForm.clothesManufacturerType clothes_man;
+            public weaponStyleType style;
+            public weaponHandType hand;
+            public clothesManufacturerType clothes_man;
             public int qty;
             public int qty_max;
             public int power_add;
@@ -7736,29 +7749,20 @@ namespace pspo2seSaveEditorProgram
             public string special_level;
             public string ext_special_level;
 
-            public int CompareTo(object obj) => obj is pspo2seForm.inventoryItemClass ? this.hex.CompareTo(((pspo2seForm.inventoryItemClass)obj).hex) : throw new ArgumentException("Object is not of type inventoryItemClass.");
+            public int CompareTo(object obj) => obj is inventoryItemClass ? this.hex.CompareTo(((inventoryItemClass)obj).hex) : throw new ArgumentException("Object is not of type inventoryItemClass.");
         }
 
         public class inventoryClass
         {
             public int itemsUsed;
-            public pspo2seForm.inventoryItemClass[] item = new pspo2seForm.inventoryItemClass[60];
+            public inventoryItemClass[] item = new inventoryItemClass[60];
         }
 
         public class inventorySharedClass
         {
             public int itemsUsed;
-            public pspo2seForm.inventoryItemClass[] item = new pspo2seForm.inventoryItemClass[2000];
+            public inventoryItemClass[] item = new inventoryItemClass[2000];
         }
-
-        public enum partFileType
-        {
-            character,
-            inventory,
-            storage,
-            item,
-            infinity_mission,
-            infinity_mission_pack,
-        }
+        #endregion
     }
 }

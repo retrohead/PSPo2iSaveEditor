@@ -1,20 +1,50 @@
-
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29306.81
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PSPo2 Save Editor", "PSPo2 Save Editor.csproj", "{11DBABDC-28A3-4C73-980C-522CF02E4F6F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PSPo2i Save Editor", "..\PSPo2i Save Editor\PSPo2i Save Editor.csproj", "{6ABACA79-DB27-4DD6-9419-7B5A11BF0614}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
 		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{11DBABDC-28A3-4C73-980C-522CF02E4F6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{11DBABDC-28A3-4C73-980C-522CF02E4F6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11DBABDC-28A3-4C73-980C-522CF02E4F6F}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{11DBABDC-28A3-4C73-980C-522CF02E4F6F}.Debug|x64.Build.0 = Debug|Any CPU
+		{11DBABDC-28A3-4C73-980C-522CF02E4F6F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{11DBABDC-28A3-4C73-980C-522CF02E4F6F}.Debug|x86.Build.0 = Debug|Any CPU
 		{11DBABDC-28A3-4C73-980C-522CF02E4F6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{11DBABDC-28A3-4C73-980C-522CF02E4F6F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11DBABDC-28A3-4C73-980C-522CF02E4F6F}.Release|x64.ActiveCfg = Release|Any CPU
+		{11DBABDC-28A3-4C73-980C-522CF02E4F6F}.Release|x64.Build.0 = Release|Any CPU
+		{11DBABDC-28A3-4C73-980C-522CF02E4F6F}.Release|x86.ActiveCfg = Release|Any CPU
+		{11DBABDC-28A3-4C73-980C-522CF02E4F6F}.Release|x86.Build.0 = Release|Any CPU
+		{6ABACA79-DB27-4DD6-9419-7B5A11BF0614}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6ABACA79-DB27-4DD6-9419-7B5A11BF0614}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6ABACA79-DB27-4DD6-9419-7B5A11BF0614}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{6ABACA79-DB27-4DD6-9419-7B5A11BF0614}.Debug|x64.Build.0 = Debug|Any CPU
+		{6ABACA79-DB27-4DD6-9419-7B5A11BF0614}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6ABACA79-DB27-4DD6-9419-7B5A11BF0614}.Debug|x86.Build.0 = Debug|Any CPU
+		{6ABACA79-DB27-4DD6-9419-7B5A11BF0614}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6ABACA79-DB27-4DD6-9419-7B5A11BF0614}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6ABACA79-DB27-4DD6-9419-7B5A11BF0614}.Release|x64.ActiveCfg = Release|Any CPU
+		{6ABACA79-DB27-4DD6-9419-7B5A11BF0614}.Release|x64.Build.0 = Release|Any CPU
+		{6ABACA79-DB27-4DD6-9419-7B5A11BF0614}.Release|x86.ActiveCfg = Release|Any CPU
+		{6ABACA79-DB27-4DD6-9419-7B5A11BF0614}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6C463CF5-D842-4466-9C19-9FD475B83810}
 	EndGlobalSection
 EndGlobal
