@@ -1,0 +1,25 @@
+C:\Development\PSPo2 Save Editor\PSPo2i Save Editor\bin\Debug\PSPo2i Save Editor.exe.config
+C:\Development\PSPo2 Save Editor\PSPo2i Save Editor\bin\Debug\PSPo2i Save Editor.exe
+C:\Development\PSPo2 Save Editor\PSPo2i Save Editor\bin\Debug\PSPo2i Save Editor.pdb
+C:\Development\PSPo2 Save Editor\PSPo2i Save Editor\obj\Debug\PSPo2i Save Editor.csprojAssemblyReference.cache
+C:\Development\PSPo2 Save Editor\PSPo2i Save Editor\obj\Debug\MainWindow.g.cs
+C:\Development\PSPo2 Save Editor\PSPo2i Save Editor\obj\Debug\App.g.cs
+C:\Development\PSPo2 Save Editor\PSPo2i Save Editor\obj\Debug\PSPo2i Save Editor_MarkupCompile.cache
+C:\Development\PSPo2 Save Editor\PSPo2i Save Editor\obj\Debug\PSPo2i Save Editor_MarkupCompile.lref
+C:\Development\PSPo2 Save Editor\PSPo2i Save Editor\obj\Debug\MainWindow.baml
+C:\Development\PSPo2 Save Editor\PSPo2i Save Editor\obj\Debug\PSPo2i Save Editor.g.resources
+C:\Development\PSPo2 Save Editor\PSPo2i Save Editor\obj\Debug\PSPo2i_Save_Editor.Properties.Resources.resources
+C:\Development\PSPo2 Save Editor\PSPo2i Save Editor\obj\Debug\PSPo2i Save Editor.csproj.GenerateResource.cache
+C:\Development\PSPo2 Save Editor\PSPo2i Save Editor\obj\Debug\PSPo2i Save Editor.csproj.CoreCompileInputs.cache
+C:\Development\PSPo2 Save Editor\PSPo2i Save Editor\obj\Debug\PSPo2i Save Editor.exe
+C:\Development\PSPo2 Save Editor\PSPo2i Save Editor\obj\Debug\PSPo2i Save Editor.pdb
+C:\Development\PSPo2 Save Editor\PSPo2i Save Editor\bin\Debug\FolderZipper.dll
+C:\Development\PSPo2 Save Editor\PSPo2i Save Editor\obj\Debug\PSPo2i Save Editor.csproj.CopyComplete
+C:\Development\PSPo2 Save Editor\PSPo2i Save Editor\bin\Debug\ICSharpCode.SharpZipLib.dll
+C:\Development\PSPo2 Save Editor\PSPo2i Save Editor\obj\Debug\Resources\Themes\Theme_00.baml
+C:\Development\PSPo2 Save Editor\PSPo2i Save Editor\obj\Debug\Resources\Themes\Theme_Templates.baml
+C:\Development\PSPo2 Save Editor\PSPo2i Save Editor\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Development\PSPo2 Save Editor\PSPo2i Save Editor\obj\Debug\PSPo2i Save Editor.csproj.ResolveComReference.cache
+C:\Development\PSPo2 Save Editor\PSPo2i Save Editor\bin\Debug\Microsoft.Xaml.Behaviors.dll
+C:\Development\PSPo2 Save Editor\PSPo2i Save Editor\bin\Debug\Microsoft.Xaml.Behaviors.pdb
+C:\Development\PSPo2 Save Editor\PSPo2i Save Editor\bin\Debug\Microsoft.Xaml.Behaviors.xml

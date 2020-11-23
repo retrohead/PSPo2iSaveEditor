@@ -1,0 +1,25 @@
+﻿ <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2"
+    xmlns:local="clr-namespace:SAPDBPortal">
+
+    <Color x:Key="ColorDark">#FF201F1F</Color>
+    <Color x:Key="ColorMedium">#FF2D2C2C</Color>
+    <Color x:Key="ColorLight">#FF383838</Color>
+    <Color x:Key="ColorSelected">#FF12356A</Color>
+    <Color x:Key="ColorHighlight">#830F3C80</Color>
+    <Color x:Key="ColorPanelAlpha">#44000000</Color>
+
+    <Color x:Key="ColorInactiveText">#C4C4C4</Color>
+    <Color x:Key="ColorActiveText">#E6E6E6</Color>
+    <Color x:Key="ColorNegativeText">#BF0000</Color>
+    <Color x:Key="ColorPositiveText">#407D00</Color>
+
+    <Color x:Key="ColorHeaderText">#E6E6E6</Color>
+    <Color x:Key="ColorLabelText">#C4C4C4</Color>
+
+    <Color x:Key="ColorControlBorder">#33FFFFFF</Color>
+    <Color x:Key="ColorControlHighlightBorder">#CCFFFFFF</Color>
+     
+    <Color x:Key="ColorShadowAlpha">#FF000000</Color>
+</ResourceDictionary>
