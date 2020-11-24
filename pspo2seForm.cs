@@ -739,6 +739,7 @@ namespace pspo2seSaveEditorProgram
         public pspo2seForm()
         {
             this.InitializeComponent();
+
             if (!Directory.Exists(Directory.GetCurrentDirectory() + "\\data"))
             {
                 Directory.CreateDirectory(Directory.GetCurrentDirectory() + "\\data\\databases");
