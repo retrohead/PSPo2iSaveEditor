@@ -736,10 +736,55 @@ namespace pspo2seSaveEditorProgram
 
         public bool legitVersion() => false;
 
+        private void exportImageLists()
+        {
+            for (int x = 0; x < decoImageList.Images.Count; x++)
+            {
+                Directory.CreateDirectory("decoImageList");
+                Image temp = decoImageList.Images[x];
+                temp.Save("decoImageList/image" + x + ".png");
+            }
+            for (int x = 0; x < weaponWithRankImageList.Images.Count; x++)
+            {
+                Directory.CreateDirectory("WeaponWithRank");
+                Image temp = weaponWithRankImageList.Images[x];
+                temp.Save("WeaponWithRank/image" + x + ".png");
+            }
+            for (int x = 0; x < imageListWeaponElements.Images.Count; x++)
+            {
+                Directory.CreateDirectory("WeaponElements");
+                Image temp = imageListWeaponElements.Images[x];
+                temp.Save("WeaponElements/image" + x + ".png");
+            }
+            for (int x = 0; x < armourImageList.Images.Count; x++)
+            {
+                Directory.CreateDirectory("armourImageList");
+                Image temp = armourImageList.Images[x];
+                temp.Save("armourImageList/image" + x + ".png");
+            }
+            for (int x = 0; x < itemImageList.Images.Count; x++)
+            {
+                Directory.CreateDirectory("itemImageList");
+                Image temp = itemImageList.Images[x];
+                temp.Save("itemImageList/image" + x + ".png");
+            }
+            for (int x = 0; x < clothesImageList.Images.Count; x++)
+            {
+                Directory.CreateDirectory("clothesImageList");
+                Image temp = clothesImageList.Images[x];
+                temp.Save("clothesImageList/image" + x + ".png");
+            }
+            for (int x = 0; x < paImageList.Images.Count; x++)
+            {
+                Directory.CreateDirectory("paImageList");
+                Image temp = paImageList.Images[x];
+                temp.Save("paImageList/image" + x + ".png");
+            }
+        }
         public pspo2seForm()
         {
             this.InitializeComponent();
-
+            exportImageLists();
             if (!Directory.Exists(Directory.GetCurrentDirectory() + "\\data"))
             {
                 Directory.CreateDirectory(Directory.GetCurrentDirectory() + "\\data\\databases");
@@ -5869,11 +5914,8 @@ namespace pspo2seSaveEditorProgram
             this.sortStorage();
             this.saveData.sharedInventory.itemsUsed = 0;
             this.txtStorageMeseta.Text = string.Concat((object)this.saveData.sharedMeseta);
-            int num1 = 0;
-            if (this.mainSettings.saveStructureIndex.shared_inventory_slots == 1000)
-                num1 = 1000;
             int index1 = -1;
-            for (int index2 = 0; index2 < this.mainSettings.saveStructureIndex.shared_inventory_slots + num1; ++index2)
+            for (int index2 = 0; index2 < this.mainSettings.saveStructureIndex.shared_inventory_slots; ++index2)
             {
                 if (this.saveData.sharedInventory.item[index2].type != pspo2seForm.itemType.free_slot)
                     ++this.saveData.sharedInventory.itemsUsed;
@@ -5910,12 +5952,7 @@ namespace pspo2seSaveEditorProgram
             }
             else if (this.selectItemAfterLoad != -1)
             {
-                int num2 = 0;
-                if (this.saveData.type == pspo2seForm.SaveType.PSP2I)
-                {
-                    int num3 = num2 + 1000;
-                }
-                for (int index2 = 0; index2 < 2000; ++index2)
+                for (int index2 = 0; index2 < this.mainSettings.saveStructureIndex.shared_inventory_slots; ++index2)
                 {
                     if (this.saveData.sharedInventory.item[index2].id == this.selectItemAfterLoad)
                     {

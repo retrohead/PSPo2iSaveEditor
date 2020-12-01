@@ -28,7 +28,7 @@ namespace pspo2seSaveEditorProgram
                 }
                 fs.Close();
             }
-            catch (Exception ex)
+            catch
             {
                 str1 = str1 + "{\\rtf1\\ansi\\ansicpg1252\\deff0\\deflang2057{\\fonttbl{\\f0\\fnil\\fcharset0 Verdana;}}\\r\\n" + "{\\*\\generator Msftedit 5.41.21.2509;}\\viewkind4\\uc1\\pard\\sa200\\sl276\\slmult1\\lang9\\b\\f0\\fs28 PSPo2 Save Editor Change Log\\par\\r\\n";
             }
