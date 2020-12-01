@@ -6573,7 +6573,7 @@ namespace pspo2seSaveEditorProgram
                                 this.savedata_decimal_array[index2] = 0;
                                 ++index2;
                             }
-                            this.loadObjectIntoBuffer(br, index2 + index1 * 36, 20, pspo2seForm.partFileType.inventory);
+                            this.loadObjectIntoBuffer(br, index2, 20, pspo2seForm.partFileType.inventory);
                         }
                         fileStream.Close();
                         return 1;
