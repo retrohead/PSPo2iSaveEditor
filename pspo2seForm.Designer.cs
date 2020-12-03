@@ -6959,6 +6959,7 @@ namespace pspo2seSaveEditorProgram
             // 
             this.txtStoryEmiliaPoints.AutoSize = true;
             this.txtStoryEmiliaPoints.BackColor = System.Drawing.Color.Transparent;
+            this.txtStoryEmiliaPoints.Cursor = System.Windows.Forms.Cursors.Hand;
             this.txtStoryEmiliaPoints.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtStoryEmiliaPoints.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.txtStoryEmiliaPoints.Location = new System.Drawing.Point(479, 13);
@@ -6967,6 +6968,7 @@ namespace pspo2seSaveEditorProgram
             this.txtStoryEmiliaPoints.TabIndex = 97;
             this.txtStoryEmiliaPoints.Text = "Emilia Points";
             this.txtStoryEmiliaPoints.Visible = false;
+            this.txtStoryEmiliaPoints.Click += new System.EventHandler(this.TxtStoryEmiliaPoints_Click);
             // 
             // txtMissionTactical
             // 
@@ -7105,6 +7107,7 @@ namespace pspo2seSaveEditorProgram
             // 
             this.txtStoryNagisaPoints.AutoSize = true;
             this.txtStoryNagisaPoints.BackColor = System.Drawing.Color.Transparent;
+            this.txtStoryNagisaPoints.Cursor = System.Windows.Forms.Cursors.Hand;
             this.txtStoryNagisaPoints.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtStoryNagisaPoints.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.txtStoryNagisaPoints.Location = new System.Drawing.Point(472, 13);
@@ -7113,6 +7116,7 @@ namespace pspo2seSaveEditorProgram
             this.txtStoryNagisaPoints.TabIndex = 91;
             this.txtStoryNagisaPoints.Text = "Nagisa Points";
             this.txtStoryNagisaPoints.Visible = false;
+            this.txtStoryNagisaPoints.Click += new System.EventHandler(this.TxtStoryNagisaPoints_Click);
             // 
             // txtSkipEp2Start
             // 

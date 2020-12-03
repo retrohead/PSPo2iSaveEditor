@@ -74,156 +74,156 @@ namespace pspo2seSaveEditorProgram
         private void loadImageFloaterImages()
         {
             string path = "data/weapon_images/";
-            this.imageFloater.filled = 0;
+            imageFloater.filled = 0;
             DirectoryInfo directoryInfo = new DirectoryInfo(path);
-            foreach (string str in this.IMAGE_FLOAT_FILE_EXT)
+            foreach (string str in IMAGE_FLOAT_FILE_EXT)
             {
                 foreach (FileInfo file in directoryInfo.GetFiles("*." + str))
                 {
-                    this.imageFloater.imagelist[this.imageFloater.filled] = file;
-                    ++this.imageFloater.filled;
+                    imageFloater.imagelist[imageFloater.filled] = file;
+                    ++imageFloater.filled;
                 }
             }
         }
 
         private void initImageFloater()
         {
-            this.imageFloat_Y_visible = this.panelImageFloater.Location.Y;
-            this.imageFloat_Y_hidden = this.panelImageFloater.Location.Y - 130;
-            this.imageFloater.pnlloc.X = this.panelImageFloater.Location.X;
-            this.imageFloater.pnlloc.Y = this.imageFloat_Y_hidden;
-            this.imageFloater.grploc.X = this.grpImageFloater.Location.X;
-            this.imageFloater.grploc.Y = this.imageFloat_Y_hidden - 6;
-            this.panelImageFloater.Location = this.imageFloater.pnlloc;
-            this.grpImageFloater.Location = this.imageFloater.grploc;
-            this.imageFloater.picBox = this.imgFloater;
-            this.loadImageFloaterImages();
+            imageFloat_Y_visible = panelImageFloater.Location.Y;
+            imageFloat_Y_hidden = panelImageFloater.Location.Y - 130;
+            imageFloater.pnlloc.X = panelImageFloater.Location.X;
+            imageFloater.pnlloc.Y = imageFloat_Y_hidden;
+            imageFloater.grploc.X = grpImageFloater.Location.X;
+            imageFloater.grploc.Y = imageFloat_Y_hidden - 6;
+            panelImageFloater.Location = imageFloater.pnlloc;
+            grpImageFloater.Location = imageFloater.grploc;
+            imageFloater.picBox = imgFloater;
+            loadImageFloaterImages();
         }
 
         private void makeImageFloaterHidden()
         {
             Application.DoEvents();
-            while (this.imageFloater.pnlloc.Y > this.imageFloat_Y_hidden)
+            while (imageFloater.pnlloc.Y > imageFloat_Y_hidden)
             {
-                this.imageFloater.pnlloc.Y -= 3;
-                if (this.imageFloater.pnlloc.Y < this.imageFloat_Y_hidden)
-                    this.imageFloater.pnlloc.Y = this.imageFloat_Y_hidden;
-                this.imageFloater.grploc.Y = this.imageFloater.pnlloc.Y - 6;
-                this.panelImageFloater.Location = this.imageFloater.pnlloc;
-                this.grpImageFloater.Location = this.imageFloater.grploc;
+                imageFloater.pnlloc.Y -= 3;
+                if (imageFloater.pnlloc.Y < imageFloat_Y_hidden)
+                    imageFloater.pnlloc.Y = imageFloat_Y_hidden;
+                imageFloater.grploc.Y = imageFloater.pnlloc.Y - 6;
+                panelImageFloater.Location = imageFloater.pnlloc;
+                grpImageFloater.Location = imageFloater.grploc;
                 Application.DoEvents();
             }
-            this.imageFloatShowing = false;
-            this.allowImageFloatMove = true;
-            this.inventoryViewPages.Enabled = true;
-            this.storageViewPages.Enabled = true;
-            this.tabArea.Enabled = true;
+            imageFloatShowing = false;
+            allowImageFloatMove = true;
+            inventoryViewPages.Enabled = true;
+            storageViewPages.Enabled = true;
+            tabArea.Enabled = true;
         }
 
         private void makeImageFloaterVisible()
         {
             Application.DoEvents();
-            while (this.imageFloater.pnlloc.Y < this.imageFloat_Y_visible)
+            while (imageFloater.pnlloc.Y < imageFloat_Y_visible)
             {
-                this.imageFloater.pnlloc.Y += 3;
-                if (this.imageFloater.pnlloc.Y > this.imageFloat_Y_visible)
-                    this.imageFloater.pnlloc.Y = this.imageFloat_Y_visible;
-                this.imageFloater.grploc.Y = this.imageFloater.pnlloc.Y - 6;
-                this.panelImageFloater.Location = this.imageFloater.pnlloc;
-                this.grpImageFloater.Location = this.imageFloater.grploc;
+                imageFloater.pnlloc.Y += 3;
+                if (imageFloater.pnlloc.Y > imageFloat_Y_visible)
+                    imageFloater.pnlloc.Y = imageFloat_Y_visible;
+                imageFloater.grploc.Y = imageFloater.pnlloc.Y - 6;
+                panelImageFloater.Location = imageFloater.pnlloc;
+                grpImageFloater.Location = imageFloater.grploc;
                 Application.DoEvents();
             }
-            this.imageFloatShowing = true;
-            this.allowImageFloatMove = true;
-            this.inventoryViewPages.Enabled = true;
-            this.storageViewPages.Enabled = true;
-            this.tabArea.Enabled = true;
+            imageFloatShowing = true;
+            allowImageFloatMove = true;
+            inventoryViewPages.Enabled = true;
+            storageViewPages.Enabled = true;
+            tabArea.Enabled = true;
         }
 
         private void moveImageFloater()
         {
-            this.allowImageFloatMove = false;
-            this.tabArea.Enabled = false;
-            if (this.imageFloatShowing)
-                this.makeImageFloaterHidden();
+            allowImageFloatMove = false;
+            tabArea.Enabled = false;
+            if (imageFloatShowing)
+                makeImageFloaterHidden();
             else
-                this.makeImageFloaterVisible();
+                makeImageFloaterVisible();
         }
 
         private void openImageFloater()
         {
-            if (!this.imageFloaterClosed() || !this.imageFloatImageIsOk || this.tabArea.SelectedTab != this.tabPageInventory && this.tabArea.SelectedTab != this.tabPageStorage || this.inventoryViewPages.SelectedIndex != 0 && this.storageViewPages.SelectedIndex != 0)
+            if (!imageFloaterClosed() || !imageFloatImageIsOk || tabArea.SelectedTab != tabPageInventory && tabArea.SelectedTab != tabPageStorage || inventoryViewPages.SelectedIndex != 0 && storageViewPages.SelectedIndex != 0)
                 return;
-            this.moveImageFloater();
+            moveImageFloater();
         }
 
         private void closeImageFloater()
         {
-            if (!this.imageFloaterOpen())
+            if (!imageFloaterOpen())
                 return;
-            this.moveImageFloater();
+            moveImageFloater();
         }
 
-        private bool imageFloaterOpen() => this.imageFloatShowing || !this.allowImageFloatMove;
+        private bool imageFloaterOpen() => imageFloatShowing || !allowImageFloatMove;
 
-        private bool imageFloaterClosed() => !this.imageFloatShowing || !this.allowImageFloatMove;
+        private bool imageFloaterClosed() => !imageFloatShowing || !allowImageFloatMove;
 
         public string findImageFloatInList(string hex)
         {
-            for (int index = 0; index < this.imageFloater.filled; ++index)
+            for (int index = 0; index < imageFloater.filled; ++index)
             {
-                if (hex.ToLower() == this.imageFloater.imagelist[index].Name.Substring(0, 8).ToLower())
+                if (hex.ToLower() == imageFloater.imagelist[index].Name.Substring(0, 8).ToLower())
                 {
-                    this.imageFloatImageIsOk = true;
-                    return this.imageFloater.imagelist[index].FullName;
+                    imageFloatImageIsOk = true;
+                    return imageFloater.imagelist[index].FullName;
                 }
             }
-            this.imageFloatImageIsOk = false;
+            imageFloatImageIsOk = false;
             return "";
         }
 
         private void changeImageFloater(string hex)
         {
-            string imageFloatInList = this.findImageFloatInList(hex);
-            if (this.imageFloatImageIsOk)
+            string imageFloatInList = findImageFloatInList(hex);
+            if (imageFloatImageIsOk)
             {
-                this.imageFloater.picBox.Image = (Image)new Bitmap(imageFloatInList);
-                this.openImageFloater();
+                imageFloater.picBox.Image = (Image)new Bitmap(imageFloatInList);
+                openImageFloater();
             }
             else
-                this.closeImageFloater();
+                closeImageFloater();
         }
 
         public pspo2seForm.typeSectionFields getTypeSectionFields(TabPage page)
         {
             pspo2seForm.typeSectionFields typeSectionFields = new pspo2seForm.typeSectionFields();
-            if (page == this.tabPageHunter)
+            if (page == tabPageHunter)
             {
-                typeSectionFields.txtLevel = this.txtHuLevel;
-                typeSectionFields.txtExp = this.txtHuExp;
-                typeSectionFields.expBar = this.txtHuExpBar;
-                typeSectionFields.grpExtend = this.grpHuTypeExtend;
+                typeSectionFields.txtLevel = txtHuLevel;
+                typeSectionFields.txtExp = txtHuExp;
+                typeSectionFields.expBar = txtHuExpBar;
+                typeSectionFields.grpExtend = grpHuTypeExtend;
             }
-            else if (page == this.tabPageRanger)
+            else if (page == tabPageRanger)
             {
-                typeSectionFields.txtLevel = this.txtRaLevel;
-                typeSectionFields.txtExp = this.txtRaExp;
-                typeSectionFields.expBar = this.txtRaExpBar;
-                typeSectionFields.grpExtend = this.grpRaTypeExtend;
+                typeSectionFields.txtLevel = txtRaLevel;
+                typeSectionFields.txtExp = txtRaExp;
+                typeSectionFields.expBar = txtRaExpBar;
+                typeSectionFields.grpExtend = grpRaTypeExtend;
             }
-            else if (page == this.tabPageForce)
+            else if (page == tabPageForce)
             {
-                typeSectionFields.txtLevel = this.txtFoLevel;
-                typeSectionFields.txtExp = this.txtFoExp;
-                typeSectionFields.expBar = this.txtFoExpBar;
-                typeSectionFields.grpExtend = this.grpFoTypeExtend;
+                typeSectionFields.txtLevel = txtFoLevel;
+                typeSectionFields.txtExp = txtFoExp;
+                typeSectionFields.expBar = txtFoExpBar;
+                typeSectionFields.grpExtend = grpFoTypeExtend;
             }
-            else if (page == this.tabPageVanguard)
+            else if (page == tabPageVanguard)
             {
-                typeSectionFields.txtLevel = this.txtVaLevel;
-                typeSectionFields.txtExp = this.txtVaExp;
-                typeSectionFields.expBar = this.txtVaExpBar;
-                typeSectionFields.grpExtend = this.grpVaTypeExtend;
+                typeSectionFields.txtLevel = txtVaLevel;
+                typeSectionFields.txtExp = txtVaExp;
+                typeSectionFields.expBar = txtVaExpBar;
+                typeSectionFields.grpExtend = grpVaTypeExtend;
             }
             return typeSectionFields;
         }
@@ -231,97 +231,97 @@ namespace pspo2seSaveEditorProgram
         public pspo2seForm.pageFields getPageFields(TabPage page, bool inDatabase = false)
         {
             pspo2seForm.pageFields pageFields = new pspo2seForm.pageFields();
-            if (page == this.tabPageInventory)
+            if (page == tabPageInventory)
             {
-                pageFields.img_rank = this.imgInventoryRank;
-                pageFields.img_item = this.imgInventoryItemIcon;
-                pageFields.img_manufaturer = this.imgInventoryWeaponManufacturer;
-                pageFields.img_infinity_item = this.imgInventoryInfinityItem;
-                pageFields.img_element = this.imgInventoryElement;
-                pageFields.img_star_0 = this.imgStar0;
-                pageFields.img_star_1 = this.imgStar1;
-                pageFields.img_star_2 = this.imgStar2;
-                pageFields.img_star_3 = this.imgStar3;
-                pageFields.img_star_4 = this.imgStar4;
-                pageFields.img_star_5 = this.imgStar5;
-                pageFields.img_star_6 = this.imgStar6;
-                pageFields.img_star_7 = this.imgStar7;
-                pageFields.img_star_8 = this.imgStar8;
-                pageFields.img_star_9 = this.imgStar9;
-                pageFields.img_star_10 = this.imgStar10;
-                pageFields.img_star_11 = this.imgStar11;
-                pageFields.img_star_12 = this.imgStar12;
-                pageFields.img_star_13 = this.imgStar13;
-                pageFields.img_star_14 = this.imgStar14;
-                pageFields.img_star_15 = this.imgStar15;
-                pageFields.txt_infinity_item = this.txtInventoryInfinityItemText;
-                pageFields.txt_name = this.txtInventoryName;
-                pageFields.txt_name_jp = this.txtInventoryName_jp;
-                pageFields.grp_details = this.grpInventoryItemDetails;
-                pageFields.txt_grinds = this.txtInventoryGrinds;
-                pageFields.txt_percent = this.txtInventoryPercent;
-                pageFields.txt_hex = this.txtInventoryHex;
-                pageFields.txt_meseta = this.txtInventoryMeseta;
-                pageFields.txt_qty = this.txtInventoryQty;
-                pageFields.txt_special = this.txtInventorySpecial;
-                pageFields.txt_effect = this.txtInventoryEffect;
-                pageFields.txt_atk = this.txtInventoryATK;
-                pageFields.txt_acc = this.txtInventoryACC;
-                pageFields.txt_level = this.txtInventoryLevel;
-                pageFields.btn_delete = this.btnInventoryDelete;
-                pageFields.btn_export_selected = this.btnInventoryExportSelected;
-                pageFields.btn_import_selected = this.btnInventoryImportSelected;
-                pageFields.chk_delete_export = this.chkDeleteExportInventory;
-                pageFields.btn_withdraw = this.btnInventoryDeposit;
+                pageFields.img_rank = imgInventoryRank;
+                pageFields.img_item = imgInventoryItemIcon;
+                pageFields.img_manufaturer = imgInventoryWeaponManufacturer;
+                pageFields.img_infinity_item = imgInventoryInfinityItem;
+                pageFields.img_element = imgInventoryElement;
+                pageFields.img_star_0 = imgStar0;
+                pageFields.img_star_1 = imgStar1;
+                pageFields.img_star_2 = imgStar2;
+                pageFields.img_star_3 = imgStar3;
+                pageFields.img_star_4 = imgStar4;
+                pageFields.img_star_5 = imgStar5;
+                pageFields.img_star_6 = imgStar6;
+                pageFields.img_star_7 = imgStar7;
+                pageFields.img_star_8 = imgStar8;
+                pageFields.img_star_9 = imgStar9;
+                pageFields.img_star_10 = imgStar10;
+                pageFields.img_star_11 = imgStar11;
+                pageFields.img_star_12 = imgStar12;
+                pageFields.img_star_13 = imgStar13;
+                pageFields.img_star_14 = imgStar14;
+                pageFields.img_star_15 = imgStar15;
+                pageFields.txt_infinity_item = txtInventoryInfinityItemText;
+                pageFields.txt_name = txtInventoryName;
+                pageFields.txt_name_jp = txtInventoryName_jp;
+                pageFields.grp_details = grpInventoryItemDetails;
+                pageFields.txt_grinds = txtInventoryGrinds;
+                pageFields.txt_percent = txtInventoryPercent;
+                pageFields.txt_hex = txtInventoryHex;
+                pageFields.txt_meseta = txtInventoryMeseta;
+                pageFields.txt_qty = txtInventoryQty;
+                pageFields.txt_special = txtInventorySpecial;
+                pageFields.txt_effect = txtInventoryEffect;
+                pageFields.txt_atk = txtInventoryATK;
+                pageFields.txt_acc = txtInventoryACC;
+                pageFields.txt_level = txtInventoryLevel;
+                pageFields.btn_delete = btnInventoryDelete;
+                pageFields.btn_export_selected = btnInventoryExportSelected;
+                pageFields.btn_import_selected = btnInventoryImportSelected;
+                pageFields.chk_delete_export = chkDeleteExportInventory;
+                pageFields.btn_withdraw = btnInventoryDeposit;
                 pageFields.pnl_details = (Panel)null;
             }
-            else if (page == this.tabPageStorage)
+            else if (page == tabPageStorage)
             {
-                pageFields.img_rank = this.imgStorageRank;
-                pageFields.img_item = this.imgStorageItemIcon;
-                pageFields.img_manufaturer = this.imgStorageWeaponManufacturer;
-                pageFields.img_infinity_item = this.imgStorageInfinityItem;
-                pageFields.img_element = this.imgStorageElement;
-                pageFields.img_star_0 = this.imgStorageStar0;
-                pageFields.img_star_1 = this.imgStorageStar1;
-                pageFields.img_star_2 = this.imgStorageStar2;
-                pageFields.img_star_3 = this.imgStorageStar3;
-                pageFields.img_star_4 = this.imgStorageStar4;
-                pageFields.img_star_5 = this.imgStorageStar5;
-                pageFields.img_star_6 = this.imgStorageStar6;
-                pageFields.img_star_7 = this.imgStorageStar7;
-                pageFields.img_star_8 = this.imgStorageStar8;
-                pageFields.img_star_9 = this.imgStorageStar9;
-                pageFields.img_star_10 = this.imgStorageStar10;
-                pageFields.img_star_11 = this.imgStorageStar11;
-                pageFields.img_star_12 = this.imgStorageStar12;
-                pageFields.img_star_13 = this.imgStorageStar13;
-                pageFields.img_star_14 = this.imgStorageStar14;
-                pageFields.img_star_15 = this.imgStorageStar15;
-                pageFields.txt_infinity_item = this.txtStorageInfinityItemText;
-                pageFields.txt_name = this.txtStorageName;
-                pageFields.txt_name_jp = this.txtStorageName_jp;
-                pageFields.grp_details = this.grpStorageItemDetails;
-                pageFields.txt_grinds = this.txtStorageGrinds;
-                pageFields.txt_percent = this.txtStoragePercent;
-                pageFields.txt_hex = this.txtStorageHex;
-                pageFields.txt_meseta = this.txtStorageMeseta;
-                pageFields.txt_qty = this.txtStorageQty;
-                pageFields.txt_special = this.txtStorageSpecial;
-                pageFields.txt_effect = this.txtStorageEffect;
-                pageFields.txt_atk = this.txtStorageATK;
-                pageFields.txt_acc = this.txtStorageACC;
-                pageFields.txt_level = this.txtStorageLevel;
-                pageFields.btn_delete = this.btnStorageDelete;
-                pageFields.btn_export_selected = this.btnStorageExportSelected;
-                pageFields.btn_import_selected = this.btnStorageImportSelected;
-                pageFields.chk_delete_export = this.chkDeleteExportStorage;
-                pageFields.btn_withdraw = this.btnStorageWithdraw;
+                pageFields.img_rank = imgStorageRank;
+                pageFields.img_item = imgStorageItemIcon;
+                pageFields.img_manufaturer = imgStorageWeaponManufacturer;
+                pageFields.img_infinity_item = imgStorageInfinityItem;
+                pageFields.img_element = imgStorageElement;
+                pageFields.img_star_0 = imgStorageStar0;
+                pageFields.img_star_1 = imgStorageStar1;
+                pageFields.img_star_2 = imgStorageStar2;
+                pageFields.img_star_3 = imgStorageStar3;
+                pageFields.img_star_4 = imgStorageStar4;
+                pageFields.img_star_5 = imgStorageStar5;
+                pageFields.img_star_6 = imgStorageStar6;
+                pageFields.img_star_7 = imgStorageStar7;
+                pageFields.img_star_8 = imgStorageStar8;
+                pageFields.img_star_9 = imgStorageStar9;
+                pageFields.img_star_10 = imgStorageStar10;
+                pageFields.img_star_11 = imgStorageStar11;
+                pageFields.img_star_12 = imgStorageStar12;
+                pageFields.img_star_13 = imgStorageStar13;
+                pageFields.img_star_14 = imgStorageStar14;
+                pageFields.img_star_15 = imgStorageStar15;
+                pageFields.txt_infinity_item = txtStorageInfinityItemText;
+                pageFields.txt_name = txtStorageName;
+                pageFields.txt_name_jp = txtStorageName_jp;
+                pageFields.grp_details = grpStorageItemDetails;
+                pageFields.txt_grinds = txtStorageGrinds;
+                pageFields.txt_percent = txtStoragePercent;
+                pageFields.txt_hex = txtStorageHex;
+                pageFields.txt_meseta = txtStorageMeseta;
+                pageFields.txt_qty = txtStorageQty;
+                pageFields.txt_special = txtStorageSpecial;
+                pageFields.txt_effect = txtStorageEffect;
+                pageFields.txt_atk = txtStorageATK;
+                pageFields.txt_acc = txtStorageACC;
+                pageFields.txt_level = txtStorageLevel;
+                pageFields.btn_delete = btnStorageDelete;
+                pageFields.btn_export_selected = btnStorageExportSelected;
+                pageFields.btn_import_selected = btnStorageImportSelected;
+                pageFields.chk_delete_export = chkDeleteExportStorage;
+                pageFields.btn_withdraw = btnStorageWithdraw;
                 pageFields.pnl_details = (Panel)null;
             }
             else
             {
-                int num = (int)MessageBox.Show("The selected page for getFields was not recognised: " + (object)page);
+                MessageBox.Show("The selected page for getFields was not recognised: " + (object)page);
             }
             return pageFields;
         }
@@ -329,409 +329,409 @@ namespace pspo2seSaveEditorProgram
         public pspo2seForm.typeWeaponRankFields getTypeWeaponExtendFields(TabPage page)
         {
             pspo2seForm.typeWeaponRankFields weaponRankFields = new pspo2seForm.typeWeaponRankFields();
-            if (page == this.tabPageHunter)
+            if (page == tabPageHunter)
             {
-                weaponRankFields.imgWeap[1] = this.imgHuSword;
-                weaponRankFields.imgWeap[2] = this.imgHuKnuckles;
-                weaponRankFields.imgWeap[3] = this.imgHuSpear;
-                weaponRankFields.imgWeap[4] = this.imgHuDblSaber;
-                weaponRankFields.imgWeap[5] = this.imgHuAxe;
-                weaponRankFields.imgWeap[6] = this.imgHuSabers;
-                weaponRankFields.imgWeap[7] = this.imgHuDaggers;
-                weaponRankFields.imgWeap[8] = this.imgHuClaws;
-                weaponRankFields.imgWeap[9] = this.imgHuSaber;
-                weaponRankFields.imgWeap[10] = this.imgHuDagger;
-                weaponRankFields.imgWeap[11] = this.imgHuClaw;
-                weaponRankFields.imgWeap[12] = this.imgHuWhip;
-                weaponRankFields.imgWeap[13] = this.imgHuSlicer;
-                weaponRankFields.imgWeap[14] = this.imgHuRifle;
-                weaponRankFields.imgWeap[15] = this.imgHuShotgun;
-                weaponRankFields.imgWeap[16] = this.imgHuLongbow;
-                weaponRankFields.imgWeap[17] = this.imgHuGrenade;
-                weaponRankFields.imgWeap[18] = this.imgHuLaser;
-                weaponRankFields.imgWeap[19] = this.imgHuHandguns;
-                weaponRankFields.imgWeap[20] = this.imgHuHandgun;
-                weaponRankFields.imgWeap[21] = this.imgHuCrossbow;
-                weaponRankFields.imgWeap[22] = this.imgHuCards;
-                weaponRankFields.imgWeap[23] = this.imgHuMachinegun;
-                weaponRankFields.imgWeap[27] = this.imgHuRmag;
-                weaponRankFields.imgWeap[24] = this.imgHuRod;
-                weaponRankFields.imgWeap[25] = this.imgHuWand;
-                weaponRankFields.imgWeap[26] = this.imgHuTmag;
-                weaponRankFields.imgWeap[28] = this.imgHuShield;
-                weaponRankFields.imgRank[1] = this.imgHuSwordRank;
-                weaponRankFields.imgRank[2] = this.imgHuKnucklesRank;
-                weaponRankFields.imgRank[3] = this.imgHuSpearRank;
-                weaponRankFields.imgRank[4] = this.imgHuDblSaberRank;
-                weaponRankFields.imgRank[5] = this.imgHuAxeRank;
-                weaponRankFields.imgRank[6] = this.imgHuSabersRank;
-                weaponRankFields.imgRank[7] = this.imgHuDaggersRank;
-                weaponRankFields.imgRank[8] = this.imgHuClawsRank;
-                weaponRankFields.imgRank[9] = this.imgHuSaberRank;
-                weaponRankFields.imgRank[10] = this.imgHuDaggerRank;
-                weaponRankFields.imgRank[11] = this.imgHuClawRank;
-                weaponRankFields.imgRank[12] = this.imgHuWhipRank;
-                weaponRankFields.imgRank[13] = this.imgHuSlicerRank;
-                weaponRankFields.imgRank[14] = this.imgHuRifleRank;
-                weaponRankFields.imgRank[15] = this.imgHuShotgunRank;
-                weaponRankFields.imgRank[16] = this.imgHuLongbowRank;
-                weaponRankFields.imgRank[17] = this.imgHuGrenadeRank;
-                weaponRankFields.imgRank[18] = this.imgHuLaserRank;
-                weaponRankFields.imgRank[19] = this.imgHuHandgunsRank;
-                weaponRankFields.imgRank[20] = this.imgHuHandgunRank;
-                weaponRankFields.imgRank[21] = this.imgHuCrossbowRank;
-                weaponRankFields.imgRank[22] = this.imgHuCardsRank;
-                weaponRankFields.imgRank[23] = this.imgHuMachinegunRank;
-                weaponRankFields.imgRank[27] = this.imgHuRmagRank;
-                weaponRankFields.imgRank[24] = this.imgHuRodRank;
-                weaponRankFields.imgRank[25] = this.imgHuWandRank;
-                weaponRankFields.imgRank[26] = this.imgHuTmagRank;
-                weaponRankFields.imgRank[28] = this.imgHuShieldRank;
+                weaponRankFields.imgWeap[1] = imgHuSword;
+                weaponRankFields.imgWeap[2] = imgHuKnuckles;
+                weaponRankFields.imgWeap[3] = imgHuSpear;
+                weaponRankFields.imgWeap[4] = imgHuDblSaber;
+                weaponRankFields.imgWeap[5] = imgHuAxe;
+                weaponRankFields.imgWeap[6] = imgHuSabers;
+                weaponRankFields.imgWeap[7] = imgHuDaggers;
+                weaponRankFields.imgWeap[8] = imgHuClaws;
+                weaponRankFields.imgWeap[9] = imgHuSaber;
+                weaponRankFields.imgWeap[10] = imgHuDagger;
+                weaponRankFields.imgWeap[11] = imgHuClaw;
+                weaponRankFields.imgWeap[12] = imgHuWhip;
+                weaponRankFields.imgWeap[13] = imgHuSlicer;
+                weaponRankFields.imgWeap[14] = imgHuRifle;
+                weaponRankFields.imgWeap[15] = imgHuShotgun;
+                weaponRankFields.imgWeap[16] = imgHuLongbow;
+                weaponRankFields.imgWeap[17] = imgHuGrenade;
+                weaponRankFields.imgWeap[18] = imgHuLaser;
+                weaponRankFields.imgWeap[19] = imgHuHandguns;
+                weaponRankFields.imgWeap[20] = imgHuHandgun;
+                weaponRankFields.imgWeap[21] = imgHuCrossbow;
+                weaponRankFields.imgWeap[22] = imgHuCards;
+                weaponRankFields.imgWeap[23] = imgHuMachinegun;
+                weaponRankFields.imgWeap[27] = imgHuRmag;
+                weaponRankFields.imgWeap[24] = imgHuRod;
+                weaponRankFields.imgWeap[25] = imgHuWand;
+                weaponRankFields.imgWeap[26] = imgHuTmag;
+                weaponRankFields.imgWeap[28] = imgHuShield;
+                weaponRankFields.imgRank[1] = imgHuSwordRank;
+                weaponRankFields.imgRank[2] = imgHuKnucklesRank;
+                weaponRankFields.imgRank[3] = imgHuSpearRank;
+                weaponRankFields.imgRank[4] = imgHuDblSaberRank;
+                weaponRankFields.imgRank[5] = imgHuAxeRank;
+                weaponRankFields.imgRank[6] = imgHuSabersRank;
+                weaponRankFields.imgRank[7] = imgHuDaggersRank;
+                weaponRankFields.imgRank[8] = imgHuClawsRank;
+                weaponRankFields.imgRank[9] = imgHuSaberRank;
+                weaponRankFields.imgRank[10] = imgHuDaggerRank;
+                weaponRankFields.imgRank[11] = imgHuClawRank;
+                weaponRankFields.imgRank[12] = imgHuWhipRank;
+                weaponRankFields.imgRank[13] = imgHuSlicerRank;
+                weaponRankFields.imgRank[14] = imgHuRifleRank;
+                weaponRankFields.imgRank[15] = imgHuShotgunRank;
+                weaponRankFields.imgRank[16] = imgHuLongbowRank;
+                weaponRankFields.imgRank[17] = imgHuGrenadeRank;
+                weaponRankFields.imgRank[18] = imgHuLaserRank;
+                weaponRankFields.imgRank[19] = imgHuHandgunsRank;
+                weaponRankFields.imgRank[20] = imgHuHandgunRank;
+                weaponRankFields.imgRank[21] = imgHuCrossbowRank;
+                weaponRankFields.imgRank[22] = imgHuCardsRank;
+                weaponRankFields.imgRank[23] = imgHuMachinegunRank;
+                weaponRankFields.imgRank[27] = imgHuRmagRank;
+                weaponRankFields.imgRank[24] = imgHuRodRank;
+                weaponRankFields.imgRank[25] = imgHuWandRank;
+                weaponRankFields.imgRank[26] = imgHuTmagRank;
+                weaponRankFields.imgRank[28] = imgHuShieldRank;
             }
-            else if (page == this.tabPageRanger)
+            else if (page == tabPageRanger)
             {
-                weaponRankFields.imgWeap[1] = this.imgRaSword;
-                weaponRankFields.imgWeap[2] = this.imgRaKnuckles;
-                weaponRankFields.imgWeap[3] = this.imgRaSpear;
-                weaponRankFields.imgWeap[4] = this.imgRaDblSaber;
-                weaponRankFields.imgWeap[5] = this.imgRaAxe;
-                weaponRankFields.imgWeap[6] = this.imgRaSabers;
-                weaponRankFields.imgWeap[7] = this.imgRaDaggers;
-                weaponRankFields.imgWeap[8] = this.imgRaClaws;
-                weaponRankFields.imgWeap[9] = this.imgRaSaber;
-                weaponRankFields.imgWeap[10] = this.imgRaDagger;
-                weaponRankFields.imgWeap[11] = this.imgRaClaw;
-                weaponRankFields.imgWeap[12] = this.imgRaWhip;
-                weaponRankFields.imgWeap[13] = this.imgRaSlicer;
-                weaponRankFields.imgWeap[14] = this.imgRaRifle;
-                weaponRankFields.imgWeap[15] = this.imgRaShotgun;
-                weaponRankFields.imgWeap[16] = this.imgRaLongbow;
-                weaponRankFields.imgWeap[17] = this.imgRaGrenade;
-                weaponRankFields.imgWeap[18] = this.imgRaLaser;
-                weaponRankFields.imgWeap[19] = this.imgRaHandguns;
-                weaponRankFields.imgWeap[20] = this.imgRaHandgun;
-                weaponRankFields.imgWeap[21] = this.imgRaCrossbow;
-                weaponRankFields.imgWeap[22] = this.imgRaCards;
-                weaponRankFields.imgWeap[23] = this.imgRaMachinegun;
-                weaponRankFields.imgWeap[27] = this.imgRaRmag;
-                weaponRankFields.imgWeap[24] = this.imgRaRod;
-                weaponRankFields.imgWeap[25] = this.imgRaWand;
-                weaponRankFields.imgWeap[26] = this.imgRaTmag;
-                weaponRankFields.imgWeap[28] = this.imgRaShield;
-                weaponRankFields.imgRank[1] = this.imgRaSwordRank;
-                weaponRankFields.imgRank[2] = this.imgRaKnucklesRank;
-                weaponRankFields.imgRank[3] = this.imgRaSpearRank;
-                weaponRankFields.imgRank[4] = this.imgRaDblSaberRank;
-                weaponRankFields.imgRank[5] = this.imgRaAxeRank;
-                weaponRankFields.imgRank[6] = this.imgRaSabersRank;
-                weaponRankFields.imgRank[7] = this.imgRaDaggersRank;
-                weaponRankFields.imgRank[8] = this.imgRaClawsRank;
-                weaponRankFields.imgRank[9] = this.imgRaSaberRank;
-                weaponRankFields.imgRank[10] = this.imgRaDaggerRank;
-                weaponRankFields.imgRank[11] = this.imgRaClawRank;
-                weaponRankFields.imgRank[12] = this.imgRaWhipRank;
-                weaponRankFields.imgRank[13] = this.imgRaSlicerRank;
-                weaponRankFields.imgRank[14] = this.imgRaRifleRank;
-                weaponRankFields.imgRank[15] = this.imgRaShotgunRank;
-                weaponRankFields.imgRank[16] = this.imgRaLongbowRank;
-                weaponRankFields.imgRank[17] = this.imgRaGrenadeRank;
-                weaponRankFields.imgRank[18] = this.imgRaLaserRank;
-                weaponRankFields.imgRank[19] = this.imgRaHandgunsRank;
-                weaponRankFields.imgRank[20] = this.imgRaHandgunRank;
-                weaponRankFields.imgRank[21] = this.imgRaCrossbowRank;
-                weaponRankFields.imgRank[22] = this.imgRaCardsRank;
-                weaponRankFields.imgRank[23] = this.imgRaMachinegunRank;
-                weaponRankFields.imgRank[27] = this.imgRaRmagRank;
-                weaponRankFields.imgRank[24] = this.imgRaRodRank;
-                weaponRankFields.imgRank[25] = this.imgRaWandRank;
-                weaponRankFields.imgRank[26] = this.imgRaTmagRank;
-                weaponRankFields.imgRank[28] = this.imgRaShieldRank;
+                weaponRankFields.imgWeap[1] = imgRaSword;
+                weaponRankFields.imgWeap[2] = imgRaKnuckles;
+                weaponRankFields.imgWeap[3] = imgRaSpear;
+                weaponRankFields.imgWeap[4] = imgRaDblSaber;
+                weaponRankFields.imgWeap[5] = imgRaAxe;
+                weaponRankFields.imgWeap[6] = imgRaSabers;
+                weaponRankFields.imgWeap[7] = imgRaDaggers;
+                weaponRankFields.imgWeap[8] = imgRaClaws;
+                weaponRankFields.imgWeap[9] = imgRaSaber;
+                weaponRankFields.imgWeap[10] = imgRaDagger;
+                weaponRankFields.imgWeap[11] = imgRaClaw;
+                weaponRankFields.imgWeap[12] = imgRaWhip;
+                weaponRankFields.imgWeap[13] = imgRaSlicer;
+                weaponRankFields.imgWeap[14] = imgRaRifle;
+                weaponRankFields.imgWeap[15] = imgRaShotgun;
+                weaponRankFields.imgWeap[16] = imgRaLongbow;
+                weaponRankFields.imgWeap[17] = imgRaGrenade;
+                weaponRankFields.imgWeap[18] = imgRaLaser;
+                weaponRankFields.imgWeap[19] = imgRaHandguns;
+                weaponRankFields.imgWeap[20] = imgRaHandgun;
+                weaponRankFields.imgWeap[21] = imgRaCrossbow;
+                weaponRankFields.imgWeap[22] = imgRaCards;
+                weaponRankFields.imgWeap[23] = imgRaMachinegun;
+                weaponRankFields.imgWeap[27] = imgRaRmag;
+                weaponRankFields.imgWeap[24] = imgRaRod;
+                weaponRankFields.imgWeap[25] = imgRaWand;
+                weaponRankFields.imgWeap[26] = imgRaTmag;
+                weaponRankFields.imgWeap[28] = imgRaShield;
+                weaponRankFields.imgRank[1] = imgRaSwordRank;
+                weaponRankFields.imgRank[2] = imgRaKnucklesRank;
+                weaponRankFields.imgRank[3] = imgRaSpearRank;
+                weaponRankFields.imgRank[4] = imgRaDblSaberRank;
+                weaponRankFields.imgRank[5] = imgRaAxeRank;
+                weaponRankFields.imgRank[6] = imgRaSabersRank;
+                weaponRankFields.imgRank[7] = imgRaDaggersRank;
+                weaponRankFields.imgRank[8] = imgRaClawsRank;
+                weaponRankFields.imgRank[9] = imgRaSaberRank;
+                weaponRankFields.imgRank[10] = imgRaDaggerRank;
+                weaponRankFields.imgRank[11] = imgRaClawRank;
+                weaponRankFields.imgRank[12] = imgRaWhipRank;
+                weaponRankFields.imgRank[13] = imgRaSlicerRank;
+                weaponRankFields.imgRank[14] = imgRaRifleRank;
+                weaponRankFields.imgRank[15] = imgRaShotgunRank;
+                weaponRankFields.imgRank[16] = imgRaLongbowRank;
+                weaponRankFields.imgRank[17] = imgRaGrenadeRank;
+                weaponRankFields.imgRank[18] = imgRaLaserRank;
+                weaponRankFields.imgRank[19] = imgRaHandgunsRank;
+                weaponRankFields.imgRank[20] = imgRaHandgunRank;
+                weaponRankFields.imgRank[21] = imgRaCrossbowRank;
+                weaponRankFields.imgRank[22] = imgRaCardsRank;
+                weaponRankFields.imgRank[23] = imgRaMachinegunRank;
+                weaponRankFields.imgRank[27] = imgRaRmagRank;
+                weaponRankFields.imgRank[24] = imgRaRodRank;
+                weaponRankFields.imgRank[25] = imgRaWandRank;
+                weaponRankFields.imgRank[26] = imgRaTmagRank;
+                weaponRankFields.imgRank[28] = imgRaShieldRank;
             }
-            else if (page == this.tabPageForce)
+            else if (page == tabPageForce)
             {
-                weaponRankFields.imgWeap[1] = this.imgFoSword;
-                weaponRankFields.imgWeap[2] = this.imgFoKnuckles;
-                weaponRankFields.imgWeap[3] = this.imgFoSpear;
-                weaponRankFields.imgWeap[4] = this.imgFoDblSaber;
-                weaponRankFields.imgWeap[5] = this.imgFoAxe;
-                weaponRankFields.imgWeap[6] = this.imgFoSabers;
-                weaponRankFields.imgWeap[7] = this.imgFoDaggers;
-                weaponRankFields.imgWeap[8] = this.imgFoClaws;
-                weaponRankFields.imgWeap[9] = this.imgFoSaber;
-                weaponRankFields.imgWeap[10] = this.imgFoDagger;
-                weaponRankFields.imgWeap[11] = this.imgFoClaw;
-                weaponRankFields.imgWeap[12] = this.imgFoWhip;
-                weaponRankFields.imgWeap[13] = this.imgFoSlicer;
-                weaponRankFields.imgWeap[14] = this.imgFoRifle;
-                weaponRankFields.imgWeap[15] = this.imgFoShotgun;
-                weaponRankFields.imgWeap[16] = this.imgFoLongbow;
-                weaponRankFields.imgWeap[17] = this.imgFoGrenade;
-                weaponRankFields.imgWeap[18] = this.imgFoLaser;
-                weaponRankFields.imgWeap[19] = this.imgFoHandguns;
-                weaponRankFields.imgWeap[20] = this.imgFoHandgun;
-                weaponRankFields.imgWeap[21] = this.imgFoCrossbow;
-                weaponRankFields.imgWeap[22] = this.imgFoCards;
-                weaponRankFields.imgWeap[23] = this.imgFoMachinegun;
-                weaponRankFields.imgWeap[27] = this.imgFoRmag;
-                weaponRankFields.imgWeap[24] = this.imgFoRod;
-                weaponRankFields.imgWeap[25] = this.imgFoWand;
-                weaponRankFields.imgWeap[26] = this.imgFoTmag;
-                weaponRankFields.imgWeap[28] = this.imgFoShield;
-                weaponRankFields.imgRank[1] = this.imgFoSwordRank;
-                weaponRankFields.imgRank[2] = this.imgFoKnucklesRank;
-                weaponRankFields.imgRank[3] = this.imgFoSpearRank;
-                weaponRankFields.imgRank[4] = this.imgFoDblSaberRank;
-                weaponRankFields.imgRank[5] = this.imgFoAxeRank;
-                weaponRankFields.imgRank[6] = this.imgFoSabersRank;
-                weaponRankFields.imgRank[7] = this.imgFoDaggersRank;
-                weaponRankFields.imgRank[8] = this.imgFoClawsRank;
-                weaponRankFields.imgRank[9] = this.imgFoSaberRank;
-                weaponRankFields.imgRank[10] = this.imgFoDaggerRank;
-                weaponRankFields.imgRank[11] = this.imgFoClawRank;
-                weaponRankFields.imgRank[12] = this.imgFoWhipRank;
-                weaponRankFields.imgRank[13] = this.imgFoSlicerRank;
-                weaponRankFields.imgRank[14] = this.imgFoRifleRank;
-                weaponRankFields.imgRank[15] = this.imgFoShotgunRank;
-                weaponRankFields.imgRank[16] = this.imgFoLongbowRank;
-                weaponRankFields.imgRank[17] = this.imgFoGrenadeRank;
-                weaponRankFields.imgRank[18] = this.imgFoLaserRank;
-                weaponRankFields.imgRank[19] = this.imgFoHandgunsRank;
-                weaponRankFields.imgRank[20] = this.imgFoHandgunRank;
-                weaponRankFields.imgRank[21] = this.imgFoCrossbowRank;
-                weaponRankFields.imgRank[22] = this.imgFoCardsRank;
-                weaponRankFields.imgRank[23] = this.imgFoMachinegunRank;
-                weaponRankFields.imgRank[27] = this.imgFoRmagRank;
-                weaponRankFields.imgRank[24] = this.imgFoRodRank;
-                weaponRankFields.imgRank[25] = this.imgFoWandRank;
-                weaponRankFields.imgRank[26] = this.imgFoTmagRank;
-                weaponRankFields.imgRank[28] = this.imgFoShieldRank;
+                weaponRankFields.imgWeap[1] = imgFoSword;
+                weaponRankFields.imgWeap[2] = imgFoKnuckles;
+                weaponRankFields.imgWeap[3] = imgFoSpear;
+                weaponRankFields.imgWeap[4] = imgFoDblSaber;
+                weaponRankFields.imgWeap[5] = imgFoAxe;
+                weaponRankFields.imgWeap[6] = imgFoSabers;
+                weaponRankFields.imgWeap[7] = imgFoDaggers;
+                weaponRankFields.imgWeap[8] = imgFoClaws;
+                weaponRankFields.imgWeap[9] = imgFoSaber;
+                weaponRankFields.imgWeap[10] = imgFoDagger;
+                weaponRankFields.imgWeap[11] = imgFoClaw;
+                weaponRankFields.imgWeap[12] = imgFoWhip;
+                weaponRankFields.imgWeap[13] = imgFoSlicer;
+                weaponRankFields.imgWeap[14] = imgFoRifle;
+                weaponRankFields.imgWeap[15] = imgFoShotgun;
+                weaponRankFields.imgWeap[16] = imgFoLongbow;
+                weaponRankFields.imgWeap[17] = imgFoGrenade;
+                weaponRankFields.imgWeap[18] = imgFoLaser;
+                weaponRankFields.imgWeap[19] = imgFoHandguns;
+                weaponRankFields.imgWeap[20] = imgFoHandgun;
+                weaponRankFields.imgWeap[21] = imgFoCrossbow;
+                weaponRankFields.imgWeap[22] = imgFoCards;
+                weaponRankFields.imgWeap[23] = imgFoMachinegun;
+                weaponRankFields.imgWeap[27] = imgFoRmag;
+                weaponRankFields.imgWeap[24] = imgFoRod;
+                weaponRankFields.imgWeap[25] = imgFoWand;
+                weaponRankFields.imgWeap[26] = imgFoTmag;
+                weaponRankFields.imgWeap[28] = imgFoShield;
+                weaponRankFields.imgRank[1] = imgFoSwordRank;
+                weaponRankFields.imgRank[2] = imgFoKnucklesRank;
+                weaponRankFields.imgRank[3] = imgFoSpearRank;
+                weaponRankFields.imgRank[4] = imgFoDblSaberRank;
+                weaponRankFields.imgRank[5] = imgFoAxeRank;
+                weaponRankFields.imgRank[6] = imgFoSabersRank;
+                weaponRankFields.imgRank[7] = imgFoDaggersRank;
+                weaponRankFields.imgRank[8] = imgFoClawsRank;
+                weaponRankFields.imgRank[9] = imgFoSaberRank;
+                weaponRankFields.imgRank[10] = imgFoDaggerRank;
+                weaponRankFields.imgRank[11] = imgFoClawRank;
+                weaponRankFields.imgRank[12] = imgFoWhipRank;
+                weaponRankFields.imgRank[13] = imgFoSlicerRank;
+                weaponRankFields.imgRank[14] = imgFoRifleRank;
+                weaponRankFields.imgRank[15] = imgFoShotgunRank;
+                weaponRankFields.imgRank[16] = imgFoLongbowRank;
+                weaponRankFields.imgRank[17] = imgFoGrenadeRank;
+                weaponRankFields.imgRank[18] = imgFoLaserRank;
+                weaponRankFields.imgRank[19] = imgFoHandgunsRank;
+                weaponRankFields.imgRank[20] = imgFoHandgunRank;
+                weaponRankFields.imgRank[21] = imgFoCrossbowRank;
+                weaponRankFields.imgRank[22] = imgFoCardsRank;
+                weaponRankFields.imgRank[23] = imgFoMachinegunRank;
+                weaponRankFields.imgRank[27] = imgFoRmagRank;
+                weaponRankFields.imgRank[24] = imgFoRodRank;
+                weaponRankFields.imgRank[25] = imgFoWandRank;
+                weaponRankFields.imgRank[26] = imgFoTmagRank;
+                weaponRankFields.imgRank[28] = imgFoShieldRank;
             }
-            else if (page == this.tabPageVanguard)
+            else if (page == tabPageVanguard)
             {
-                weaponRankFields.imgWeap[1] = this.imgVaSword;
-                weaponRankFields.imgWeap[2] = this.imgVaKnuckles;
-                weaponRankFields.imgWeap[3] = this.imgVaSpear;
-                weaponRankFields.imgWeap[4] = this.imgVaDblSaber;
-                weaponRankFields.imgWeap[5] = this.imgVaAxe;
-                weaponRankFields.imgWeap[6] = this.imgVaSabers;
-                weaponRankFields.imgWeap[7] = this.imgVaDaggers;
-                weaponRankFields.imgWeap[8] = this.imgVaClaws;
-                weaponRankFields.imgWeap[9] = this.imgVaSaber;
-                weaponRankFields.imgWeap[10] = this.imgVaDagger;
-                weaponRankFields.imgWeap[11] = this.imgVaClaw;
-                weaponRankFields.imgWeap[12] = this.imgVaWhip;
-                weaponRankFields.imgWeap[13] = this.imgVaSlicer;
-                weaponRankFields.imgWeap[14] = this.imgVaRifle;
-                weaponRankFields.imgWeap[15] = this.imgVaShotgun;
-                weaponRankFields.imgWeap[16] = this.imgVaLongbow;
-                weaponRankFields.imgWeap[17] = this.imgVaGrenade;
-                weaponRankFields.imgWeap[18] = this.imgVaLaser;
-                weaponRankFields.imgWeap[19] = this.imgVaHandguns;
-                weaponRankFields.imgWeap[20] = this.imgVaHandgun;
-                weaponRankFields.imgWeap[21] = this.imgVaCrossbow;
-                weaponRankFields.imgWeap[22] = this.imgVaCards;
-                weaponRankFields.imgWeap[23] = this.imgVaMachinegun;
-                weaponRankFields.imgWeap[27] = this.imgVaRmag;
-                weaponRankFields.imgWeap[24] = this.imgVaRod;
-                weaponRankFields.imgWeap[25] = this.imgVaWand;
-                weaponRankFields.imgWeap[26] = this.imgVaTmag;
-                weaponRankFields.imgWeap[28] = this.imgVaShield;
-                weaponRankFields.imgRank[1] = this.imgVaSwordRank;
-                weaponRankFields.imgRank[2] = this.imgVaKnucklesRank;
-                weaponRankFields.imgRank[3] = this.imgVaSpearRank;
-                weaponRankFields.imgRank[4] = this.imgVaDblSaberRank;
-                weaponRankFields.imgRank[5] = this.imgVaAxeRank;
-                weaponRankFields.imgRank[6] = this.imgVaSabersRank;
-                weaponRankFields.imgRank[7] = this.imgVaDaggersRank;
-                weaponRankFields.imgRank[8] = this.imgVaClawsRank;
-                weaponRankFields.imgRank[9] = this.imgVaSaberRank;
-                weaponRankFields.imgRank[10] = this.imgVaDaggerRank;
-                weaponRankFields.imgRank[11] = this.imgVaClawRank;
-                weaponRankFields.imgRank[12] = this.imgVaWhipRank;
-                weaponRankFields.imgRank[13] = this.imgVaSlicerRank;
-                weaponRankFields.imgRank[14] = this.imgVaRifleRank;
-                weaponRankFields.imgRank[15] = this.imgVaShotgunRank;
-                weaponRankFields.imgRank[16] = this.imgVaLongbowRank;
-                weaponRankFields.imgRank[17] = this.imgVaGrenadeRank;
-                weaponRankFields.imgRank[18] = this.imgVaLaserRank;
-                weaponRankFields.imgRank[19] = this.imgVaHandgunsRank;
-                weaponRankFields.imgRank[20] = this.imgVaHandgunRank;
-                weaponRankFields.imgRank[21] = this.imgVaCrossbowRank;
-                weaponRankFields.imgRank[22] = this.imgVaCardsRank;
-                weaponRankFields.imgRank[23] = this.imgVaMachinegunRank;
-                weaponRankFields.imgRank[27] = this.imgVaRmagRank;
-                weaponRankFields.imgRank[24] = this.imgVaRodRank;
-                weaponRankFields.imgRank[25] = this.imgVaWandRank;
-                weaponRankFields.imgRank[26] = this.imgVaTmagRank;
-                weaponRankFields.imgRank[28] = this.imgVaShieldRank;
+                weaponRankFields.imgWeap[1] = imgVaSword;
+                weaponRankFields.imgWeap[2] = imgVaKnuckles;
+                weaponRankFields.imgWeap[3] = imgVaSpear;
+                weaponRankFields.imgWeap[4] = imgVaDblSaber;
+                weaponRankFields.imgWeap[5] = imgVaAxe;
+                weaponRankFields.imgWeap[6] = imgVaSabers;
+                weaponRankFields.imgWeap[7] = imgVaDaggers;
+                weaponRankFields.imgWeap[8] = imgVaClaws;
+                weaponRankFields.imgWeap[9] = imgVaSaber;
+                weaponRankFields.imgWeap[10] = imgVaDagger;
+                weaponRankFields.imgWeap[11] = imgVaClaw;
+                weaponRankFields.imgWeap[12] = imgVaWhip;
+                weaponRankFields.imgWeap[13] = imgVaSlicer;
+                weaponRankFields.imgWeap[14] = imgVaRifle;
+                weaponRankFields.imgWeap[15] = imgVaShotgun;
+                weaponRankFields.imgWeap[16] = imgVaLongbow;
+                weaponRankFields.imgWeap[17] = imgVaGrenade;
+                weaponRankFields.imgWeap[18] = imgVaLaser;
+                weaponRankFields.imgWeap[19] = imgVaHandguns;
+                weaponRankFields.imgWeap[20] = imgVaHandgun;
+                weaponRankFields.imgWeap[21] = imgVaCrossbow;
+                weaponRankFields.imgWeap[22] = imgVaCards;
+                weaponRankFields.imgWeap[23] = imgVaMachinegun;
+                weaponRankFields.imgWeap[27] = imgVaRmag;
+                weaponRankFields.imgWeap[24] = imgVaRod;
+                weaponRankFields.imgWeap[25] = imgVaWand;
+                weaponRankFields.imgWeap[26] = imgVaTmag;
+                weaponRankFields.imgWeap[28] = imgVaShield;
+                weaponRankFields.imgRank[1] = imgVaSwordRank;
+                weaponRankFields.imgRank[2] = imgVaKnucklesRank;
+                weaponRankFields.imgRank[3] = imgVaSpearRank;
+                weaponRankFields.imgRank[4] = imgVaDblSaberRank;
+                weaponRankFields.imgRank[5] = imgVaAxeRank;
+                weaponRankFields.imgRank[6] = imgVaSabersRank;
+                weaponRankFields.imgRank[7] = imgVaDaggersRank;
+                weaponRankFields.imgRank[8] = imgVaClawsRank;
+                weaponRankFields.imgRank[9] = imgVaSaberRank;
+                weaponRankFields.imgRank[10] = imgVaDaggerRank;
+                weaponRankFields.imgRank[11] = imgVaClawRank;
+                weaponRankFields.imgRank[12] = imgVaWhipRank;
+                weaponRankFields.imgRank[13] = imgVaSlicerRank;
+                weaponRankFields.imgRank[14] = imgVaRifleRank;
+                weaponRankFields.imgRank[15] = imgVaShotgunRank;
+                weaponRankFields.imgRank[16] = imgVaLongbowRank;
+                weaponRankFields.imgRank[17] = imgVaGrenadeRank;
+                weaponRankFields.imgRank[18] = imgVaLaserRank;
+                weaponRankFields.imgRank[19] = imgVaHandgunsRank;
+                weaponRankFields.imgRank[20] = imgVaHandgunRank;
+                weaponRankFields.imgRank[21] = imgVaCrossbowRank;
+                weaponRankFields.imgRank[22] = imgVaCardsRank;
+                weaponRankFields.imgRank[23] = imgVaMachinegunRank;
+                weaponRankFields.imgRank[27] = imgVaRmagRank;
+                weaponRankFields.imgRank[24] = imgVaRodRank;
+                weaponRankFields.imgRank[25] = imgVaWandRank;
+                weaponRankFields.imgRank[26] = imgVaTmagRank;
+                weaponRankFields.imgRank[28] = imgVaShieldRank;
             }
             return weaponRankFields;
         }
 
         public pspo2seForm.expDb_ItemClass findExpLevelInfoInDb(int level)
         {
-            if (level - 1 < this.exp_db_filled)
-                return this.exp_db.level[level - 1];
-            int num = (int)MessageBox.Show("Fatal error. Trying to exp info not in the database.\n\nPlease update your databases from the menu.", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+            if (level - 1 < exp_db_filled)
+                return exp_db.level[level - 1];
+            MessageBox.Show("Fatal error. Trying to exp info not in the database.\n\nPlease update your databases from the menu.", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
             return (pspo2seForm.expDb_ItemClass)null;
         }
 
         public void addExpLevelInfoToDb(string csvLine)
         {
-            if (this.exp_db_filled >= 355)
+            if (exp_db_filled >= 355)
             {
-                int num1 = (int)MessageBox.Show("Fatal Error! ExpLevel Database is too large!");
+                MessageBox.Show("Fatal Error! ExpLevel Database is too large!");
             }
             string[] strArray = csvLine.Split('|');
-            this.exp_db.level[this.exp_db_filled] = new pspo2seForm.expDb_ItemClass();
+            exp_db.level[exp_db_filled] = new pspo2seForm.expDb_ItemClass();
             try
             {
-                this.exp_db.level[this.exp_db_filled].level = int.Parse(strArray[0]);
-                this.exp_db.level[this.exp_db_filled].exp = int.Parse(strArray[1]);
-                this.exp_db.level[this.exp_db_filled].exp_next = int.Parse(strArray[2]);
-                ++this.exp_db_filled;
+                exp_db.level[exp_db_filled].level = int.Parse(strArray[0]);
+                exp_db.level[exp_db_filled].exp = int.Parse(strArray[1]);
+                exp_db.level[exp_db_filled].exp_next = int.Parse(strArray[2]);
+                ++exp_db_filled;
             }
             catch
             {
-                if (this.shownCorruptExpCsv)
+                if (shownCorruptExpCsv)
                     return;
-                int num2 = (int)MessageBox.Show("The ExpLevel Database appears to need updating\r\nPlease update from the database menu", "Corrupt Database", MessageBoxButtons.OK, MessageBoxIcon.Hand);
-                this.shownCorruptExpCsv = true;
-                this.databasesOk = false;
+                MessageBox.Show("The ExpLevel Database appears to need updating\r\nPlease update from the database menu", "Corrupt Database", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                shownCorruptExpCsv = true;
+                databasesOk = false;
             }
         }
 
         public void loadExpLevelDatabase()
         {
-            this.exp_db_filled = 0;
+            exp_db_filled = 0;
             try
             {
-                string encryptionKey = this.run.hexAndMathFunction.convertHexToEncryptionKey("3F0007003C00F2009D005200AF002C00");
+                string encryptionKey = run.hexAndMathFunction.convertHexToEncryptionKey("3F0007003C00F2009D005200AF002C00");
                 FileStream fs = new FileStream("data/databases/explevel.pspo2sedb", FileMode.Open, FileAccess.Read);
-                using (StreamReader streamReader = new StreamReader((Stream)this.encryptor.createDecryptionReadStream(encryptionKey, fs)))
+                using (StreamReader streamReader = new StreamReader((Stream)encryptor.createDecryptionReadStream(encryptionKey, fs)))
                 {
                     string csvLine;
                     while ((csvLine = streamReader.ReadLine()) != null)
-                        this.addExpLevelInfoToDb(csvLine);
+                        addExpLevelInfoToDb(csvLine);
                     streamReader.Close();
                     fs.Close();
                 }
             }
             catch (Exception ex)
             {
-                this.databasesOk = false;
-                int num = (int)MessageBox.Show(ex.Message + "\r\n\r\nPlease run a database update from the menu", "Exp Level Database Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                databasesOk = false;
+                MessageBox.Show(ex.Message + "\r\n\r\nPlease run a database update from the menu", "Exp Level Database Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 
         public pspo2seForm.expDb_ItemClass findExpTypeInfoInDb(int level)
         {
-            if (level < this.type_db_filled)
-                return this.typeexp_db.level[level];
-            int num = (int)MessageBox.Show("Fatal error. Trying to get type exp info not in the database.\n\nPlease update your databases from the menu.", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+            if (level < type_db_filled)
+                return typeexp_db.level[level];
+            MessageBox.Show("Fatal error. Trying to get type exp info not in the database.\n\nPlease update your databases from the menu.", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
             return (pspo2seForm.expDb_ItemClass)null;
         }
 
         public pspo2seForm.expDb_ItemClass findRebirthBpInfoInDb(int level)
         {
-            if (level - 50 + 200 < this.exp_db_filled)
-                return this.exp_db.level[level - 50 + 200];
-            int num = (int)MessageBox.Show("Fatal error. Trying to get rebirth info not in the database.\n\nPlease update your databases from the menu.", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+            if (level - 50 + 200 < exp_db_filled)
+                return exp_db.level[level - 50 + 200];
+            MessageBox.Show("Fatal error. Trying to get rebirth info not in the database.\n\nPlease update your databases from the menu.", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
             return (pspo2seForm.expDb_ItemClass)null;
         }
 
         public void addExpTypeInfoToDb(string csvLine)
         {
-            if (this.type_db_filled >= 55)
+            if (type_db_filled >= 55)
             {
-                int num1 = (int)MessageBox.Show("Fatal Error! ExpTypeLevel Database is too large!");
+                MessageBox.Show("Fatal Error! ExpTypeLevel Database is too large!");
             }
             string[] strArray = csvLine.Split('|');
-            this.typeexp_db.level[this.type_db_filled] = new pspo2seForm.expDb_ItemClass();
+            typeexp_db.level[type_db_filled] = new pspo2seForm.expDb_ItemClass();
             try
             {
-                this.typeexp_db.level[this.type_db_filled].level = int.Parse(strArray[0]);
-                this.typeexp_db.level[this.type_db_filled].exp = int.Parse(strArray[1]);
-                this.typeexp_db.level[this.type_db_filled].exp_next = int.Parse(strArray[2]);
-                this.typeexp_db.level[this.type_db_filled].extend_points = int.Parse(strArray[3]);
+                typeexp_db.level[type_db_filled].level = int.Parse(strArray[0]);
+                typeexp_db.level[type_db_filled].exp = int.Parse(strArray[1]);
+                typeexp_db.level[type_db_filled].exp_next = int.Parse(strArray[2]);
+                typeexp_db.level[type_db_filled].extend_points = int.Parse(strArray[3]);
             }
             catch
             {
-                if (!this.shownCorruptExpTypeCsv)
+                if (!shownCorruptExpTypeCsv)
                 {
-                    int num2 = (int)MessageBox.Show("The ExpTypeLevel Database appears to need updating\r\nPlease update from the database menu", "Corrupt Database", MessageBoxButtons.OK, MessageBoxIcon.Hand);
-                    this.shownCorruptExpTypeCsv = true;
-                    this.databasesOk = false;
+                    MessageBox.Show("The ExpTypeLevel Database appears to need updating\r\nPlease update from the database menu", "Corrupt Database", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                    shownCorruptExpTypeCsv = true;
+                    databasesOk = false;
                 }
             }
-            ++this.type_db_filled;
+            ++type_db_filled;
         }
 
         public void loadExpTypeDatabase()
         {
-            this.type_db_filled = 0;
+            type_db_filled = 0;
             try
             {
-                string encryptionKey = this.run.hexAndMathFunction.convertHexToEncryptionKey("3F0007003C00F2009D005200AF002C00");
+                string encryptionKey = run.hexAndMathFunction.convertHexToEncryptionKey("3F0007003C00F2009D005200AF002C00");
                 FileStream fs = new FileStream("data/databases/exptype.pspo2sedb", FileMode.Open, FileAccess.Read);
-                using (StreamReader streamReader = new StreamReader((Stream)this.encryptor.createDecryptionReadStream(encryptionKey, fs)))
+                using (StreamReader streamReader = new StreamReader((Stream)encryptor.createDecryptionReadStream(encryptionKey, fs)))
                 {
                     string csvLine;
                     while ((csvLine = streamReader.ReadLine()) != null)
-                        this.addExpTypeInfoToDb(csvLine);
+                        addExpTypeInfoToDb(csvLine);
                     streamReader.Close();
                     fs.Close();
                 }
             }
             catch (Exception ex)
             {
-                this.databasesOk = false;
-                int num = (int)MessageBox.Show(ex.Message + "\r\n\r\nPlease run a database update from the menu", "Exp Type Database Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                databasesOk = false;
+                MessageBox.Show(ex.Message + "\r\n\r\nPlease run a database update from the menu", "Exp Type Database Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 
-        public pspo2seForm.saveDataType get_saveDataInfo => this.saveData;
+        public pspo2seForm.saveDataType get_saveDataInfo => saveData;
 
-        public TabPage get_tabPageType => this.tabPageInventory;
+        public TabPage get_tabPageType => tabPageInventory;
 
         public void disableMainForm()
         {
-            this.lstSaveSlotView.Enabled = false;
-            this.tabArea.Enabled = false;
-            this.btnSave.Enabled = false;
-            this.btnSaveAs.Enabled = false;
-            this.btnUndoAll.Enabled = false;
-            this.btnImportCharacter.Enabled = false;
-            this.btnExportCharacter.Enabled = false;
-            this.btnBrowse.Enabled = false;
-            this.menuStrip.Enabled = false;
-            this.tabArea.SelectedTab = this.tabPageInfo;
-            this.btnInventoryDelete.Enabled = false;
-            this.btnInventoryExportSelected.Enabled = false;
-            this.btnInventoryDeposit.Enabled = false;
-            this.btnStorageDelete.Enabled = false;
-            this.btnStorageExportSelected.Enabled = false;
-            this.btnStorageWithdraw.Enabled = false;
-            this.chkDeleteExportInventory.Enabled = false;
-            this.chkDeleteExportStorage.Enabled = false;
+            lstSaveSlotView.Enabled = false;
+            tabArea.Enabled = false;
+            btnSave.Enabled = false;
+            btnSaveAs.Enabled = false;
+            btnUndoAll.Enabled = false;
+            btnImportCharacter.Enabled = false;
+            btnExportCharacter.Enabled = false;
+            btnBrowse.Enabled = false;
+            menuStrip.Enabled = false;
+            tabArea.SelectedTab = tabPageInfo;
+            btnInventoryDelete.Enabled = false;
+            btnInventoryExportSelected.Enabled = false;
+            btnInventoryDeposit.Enabled = false;
+            btnStorageDelete.Enabled = false;
+            btnStorageExportSelected.Enabled = false;
+            btnStorageWithdraw.Enabled = false;
+            chkDeleteExportInventory.Enabled = false;
+            chkDeleteExportStorage.Enabled = false;
         }
 
         public void enableMainForm()
         {
-            if (this.txtFileLoc.Text != "")
+            if (txtFileLoc.Text != "")
             {
-                this.lstSaveSlotView.Enabled = true;
-                this.tabArea.Enabled = true;
-                this.btnSave.Enabled = true;
-                this.btnSaveAs.Enabled = true;
-                this.btnUndoAll.Enabled = true;
-                this.btnImportCharacter.Enabled = true;
-                this.btnExportCharacter.Enabled = true;
-                this.inventoryViewPages.SelectedIndex = 0;
-                this.storageViewPages.SelectedIndex = 0;
+                lstSaveSlotView.Enabled = true;
+                tabArea.Enabled = true;
+                btnSave.Enabled = true;
+                btnSaveAs.Enabled = true;
+                btnUndoAll.Enabled = true;
+                btnImportCharacter.Enabled = true;
+                btnExportCharacter.Enabled = true;
+                inventoryViewPages.SelectedIndex = 0;
+                storageViewPages.SelectedIndex = 0;
             }
-            this.btnBrowse.Enabled = true;
-            this.menuStrip.Enabled = true;
+            btnBrowse.Enabled = true;
+            menuStrip.Enabled = true;
         }
 
         public bool legitVersion() => false;
@@ -783,248 +783,248 @@ namespace pspo2seSaveEditorProgram
         }
         public pspo2seForm()
         {
-            this.InitializeComponent();
+            InitializeComponent();
             exportImageLists();
             if (!Directory.Exists(Directory.GetCurrentDirectory() + "\\data"))
             {
                 Directory.CreateDirectory(Directory.GetCurrentDirectory() + "\\data\\databases");
                 Directory.CreateDirectory(Directory.GetCurrentDirectory() + "\\data\\temp");
                 Directory.CreateDirectory(Directory.GetCurrentDirectory() + "\\data\\weapon_images");
-                this.firstInstall = true;
-                this.databasesOk = false;
-                int num = (int)MessageBox.Show("This is your first time running the application\r\nYou will need to update the databases\r\nbefore you can do anything.\r\n\r\nChoose databases from the top menu to update.", "First time use", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                firstInstall = true;
+                databasesOk = false;
+                MessageBox.Show("This is your first time running the application\r\nYou will need to update the databases\r\nbefore you can do anything.\r\n\r\nChoose databases from the top menu to update.", "First time use", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
             if (!Directory.Exists(Directory.GetCurrentDirectory() + "\\data\\keys"))
                 Directory.CreateDirectory(Directory.GetCurrentDirectory() + "\\data\\keys");
-            if (!this.downloadRequiredFile("FolderZipper.dll", "The application will not start without this file.", 6144L))
+            if (!downloadRequiredFile("FolderZipper.dll", "The application will not start without this file.", 6144L))
             {
-                int num = (int)MessageBox.Show("The application will now close", "Application Closing", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                MessageBox.Show("The application will now close", "Application Closing", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                 Environment.Exit(0);
             }
-            if (!this.downloadRequiredFile("ICSharpCode.SharpZipLib.dll", "The application will not start without this file.", 200704L))
+            if (!downloadRequiredFile("ICSharpCode.SharpZipLib.dll", "The application will not start without this file.", 200704L))
             {
-                int num = (int)MessageBox.Show("The application will now close", "Application Closing", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                MessageBox.Show("The application will now close", "Application Closing", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                 Environment.Exit(0);
             }
-            if (!this.downloadRequiredFile("pspo2se_updater.exe", "The application will not start without this file.", 6144L))
+            if (!downloadRequiredFile("pspo2se_updater.exe", "The application will not start without this file.", 6144L))
             {
-                int num = (int)MessageBox.Show("The application will now close", "Application Closing", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                MessageBox.Show("The application will now close", "Application Closing", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                 Environment.Exit(0);
             }
-            this.downloadRequiredFile("SED.exe", "You cannot load encrypted save files without this.", 51712L);
-            this.abilityDb.encryptor = this.encryptor;
-            this.initImageFloater();
-            if (!this.firstInstall)
+            downloadRequiredFile("SED.exe", "You cannot load encrypted save files without ", 51712L);
+            abilityDb.encryptor = encryptor;
+            initImageFloater();
+            if (!firstInstall)
             {
-                this.action_loadDatabases();
+                action_loadDatabases();
                 Application.DoEvents();
-                this.checkAppUpdate(false);
-                this.checkDatabaseUpdate(false);
-                this.checkImagesUpdate(false);
+                checkAppUpdate(false);
+                checkDatabaseUpdate(false);
+                checkImagesUpdate(false);
             }
-            this.firstboot = false;
-            this.Text = "PSPo2 Save Editor v3.0 build 1008";
-            this.txtFooterText.Text = "PSPo2 Save Editor v3.0 build 1008 by FunkySkunk 2011-2015";
-            if (this.legitVersion())
-                this.action_setupLegitApp();
-            this.btnBrowse.Enabled = true;
-            this.menuStrip.Enabled = true;
+            firstboot = false;
+            Text = "PSPo2 Save Editor v3.0 build 1008";
+            txtFooterText.Text = "PSPo2 Save Editor v3.0 build 1008 by FunkySkunk 2011-" + DateTime.Now.Year;
+            if (legitVersion())
+                action_setupLegitApp();
+            btnBrowse.Enabled = true;
+            menuStrip.Enabled = true;
         }
 
         private void action_loadDatabases()
         {
-            this.databasesOk = true;
-            this.loadItemDatabase();
-            if (!this.abilityDb.loadDatabase())
-                this.databasesOk = false;
-            this.loadExpLevelDatabase();
-            this.loadExpTypeDatabase();
-            if (this.saveData.type == pspo2seForm.SaveType.NONE)
+            databasesOk = true;
+            loadItemDatabase();
+            if (!abilityDb.loadDatabase())
+                databasesOk = false;
+            loadExpLevelDatabase();
+            loadExpTypeDatabase();
+            if (saveData.type == pspo2seForm.SaveType.NONE)
                 return;
-            this.reloadEverything();
+            reloadEverything();
         }
 
         private void action_setupLegitApp()
         {
-            this.Text = "PSPo2 Save Viewer v3.0 build 1008";
-            this.btnExportCharacter.Visible = false;
-            this.btnImportCharacter.Visible = false;
-            this.btnInventoryDelete.Visible = false;
-            this.btnInventoryExportAll.Visible = false;
-            this.btnInventoryImportAll.Visible = false;
-            this.btnInventoryExportSelected.Visible = false;
-            this.btnInventoryDeposit.Visible = true;
-            this.btnInventoryImportSelected.Visible = false;
-            this.btnStorageDelete.Visible = false;
-            this.btnStorageExportAll.Visible = false;
-            this.btnStorageImportAll.Visible = false;
-            this.btnStorageExportSelected.Visible = false;
-            this.btnStorageImportSelected.Visible = false;
-            this.btnStorageWithdraw.Visible = true;
-            this.chkDeleteExportInventory.Visible = false;
-            this.chkDeleteExportStorage.Visible = false;
-            this.inventoryViewPages.TabPages.Remove(this.tabInventory6);
-            this.storageViewPages.TabPages.Remove(this.tabStorage6);
-            this.txtFooterText.Text = "PSPo2 Save Viewer v3.0 build 1008 by FunkySkunk 2011";
-            this.chkRebirthSpoof.Visible = false;
-            this.chkRebirthSpoof.Checked = false;
-            this.chkRebirthNoLevelDrop.Visible = false;
-            this.chkRebirthNoLevelDrop.Checked = false;
-            this.txtLevel.Cursor = Cursors.Default;
-            this.lblLevel.Cursor = Cursors.Default;
-            this.txtTitle.Cursor = Cursors.Default;
-            this.lblTitle.Cursor = Cursors.Default;
-            this.txtCurType.Cursor = Cursors.Default;
-            this.lblType.Cursor = Cursors.Default;
-            this.txtRace.Cursor = Cursors.Default;
-            this.lblClass.Cursor = Cursors.Default;
-            this.txtSex.Cursor = Cursors.Default;
-            this.lblSex.Cursor = Cursors.Default;
-            this.txtHuLevel.Cursor = Cursors.Default;
-            this.txtRaLevel.Cursor = Cursors.Default;
-            this.txtFoLevel.Cursor = Cursors.Default;
-            this.txtVaLevel.Cursor = Cursors.Default;
-            this.lblHuLevel.Cursor = Cursors.Default;
-            this.lblRaLevel.Cursor = Cursors.Default;
-            this.lblFoLevel.Cursor = Cursors.Default;
-            this.lblVaLevel.Cursor = Cursors.Default;
-            this.txtInventoryMeseta.Cursor = Cursors.Default;
-            this.lblInventoryMeseta.Cursor = Cursors.Default;
-            this.txtInventoryQty.Cursor = Cursors.Default;
-            this.imgInventoryElement.Cursor = Cursors.Default;
-            this.txtInventoryPercent.Cursor = Cursors.Default;
-            this.txtInventorySpecial.Cursor = Cursors.Default;
-            this.txtInventoryATK.Cursor = Cursors.Default;
-            this.txtStorageMeseta.Cursor = Cursors.Default;
-            this.lblStorageMeseta.Cursor = Cursors.Default;
-            this.txtStorageQty.Cursor = Cursors.Default;
-            this.imgStorageElement.Cursor = Cursors.Default;
-            this.txtStoragePercent.Cursor = Cursors.Default;
-            this.txtStorageSpecial.Cursor = Cursors.Default;
-            this.txtStorageATK.Cursor = Cursors.Default;
-            this.txtSkipEp1Start.Cursor = Cursors.Default;
-            this.txtMissionEp1.Cursor = Cursors.Default;
-            this.txtMissionMagashi.Cursor = Cursors.Default;
-            this.txtMissionTactical.Cursor = Cursors.Default;
-            this.txtEp1Complete.Cursor = Cursors.Default;
-            this.txtSkipEp2Start.Cursor = Cursors.Default;
-            this.txtMissionEp2.Cursor = Cursors.Default;
-            this.txtEp2Complete.Cursor = Cursors.Default;
-            this.btnImportInfinityMission.Visible = false;
-            this.btnExportInfinityMission.Visible = false;
-            this.btnDeleteInfinityMission.Visible = false;
-            this.btnModifyInfinityMission.Visible = false;
+            Text = "PSPo2 Save Viewer v3.0 build 1008";
+            btnExportCharacter.Visible = false;
+            btnImportCharacter.Visible = false;
+            btnInventoryDelete.Visible = false;
+            btnInventoryExportAll.Visible = false;
+            btnInventoryImportAll.Visible = false;
+            btnInventoryExportSelected.Visible = false;
+            btnInventoryDeposit.Visible = true;
+            btnInventoryImportSelected.Visible = false;
+            btnStorageDelete.Visible = false;
+            btnStorageExportAll.Visible = false;
+            btnStorageImportAll.Visible = false;
+            btnStorageExportSelected.Visible = false;
+            btnStorageImportSelected.Visible = false;
+            btnStorageWithdraw.Visible = true;
+            chkDeleteExportInventory.Visible = false;
+            chkDeleteExportStorage.Visible = false;
+            inventoryViewPages.TabPages.Remove(tabInventory6);
+            storageViewPages.TabPages.Remove(tabStorage6);
+            txtFooterText.Text = "PSPo2 Save Viewer v3.0 build 1008 by FunkySkunk 2011";
+            chkRebirthSpoof.Visible = false;
+            chkRebirthSpoof.Checked = false;
+            chkRebirthNoLevelDrop.Visible = false;
+            chkRebirthNoLevelDrop.Checked = false;
+            txtLevel.Cursor = Cursors.Default;
+            lblLevel.Cursor = Cursors.Default;
+            txtTitle.Cursor = Cursors.Default;
+            lblTitle.Cursor = Cursors.Default;
+            txtCurType.Cursor = Cursors.Default;
+            lblType.Cursor = Cursors.Default;
+            txtRace.Cursor = Cursors.Default;
+            lblClass.Cursor = Cursors.Default;
+            txtSex.Cursor = Cursors.Default;
+            lblSex.Cursor = Cursors.Default;
+            txtHuLevel.Cursor = Cursors.Default;
+            txtRaLevel.Cursor = Cursors.Default;
+            txtFoLevel.Cursor = Cursors.Default;
+            txtVaLevel.Cursor = Cursors.Default;
+            lblHuLevel.Cursor = Cursors.Default;
+            lblRaLevel.Cursor = Cursors.Default;
+            lblFoLevel.Cursor = Cursors.Default;
+            lblVaLevel.Cursor = Cursors.Default;
+            txtInventoryMeseta.Cursor = Cursors.Default;
+            lblInventoryMeseta.Cursor = Cursors.Default;
+            txtInventoryQty.Cursor = Cursors.Default;
+            imgInventoryElement.Cursor = Cursors.Default;
+            txtInventoryPercent.Cursor = Cursors.Default;
+            txtInventorySpecial.Cursor = Cursors.Default;
+            txtInventoryATK.Cursor = Cursors.Default;
+            txtStorageMeseta.Cursor = Cursors.Default;
+            lblStorageMeseta.Cursor = Cursors.Default;
+            txtStorageQty.Cursor = Cursors.Default;
+            imgStorageElement.Cursor = Cursors.Default;
+            txtStoragePercent.Cursor = Cursors.Default;
+            txtStorageSpecial.Cursor = Cursors.Default;
+            txtStorageATK.Cursor = Cursors.Default;
+            txtSkipEp1Start.Cursor = Cursors.Default;
+            txtMissionEp1.Cursor = Cursors.Default;
+            txtMissionMagashi.Cursor = Cursors.Default;
+            txtMissionTactical.Cursor = Cursors.Default;
+            txtEp1Complete.Cursor = Cursors.Default;
+            txtSkipEp2Start.Cursor = Cursors.Default;
+            txtMissionEp2.Cursor = Cursors.Default;
+            txtEp2Complete.Cursor = Cursors.Default;
+            btnImportInfinityMission.Visible = false;
+            btnExportInfinityMission.Visible = false;
+            btnDeleteInfinityMission.Visible = false;
+            btnModifyInfinityMission.Visible = false;
         }
 
         private void action_browse()
         {
-            if (!this.databasesOk)
+            if (!databasesOk)
             {
-                int num = (int)MessageBox.Show("The databases must be updated before you can use the application", "Database Updates Required", MessageBoxButtons.OK, MessageBoxIcon.Hand);
-                this.checkDatabaseUpdate(true);
+                MessageBox.Show("The databases must be updated before you can use the application", "Database Updates Required", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                checkDatabaseUpdate(true);
             }
             else
             {
                 OpenFileDialog openFileDialog = new OpenFileDialog();
                 openFileDialog.Title = "PSPo2 Save Editor: Open File";
-                if (this.legitVersion())
+                if (legitVersion())
                     openFileDialog.Title = "PSPo2 Save Viewer: Open File";
                 openFileDialog.Filter = "All files (*.*)|*.*|PSP Decrypted Save Data (*.bin)|*.bin|PSP Encrypted Save Data (*.bin)|*.bin";
                 openFileDialog.FilterIndex = 2;
                 openFileDialog.RestoreDirectory = true;
                 if (openFileDialog.ShowDialog() != DialogResult.OK)
                     return;
-                this.txtFileLoc.Text = openFileDialog.FileName;
-                this.tabArea.SelectedTab = this.tabPageInfo;
-                this.disableMainForm();
-                this.saveOk = this.loadSaveFile(false);
-                if (!this.saveOk)
+                txtFileLoc.Text = openFileDialog.FileName;
+                tabArea.SelectedTab = tabPageInfo;
+                disableMainForm();
+                saveOk = loadSaveFile(false);
+                if (!saveOk)
                     return;
-                this.showGameImage();
-                if (this.lstSaveSlotView.Items.Count <= 0)
+                showGameImage();
+                if (lstSaveSlotView.Items.Count <= 0)
                     return;
-                this.lstSaveSlotView.Items[0].Selected = true;
-                this.enableMainForm();
+                lstSaveSlotView.Items[0].Selected = true;
+                enableMainForm();
             }
         }
 
         private void action_saveas()
         {
-            if (this.saveOk)
+            if (saveOk)
             {
-                if (this.mainSettings.saveStructureIndex.encrypted)
+                if (mainSettings.saveStructureIndex.encrypted)
                 {
-                    if (!this.saveBufferDataToFile(0, this.saveData.size, "PSP Encrypted Save Data (*.bin)|*.bin"))
+                    if (!saveBufferDataToFile(0, saveData.size, "PSP Encrypted Save Data (*.bin)|*.bin"))
                         return;
-                    int num = (int)MessageBox.Show("The data was saved successfully", "Save Data Export Successful", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    MessageBox.Show("The data was saved successfully", "Save Data Export Successful", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 }
                 else
                 {
-                    if (!this.saveBufferDataToFile(0, this.saveData.size, "PSP Decrypted Save Data (*.bin)|*.bin"))
+                    if (!saveBufferDataToFile(0, saveData.size, "PSP Decrypted Save Data (*.bin)|*.bin"))
                         return;
-                    int num = (int)MessageBox.Show("The data was saved successfully", "Save Data Export Successful", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    MessageBox.Show("The data was saved successfully", "Save Data Export Successful", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 }
             }
             else
             {
-                int num1 = (int)MessageBox.Show("There is no data to save", "Save Data Buffer Empty", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                MessageBox.Show("There is no data to save", "Save Data Buffer Empty", MessageBoxButtons.OK, MessageBoxIcon.Hand);
             }
         }
 
         private void action_save()
         {
-            if (this.saveOk)
+            if (saveOk)
             {
                 if (MessageBox.Show("Are you sure you want to overwrite the loaded save file?", "Confirm Overwrite", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel)
                     return;
-                if (this.mainSettings.saveStructureIndex.encrypted)
+                if (mainSettings.saveStructureIndex.encrypted)
                 {
-                    if (!this.saveBufferDataToFile(0, this.saveData.size, "PSP Encrypted Save Data (*.bin)|*.bin", isSaveFile: true, path: this.txtFileLoc.Text))
+                    if (!saveBufferDataToFile(0, saveData.size, "PSP Encrypted Save Data (*.bin)|*.bin", isSaveFile: true, path: txtFileLoc.Text))
                         return;
-                    int num = (int)MessageBox.Show("The data was saved successfully", "Save Data Export Successful", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    MessageBox.Show("The data was saved successfully", "Save Data Export Successful", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 }
                 else
                 {
-                    if (!this.saveBufferDataToFile(0, this.saveData.size, "PSP Decrypted Save Data (*.bin)|*.bin", isSaveFile: true, path: this.txtFileLoc.Text))
+                    if (!saveBufferDataToFile(0, saveData.size, "PSP Decrypted Save Data (*.bin)|*.bin", isSaveFile: true, path: txtFileLoc.Text))
                         return;
-                    int num = (int)MessageBox.Show("The data was saved successfully", "Save Data Export Successful", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    MessageBox.Show("The data was saved successfully", "Save Data Export Successful", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 }
             }
             else
             {
-                int num1 = (int)MessageBox.Show("There is no data to save", "Save Data Buffer Empty", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                MessageBox.Show("There is no data to save", "Save Data Buffer Empty", MessageBoxButtons.OK, MessageBoxIcon.Hand);
             }
         }
 
         private void action_launchTypeAbilitiesForm()
         {
-            string attachedAbilities = this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].job[this.tabControlClasses.SelectedIndex].attachedAbilities;
-            this.abilitiesForm.oldJobs = this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].job;
-            this.abilitiesForm.newJob = this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].job[this.tabControlClasses.SelectedIndex];
-            this.abilitiesForm.selectedJob = (pspo2seForm.jobType)this.tabControlClasses.SelectedIndex;
-            this.abilitiesForm.max_abilities = this.mainSettings.saveStructureIndex.max_type_abilities;
-            this.abilitiesForm.character_name = this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].name;
-            this.abilitiesForm.abilityDb = this.abilityDb;
-            this.abilitiesForm.saveType = this.saveData.type;
+            string attachedAbilities = saveData.slot[lstSaveSlotView.SelectedItems[0].Index].job[tabControlClasses.SelectedIndex].attachedAbilities;
+            abilitiesForm.oldJobs = saveData.slot[lstSaveSlotView.SelectedItems[0].Index].job;
+            abilitiesForm.newJob = saveData.slot[lstSaveSlotView.SelectedItems[0].Index].job[tabControlClasses.SelectedIndex];
+            abilitiesForm.selectedJob = (pspo2seForm.jobType)tabControlClasses.SelectedIndex;
+            abilitiesForm.max_abilities = mainSettings.saveStructureIndex.max_type_abilities;
+            abilitiesForm.character_name = saveData.slot[lstSaveSlotView.SelectedItems[0].Index].name;
+            abilitiesForm.abilityDb = abilityDb;
+            abilitiesForm.saveType = saveData.type;
             bool flag = false;
             while (!flag)
             {
-                if (this.abilitiesForm.ShowDialog((IWin32Window)this) == DialogResult.OK)
+                if (abilitiesForm.ShowDialog((IWin32Window)this) == DialogResult.OK)
                 {
-                    pspo2seForm.jobClass newJob = this.abilitiesForm.newJob;
+                    pspo2seForm.jobClass newJob = abilitiesForm.newJob;
                     if (newJob.attachedAbilities != attachedAbilities)
                     {
-                        int pos = this.mainSettings.saveStructureIndex.type_level_pos + this.mainSettings.saveStructureIndex.slot_size * this.lstSaveSlotView.SelectedItems[0].Index + 16 + this.tabControlClasses.SelectedIndex * this.mainSettings.saveStructureIndex.type_extend_size + 4;
-                        this.overwriteHexInBuffer(newJob.attachedAbilities, pos);
-                        this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].job[this.tabControlClasses.SelectedIndex].attachedAbilities = newJob.attachedAbilities;
+                        int pos = mainSettings.saveStructureIndex.type_level_pos + mainSettings.saveStructureIndex.slot_size * lstSaveSlotView.SelectedItems[0].Index + 16 + tabControlClasses.SelectedIndex * mainSettings.saveStructureIndex.type_extend_size + 4;
+                        overwriteHexInBuffer(newJob.attachedAbilities, pos);
+                        saveData.slot[lstSaveSlotView.SelectedItems[0].Index].job[tabControlClasses.SelectedIndex].attachedAbilities = newJob.attachedAbilities;
                     }
                     flag = true;
                 }
-                else if (this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].job[this.tabControlClasses.SelectedIndex].attachedAbilities != attachedAbilities)
+                else if (saveData.slot[lstSaveSlotView.SelectedItems[0].Index].job[tabControlClasses.SelectedIndex].attachedAbilities != attachedAbilities)
                 {
                     if (MessageBox.Show("You are about to quit without saving changes\r\nAre you sure?", "Changes were made", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
                     {
-                        this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].job[this.tabControlClasses.SelectedIndex].attachedAbilities = attachedAbilities;
+                        saveData.slot[lstSaveSlotView.SelectedItems[0].Index].job[tabControlClasses.SelectedIndex].attachedAbilities = attachedAbilities;
                         flag = true;
                     }
                 }
@@ -1033,746 +1033,746 @@ namespace pspo2seSaveEditorProgram
             }
         }
 
-        private void btnBrowse_Click(object sender, EventArgs e) => this.action_browse();
+        private void btnBrowse_Click(object sender, EventArgs e) => action_browse();
 
         private void btnExportCharacter_Click(object sender, EventArgs e)
         {
-            if (!this.saveBufferDataToFile(this.mainSettings.saveStructureIndex.header_size + this.mainSettings.saveStructureIndex.slot_size * this.lstSaveSlotView.SelectedItems[0].Index, this.mainSettings.saveStructureIndex.slot_size, this.mainSettings.saveStructureIndex.character_file_name + " (*" + this.mainSettings.saveStructureIndex.character_file_ext + ")|*" + this.mainSettings.saveStructureIndex.character_file_ext, fileNameDefault: this.lstSaveSlotView.SelectedItems[0].Text))
+            if (!saveBufferDataToFile(mainSettings.saveStructureIndex.header_size + mainSettings.saveStructureIndex.slot_size * lstSaveSlotView.SelectedItems[0].Index, mainSettings.saveStructureIndex.slot_size, mainSettings.saveStructureIndex.character_file_name + " (*" + mainSettings.saveStructureIndex.character_file_ext + ")|*" + mainSettings.saveStructureIndex.character_file_ext, fileNameDefault: lstSaveSlotView.SelectedItems[0].Text))
                 return;
-            int num = (int)MessageBox.Show("The character file was exported successfully.", "Export Successful", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            MessageBox.Show("The character file was exported successfully.", "Export Successful", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
         }
 
-        private void btnUndoAll_Click(object sender, EventArgs e) => this.loadSaveFile(false);
+        private void btnUndoAll_Click(object sender, EventArgs e) => loadSaveFile(false);
 
         private void btnImportCharacter_Click(object sender, EventArgs e)
         {
-            if (this.loadFileIntoBuffer(this.mainSettings.saveStructureIndex.header_size + this.mainSettings.saveStructureIndex.slot_size * this.lstSaveSlotView.SelectedItems[0].Index, this.mainSettings.saveStructureIndex.character_file_name + " (*" + this.mainSettings.saveStructureIndex.character_file_ext + ")|*" + this.mainSettings.saveStructureIndex.character_file_ext, pspo2seForm.partFileType.character, false) <= 0)
+            if (loadFileIntoBuffer(mainSettings.saveStructureIndex.header_size + mainSettings.saveStructureIndex.slot_size * lstSaveSlotView.SelectedItems[0].Index, mainSettings.saveStructureIndex.character_file_name + " (*" + mainSettings.saveStructureIndex.character_file_ext + ")|*" + mainSettings.saveStructureIndex.character_file_ext, pspo2seForm.partFileType.character, false) <= 0)
                 return;
-            this.reloadEverything();
-            int num = (int)MessageBox.Show("The character file was imported successfully.", "Import Successful", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            reloadEverything();
+            MessageBox.Show("The character file was imported successfully.", "Import Successful", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
         }
 
-        private void btnSaveAs_Click(object sender, EventArgs e) => this.action_saveas();
+        private void btnSaveAs_Click(object sender, EventArgs e) => action_saveas();
 
         private void tabArea_SelectedIndexChanged(object sender, EventArgs e)
         {
-            switch (this.tabArea.SelectedIndex)
+            switch (tabArea.SelectedIndex)
             {
                 case 2:
-                    this.inventoryViewPages.SelectedIndex = 0;
-                    if (this.inventoryView.SelectedItems.Count <= 0)
+                    inventoryViewPages.SelectedIndex = 0;
+                    if (inventoryView.SelectedItems.Count <= 0)
                     {
-                        this.makeImageFloaterHidden();
+                        makeImageFloaterHidden();
                         break;
                     }
-                    this.changeImageFloater(this.txtInventoryHex.Text.Substring(2, 8));
+                    changeImageFloater(txtInventoryHex.Text.Substring(2, 8));
                     break;
                 case 3:
-                    this.storageViewPages.SelectedIndex = 0;
-                    if (this.storageView.SelectedItems.Count <= 0)
+                    storageViewPages.SelectedIndex = 0;
+                    if (storageView.SelectedItems.Count <= 0)
                     {
-                        this.makeImageFloaterHidden();
+                        makeImageFloaterHidden();
                         break;
                     }
-                    this.changeImageFloater(this.txtStorageHex.Text.Substring(2, 8));
+                    changeImageFloater(txtStorageHex.Text.Substring(2, 8));
                     break;
                 default:
-                    this.closeImageFloater();
+                    closeImageFloater();
                     break;
             }
         }
 
-        private void storageViewPages_SelectedIndexChanged(object sender, EventArgs e) => this.changeStoragePage(this.storageViewPages.SelectedIndex + 1);
+        private void storageViewPages_SelectedIndexChanged(object sender, EventArgs e) => changeStoragePage(storageViewPages.SelectedIndex + 1);
 
         private void storageViewChanged()
         {
-            if (this.storageView.SelectedItems.Count > 0)
+            if (storageView.SelectedItems.Count > 0)
             {
-                this.selectedStorageItem = this.storageView.SelectedItems[0].Index;
-                if (this.selectedStorageItem != -1)
+                selectedStorageItem = storageView.SelectedItems[0].Index;
+                if (selectedStorageItem != -1)
                 {
-                    this.showSelectedInventoryItem(this.tabPageStorage);
+                    showSelectedInventoryItem(tabPageStorage);
                 }
                 else
                 {
-                    this.grpStorageItemDetails.Visible = false;
-                    this.imageFloatImageIsOk = false;
-                    this.txtStorageHex.Text = "0x00000000";
-                    this.changeImageFloater(this.txtStorageHex.Text);
+                    grpStorageItemDetails.Visible = false;
+                    imageFloatImageIsOk = false;
+                    txtStorageHex.Text = "0x00000000";
+                    changeImageFloater(txtStorageHex.Text);
                 }
             }
             else
             {
-                this.grpStorageItemDetails.Visible = false;
-                this.imageFloatImageIsOk = false;
-                this.txtStorageHex.Text = "0x00000000";
+                grpStorageItemDetails.Visible = false;
+                imageFloatImageIsOk = false;
+                txtStorageHex.Text = "0x00000000";
             }
         }
 
-        private void storageView_SelectedIndexChanged(object sender, EventArgs e) => this.storageViewChanged();
+        private void storageView_SelectedIndexChanged(object sender, EventArgs e) => storageViewChanged();
 
-        private void storageView_Click(object sender, EventArgs e) => this.storageViewChanged();
+        private void storageView_Click(object sender, EventArgs e) => storageViewChanged();
 
-        private void inventoryViewPages_SelectedIndexChanged(object sender, EventArgs e) => this.changeInventoryPage(this.inventoryViewPages.SelectedIndex + 1);
+        private void inventoryViewPages_SelectedIndexChanged(object sender, EventArgs e) => changeInventoryPage(inventoryViewPages.SelectedIndex + 1);
 
         private void inventoryViewChanged()
         {
-            if (this.inventoryView.SelectedItems.Count > 0)
+            if (inventoryView.SelectedItems.Count > 0)
             {
-                this.selectedInventoryItem = this.inventoryView.SelectedItems[0].Index;
-                if (this.selectedInventoryItem != -1)
+                selectedInventoryItem = inventoryView.SelectedItems[0].Index;
+                if (selectedInventoryItem != -1)
                 {
-                    this.showSelectedInventoryItem(this.tabPageInventory);
+                    showSelectedInventoryItem(tabPageInventory);
                 }
                 else
                 {
-                    this.grpInventoryItemDetails.Visible = false;
-                    this.imageFloatImageIsOk = false;
-                    this.txtInventoryHex.Text = "0x00000000";
-                    this.changeImageFloater(this.txtInventoryHex.Text);
+                    grpInventoryItemDetails.Visible = false;
+                    imageFloatImageIsOk = false;
+                    txtInventoryHex.Text = "0x00000000";
+                    changeImageFloater(txtInventoryHex.Text);
                 }
             }
             else
             {
-                this.grpInventoryItemDetails.Visible = false;
-                this.imageFloatImageIsOk = false;
-                this.txtInventoryHex.Text = "0x00000000";
+                grpInventoryItemDetails.Visible = false;
+                imageFloatImageIsOk = false;
+                txtInventoryHex.Text = "0x00000000";
             }
         }
 
-        private void inventoryView_Click(object sender, EventArgs e) => this.inventoryViewChanged();
+        private void inventoryView_Click(object sender, EventArgs e) => inventoryViewChanged();
 
-        private void inventoryView_SelectedIndexChanged(object sender, EventArgs e) => this.inventoryViewChanged();
+        private void inventoryView_SelectedIndexChanged(object sender, EventArgs e) => inventoryViewChanged();
 
         private void txtInventoryName_jp_Click(object sender, EventArgs e)
         {
-            Clipboard.SetText(this.txtInventoryName_jp.Text);
-            int num = (int)MessageBox.Show("Copied to clipboard", "Clipboard Action", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            Clipboard.SetText(txtInventoryName_jp.Text);
+            MessageBox.Show("Copied to clipboard", "Clipboard Action", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
         }
 
         private void btnInventoryExportSelected_Click(object sender, EventArgs e)
         {
-            int id = this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].inventory.item[int.Parse(this.inventoryView.SelectedItems[0].SubItems[1].Text)].id;
-            string ext_options = this.mainSettings.saveStructureIndex.item_file_name + " (*" + this.mainSettings.saveStructureIndex.item_file_ext + ")|*" + this.mainSettings.saveStructureIndex.item_file_ext;
-            if (this.saveItemDataToFile(id, 20, ext_options, this.inventoryView.SelectedItems[0].Text, delete: this.chkDeleteExportInventory.Checked))
+            int id = saveData.slot[lstSaveSlotView.SelectedItems[0].Index].inventory.item[int.Parse(inventoryView.SelectedItems[0].SubItems[1].Text)].id;
+            string ext_options = mainSettings.saveStructureIndex.item_file_name + " (*" + mainSettings.saveStructureIndex.item_file_ext + ")|*" + mainSettings.saveStructureIndex.item_file_ext;
+            if (saveItemDataToFile(id, 20, ext_options, inventoryView.SelectedItems[0].Text, delete: chkDeleteExportInventory.Checked))
             {
-                if (this.chkDeleteExportInventory.Checked)
+                if (chkDeleteExportInventory.Checked)
                 {
-                    this.overwriteHexInBuffer("0000000000000000000000000000000000000000", id);
-                    this.overwriteHexInBuffer("00000000", id - 8);
-                    this.reloadEverything();
+                    overwriteHexInBuffer("0000000000000000000000000000000000000000", id);
+                    overwriteHexInBuffer("00000000", id - 8);
+                    reloadEverything();
                 }
-                int num = (int)MessageBox.Show("The item file was exported successfully.", "Export Successful", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                MessageBox.Show("The item file was exported successfully.", "Export Successful", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
             else
             {
-                int num1 = (int)MessageBox.Show("The item file failed to export.", "Export Failed", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                MessageBox.Show("The item file failed to export.", "Export Failed", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
         }
 
         private void btnStorageExportSelected_Click(object sender, EventArgs e)
         {
-            if (this.saveItemDataToFile(this.saveData.sharedInventory.item[int.Parse(this.storageView.SelectedItems[0].SubItems[1].Text)].id, 20, this.mainSettings.saveStructureIndex.item_file_name + " (*" + this.mainSettings.saveStructureIndex.item_file_ext + ")|*" + this.mainSettings.saveStructureIndex.item_file_ext, this.storageView.SelectedItems[0].Text, delete: this.chkDeleteExportStorage.Checked))
+            if (saveItemDataToFile(saveData.sharedInventory.item[int.Parse(storageView.SelectedItems[0].SubItems[1].Text)].id, 20, mainSettings.saveStructureIndex.item_file_name + " (*" + mainSettings.saveStructureIndex.item_file_ext + ")|*" + mainSettings.saveStructureIndex.item_file_ext, storageView.SelectedItems[0].Text, delete: chkDeleteExportStorage.Checked))
             {
-                if (this.chkDeleteExportStorage.Checked)
-                    this.reloadEverything();
-                int num = (int)MessageBox.Show("The item file was exported successfully.", "Export Successful", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                if (chkDeleteExportStorage.Checked)
+                    reloadEverything();
+                MessageBox.Show("The item file was exported successfully.", "Export Successful", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
             else
             {
-                int num1 = (int)MessageBox.Show("The item file failed to export.", "Export Failed", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                MessageBox.Show("The item file failed to export.", "Export Failed", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
         }
 
         private void btnStorageImportSelected_Click(object sender, EventArgs e)
         {
-            int id = this.saveData.sharedInventory.item[int.Parse(this.storageView.SelectedItems[0].SubItems[1].Text)].id;
-            string ext_options = this.mainSettings.saveStructureIndex.item_file_name + " (*" + this.mainSettings.saveStructureIndex.item_file_ext + ")|*" + this.mainSettings.saveStructureIndex.item_file_ext;
-            if (this.loadFileIntoBuffer(id, ext_options, pspo2seForm.partFileType.item, false) <= 0)
+            int id = saveData.sharedInventory.item[int.Parse(storageView.SelectedItems[0].SubItems[1].Text)].id;
+            string ext_options = mainSettings.saveStructureIndex.item_file_name + " (*" + mainSettings.saveStructureIndex.item_file_ext + ")|*" + mainSettings.saveStructureIndex.item_file_ext;
+            if (loadFileIntoBuffer(id, ext_options, pspo2seForm.partFileType.item, false) <= 0)
                 return;
-            this.reloadEverything();
-            this.tabArea.SelectedIndex = 3;
-            this.selectItemAfterLoad = id;
-            this.displaySharedStorage(1);
-            int num = (int)MessageBox.Show("The item was imported successfully.\n\nIf the item was modified, the values may not match the game until the next time you save your progress.", "Import Complete", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            reloadEverything();
+            tabArea.SelectedIndex = 3;
+            selectItemAfterLoad = id;
+            displaySharedStorage(1);
+            MessageBox.Show("The item was imported successfully.\n\nIf the item was modified, the values may not match the game until the next time you save your progress.", "Import Complete", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
         }
 
         private void btnInventoryImportSelected_Click(object sender, EventArgs e)
         {
-            if (this.inventoryView.SelectedItems.Count <= 0)
+            if (inventoryView.SelectedItems.Count <= 0)
                 return;
-            if (this.loadFileIntoBuffer(this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].inventory.item[int.Parse(this.inventoryView.SelectedItems[0].SubItems[1].Text)].id, this.mainSettings.saveStructureIndex.item_file_name + " (*" + this.mainSettings.saveStructureIndex.item_file_ext + ")|*" + this.mainSettings.saveStructureIndex.item_file_ext, pspo2seForm.partFileType.item, true) <= 0)
+            if (loadFileIntoBuffer(saveData.slot[lstSaveSlotView.SelectedItems[0].Index].inventory.item[int.Parse(inventoryView.SelectedItems[0].SubItems[1].Text)].id, mainSettings.saveStructureIndex.item_file_name + " (*" + mainSettings.saveStructureIndex.item_file_ext + ")|*" + mainSettings.saveStructureIndex.item_file_ext, pspo2seForm.partFileType.item, true) <= 0)
                 return;
-            this.reloadEverything();
-            this.tabArea.SelectedIndex = 2;
-            this.displayInventory(this.lstSaveSlotView.SelectedItems[0].Index, 1);
-            int num = (int)MessageBox.Show("The item / items were imported successfully.\n\nIf an item was modified, the values may not match the game until the next time you save your progress.\n\nPlease remember that you should not used modified items online as you may get banned.", "Import Complete", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            reloadEverything();
+            tabArea.SelectedIndex = 2;
+            displayInventory(lstSaveSlotView.SelectedItems[0].Index, 1);
+            MessageBox.Show("The item / items were imported successfully.\n\nIf an item was modified, the values may not match the game until the next time you save your progress.\n\nPlease remember that you should not used modified items online as you may get banned.", "Import Complete", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
         }
 
         private void btnStorageExportAll_Click(object sender, EventArgs e)
         {
-            if (!this.saveBufferDataToFile(this.mainSettings.saveStructureIndex.shared_inventory_pos, this.mainSettings.saveStructureIndex.shared_inventory_slots * 20, this.mainSettings.saveStructureIndex.storage_file_name + " (*" + this.mainSettings.saveStructureIndex.storage_file_ext + ")|*" + this.mainSettings.saveStructureIndex.storage_file_ext))
+            if (!saveBufferDataToFile(mainSettings.saveStructureIndex.shared_inventory_pos, mainSettings.saveStructureIndex.shared_inventory_slots * 20, mainSettings.saveStructureIndex.storage_file_name + " (*" + mainSettings.saveStructureIndex.storage_file_ext + ")|*" + mainSettings.saveStructureIndex.storage_file_ext))
                 return;
-            int num = (int)MessageBox.Show("The storage file was exported successfully.", "Export Successful", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            MessageBox.Show("The storage file was exported successfully.", "Export Successful", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
         }
 
         private void btnInventoryExportAll_Click(object sender, EventArgs e)
         {
-            if (!this.saveBufferDataToFile(this.mainSettings.saveStructureIndex.inventory_slots_pos + this.mainSettings.saveStructureIndex.slot_size * this.lstSaveSlotView.SelectedItems[0].Index, 2160, this.mainSettings.saveStructureIndex.inventory_file_name + " (*" + this.mainSettings.saveStructureIndex.inventory_file_ext + ")|*" + this.mainSettings.saveStructureIndex.inventory_file_ext, this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].inventory.itemsUsed))
+            if (!saveBufferDataToFile(mainSettings.saveStructureIndex.inventory_slots_pos + mainSettings.saveStructureIndex.slot_size * lstSaveSlotView.SelectedItems[0].Index, 2160, mainSettings.saveStructureIndex.inventory_file_name + " (*" + mainSettings.saveStructureIndex.inventory_file_ext + ")|*" + mainSettings.saveStructureIndex.inventory_file_ext, saveData.slot[lstSaveSlotView.SelectedItems[0].Index].inventory.itemsUsed))
                 return;
-            int num = (int)MessageBox.Show("The inventory file was exported successfully.", "Export Successful", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            MessageBox.Show("The inventory file was exported successfully.", "Export Successful", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
         }
 
         private void btnInventoryImportAll_Click(object sender, EventArgs e)
         {
-            if (this.loadFileIntoBuffer(this.mainSettings.saveStructureIndex.inventory_slots_pos + this.mainSettings.saveStructureIndex.slot_size * this.lstSaveSlotView.SelectedItems[0].Index, this.mainSettings.saveStructureIndex.inventory_file_name + " (*" + this.mainSettings.saveStructureIndex.inventory_file_ext + ")|*" + this.mainSettings.saveStructureIndex.inventory_file_ext, pspo2seForm.partFileType.inventory, true) <= 0)
+            if (loadFileIntoBuffer(mainSettings.saveStructureIndex.inventory_slots_pos + mainSettings.saveStructureIndex.slot_size * lstSaveSlotView.SelectedItems[0].Index, mainSettings.saveStructureIndex.inventory_file_name + " (*" + mainSettings.saveStructureIndex.inventory_file_ext + ")|*" + mainSettings.saveStructureIndex.inventory_file_ext, pspo2seForm.partFileType.inventory, true) <= 0)
                 return;
-            this.reloadEverything();
-            int num = (int)MessageBox.Show("The inventory file was imported successfully.", "Import Successful", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            reloadEverything();
+            MessageBox.Show("The inventory file was imported successfully.", "Import Successful", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
         }
 
         private void btnStorageImportAll_Click(object sender, EventArgs e)
         {
-            if (this.loadFileIntoBuffer(this.mainSettings.saveStructureIndex.shared_inventory_pos, this.mainSettings.saveStructureIndex.storage_file_name + " (*" + this.mainSettings.saveStructureIndex.storage_file_ext + ")|*" + this.mainSettings.saveStructureIndex.storage_file_ext, pspo2seForm.partFileType.storage, false) <= 0)
+            if (loadFileIntoBuffer(mainSettings.saveStructureIndex.shared_inventory_pos, mainSettings.saveStructureIndex.storage_file_name + " (*" + mainSettings.saveStructureIndex.storage_file_ext + ")|*" + mainSettings.saveStructureIndex.storage_file_ext, pspo2seForm.partFileType.storage, false) <= 0)
                 return;
-            this.reloadEverything();
-            int num = (int)MessageBox.Show("The storage file was imported successfully.", "Import Successful", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            reloadEverything();
+            MessageBox.Show("The storage file was imported successfully.", "Import Successful", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
         }
 
-        private void btnHuAbilitiesOpen_Click(object sender, EventArgs e) => this.action_launchTypeAbilitiesForm();
+        private void btnHuAbilitiesOpen_Click(object sender, EventArgs e) => action_launchTypeAbilitiesForm();
 
-        private void btnRaAbilitiesOpen_Click(object sender, EventArgs e) => this.action_launchTypeAbilitiesForm();
+        private void btnRaAbilitiesOpen_Click(object sender, EventArgs e) => action_launchTypeAbilitiesForm();
 
-        private void btnFoAbilitiesOpen_Click(object sender, EventArgs e) => this.action_launchTypeAbilitiesForm();
+        private void btnFoAbilitiesOpen_Click(object sender, EventArgs e) => action_launchTypeAbilitiesForm();
 
-        private void btnVaAbilitiesOpen_Click(object sender, EventArgs e) => this.action_launchTypeAbilitiesForm();
+        private void btnVaAbilitiesOpen_Click(object sender, EventArgs e) => action_launchTypeAbilitiesForm();
 
         private void saveSlotView_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (this.lstSaveSlotView.SelectedItems.Count <= 0)
+            if (lstSaveSlotView.SelectedItems.Count <= 0)
                 return;
-            this.displaySlotInfo(this.lstSaveSlotView.SelectedItems[0].Index);
-            if (this.tabArea.SelectedIndex == 2)
+            displaySlotInfo(lstSaveSlotView.SelectedItems[0].Index);
+            if (tabArea.SelectedIndex == 2)
             {
-                this.inventoryViewPages.SelectedIndex = 0;
+                inventoryViewPages.SelectedIndex = 0;
                 Application.DoEvents();
             }
-            if (this.tabArea.SelectedIndex != 3)
+            if (tabArea.SelectedIndex != 3)
                 return;
-            this.storageViewPages.SelectedIndex = 0;
+            storageViewPages.SelectedIndex = 0;
             Application.DoEvents();
         }
 
-        private void openToolStripMenuItem_Click(object sender, EventArgs e) => this.action_browse();
+        private void openToolStripMenuItem_Click(object sender, EventArgs e) => action_browse();
 
-        private void saveAsToolStripMenuItem_Click(object sender, EventArgs e) => this.action_saveas();
+        private void saveAsToolStripMenuItem_Click(object sender, EventArgs e) => action_saveas();
 
-        private void refreshToolStripMenuItem_Click(object sender, EventArgs e) => this.action_loadDatabases();
+        private void refreshToolStripMenuItem_Click(object sender, EventArgs e) => action_loadDatabases();
 
-        private void refreshToolStripMenuItem1_Click(object sender, EventArgs e) => this.loadImageFloaterImages();
+        private void refreshToolStripMenuItem1_Click(object sender, EventArgs e) => loadImageFloaterImages();
 
         private void txtInventoryHex_Click(object sender, EventArgs e)
         {
-            Clipboard.SetText(this.txtInventoryHex.Text.Substring(2, 8));
-            int num = (int)MessageBox.Show("Copied to clipboard", "Clipboard Action", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            Clipboard.SetText(txtInventoryHex.Text.Substring(2, 8));
+            MessageBox.Show("Copied to clipboard", "Clipboard Action", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
         }
 
         private void txtStorageHex_Click(object sender, EventArgs e)
         {
-            Clipboard.SetText(this.txtStorageHex.Text.Substring(2, 8));
-            int num = (int)MessageBox.Show("Copied to clipboard", "Clipboard Action", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            Clipboard.SetText(txtStorageHex.Text.Substring(2, 8));
+            MessageBox.Show("Copied to clipboard", "Clipboard Action", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
         }
 
-        private void checkForUpdatesToolStripMenuItem_Click(object sender, EventArgs e) => this.checkDatabaseUpdate(true);
+        private void checkForUpdatesToolStripMenuItem_Click(object sender, EventArgs e) => checkDatabaseUpdate(true);
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e) => Environment.Exit(0);
 
-        private void updateToolStripMenuItem_Click(object sender, EventArgs e) => this.checkAppUpdate(true);
+        private void updateToolStripMenuItem_Click(object sender, EventArgs e) => checkAppUpdate(true);
 
         private void versionInfoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string str = !this.legitVersion() ? "PSPo2 Save Editor" : "PSPo2 Save Viewer";
-            if (!this.databasesOk)
+            string str = !legitVersion() ? "PSPo2 Save Editor" : "PSPo2 Save Viewer";
+            if (!databasesOk)
             {
-                int num1 = (int)MessageBox.Show("You are currently running " + str + " v3.0 build 1008\r\n\r\nThe databases are not installed correctly.\r\nPlease update them before you can view more information.", "Version Info", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                MessageBox.Show("You are currently running " + str + " v3.0 build 1008\r\n\r\nThe databases are not installed correctly.\r\nPlease update them before you can view more information.", "Version Info", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
             else
             {
-                this.changelogForm.formSetup();
-                int num2 = (int)this.changelogForm.ShowDialog((IWin32Window)this);
+                changelogForm.formSetup();
+                int num2 = (int)changelogForm.ShowDialog((IWin32Window)this);
             }
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e) => Process.Start("http://files-ds-scene.net/retrohead/pspo2se/");
 
-        private void checkForUpdatesToolStripMenuItem1_Click(object sender, EventArgs e) => this.checkImagesUpdate(true);
+        private void checkForUpdatesToolStripMenuItem1_Click(object sender, EventArgs e) => checkImagesUpdate(true);
 
         private void txtStorageMeseta_Click(object sender, EventArgs e)
         {
-            if (this.legitVersion())
+            if (legitVersion())
                 return;
-            this.entryForm.oldVal = string.Concat((object)this.saveData.sharedMeseta);
-            this.entryForm.newVal = string.Concat((object)this.saveData.sharedMeseta);
-            this.entryForm.description = "shared meseta";
-            this.entryForm.maxLen = 8;
-            if (this.entryForm.ShowDialog((IWin32Window)this) != DialogResult.OK)
+            entryForm.oldVal = string.Concat((object)saveData.sharedMeseta);
+            entryForm.newVal = string.Concat((object)saveData.sharedMeseta);
+            entryForm.description = "shared meseta";
+            entryForm.maxLen = 8;
+            if (entryForm.ShowDialog((IWin32Window)this) != DialogResult.OK)
                 return;
-            long num1 = long.Parse(this.entryForm.newVal);
-            if (num1 != this.saveData.sharedMeseta && num1 <= 99999999L)
+            long num1 = long.Parse(entryForm.newVal);
+            if (num1 != saveData.sharedMeseta && num1 <= 99999999L)
             {
                 string hex = num1.ToString("X4");
                 while (hex.Length < 8)
                     hex = "0" + hex;
-                int pos = this.mainSettings.saveStructureIndex.shared_inventory_pos + this.mainSettings.saveStructureIndex.shared_inventory_slots * 20;
-                this.overwriteHexInBuffer(this.run.hexAndMathFunction.reversehex(hex, 8), pos);
-                this.saveData.sharedMeseta = num1;
-                this.txtStorageMeseta.Text = num1.ToString();
+                int pos = mainSettings.saveStructureIndex.shared_inventory_pos + mainSettings.saveStructureIndex.shared_inventory_slots * 20;
+                overwriteHexInBuffer(run.hexAndMathFunction.reversehex(hex, 8), pos);
+                saveData.sharedMeseta = num1;
+                txtStorageMeseta.Text = num1.ToString();
             }
             else
             {
                 if (num1 <= 99999999L)
                     return;
-                int num2 = (int)MessageBox.Show("You must enter a value less than 99,999,999");
+                MessageBox.Show("You must enter a value less than or equal to 99,999,999");
             }
         }
 
         private void btnStorageWithdraw_Click(object sender, EventArgs e)
         {
-            if (this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].inventory.itemsUsed >= 60)
+            if (saveData.slot[lstSaveSlotView.SelectedItems[0].Index].inventory.itemsUsed >= 60)
             {
-                int num1 = (int)MessageBox.Show("The selected characters inventory is full", "Inventory Full", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("The selected characters inventory is full", "Inventory Full", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
             else
             {
-                this.saveItemDataToFile(this.saveData.sharedInventory.item[int.Parse(this.storageView.SelectedItems[0].SubItems[1].Text)].id, 20, "", "", Directory.GetCurrentDirectory() + "\\data\\temp\\moving." + this.mainSettings.saveStructureIndex.item_file_ext, true);
+                saveItemDataToFile(saveData.sharedInventory.item[int.Parse(storageView.SelectedItems[0].SubItems[1].Text)].id, 20, "", "", Directory.GetCurrentDirectory() + "\\data\\temp\\moving." + mainSettings.saveStructureIndex.item_file_ext, true);
                 int index = 0;
-                while (index < 60 && this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].inventory.item[index].used)
+                while (index < 60 && saveData.slot[lstSaveSlotView.SelectedItems[0].Index].inventory.item[index].used)
                     ++index;
-                int freeInventoryItemId = this.getFreeInventoryItemId(this.lstSaveSlotView.SelectedItems[0].Index);
-                if (this.loadFileIntoBuffer(freeInventoryItemId, "", pspo2seForm.partFileType.item, true, Directory.GetCurrentDirectory() + "\\data\\temp\\moving." + this.mainSettings.saveStructureIndex.item_file_ext) > 0)
+                int freeInventoryItemId = getFreeInventoryItemId(lstSaveSlotView.SelectedItems[0].Index);
+                if (loadFileIntoBuffer(freeInventoryItemId, "", pspo2seForm.partFileType.item, true, Directory.GetCurrentDirectory() + "\\data\\temp\\moving." + mainSettings.saveStructureIndex.item_file_ext) > 0)
                 {
-                    this.reloadEverything();
-                    System.IO.File.Delete(Directory.GetCurrentDirectory() + "\\data\\temp\\moving." + this.mainSettings.saveStructureIndex.item_file_ext);
-                    this.tabArea.SelectedIndex = 2;
-                    this.selectInventoryItemAfterLoad = freeInventoryItemId;
-                    this.displayInventory(this.lstSaveSlotView.SelectedItems[0].Index, 1);
+                    reloadEverything();
+                    System.IO.File.Delete(Directory.GetCurrentDirectory() + "\\data\\temp\\moving." + mainSettings.saveStructureIndex.item_file_ext);
+                    tabArea.SelectedIndex = 2;
+                    selectInventoryItemAfterLoad = freeInventoryItemId;
+                    displayInventory(lstSaveSlotView.SelectedItems[0].Index, 1);
                 }
                 else
                 {
-                    int num2 = (int)MessageBox.Show("There was an error moving the item. Please re-load your save file and try again.", "Item Move Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                    MessageBox.Show("There was an error moving the item. Please re-load your save file and try again.", "Item Move Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                 }
             }
         }
 
         private void btnInventoryDeposit_Click(object sender, EventArgs e)
         {
-            if (this.saveData.sharedInventory.itemsUsed >= this.mainSettings.saveStructureIndex.shared_inventory_slots)
+            if (saveData.sharedInventory.itemsUsed >= mainSettings.saveStructureIndex.shared_inventory_slots)
             {
-                int num1 = (int)MessageBox.Show("The shared storage is full", "Storage Full", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("The shared storage is full", "Storage Full", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
             else
             {
-                int id = this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].inventory.item[int.Parse(this.inventoryView.SelectedItems[0].SubItems[1].Text)].id;
-                if (!this.saveItemDataToFile(id, 20, "", "", Directory.GetCurrentDirectory() + "\\data\\temp\\moving." + this.mainSettings.saveStructureIndex.item_file_ext, true))
+                int id = saveData.slot[lstSaveSlotView.SelectedItems[0].Index].inventory.item[int.Parse(inventoryView.SelectedItems[0].SubItems[1].Text)].id;
+                if (!saveItemDataToFile(id, 20, "", "", Directory.GetCurrentDirectory() + "\\data\\temp\\moving." + mainSettings.saveStructureIndex.item_file_ext, true))
                 {
-                    int num2 = (int)MessageBox.Show("Could not write the temporary file: \n\n" + Directory.GetCurrentDirectory() + "\\data\\temp\\moving." + this.mainSettings.saveStructureIndex.item_file_ext, "Failed to deposit item!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show("Could not write the temporary file: \n\n" + Directory.GetCurrentDirectory() + "\\data\\temp\\moving." + mainSettings.saveStructureIndex.item_file_ext, "Failed to deposit item!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
                 else
                 {
-                    this.overwriteHexInBuffer("0000000000000000000000000000000000000000", id);
-                    this.overwriteHexInBuffer("00000000", id - 8);
-                    for (int index = 0; index < this.saveData.sharedInventory.itemsUsed; ++index)
+                    overwriteHexInBuffer("0000000000000000000000000000000000000000", id);
+                    overwriteHexInBuffer("00000000", id - 8);
+                    for (int index = 0; index < saveData.sharedInventory.itemsUsed; ++index)
                     {
-                        if (!this.saveData.sharedInventory.item[index].used)
+                        if (!saveData.sharedInventory.item[index].used)
                         {
-                            id = this.saveData.sharedInventory.item[index].id;
+                            id = saveData.sharedInventory.item[index].id;
                             break;
                         }
                     }
-                    if (this.loadFileIntoBuffer(id, "", pspo2seForm.partFileType.item, false, Directory.GetCurrentDirectory() + "\\data\\temp\\moving." + this.mainSettings.saveStructureIndex.item_file_ext) > 0)
+                    if (loadFileIntoBuffer(id, "", pspo2seForm.partFileType.item, false, Directory.GetCurrentDirectory() + "\\data\\temp\\moving." + mainSettings.saveStructureIndex.item_file_ext) > 0)
                     {
-                        --this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].inventory.itemsUsed;
-                        this.overwriteHexInBuffer(this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].inventory.itemsUsed.ToString("X2"), this.mainSettings.saveStructureIndex.inventory_slots_used_pos + this.mainSettings.saveStructureIndex.slot_size * this.lstSaveSlotView.SelectedItems[0].Index);
-                        this.reloadEverything();
-                        System.IO.File.Delete(Directory.GetCurrentDirectory() + "\\data\\temp\\moving." + this.mainSettings.saveStructureIndex.item_file_ext);
-                        this.tabArea.SelectedIndex = 3;
-                        this.selectItemAfterLoad = id;
-                        this.displaySharedStorage(1);
+                        --saveData.slot[lstSaveSlotView.SelectedItems[0].Index].inventory.itemsUsed;
+                        overwriteHexInBuffer(saveData.slot[lstSaveSlotView.SelectedItems[0].Index].inventory.itemsUsed.ToString("X2"), mainSettings.saveStructureIndex.inventory_slots_used_pos + mainSettings.saveStructureIndex.slot_size * lstSaveSlotView.SelectedItems[0].Index);
+                        reloadEverything();
+                        System.IO.File.Delete(Directory.GetCurrentDirectory() + "\\data\\temp\\moving." + mainSettings.saveStructureIndex.item_file_ext);
+                        tabArea.SelectedIndex = 3;
+                        selectItemAfterLoad = id;
+                        displaySharedStorage(1);
                     }
                     else
                     {
-                        int num3 = (int)MessageBox.Show("There was an error moving the item. Please re-load your save file and try again.", "Item Move Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                        MessageBox.Show("There was an error moving the item. Please re-load your save file and try again.", "Item Move Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                     }
                 }
             }
         }
 
-        private void txtStorageQty_Click(object sender, EventArgs e) => this.changeItemQty(this.tabPageStorage);
+        private void txtStorageQty_Click(object sender, EventArgs e) => changeItemQty(tabPageStorage);
 
-        private void txtInventoryQty_Click(object sender, EventArgs e) => this.changeItemQty(this.tabPageInventory);
+        private void txtInventoryQty_Click(object sender, EventArgs e) => changeItemQty(tabPageInventory);
 
         private void changeDiskLevel(TabPage page)
         {
-            if (this.legitVersion())
+            if (legitVersion())
                 return;
-            pspo2seForm.inventoryItemClass inventoryItemClass = page != this.tabPageStorage ? this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].inventory.item[int.Parse(this.inventoryView.SelectedItems[0].SubItems[1].Text)] : this.saveData.sharedInventory.item[int.Parse(this.storageView.SelectedItems[0].SubItems[1].Text)];
-            this.entryForm.oldVal = string.Concat((object)(inventoryItemClass.pa_level + 1));
-            this.entryForm.newVal = string.Concat((object)(inventoryItemClass.pa_level + 1));
-            this.entryForm.description = "PA disk level";
-            this.entryForm.maxLen = 2;
-            if (this.entryForm.ShowDialog((IWin32Window)this) != DialogResult.OK)
+            pspo2seForm.inventoryItemClass inventoryItemClass = page != tabPageStorage ? saveData.slot[lstSaveSlotView.SelectedItems[0].Index].inventory.item[int.Parse(inventoryView.SelectedItems[0].SubItems[1].Text)] : saveData.sharedInventory.item[int.Parse(storageView.SelectedItems[0].SubItems[1].Text)];
+            entryForm.oldVal = string.Concat((object)(inventoryItemClass.pa_level + 1));
+            entryForm.newVal = string.Concat((object)(inventoryItemClass.pa_level + 1));
+            entryForm.description = "PA disk level";
+            entryForm.maxLen = 2;
+            if (entryForm.ShowDialog((IWin32Window)this) != DialogResult.OK)
                 return;
-            string newVal = this.entryForm.newVal;
+            string newVal = entryForm.newVal;
             if (!(newVal != (inventoryItemClass.pa_level + 1).ToString()))
                 return;
             if (int.Parse(newVal) > 30)
             {
-                int num1 = (int)MessageBox.Show("You must enter a value lower or equal to 30.");
+                MessageBox.Show("You must enter a value lower or equal to 30.");
             }
             else if (int.Parse(newVal) < 1)
             {
-                int num2 = (int)MessageBox.Show("You must enter a value greater than 0.");
+                MessageBox.Show("You must enter a value greater than 0.");
             }
             else
             {
                 string hex = (int.Parse(newVal) - 1).ToString("X1");
                 while (hex.Length < 2)
                     hex = "0" + hex;
-                this.overwriteHexInBuffer(this.run.hexAndMathFunction.reversehex(hex, 2), inventoryItemClass.id + 16);
+                overwriteHexInBuffer(run.hexAndMathFunction.reversehex(hex, 2), inventoryItemClass.id + 16);
                 inventoryItemClass.pa_level = int.Parse(newVal) - 1;
-                this.displayItemInfo(this.getPageFields(page), inventoryItemClass);
+                displayItemInfo(getPageFields(page), inventoryItemClass);
             }
         }
 
         private void changeItemQty(TabPage page)
         {
-            if (this.legitVersion())
+            if (legitVersion())
                 return;
-            pspo2seForm.inventoryItemClass inventoryItemClass = page != this.tabPageStorage ? this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].inventory.item[int.Parse(this.inventoryView.SelectedItems[0].SubItems[1].Text)] : this.saveData.sharedInventory.item[int.Parse(this.storageView.SelectedItems[0].SubItems[1].Text)];
+            pspo2seForm.inventoryItemClass inventoryItemClass = page != tabPageStorage ? saveData.slot[lstSaveSlotView.SelectedItems[0].Index].inventory.item[int.Parse(inventoryView.SelectedItems[0].SubItems[1].Text)] : saveData.sharedInventory.item[int.Parse(storageView.SelectedItems[0].SubItems[1].Text)];
             if (inventoryItemClass.qty == 0)
             {
-                this.changeDiskLevel(page);
+                changeDiskLevel(page);
             }
             else
             {
-                this.entryForm.oldVal = inventoryItemClass.qty.ToString();
-                this.entryForm.newVal = inventoryItemClass.qty.ToString();
-                this.entryForm.description = "item qty";
-                this.entryForm.maxLen = 3;
-                if (this.entryForm.ShowDialog((IWin32Window)this) != DialogResult.OK)
+                entryForm.oldVal = inventoryItemClass.qty.ToString();
+                entryForm.newVal = inventoryItemClass.qty.ToString();
+                entryForm.description = "item qty";
+                entryForm.maxLen = 3;
+                if (entryForm.ShowDialog((IWin32Window)this) != DialogResult.OK)
                     return;
-                string newVal = this.entryForm.newVal;
+                string newVal = entryForm.newVal;
                 if (!(newVal != inventoryItemClass.qty.ToString()))
                     return;
                 if (int.Parse(newVal) > inventoryItemClass.qty_max)
                 {
-                    int num1 = (int)MessageBox.Show("You must enter a value lower or equal to the max stack qty for this item.");
+                    MessageBox.Show("You must enter a value lower or equal to the max stack qty for this item.");
                 }
                 else if (int.Parse(newVal) < 1)
                 {
-                    int num2 = (int)MessageBox.Show("You must enter a value greater than 0.");
+                    MessageBox.Show("You must enter a value greater than 0.");
                 }
                 else
                 {
                     string hex = int.Parse(newVal).ToString("X2");
                     while (hex.Length < 4)
                         hex = "0" + hex;
-                    this.overwriteHexInBuffer(this.run.hexAndMathFunction.reversehex(hex, 4), inventoryItemClass.id + 4);
+                    overwriteHexInBuffer(run.hexAndMathFunction.reversehex(hex, 4), inventoryItemClass.id + 4);
                     inventoryItemClass.qty = int.Parse(newVal);
-                    if (page == this.tabPageStorage)
-                        this.txtStorageQty.Text = inventoryItemClass.qty.ToString() + "/" + (object)inventoryItemClass.qty_max;
+                    if (page == tabPageStorage)
+                        txtStorageQty.Text = inventoryItemClass.qty.ToString() + "/" + (object)inventoryItemClass.qty_max;
                     else
-                        this.txtInventoryQty.Text = inventoryItemClass.qty.ToString() + "/" + (object)inventoryItemClass.qty_max;
+                        txtInventoryQty.Text = inventoryItemClass.qty.ToString() + "/" + (object)inventoryItemClass.qty_max;
                 }
             }
         }
 
-        private void txtInventoryPercent_Click(object sender, EventArgs e) => this.changeItemPercentage(this.tabPageInventory);
+        private void txtInventoryPercent_Click(object sender, EventArgs e) => changeItemPercentage(tabPageInventory);
 
-        private void txtStoragePercent_Click(object sender, EventArgs e) => this.changeItemPercentage(this.tabPageStorage);
+        private void txtStoragePercent_Click(object sender, EventArgs e) => changeItemPercentage(tabPageStorage);
 
         private void changeItemPercentage(TabPage page)
         {
-            if (this.legitVersion())
+            if (legitVersion())
                 return;
-            pspo2seForm.inventoryItemClass inventoryItemClass = page != this.tabPageStorage ? this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].inventory.item[int.Parse(this.inventoryView.SelectedItems[0].SubItems[1].Text)] : this.saveData.sharedInventory.item[int.Parse(this.storageView.SelectedItems[0].SubItems[1].Text)];
-            this.entryForm.oldVal = inventoryItemClass.percent.ToString();
-            this.entryForm.newVal = inventoryItemClass.percent.ToString();
-            this.entryForm.description = "element percentage";
-            this.entryForm.maxLen = 3;
-            if (this.entryForm.ShowDialog((IWin32Window)this) != DialogResult.OK)
+            pspo2seForm.inventoryItemClass inventoryItemClass = page != tabPageStorage ? saveData.slot[lstSaveSlotView.SelectedItems[0].Index].inventory.item[int.Parse(inventoryView.SelectedItems[0].SubItems[1].Text)] : saveData.sharedInventory.item[int.Parse(storageView.SelectedItems[0].SubItems[1].Text)];
+            entryForm.oldVal = inventoryItemClass.percent.ToString();
+            entryForm.newVal = inventoryItemClass.percent.ToString();
+            entryForm.description = "element percentage";
+            entryForm.maxLen = 3;
+            if (entryForm.ShowDialog((IWin32Window)this) != DialogResult.OK)
                 return;
-            string newVal = this.entryForm.newVal;
+            string newVal = entryForm.newVal;
             if (!(newVal != inventoryItemClass.percent.ToString()))
                 return;
             if (int.Parse(newVal) > 100)
             {
-                int num1 = (int)MessageBox.Show("You must enter a value lower or equal to 100.");
+                MessageBox.Show("You must enter a value lower or equal to 100.");
             }
             else if (int.Parse(newVal) < 0)
             {
-                int num2 = (int)MessageBox.Show("You must enter a value greater or equal to 0.");
+                MessageBox.Show("You must enter a value greater or equal to 0.");
             }
             else
             {
                 string hex1 = int.Parse(newVal).ToString("X1");
                 while (hex1.Length < 2)
                     hex1 = "0" + hex1;
-                string hex2 = this.run.hexAndMathFunction.reversehex(hex1, 2);
+                string hex2 = run.hexAndMathFunction.reversehex(hex1, 2);
                 string str1 = "";
                 for (int index = 0; index < 20; ++index)
-                    str1 += this.run.hexAndMathFunction.decimalByteConvert(this.savedata_decimal_array[inventoryItemClass.id + index], "hex");
-                this.overwriteHexInBuffer(hex2, inventoryItemClass.id + 17);
+                    str1 += run.hexAndMathFunction.decimalByteConvert(savedata_decimal_array[inventoryItemClass.id + index], "hex");
+                overwriteHexInBuffer(hex2, inventoryItemClass.id + 17);
                 string str2 = "";
                 for (int index = 0; index < 20; ++index)
-                    str2 += this.run.hexAndMathFunction.decimalByteConvert(this.savedata_decimal_array[inventoryItemClass.id + index], "hex");
+                    str2 += run.hexAndMathFunction.decimalByteConvert(savedata_decimal_array[inventoryItemClass.id + index], "hex");
                 inventoryItemClass.percent = int.Parse(newVal);
-                if (page == this.tabPageStorage)
-                    this.txtStoragePercent.Text = inventoryItemClass.percent.ToString() + "%";
+                if (page == tabPageStorage)
+                    txtStoragePercent.Text = inventoryItemClass.percent.ToString() + "%";
                 else
-                    this.txtInventoryPercent.Text = inventoryItemClass.percent.ToString() + "%";
+                    txtInventoryPercent.Text = inventoryItemClass.percent.ToString() + "%";
             }
         }
 
-        private void imgStorageElement_Click(object sender, EventArgs e) => this.changeItemElement(this.tabPageStorage);
+        private void imgStorageElement_Click(object sender, EventArgs e) => changeItemElement(tabPageStorage);
 
-        private void imgInventoryElement_Click(object sender, EventArgs e) => this.changeItemElement(this.tabPageInventory);
+        private void imgInventoryElement_Click(object sender, EventArgs e) => changeItemElement(tabPageInventory);
 
         private void changeItemElement(TabPage page)
         {
-            if (this.legitVersion())
+            if (legitVersion())
                 return;
-            pspo2seForm.inventoryItemClass inventoryItemClass = page != this.tabPageStorage ? this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].inventory.item[int.Parse(this.inventoryView.SelectedItems[0].SubItems[1].Text)] : this.saveData.sharedInventory.item[int.Parse(this.storageView.SelectedItems[0].SubItems[1].Text)];
-            this.entryForm.oldVal = inventoryItemClass.element.ToString();
-            this.entryForm.newVal = ((int)inventoryItemClass.element).ToString();
-            this.entryForm.description = "element";
-            this.entryForm.maxLen = 1;
-            if (this.entryForm.ShowDialog((IWin32Window)this) != DialogResult.OK)
+            pspo2seForm.inventoryItemClass inventoryItemClass = page != tabPageStorage ? saveData.slot[lstSaveSlotView.SelectedItems[0].Index].inventory.item[int.Parse(inventoryView.SelectedItems[0].SubItems[1].Text)] : saveData.sharedInventory.item[int.Parse(storageView.SelectedItems[0].SubItems[1].Text)];
+            entryForm.oldVal = inventoryItemClass.element.ToString();
+            entryForm.newVal = ((int)inventoryItemClass.element).ToString();
+            entryForm.description = "element";
+            entryForm.maxLen = 1;
+            if (entryForm.ShowDialog((IWin32Window)this) != DialogResult.OK)
                 return;
-            string newVal = this.entryForm.newVal;
+            string newVal = entryForm.newVal;
             if (!(newVal != ((int)inventoryItemClass.element).ToString()))
                 return;
             if (int.Parse(newVal) >= 7)
             {
-                int num1 = (int)MessageBox.Show("You must enter a value lower than " + (object)pspo2seForm.elementType.COUNT + ".");
+                MessageBox.Show("You must enter a value lower than " + (object)pspo2seForm.elementType.COUNT + ".");
             }
             else if (int.Parse(newVal) < 0)
             {
-                int num2 = (int)MessageBox.Show("You must enter a value greater or equal to 0.");
+                MessageBox.Show("You must enter a value greater or equal to 0.");
             }
             else
             {
                 string hex = int.Parse(newVal).ToString("X1");
                 while (hex.Length < 2)
                     hex = "0" + hex;
-                this.overwriteHexInBuffer(this.run.hexAndMathFunction.reversehex(hex, 2), inventoryItemClass.id + 16);
+                overwriteHexInBuffer(run.hexAndMathFunction.reversehex(hex, 2), inventoryItemClass.id + 16);
                 inventoryItemClass.element = (pspo2seForm.elementType)int.Parse(newVal);
-                this.displayElementImage(this.getPageFields(page), inventoryItemClass.element);
+                displayElementImage(getPageFields(page), inventoryItemClass.element);
             }
         }
 
         private void txtInventoryMeseta_Click(object sender, EventArgs e)
         {
-            if (this.legitVersion())
+            if (legitVersion())
                 return;
-            this.entryForm.oldVal = this.txtInventoryMeseta.Text;
-            this.entryForm.newVal = this.txtInventoryMeseta.Text;
-            this.entryForm.description = "characters meseta";
-            this.entryForm.maxLen = 8;
-            if (this.entryForm.ShowDialog((IWin32Window)this) != DialogResult.OK)
+            entryForm.oldVal = txtInventoryMeseta.Text;
+            entryForm.newVal = txtInventoryMeseta.Text;
+            entryForm.description = "characters meseta";
+            entryForm.maxLen = 8;
+            if (entryForm.ShowDialog((IWin32Window)this) != DialogResult.OK)
                 return;
-            long num1 = long.Parse(this.entryForm.newVal);
-            if (num1 != this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].meseta)
+            long num1 = long.Parse(entryForm.newVal);
+            if (num1 != saveData.slot[lstSaveSlotView.SelectedItems[0].Index].meseta)
             {
                 string hex = num1.ToString("X4");
                 while (hex.Length < 8)
                     hex = "0" + hex;
-                this.overwriteHexInBuffer(this.run.hexAndMathFunction.reversehex(hex, 8), this.mainSettings.saveStructureIndex.header_size + this.mainSettings.saveStructureIndex.slot_size * this.lstSaveSlotView.SelectedItems[0].Index + 244);
-                this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].meseta = num1;
-                this.txtInventoryMeseta.Text = num1.ToString();
+                overwriteHexInBuffer(run.hexAndMathFunction.reversehex(hex, 8), mainSettings.saveStructureIndex.header_size + mainSettings.saveStructureIndex.slot_size * lstSaveSlotView.SelectedItems[0].Index + 244);
+                saveData.slot[lstSaveSlotView.SelectedItems[0].Index].meseta = num1;
+                txtInventoryMeseta.Text = num1.ToString();
             }
             else
             {
                 if (num1 <= 99999999L)
                     return;
-                int num2 = (int)MessageBox.Show("You must enter a value less than 99,999,999");
+                MessageBox.Show("You must enter a value less than or equal to 99,999,999");
             }
         }
 
-        private void saveToolStripMenuItem_Click(object sender, EventArgs e) => this.action_save();
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e) => action_save();
 
-        private void btnSave_Click(object sender, EventArgs e) => this.action_save();
+        private void btnSave_Click(object sender, EventArgs e) => action_save();
 
         private void btnInventoryDelete_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Are you sure you want to delete the selected item?", "Confirm Delete", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel)
                 return;
-            int id = this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].inventory.item[int.Parse(this.inventoryView.SelectedItems[0].SubItems[1].Text)].id;
-            --this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].inventory.itemsUsed;
-            this.overwriteHexInBuffer(this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].inventory.itemsUsed.ToString("X2"), this.mainSettings.saveStructureIndex.inventory_slots_used_pos + this.mainSettings.saveStructureIndex.slot_size * this.lstSaveSlotView.SelectedItems[0].Index);
-            this.overwriteHexInBuffer("0000000000000000000000000000000000000000", id);
-            this.overwriteHexInBuffer("00000000", id - 8);
-            this.reloadEverything();
+            int id = saveData.slot[lstSaveSlotView.SelectedItems[0].Index].inventory.item[int.Parse(inventoryView.SelectedItems[0].SubItems[1].Text)].id;
+            --saveData.slot[lstSaveSlotView.SelectedItems[0].Index].inventory.itemsUsed;
+            overwriteHexInBuffer(saveData.slot[lstSaveSlotView.SelectedItems[0].Index].inventory.itemsUsed.ToString("X2"), mainSettings.saveStructureIndex.inventory_slots_used_pos + mainSettings.saveStructureIndex.slot_size * lstSaveSlotView.SelectedItems[0].Index);
+            overwriteHexInBuffer("0000000000000000000000000000000000000000", id);
+            overwriteHexInBuffer("00000000", id - 8);
+            reloadEverything();
         }
 
         private void btnStorageDelete_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Are you sure you want to delete the selected item?", "Confirm Delete", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel)
                 return;
-            this.overwriteHexInBuffer("0000000000000000000000000000000000000000", this.saveData.sharedInventory.item[int.Parse(this.storageView.SelectedItems[0].SubItems[1].Text)].id);
-            this.reloadEverything();
+            overwriteHexInBuffer("0000000000000000000000000000000000000000", saveData.sharedInventory.item[int.Parse(storageView.SelectedItems[0].SubItems[1].Text)].id);
+            reloadEverything();
         }
 
         private void pspo2seForm_FormClosing(object sender, FormClosingEventArgs e) => e.Cancel = false;
 
         private void changeItemATK(TabPage page)
         {
-            if (this.legitVersion())
+            if (legitVersion())
                 return;
-            pspo2seForm.inventoryItemClass inventoryItemClass = page != this.tabPageStorage ? this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].inventory.item[int.Parse(this.inventoryView.SelectedItems[0].SubItems[1].Text)] : this.saveData.sharedInventory.item[int.Parse(this.storageView.SelectedItems[0].SubItems[1].Text)];
-            this.entryForm.oldVal = inventoryItemClass.power_add.ToString();
-            this.entryForm.newVal = inventoryItemClass.power_add.ToString();
-            this.entryForm.description = "weapon power mod";
-            this.entryForm.maxLen = 4;
-            if (this.entryForm.ShowDialog((IWin32Window)this) != DialogResult.OK)
+            pspo2seForm.inventoryItemClass inventoryItemClass = page != tabPageStorage ? saveData.slot[lstSaveSlotView.SelectedItems[0].Index].inventory.item[int.Parse(inventoryView.SelectedItems[0].SubItems[1].Text)] : saveData.sharedInventory.item[int.Parse(storageView.SelectedItems[0].SubItems[1].Text)];
+            entryForm.oldVal = inventoryItemClass.power_add.ToString();
+            entryForm.newVal = inventoryItemClass.power_add.ToString();
+            entryForm.description = "weapon power mod";
+            entryForm.maxLen = 4;
+            if (entryForm.ShowDialog((IWin32Window)this) != DialogResult.OK)
                 return;
-            string newVal = this.entryForm.newVal;
+            string newVal = entryForm.newVal;
             if (!(newVal != inventoryItemClass.power_add.ToString()))
                 return;
             if (int.Parse(newVal) > 9999)
             {
-                int num1 = (int)MessageBox.Show("You must enter a value lower or equal to 9999.");
+                MessageBox.Show("You must enter a value lower or equal to 9999.");
             }
             else if (int.Parse(newVal) < 1)
             {
-                int num2 = (int)MessageBox.Show("You must enter a value greater than 0.");
+                MessageBox.Show("You must enter a value greater than 0.");
             }
             else
             {
                 string hex1 = int.Parse(newVal).ToString("X2");
                 while (hex1.Length < 4)
                     hex1 = "0" + hex1;
-                string hex2 = this.run.hexAndMathFunction.reversehex(hex1, 4);
+                string hex2 = run.hexAndMathFunction.reversehex(hex1, 4);
                 string str1 = "";
                 for (int index = 0; index < 20; ++index)
-                    str1 += this.run.hexAndMathFunction.decimalByteConvert(this.savedata_decimal_array[inventoryItemClass.id + index], "hex");
-                this.overwriteHexInBuffer(hex2, inventoryItemClass.id + 12);
+                    str1 += run.hexAndMathFunction.decimalByteConvert(savedata_decimal_array[inventoryItemClass.id + index], "hex");
+                overwriteHexInBuffer(hex2, inventoryItemClass.id + 12);
                 string str2 = "";
                 for (int index = 0; index < 20; ++index)
-                    str2 += this.run.hexAndMathFunction.decimalByteConvert(this.savedata_decimal_array[inventoryItemClass.id + index], "hex");
+                    str2 += run.hexAndMathFunction.decimalByteConvert(savedata_decimal_array[inventoryItemClass.id + index], "hex");
                 inventoryItemClass.power_add = int.Parse(newVal);
-                this.showSelectedInventoryItem(page);
+                showSelectedInventoryItem(page);
             }
         }
 
-        private void txtStorageATK_Click(object sender, EventArgs e) => this.changeItemATK(this.tabPageStorage);
+        private void txtStorageATK_Click(object sender, EventArgs e) => changeItemATK(tabPageStorage);
 
-        private void txtInventoryATK_Click(object sender, EventArgs e) => this.changeItemATK(this.tabPageInventory);
+        private void txtInventoryATK_Click(object sender, EventArgs e) => changeItemATK(tabPageInventory);
 
         private void txtSkipEp1Start_Click(object sender, EventArgs e)
         {
-            if (this.legitVersion())
+            if (legitVersion())
                 return;
-            if (this.txtSkipEp1Start.Text == "Yes")
+            if (txtSkipEp1Start.Text == "Yes")
             {
-                int num1 = (int)MessageBox.Show("You are already skipping the starting sequence to Episode 1", "Already Unlocked", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                MessageBox.Show("You are already skipping the starting sequence to Episode 1", "Already Unlocked", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
             else
             {
                 if (MessageBox.Show("Are you sure you want to skip the starting sequence to Episode 1?", "Confirm Unlock", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel)
                     return;
-                int num2 = this.mainSettings.saveStructureIndex.header_size + this.mainSettings.saveStructureIndex.slot_size * this.lstSaveSlotView.SelectedItems[0].Index;
-                this.overwriteHexInBuffer("90AB1E", this.saveData.type != pspo2seForm.SaveType.PSP2I ? num2 + 5460 : num2 + 4648);
-                this.txtSkipEp1Start.Text = "Yes";
-                this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].skip_ep_1_start = true;
-                int num3 = (int)MessageBox.Show("The Episode 1 start sequence was skipped successfully.\n\nYou will need to play the first mission to progress the story.", "Unlock Complete", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                int num2 = mainSettings.saveStructureIndex.header_size + mainSettings.saveStructureIndex.slot_size * lstSaveSlotView.SelectedItems[0].Index;
+                overwriteHexInBuffer("90AB1E", saveData.type != pspo2seForm.SaveType.PSP2I ? num2 + 5460 : num2 + 4648);
+                txtSkipEp1Start.Text = "Yes";
+                saveData.slot[lstSaveSlotView.SelectedItems[0].Index].skip_ep_1_start = true;
+                MessageBox.Show("The Episode 1 start sequence was skipped successfully.\n\nYou will need to play the first mission to progress the story.", "Unlock Complete", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
         }
 
         private void txtSkipEp2Start_Click(object sender, EventArgs e)
         {
-            if (this.legitVersion())
+            if (legitVersion())
                 return;
-            if (this.txtSkipEp2Start.Text == "Yes")
+            if (txtSkipEp2Start.Text == "Yes")
             {
-                int num1 = (int)MessageBox.Show("You are already skipping the starting sequence to Episode 2", "Already Unlocked", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                MessageBox.Show("You are already skipping the starting sequence to Episode 2", "Already Unlocked", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
             else
             {
                 if (MessageBox.Show("Are you sure you want to skip the starting sequence to Episode 2?", "Confirm Unlock", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel)
                     return;
-                this.overwriteHexInBuffer("78AF1E", this.mainSettings.saveStructureIndex.header_size + this.mainSettings.saveStructureIndex.slot_size * this.lstSaveSlotView.SelectedItems[0].Index + 4684);
-                this.txtSkipEp2Start.Text = "Yes";
-                this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].skip_ep_2_start = true;
-                int num2 = (int)MessageBox.Show("The Episode 2 start sequence was skipped successfully.\n\nGo to the Little Wing Office to progress the story further.", "Unlock Complete", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                overwriteHexInBuffer("78AF1E", mainSettings.saveStructureIndex.header_size + mainSettings.saveStructureIndex.slot_size * lstSaveSlotView.SelectedItems[0].Index + 4684);
+                txtSkipEp2Start.Text = "Yes";
+                saveData.slot[lstSaveSlotView.SelectedItems[0].Index].skip_ep_2_start = true;
+                MessageBox.Show("The Episode 2 start sequence was skipped successfully.\n\nGo to the Little Wing Office to progress the story further.", "Unlock Complete", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
         }
 
         private void txtMissionEp1_Click(object sender, EventArgs e)
         {
-            if (this.legitVersion())
+            if (legitVersion())
                 return;
-            if (this.txtMissionEp1.Text == "Yes")
+            if (txtMissionEp1.Text == "Yes")
             {
-                int num1 = (int)MessageBox.Show("You have already unlocked all of the Episode 1 Missions.", "Already Unlocked", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                MessageBox.Show("You have already unlocked all of the Episode 1 Missions.", "Already Unlocked", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
             else
             {
                 if (MessageBox.Show("Are you sure you want unlock all of the Episode 1 Missions?", "Confirm Unlock", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel)
                     return;
-                int num2 = this.mainSettings.saveStructureIndex.header_size + this.mainSettings.saveStructureIndex.slot_size * this.lstSaveSlotView.SelectedItems[0].Index;
-                this.overwriteHexInBuffer("204E", this.saveData.type != pspo2seForm.SaveType.PSP2I ? num2 + 3436 : num2 + 3512);
-                this.txtMissionEp1.Text = "Yes";
-                this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].mission_unlock_ep1 = true;
-                int num3 = (int)MessageBox.Show("The Episode 1 Missions were unlocked successfully.", "Unlock Complete", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                int num2 = mainSettings.saveStructureIndex.header_size + mainSettings.saveStructureIndex.slot_size * lstSaveSlotView.SelectedItems[0].Index;
+                overwriteHexInBuffer("204E", saveData.type != pspo2seForm.SaveType.PSP2I ? num2 + 3436 : num2 + 3512);
+                txtMissionEp1.Text = "Yes";
+                saveData.slot[lstSaveSlotView.SelectedItems[0].Index].mission_unlock_ep1 = true;
+                MessageBox.Show("The Episode 1 Missions were unlocked successfully.", "Unlock Complete", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
         }
 
         private void txtMissionUnknown_Click(object sender, EventArgs e)
         {
-            if (this.legitVersion())
+            if (legitVersion())
                 return;
-            if (this.txtMissionTactical.Text == "Yes")
+            if (txtMissionTactical.Text == "Yes")
             {
-                int num1 = (int)MessageBox.Show("You have already unlocked all of the Unknown Missions.", "Already Unlocked", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                MessageBox.Show("You have already unlocked all of the Unknown Missions.", "Already Unlocked", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
             else
             {
                 if (MessageBox.Show("Are you sure you want unlock all of the Unknown Missions?", "Confirm Unlock", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel)
                     return;
-                int num2 = this.mainSettings.saveStructureIndex.header_size + this.mainSettings.saveStructureIndex.slot_size * this.lstSaveSlotView.SelectedItems[0].Index;
-                this.overwriteHexInBuffer("204E", this.saveData.type != pspo2seForm.SaveType.PSP2I ? num2 + 3488 : num2 + 3564);
-                this.txtMissionTactical.Text = "Yes";
-                this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].mission_unlock_unknown = true;
-                int num3 = (int)MessageBox.Show("The Unknown Missions were unlocked successfully.", "Unlock Complete", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                int num2 = mainSettings.saveStructureIndex.header_size + mainSettings.saveStructureIndex.slot_size * lstSaveSlotView.SelectedItems[0].Index;
+                overwriteHexInBuffer("204E", saveData.type != pspo2seForm.SaveType.PSP2I ? num2 + 3488 : num2 + 3564);
+                txtMissionTactical.Text = "Yes";
+                saveData.slot[lstSaveSlotView.SelectedItems[0].Index].mission_unlock_unknown = true;
+                MessageBox.Show("The Unknown Missions were unlocked successfully.", "Unlock Complete", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
         }
 
         private void txtMissionEp2_Click(object sender, EventArgs e)
         {
-            if (this.legitVersion())
+            if (legitVersion())
                 return;
-            if (this.txtMissionEp2.Text == "Yes")
+            if (txtMissionEp2.Text == "Yes")
             {
-                int num1 = (int)MessageBox.Show("You have already unlocked all of the Episode 2 Missions.", "Already Unlocked", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                MessageBox.Show("You have already unlocked all of the Episode 2 Missions.", "Already Unlocked", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
             else
             {
                 if (MessageBox.Show("Are you sure you want unlock all of the Episode 2 Missions?", "Confirm Unlock", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel)
                     return;
-                int pos = this.mainSettings.saveStructureIndex.header_size + this.mainSettings.saveStructureIndex.slot_size * this.lstSaveSlotView.SelectedItems[0].Index;
-                if (this.saveData.type == pspo2seForm.SaveType.PSP2I)
+                if (saveData.type == pspo2seForm.SaveType.PSP2I)
                 {
-                    pos += 3624;
+                    int pos = mainSettings.saveStructureIndex.story_info_pos + mainSettings.saveStructureIndex.slot_size * lstSaveSlotView.SelectedItems[0].Index;
+                    pos = pos + 272;
+                    overwriteHexInBuffer("204E", pos);
+                    txtMissionEp2.Text = "Yes";
+                    saveData.slot[lstSaveSlotView.SelectedItems[0].Index].mission_unlock_ep2 = true;
+                    MessageBox.Show("The Episode 2 Missions were unlocked successfully.", "Unlock Complete", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 }
                 else
                 {
-                    int num2 = (int)MessageBox.Show("This feature is for Infinity only");
+                   MessageBox.Show("This feature is for Infinity only");
                 }
-                this.overwriteHexInBuffer("204E", pos);
-                this.txtMissionEp2.Text = "Yes";
-                this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].mission_unlock_unknown = true;
-                int num3 = (int)MessageBox.Show("The Episode 2 Missions were unlocked successfully.", "Unlock Complete", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
         }
 
@@ -1786,153 +1786,153 @@ namespace pspo2seSaveEditorProgram
 
         private void txtMissionMagashi_Click(object sender, EventArgs e)
         {
-            if (this.legitVersion())
+            if (legitVersion())
                 return;
-            if (this.txtMissionMagashi.Text == "Yes")
+            if (txtMissionMagashi.Text == "Yes")
             {
-                int num1 = (int)MessageBox.Show("You have already unlocked Magashi Plan.", "Already Unlocked", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                MessageBox.Show("You have already unlocked Magashi Plan.", "Already Unlocked", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
             else
             {
                 if (MessageBox.Show("Are you sure you want unlock Magashi Plan?", "Confirm Unlock", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel)
                     return;
-                int num2 = this.mainSettings.saveStructureIndex.header_size + this.mainSettings.saveStructureIndex.slot_size * this.lstSaveSlotView.SelectedItems[0].Index;
-                this.overwriteHexInBuffer("1F", this.saveData.type != pspo2seForm.SaveType.PSP2I ? num2 + 3182 : num2 + 3242);
-                this.txtMissionMagashi.Text = "Yes";
-                this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].mission_unlock_magashi = true;
-                int num3 = (int)MessageBox.Show("The Magashi Plan mission was unlocked successfully.", "Unlock Complete", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                int num2 = mainSettings.saveStructureIndex.header_size + mainSettings.saveStructureIndex.slot_size * lstSaveSlotView.SelectedItems[0].Index;
+                overwriteHexInBuffer("1F", saveData.type != pspo2seForm.SaveType.PSP2I ? num2 + 3182 : num2 + 3242);
+                txtMissionMagashi.Text = "Yes";
+                saveData.slot[lstSaveSlotView.SelectedItems[0].Index].mission_unlock_magashi = true;
+                MessageBox.Show("The Magashi Plan mission was unlocked successfully.", "Unlock Complete", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
         }
 
         private void txtCharacterName_Click(object sender, EventArgs e)
         {
-            this.entryForm.oldVal = this.txtCharacterName.Text;
-            this.entryForm.newVal = this.txtCharacterName.Text;
-            this.entryForm.description = "character name";
-            this.entryForm.maxLen = 32;
-            if (this.entryForm.ShowDialog((IWin32Window)this) != DialogResult.OK)
+            entryForm.oldVal = txtCharacterName.Text;
+            entryForm.newVal = txtCharacterName.Text;
+            entryForm.description = "character name";
+            entryForm.maxLen = 32;
+            if (entryForm.ShowDialog((IWin32Window)this) != DialogResult.OK)
                 return;
-            string newVal = this.entryForm.newVal;
-            if (!(newVal != this.txtCharacterName.Text))
+            string newVal = entryForm.newVal;
+            if (!(newVal != txtCharacterName.Text))
                 return;
-            string hexadecimal = this.run.hexAndMathFunction.stringToHexadecimal(newVal, 64);
-            this.overwriteHexInBuffer(hexadecimal, this.mainSettings.saveStructureIndex.header_size + this.mainSettings.saveStructureIndex.slot_size * this.lstSaveSlotView.SelectedItems[0].Index);
-            this.overwriteHexInBuffer(hexadecimal, this.mainSettings.saveStructureIndex.character_name_pos2 + this.mainSettings.saveStructureIndex.slot_size * this.lstSaveSlotView.SelectedItems[0].Index);
-            this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].name = newVal;
-            this.lstSaveSlotView.SelectedItems[0].Text = newVal;
-            this.txtCharacterName.Text = newVal;
+            string hexadecimal = run.hexAndMathFunction.stringToHexadecimal(newVal, 64);
+            overwriteHexInBuffer(hexadecimal, mainSettings.saveStructureIndex.header_size + mainSettings.saveStructureIndex.slot_size * lstSaveSlotView.SelectedItems[0].Index);
+            overwriteHexInBuffer(hexadecimal, mainSettings.saveStructureIndex.character_name_pos2 + mainSettings.saveStructureIndex.slot_size * lstSaveSlotView.SelectedItems[0].Index);
+            saveData.slot[lstSaveSlotView.SelectedItems[0].Index].name = newVal;
+            lstSaveSlotView.SelectedItems[0].Text = newVal;
+            txtCharacterName.Text = newVal;
         }
 
-        private void txtLevel_Click(object sender, EventArgs e) => this.jumpToLevel();
+        private void txtLevel_Click(object sender, EventArgs e) => jumpToLevel();
 
         private void txtStorageName_jp_Click(object sender, EventArgs e)
         {
-            Clipboard.SetText(this.txtStorageName_jp.Text);
-            int num = (int)MessageBox.Show("Copied to clipboard", "Clipboard Action", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            Clipboard.SetText(txtStorageName_jp.Text);
+            MessageBox.Show("Copied to clipboard", "Clipboard Action", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
         }
 
         private void txtTitle_Click(object sender, EventArgs e)
         {
-            if (this.legitVersion())
+            if (legitVersion())
                 return;
-            this.entryForm.oldVal = this.txtTitle.Text;
-            this.entryForm.newVal = this.txtTitle.Text;
-            this.entryForm.description = "title";
-            this.entryForm.maxLen = 25;
-            if (this.entryForm.ShowDialog((IWin32Window)this) != DialogResult.OK)
+            entryForm.oldVal = txtTitle.Text;
+            entryForm.newVal = txtTitle.Text;
+            entryForm.description = "title";
+            entryForm.maxLen = 25;
+            if (entryForm.ShowDialog((IWin32Window)this) != DialogResult.OK)
                 return;
-            string newVal = this.entryForm.newVal;
-            if (!(newVal != this.txtTitle.Text))
+            string newVal = entryForm.newVal;
+            if (!(newVal != txtTitle.Text))
                 return;
-            this.overwriteHexInBuffer(this.run.hexAndMathFunction.stringToHexadecimal(newVal, 64), this.mainSettings.saveStructureIndex.header_size + this.mainSettings.saveStructureIndex.slot_size * this.lstSaveSlotView.SelectedItems[0].Index + 64);
-            this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].title = newVal;
-            this.txtTitle.Text = newVal;
+            overwriteHexInBuffer(run.hexAndMathFunction.stringToHexadecimal(newVal, 64), mainSettings.saveStructureIndex.header_size + mainSettings.saveStructureIndex.slot_size * lstSaveSlotView.SelectedItems[0].Index + 64);
+            saveData.slot[lstSaveSlotView.SelectedItems[0].Index].title = newVal;
+            txtTitle.Text = newVal;
         }
 
         private void txtCurType_Click(object sender, EventArgs e)
         {
-            if (this.legitVersion())
+            if (legitVersion())
                 return;
-            this.entryForm.oldVal = this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].cur_type.ToString();
-            this.entryForm.newVal = ((int)this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].cur_type).ToString();
-            this.entryForm.description = "type";
-            this.entryForm.maxLen = 1;
-            if (this.entryForm.ShowDialog((IWin32Window)this) != DialogResult.OK)
+            entryForm.oldVal = saveData.slot[lstSaveSlotView.SelectedItems[0].Index].cur_type.ToString();
+            entryForm.newVal = ((int)saveData.slot[lstSaveSlotView.SelectedItems[0].Index].cur_type).ToString();
+            entryForm.description = "type";
+            entryForm.maxLen = 1;
+            if (entryForm.ShowDialog((IWin32Window)this) != DialogResult.OK)
                 return;
-            string newVal = this.entryForm.newVal;
-            if (!(newVal != ((int)this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].cur_type).ToString()))
+            string newVal = entryForm.newVal;
+            if (!(newVal != ((int)saveData.slot[lstSaveSlotView.SelectedItems[0].Index].cur_type).ToString()))
                 return;
             string hex = int.Parse(newVal).ToString("X1");
             while (hex.Length < 2)
                 hex = "0" + hex;
-            this.overwriteHexInBuffer(this.run.hexAndMathFunction.reversehex(hex, 2), this.mainSettings.saveStructureIndex.header_size + this.mainSettings.saveStructureIndex.slot_size * this.lstSaveSlotView.SelectedItems[0].Index + 130);
-            this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].cur_type = (pspo2seForm.jobType)int.Parse(newVal);
-            this.txtCurType.Text = string.Concat((object)this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].cur_type);
-            this.lstSaveSlotView.SelectedItems[0].SubItems[3].Text = this.txtCurType.Text;
+            overwriteHexInBuffer(run.hexAndMathFunction.reversehex(hex, 2), mainSettings.saveStructureIndex.header_size + mainSettings.saveStructureIndex.slot_size * lstSaveSlotView.SelectedItems[0].Index + 130);
+            saveData.slot[lstSaveSlotView.SelectedItems[0].Index].cur_type = (pspo2seForm.jobType)int.Parse(newVal);
+            txtCurType.Text = string.Concat((object)saveData.slot[lstSaveSlotView.SelectedItems[0].Index].cur_type);
+            lstSaveSlotView.SelectedItems[0].SubItems[3].Text = txtCurType.Text;
         }
 
         private void txtClass_Click(object sender, EventArgs e)
         {
-            if (this.legitVersion())
+            if (legitVersion())
                 return;
-            this.entryForm.oldVal = this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].race.ToString();
-            this.entryForm.newVal = ((int)this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].race).ToString();
-            this.entryForm.description = "class";
-            this.entryForm.maxLen = 1;
-            if (this.entryForm.ShowDialog((IWin32Window)this) != DialogResult.OK)
+            entryForm.oldVal = saveData.slot[lstSaveSlotView.SelectedItems[0].Index].race.ToString();
+            entryForm.newVal = ((int)saveData.slot[lstSaveSlotView.SelectedItems[0].Index].race).ToString();
+            entryForm.description = "class";
+            entryForm.maxLen = 1;
+            if (entryForm.ShowDialog((IWin32Window)this) != DialogResult.OK)
                 return;
-            string newVal = this.entryForm.newVal;
-            if (!(newVal != ((int)this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].race).ToString()))
+            string newVal = entryForm.newVal;
+            if (!(newVal != ((int)saveData.slot[lstSaveSlotView.SelectedItems[0].Index].race).ToString()))
                 return;
             string hex = int.Parse(newVal).ToString("X1");
             while (hex.Length < 2)
                 hex = "0" + hex;
-            this.overwriteHexInBuffer(this.run.hexAndMathFunction.reversehex(hex, 2), this.mainSettings.saveStructureIndex.header_size + this.mainSettings.saveStructureIndex.slot_size * this.lstSaveSlotView.SelectedItems[0].Index + 128);
-            this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].race = (pspo2seForm.raceTypes)int.Parse(newVal);
-            this.txtRace.Text = string.Concat((object)this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].race);
-            this.lstSaveSlotView.SelectedItems[0].SubItems[2].Text = this.txtRace.Text;
+            overwriteHexInBuffer(run.hexAndMathFunction.reversehex(hex, 2), mainSettings.saveStructureIndex.header_size + mainSettings.saveStructureIndex.slot_size * lstSaveSlotView.SelectedItems[0].Index + 128);
+            saveData.slot[lstSaveSlotView.SelectedItems[0].Index].race = (pspo2seForm.raceTypes)int.Parse(newVal);
+            txtRace.Text = string.Concat((object)saveData.slot[lstSaveSlotView.SelectedItems[0].Index].race);
+            lstSaveSlotView.SelectedItems[0].SubItems[2].Text = txtRace.Text;
         }
 
         private void txtSex_Click(object sender, EventArgs e)
         {
-            if (this.legitVersion())
+            if (legitVersion())
                 return;
-            this.entryForm.oldVal = this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].sex.ToString();
-            this.entryForm.newVal = ((int)this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].sex).ToString();
-            this.entryForm.description = "sex";
-            this.entryForm.maxLen = 1;
-            if (this.entryForm.ShowDialog((IWin32Window)this) != DialogResult.OK)
+            entryForm.oldVal = saveData.slot[lstSaveSlotView.SelectedItems[0].Index].sex.ToString();
+            entryForm.newVal = ((int)saveData.slot[lstSaveSlotView.SelectedItems[0].Index].sex).ToString();
+            entryForm.description = "sex";
+            entryForm.maxLen = 1;
+            if (entryForm.ShowDialog((IWin32Window)this) != DialogResult.OK)
                 return;
-            string newVal = this.entryForm.newVal;
-            if (!(newVal != ((int)this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].sex).ToString()))
+            string newVal = entryForm.newVal;
+            if (!(newVal != ((int)saveData.slot[lstSaveSlotView.SelectedItems[0].Index].sex).ToString()))
                 return;
             string hex = int.Parse(newVal).ToString("X1");
             while (hex.Length < 2)
                 hex = "0" + hex;
-            this.overwriteHexInBuffer(this.run.hexAndMathFunction.reversehex(hex, 2), this.mainSettings.saveStructureIndex.header_size + this.mainSettings.saveStructureIndex.slot_size * this.lstSaveSlotView.SelectedItems[0].Index + 129);
-            this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].sex = (pspo2seForm.sexType)int.Parse(newVal);
-            this.txtSex.Text = string.Concat((object)this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].sex);
+            overwriteHexInBuffer(run.hexAndMathFunction.reversehex(hex, 2), mainSettings.saveStructureIndex.header_size + mainSettings.saveStructureIndex.slot_size * lstSaveSlotView.SelectedItems[0].Index + 129);
+            saveData.slot[lstSaveSlotView.SelectedItems[0].Index].sex = (pspo2seForm.sexType)int.Parse(newVal);
+            txtSex.Text = string.Concat((object)saveData.slot[lstSaveSlotView.SelectedItems[0].Index].sex);
         }
 
         private void lstPAMelee_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (this.lstPAMelee.SelectedItems.Count <= 0)
+            if (lstPAMelee.SelectedItems.Count <= 0)
                 return;
-            this.lstPA_SelectedIndexChanged(this.tabPAMelee, int.Parse(this.lstPAMelee.SelectedItems[0].Tag.ToString()));
+            lstPA_SelectedIndexChanged(tabPAMelee, int.Parse(lstPAMelee.SelectedItems[0].Tag.ToString()));
         }
 
         private void lstPABullets_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (this.lstPABullets.SelectedItems.Count <= 0)
+            if (lstPABullets.SelectedItems.Count <= 0)
                 return;
-            this.lstPA_SelectedIndexChanged(this.tabPABullets, int.Parse(this.lstPABullets.SelectedItems[0].Tag.ToString()));
+            lstPA_SelectedIndexChanged(tabPABullets, int.Parse(lstPABullets.SelectedItems[0].Tag.ToString()));
         }
 
         private void lstPATechs_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (this.lstPATechs.SelectedItems.Count <= 0)
+            if (lstPATechs.SelectedItems.Count <= 0)
                 return;
-            this.lstPA_SelectedIndexChanged(this.tabPATech, int.Parse(this.lstPATechs.SelectedItems[0].Tag.ToString()));
+            lstPA_SelectedIndexChanged(tabPATech, int.Parse(lstPATechs.SelectedItems[0].Tag.ToString()));
         }
 
         private pspo2seForm.pageFields getPAPageFields(TabPage tab)
@@ -1941,19 +1941,19 @@ namespace pspo2seSaveEditorProgram
             switch (tab.Name)
             {
                 case "tabPAMelee":
-                    pageFields.txt_hex = this.txtPAHexMelee;
+                    pageFields.txt_hex = txtPAHexMelee;
                     break;
                 case "tabPABullets":
-                    pageFields.txt_hex = this.txtPAHexBullets;
+                    pageFields.txt_hex = txtPAHexBullets;
                     break;
                 case "tabPATech":
-                    pageFields.txt_hex = this.txtPAHexTech;
+                    pageFields.txt_hex = txtPAHexTech;
                     break;
             }
             return pageFields;
         }
 
-        private void lstPA_SelectedIndexChanged(TabPage tab, int paPositionID) => this.getPAPageFields(tab).txt_hex.Text = "0x" + this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].pa.items[paPositionID].hex_reversed;
+        private void lstPA_SelectedIndexChanged(TabPage tab, int paPositionID) => getPAPageFields(tab).txt_hex.Text = "0x" + saveData.slot[lstSaveSlotView.SelectedItems[0].Index].pa.items[paPositionID].hex_reversed;
 
         private unsafe int* getRebirthStatPointer(string nameFlag)
         {
@@ -1961,39 +1961,39 @@ namespace pspo2seSaveEditorProgram
             switch (nameFlag)
             {
                 case "HP":
-                    fixed (int* numPtr2 = &this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].rebirth.hp)
+                    fixed (int* numPtr2 = &saveData.slot[lstSaveSlotView.SelectedItems[0].Index].rebirth.hp)
                         numPtr1 = numPtr2;
                     break;
                 case "PP":
-                    fixed (int* numPtr2 = &this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].rebirth.pp)
+                    fixed (int* numPtr2 = &saveData.slot[lstSaveSlotView.SelectedItems[0].Index].rebirth.pp)
                         numPtr1 = numPtr2;
                     break;
                 case "ATK":
-                    fixed (int* numPtr2 = &this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].rebirth.atk)
+                    fixed (int* numPtr2 = &saveData.slot[lstSaveSlotView.SelectedItems[0].Index].rebirth.atk)
                         numPtr1 = numPtr2;
                     break;
                 case "DEF":
-                    fixed (int* numPtr2 = &this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].rebirth.def)
+                    fixed (int* numPtr2 = &saveData.slot[lstSaveSlotView.SelectedItems[0].Index].rebirth.def)
                         numPtr1 = numPtr2;
                     break;
                 case "ACC":
-                    fixed (int* numPtr2 = &this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].rebirth.acc)
+                    fixed (int* numPtr2 = &saveData.slot[lstSaveSlotView.SelectedItems[0].Index].rebirth.acc)
                         numPtr1 = numPtr2;
                     break;
                 case "EVA":
-                    fixed (int* numPtr2 = &this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].rebirth.eva)
+                    fixed (int* numPtr2 = &saveData.slot[lstSaveSlotView.SelectedItems[0].Index].rebirth.eva)
                         numPtr1 = numPtr2;
                     break;
                 case "TEC":
-                    fixed (int* numPtr2 = &this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].rebirth.tec)
+                    fixed (int* numPtr2 = &saveData.slot[lstSaveSlotView.SelectedItems[0].Index].rebirth.tec)
                         numPtr1 = numPtr2;
                     break;
                 case "MND":
-                    fixed (int* numPtr2 = &this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].rebirth.mnd)
+                    fixed (int* numPtr2 = &saveData.slot[lstSaveSlotView.SelectedItems[0].Index].rebirth.mnd)
                         numPtr1 = numPtr2;
                     break;
                 case "STA":
-                    fixed (int* numPtr2 = &this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].rebirth.sta)
+                    fixed (int* numPtr2 = &saveData.slot[lstSaveSlotView.SelectedItems[0].Index].rebirth.sta)
                         numPtr1 = numPtr2;
                     break;
             }
@@ -2002,241 +2002,241 @@ namespace pspo2seSaveEditorProgram
 
         private unsafe void numRebirth_ValueChanged(object sender, EventArgs e)
         {
-            if (this.lstSaveSlotView.SelectedItems[0].Index < 0 || ((NumericUpDown)sender).Value > 10M || ((NumericUpDown)sender).Value < 0M)
+            if (lstSaveSlotView.SelectedItems[0].Index < 0 || ((NumericUpDown)sender).Value > 10M || ((NumericUpDown)sender).Value < 0M)
                 return;
             string str = ((Control)sender).Name.Replace("numRebirth", "");
-            int* rebirthStatPointer = this.getRebirthStatPointer(str);
+            int* rebirthStatPointer = getRebirthStatPointer(str);
             int num1 = *rebirthStatPointer;
-            int rebirthValuePtsUsed = this.getRebirthValuePtsUsed(this.lstSaveSlotView.SelectedItems[0].Index, *rebirthStatPointer, str);
+            int rebirthValuePtsUsed = getRebirthValuePtsUsed(lstSaveSlotView.SelectedItems[0].Index, *rebirthStatPointer, str);
             *rebirthStatPointer = (int)((NumericUpDown)sender).Value;
-            int num2 = this.getRebirthValuePtsUsed(this.lstSaveSlotView.SelectedItems[0].Index, *rebirthStatPointer, str) - rebirthValuePtsUsed;
+            int num2 = getRebirthValuePtsUsed(lstSaveSlotView.SelectedItems[0].Index, *rebirthStatPointer, str) - rebirthValuePtsUsed;
             if (num2 < 0)
             {
-                this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].rebirth.remaining_points += -num2;
-                this.updateRebirthBufferVals(this.lstSaveSlotView.SelectedItems[0].Index);
+                saveData.slot[lstSaveSlotView.SelectedItems[0].Index].rebirth.remaining_points += -num2;
+                updateRebirthBufferVals(lstSaveSlotView.SelectedItems[0].Index);
             }
             else
             {
-                this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].rebirth.remaining_points -= num2;
-                if (this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].rebirth.remaining_points < 0)
+                saveData.slot[lstSaveSlotView.SelectedItems[0].Index].rebirth.remaining_points -= num2;
+                if (saveData.slot[lstSaveSlotView.SelectedItems[0].Index].rebirth.remaining_points < 0)
                 {
-                    int num3 = (int)MessageBox.Show("You need " + (object)-this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].rebirth.remaining_points + " more points to add to this stat.\n\nYou will need to rebirth to gain more BP.", "Not Enough BP", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                    MessageBox.Show("You need " + (object)-saveData.slot[lstSaveSlotView.SelectedItems[0].Index].rebirth.remaining_points + " more points to add to this stat.\n\nYou will need to rebirth to gain more BP.", "Not Enough BP", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                     ((NumericUpDown)sender).Value = (Decimal)(*rebirthStatPointer - 1);
                 }
                 else
-                    this.updateRebirthBufferVals(this.lstSaveSlotView.SelectedItems[0].Index);
+                    updateRebirthBufferVals(lstSaveSlotView.SelectedItems[0].Index);
             }
-            this.displayRebirthInfo(this.lstSaveSlotView.SelectedItems[0].Index);
+            displayRebirthInfo(lstSaveSlotView.SelectedItems[0].Index);
         }
 
-        private void classLevel_Click(object sender, EventArgs e) => this.jumpToTypeLevel();
+        private void classLevel_Click(object sender, EventArgs e) => jumpToTypeLevel();
 
         private void lstRebirthRewards_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (this.lstRebirthRewards.Items.Count <= 0)
+            if (lstRebirthRewards.Items.Count <= 0)
                 return;
-            this.lstRebirthRewards.SelectedItems.Clear();
+            lstRebirthRewards.SelectedItems.Clear();
         }
 
         private void btnRebirth_Click(object sender, EventArgs e)
         {
-            int level = this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].level;
-            if (this.chkRebirthSpoof.Checked)
+            int level = saveData.slot[lstSaveSlotView.SelectedItems[0].Index].level;
+            if (chkRebirthSpoof.Checked)
                 level = 200;
             if (level < 50)
                 return;
-            if (this.comboRebirthExtend.SelectedIndex > 0)
+            if (comboRebirthExtend.SelectedIndex > 0)
             {
-                if (this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].inventory.itemsUsed >= 60)
+                if (saveData.slot[lstSaveSlotView.SelectedItems[0].Index].inventory.itemsUsed >= 60)
                 {
-                    int num = (int)MessageBox.Show("The characters inventory is full, please deposit an item before rebirthing so you can claim the extend codes", "Inventory Full", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                    MessageBox.Show("The characters inventory is full, please deposit an item before rebirthing so you can claim the extend codes", "Inventory Full", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                     return;
                 }
-                string hex1 = this.comboRebirthExtend.SelectedIndex.ToString("X4");
+                string hex1 = comboRebirthExtend.SelectedIndex.ToString("X4");
                 while (hex1.Length < 8)
                     hex1 = "0" + hex1;
-                this.overwriteHexInBuffer("0F010000" + this.run.hexAndMathFunction.reversehex(hex1, 8) + "630000000000000B00000000", this.mainSettings.saveStructureIndex.inventory_slots_pos + this.mainSettings.saveStructureIndex.slot_size * this.lstSaveSlotView.SelectedItems[0].Index + this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].inventory.itemsUsed * 36 + 4);
-                ++this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].inventory.itemsUsed;
-                string hex2 = this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].inventory.itemsUsed.ToString("X1");
+                overwriteHexInBuffer("0F010000" + run.hexAndMathFunction.reversehex(hex1, 8) + "630000000000000B00000000", mainSettings.saveStructureIndex.inventory_slots_pos + mainSettings.saveStructureIndex.slot_size * lstSaveSlotView.SelectedItems[0].Index + saveData.slot[lstSaveSlotView.SelectedItems[0].Index].inventory.itemsUsed * 36 + 4);
+                ++saveData.slot[lstSaveSlotView.SelectedItems[0].Index].inventory.itemsUsed;
+                string hex2 = saveData.slot[lstSaveSlotView.SelectedItems[0].Index].inventory.itemsUsed.ToString("X1");
                 while (hex2.Length < 2)
                     hex2 = "0" + hex2;
-                this.overwriteHexInBuffer(hex2, this.mainSettings.saveStructureIndex.inventory_slots_used_pos + this.mainSettings.saveStructureIndex.slot_size * this.lstSaveSlotView.SelectedItems[0].Index);
+                overwriteHexInBuffer(hex2, mainSettings.saveStructureIndex.inventory_slots_used_pos + mainSettings.saveStructureIndex.slot_size * lstSaveSlotView.SelectedItems[0].Index);
             }
-            if (this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].rebirth.count < (int)ushort.MaxValue)
+            if (saveData.slot[lstSaveSlotView.SelectedItems[0].Index].rebirth.count < (int)ushort.MaxValue)
             {
-                string hex = (this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].rebirth.count + 1).ToString("X2");
+                string hex = (saveData.slot[lstSaveSlotView.SelectedItems[0].Index].rebirth.count + 1).ToString("X2");
                 while (hex.Length < 4)
                     hex = "0" + hex;
-                this.overwriteHexInBuffer(this.run.hexAndMathFunction.reversehex(hex, 4), this.mainSettings.saveStructureIndex.header_size + this.mainSettings.saveStructureIndex.slot_size * this.lstSaveSlotView.SelectedItems[0].Index + 438);
+                overwriteHexInBuffer(run.hexAndMathFunction.reversehex(hex, 4), mainSettings.saveStructureIndex.header_size + mainSettings.saveStructureIndex.slot_size * lstSaveSlotView.SelectedItems[0].Index + 438);
             }
-            int num1 = this.getRebirthNowPointGain(level);
-            if (this.comboRebirthExtend.SelectedIndex > 0)
-                num1 -= 5 * this.comboRebirthExtend.SelectedIndex;
+            int num1 = getRebirthNowPointGain(level);
+            if (comboRebirthExtend.SelectedIndex > 0)
+                num1 -= 5 * comboRebirthExtend.SelectedIndex;
             if (num1 > 999)
                 num1 = 999;
-            string hex3 = (num1 + this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].rebirth.remaining_points).ToString("X2");
+            string hex3 = (num1 + saveData.slot[lstSaveSlotView.SelectedItems[0].Index].rebirth.remaining_points).ToString("X2");
             while (hex3.Length < 4)
                 hex3 = "0" + hex3;
-            this.overwriteHexInBuffer(this.run.hexAndMathFunction.reversehex(hex3, 4), this.mainSettings.saveStructureIndex.header_size + this.mainSettings.saveStructureIndex.slot_size * this.lstSaveSlotView.SelectedItems[0].Index + 440);
-            int num2 = this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].rebirth.additionalTypeLevels + this.getRebirthNowTypeLevelGain(level);
+            overwriteHexInBuffer(run.hexAndMathFunction.reversehex(hex3, 4), mainSettings.saveStructureIndex.header_size + mainSettings.saveStructureIndex.slot_size * lstSaveSlotView.SelectedItems[0].Index + 440);
+            int num2 = saveData.slot[lstSaveSlotView.SelectedItems[0].Index].rebirth.additionalTypeLevels + getRebirthNowTypeLevelGain(level);
             if (num2 > 20)
                 num2 = 20;
             string hex4 = num2.ToString("X1");
             while (hex4.Length < 2)
                 hex4 = "0" + hex4;
-            this.overwriteHexInBuffer(hex4, this.mainSettings.saveStructureIndex.header_size + this.mainSettings.saveStructureIndex.slot_size * this.lstSaveSlotView.SelectedItems[0].Index + 283);
-            if (!this.chkRebirthNoLevelDrop.Checked)
-                this.writeNewLevelData(1);
-            this.reloadEverything();
-            int num3 = (int)MessageBox.Show("The rebirth completed successfully.\n\nIf you selected to claim extend codes, they will be in the characters inventory.", "Rebirth Complete", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            overwriteHexInBuffer(hex4, mainSettings.saveStructureIndex.header_size + mainSettings.saveStructureIndex.slot_size * lstSaveSlotView.SelectedItems[0].Index + 283);
+            if (!chkRebirthNoLevelDrop.Checked)
+                writeNewLevelData(1);
+            reloadEverything();
+            MessageBox.Show("The rebirth completed successfully.\n\nIf you selected to claim extend codes, they will be in the characters inventory.", "Rebirth Complete", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
         }
 
-        private void chkRebirthSpoof_CheckedChanged(object sender, EventArgs e) => this.listRebirthRewards(this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].level, this.lstSaveSlotView.SelectedItems[0].Index);
+        private void chkRebirthSpoof_CheckedChanged(object sender, EventArgs e) => listRebirthRewards(saveData.slot[lstSaveSlotView.SelectedItems[0].Index].level, lstSaveSlotView.SelectedItems[0].Index);
 
         private void weaponDatabaseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.weaponDatabaseForm.initForm();
-            this.weaponDatabaseForm.Show((IWin32Window)this);
+            weaponDatabaseForm.initForm();
+            weaponDatabaseForm.Show((IWin32Window)this);
         }
 
         private void txtEp1Complete_Click(object sender, EventArgs e)
         {
-            if (this.legitVersion())
+            if (legitVersion())
                 return;
-            if (this.txtEp1Complete.Text == "Yes")
+            if (txtEp1Complete.Text == "Yes")
             {
-                int num1 = (int)MessageBox.Show("You have already completed Episode 1.", "Already Unlocked", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                MessageBox.Show("You have already completed Episode 1.", "Already Unlocked", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
             else
             {
                 if (MessageBox.Show("Are you sure you want set Episode 1 to complete?", "Confirm Unlock", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel)
                     return;
-                int num2 = this.mainSettings.saveStructureIndex.header_size + this.mainSettings.saveStructureIndex.slot_size * this.lstSaveSlotView.SelectedItems[0].Index;
-                int pos = this.saveData.type != pspo2seForm.SaveType.PSP2I ? num2 + 23177 : num2 + 22397;
-                if (this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].story_ep_2_complete)
-                    this.overwriteHexInBuffer("03", pos);
+                int num2 = mainSettings.saveStructureIndex.header_size + mainSettings.saveStructureIndex.slot_size * lstSaveSlotView.SelectedItems[0].Index;
+                int pos = saveData.type != pspo2seForm.SaveType.PSP2I ? num2 + 23177 : num2 + 22397;
+                if (saveData.slot[lstSaveSlotView.SelectedItems[0].Index].story_ep_2_complete)
+                    overwriteHexInBuffer("03", pos);
                 else
-                    this.overwriteHexInBuffer("01", pos);
-                this.txtEp1Complete.Text = "Yes";
-                this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].story_ep_1_complete = true;
-                this.reloadEverything();
-                int num3 = (int)MessageBox.Show("Episode 1 was completed successfully.", "Unlock Complete", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    overwriteHexInBuffer("01", pos);
+                txtEp1Complete.Text = "Yes";
+                saveData.slot[lstSaveSlotView.SelectedItems[0].Index].story_ep_1_complete = true;
+                reloadEverything();
+                MessageBox.Show("Episode 1 was completed successfully.", "Unlock Complete", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
         }
 
         private void txtEp2Complete_Click(object sender, EventArgs e)
         {
-            if (this.legitVersion())
+            if (legitVersion())
                 return;
-            if (this.txtEp2Complete.Text == "Yes")
+            if (txtEp2Complete.Text == "Yes")
             {
-                int num1 = (int)MessageBox.Show("You have already completed Episode 2.", "Already Unlocked", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                MessageBox.Show("You have already completed Episode 2.", "Already Unlocked", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
             else
             {
                 if (MessageBox.Show("Are you sure you want set Episode 2 to complete?", "Confirm Unlock", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel)
                     return;
-                int num2 = this.mainSettings.saveStructureIndex.header_size + this.mainSettings.saveStructureIndex.slot_size * this.lstSaveSlotView.SelectedItems[0].Index;
-                int pos = this.saveData.type != pspo2seForm.SaveType.PSP2I ? num2 + 23177 : num2 + 22397;
-                if (this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].story_ep_1_complete)
-                    this.overwriteHexInBuffer("03", pos);
+                int num2 = mainSettings.saveStructureIndex.header_size + mainSettings.saveStructureIndex.slot_size * lstSaveSlotView.SelectedItems[0].Index;
+                int pos = saveData.type != pspo2seForm.SaveType.PSP2I ? num2 + 23177 : num2 + 22397;
+                if (saveData.slot[lstSaveSlotView.SelectedItems[0].Index].story_ep_1_complete)
+                    overwriteHexInBuffer("03", pos);
                 else
-                    this.overwriteHexInBuffer("02", pos);
-                this.txtEp2Complete.Text = "Yes";
-                this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].story_ep_2_complete = true;
-                this.reloadEverything();
-                int num3 = (int)MessageBox.Show("Episode 2 was completed successfully.", "Unlock Complete", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    overwriteHexInBuffer("02", pos);
+                txtEp2Complete.Text = "Yes";
+                saveData.slot[lstSaveSlotView.SelectedItems[0].Index].story_ep_2_complete = true;
+                reloadEverything();
+                MessageBox.Show("Episode 2 was completed successfully.", "Unlock Complete", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
         }
 
         private void lstInfinityMissions_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (this.lstInfinityMissions.SelectedItems.Count <= 0)
+            if (lstInfinityMissions.SelectedItems.Count <= 0)
             {
-                this.grpInfinityMissionDetails.Visible = false;
-                this.grpInfMisExtra.Visible = false;
-                this.grpInfMisSpecial.Visible = false;
-                this.btnExportInfinityMission.Enabled = false;
-                this.btnDeleteInfinityMission.Enabled = false;
-                this.btnModifyInfinityMission.Enabled = false;
+                grpInfinityMissionDetails.Visible = false;
+                grpInfMisExtra.Visible = false;
+                grpInfMisSpecial.Visible = false;
+                btnExportInfinityMission.Enabled = false;
+                btnDeleteInfinityMission.Enabled = false;
+                btnModifyInfinityMission.Enabled = false;
             }
             else
             {
-                pspo2seForm.infinityMissionClass infinityMissionClass = this.saveData.infinityMissions.slot[int.Parse(this.lstInfinityMissions.SelectedItems[0].Tag.ToString())];
-                this.txtInfNameEn.Text = this.intToInfinityBoss(infinityMissionClass.boss - 1)[1] + " @ " + this.intToInfinityArea(infinityMissionClass.area - 1)[1];
-                this.txtInfNameJp.Text = this.intToInfinityArea(infinityMissionClass.area - 1)[0] + "の" + this.intToInfinityBoss(infinityMissionClass.boss - 1)[0];
-                this.txtInfMisSpecial.Text = "Area  " + this.intToInfinityArea(infinityMissionClass.area - 1)[1] + " (" + this.intToInfinityArea(infinityMissionClass.area - 1)[0] + ")";
-                this.txtInfMisBoss.Text = "Boss  " + this.intToInfinityBoss(infinityMissionClass.boss - 1)[1] + " (" + this.intToInfinityBoss(infinityMissionClass.boss - 1)[0] + ") [" + (object)infinityMissionClass.length + "]";
-                this.txtInfMisEnemy1.Text = "Main Enemy  " + this.intToInfinityEnemy(infinityMissionClass.enemy_1)[1] + " (" + this.intToInfinityEnemy(infinityMissionClass.enemy_1)[0] + ") [" + (object)infinityMissionClass.unk_enemy_1_mod + "]";
-                this.txtInfMisEnemy2.Text = "Sub Enemy  " + this.intToInfinityEnemy(infinityMissionClass.enemy_2)[1] + " (" + this.intToInfinityEnemy(infinityMissionClass.enemy_2)[0] + ")";
-                this.txtInfEnemyLevel.Text = "Enemy Level  +" + (object)infinityMissionClass.enemy_level + " [" + (object)infinityMissionClass.unk_enemy_level_mod + "]";
-                this.txtInfMisSpecial.Text = "Special Effects  " + infinityMissionClass.hex.Substring(12, 20);
-                this.txtInfMisCreatedBy.Text = "Created By  " + infinityMissionClass.createdBy;
-                this.txtInfMisSynthPoint.Text = "Synthesis Points  " + (object)infinityMissionClass.mergePoints;
-                this.grpInfinityMissionDetails.Visible = true;
-                this.grpInfMisExtra.Visible = true;
-                this.grpInfMisSpecial.Visible = true;
-                this.btnExportInfinityMission.Enabled = true;
-                this.btnDeleteInfinityMission.Enabled = true;
-                this.btnModifyInfinityMission.Enabled = true;
+                pspo2seForm.infinityMissionClass infinityMissionClass = saveData.infinityMissions.slot[int.Parse(lstInfinityMissions.SelectedItems[0].Tag.ToString())];
+                txtInfNameEn.Text = intToInfinityBoss(infinityMissionClass.boss - 1)[1] + " @ " + intToInfinityArea(infinityMissionClass.area - 1)[1];
+                txtInfNameJp.Text = intToInfinityArea(infinityMissionClass.area - 1)[0] + "の" + intToInfinityBoss(infinityMissionClass.boss - 1)[0];
+                txtInfMisSpecial.Text = "Area  " + intToInfinityArea(infinityMissionClass.area - 1)[1] + " (" + intToInfinityArea(infinityMissionClass.area - 1)[0] + ")";
+                txtInfMisBoss.Text = "Boss  " + intToInfinityBoss(infinityMissionClass.boss - 1)[1] + " (" + intToInfinityBoss(infinityMissionClass.boss - 1)[0] + ") [" + (object)infinityMissionClass.length + "]";
+                txtInfMisEnemy1.Text = "Main Enemy  " + intToInfinityEnemy(infinityMissionClass.enemy_1)[1] + " (" + intToInfinityEnemy(infinityMissionClass.enemy_1)[0] + ") [" + (object)infinityMissionClass.unk_enemy_1_mod + "]";
+                txtInfMisEnemy2.Text = "Sub Enemy  " + intToInfinityEnemy(infinityMissionClass.enemy_2)[1] + " (" + intToInfinityEnemy(infinityMissionClass.enemy_2)[0] + ")";
+                txtInfEnemyLevel.Text = "Enemy Level  +" + (object)infinityMissionClass.enemy_level + " [" + (object)infinityMissionClass.unk_enemy_level_mod + "]";
+                txtInfMisSpecial.Text = "Special Effects  " + infinityMissionClass.hex.Substring(12, 20);
+                txtInfMisCreatedBy.Text = "Created By  " + infinityMissionClass.createdBy;
+                txtInfMisSynthPoint.Text = "Synthesis Points  " + (object)infinityMissionClass.mergePoints;
+                grpInfinityMissionDetails.Visible = true;
+                grpInfMisExtra.Visible = true;
+                grpInfMisSpecial.Visible = true;
+                btnExportInfinityMission.Enabled = true;
+                btnDeleteInfinityMission.Enabled = true;
+                btnModifyInfinityMission.Enabled = true;
             }
         }
 
         private void btnExportInfinityMission_Click(object sender, EventArgs e)
         {
-            if (this.saveBufferDataToFile(this.mainSettings.saveStructureIndex.infinity_mission_pos + int.Parse(this.lstInfinityMissions.SelectedItems[0].Tag.ToString()) * 104, 104, "PSPo2i Mission File (*pspo2imission)|*pspo2imission", fileNameDefault: this.lstInfinityMissions.SelectedItems[0].Text))
+            if (saveBufferDataToFile(mainSettings.saveStructureIndex.infinity_mission_pos + int.Parse(lstInfinityMissions.SelectedItems[0].Tag.ToString()) * 104, 104, "PSPo2i Mission File (*pspo2imission)|*pspo2imission", fileNameDefault: lstInfinityMissions.SelectedItems[0].Text))
             {
-                int num1 = (int)MessageBox.Show("The mission file was exported successfully.", "Export Successful", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                MessageBox.Show("The mission file was exported successfully.", "Export Successful", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
             else
             {
-                int num2 = (int)MessageBox.Show("The mission file failed to export.", "Export Failed", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                MessageBox.Show("The mission file failed to export.", "Export Failed", MessageBoxButtons.OK, MessageBoxIcon.Hand);
             }
         }
 
         private void btnImportInfinityMission_Click(object sender, EventArgs e)
         {
             string ext_options = "PSPo2i Mission File (*pspo2imission)|*pspo2imission";
-            if (this.saveData.infinityMissions.itemsUsed >= 100)
+            if (saveData.infinityMissions.itemsUsed >= 100)
             {
                 if (MessageBox.Show("You do not have any available infinity mission slots.\n\nDo you want to overwrite the selected slot?", "Max Slots Reached", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel)
                     return;
-                if (this.lstInfinityMissions.SelectedItems.Count <= 0)
+                if (lstInfinityMissions.SelectedItems.Count <= 0)
                 {
-                    int num = (int)MessageBox.Show("You must select a mission from your list to overwrite.", "Import Failed", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                    MessageBox.Show("You must select a mission from your list to overwrite.", "Import Failed", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                 }
                 else
                 {
-                    if (this.loadFileIntoBuffer(int.Parse(this.lstInfinityMissions.SelectedItems[0].Tag.ToString()) * 104 + this.mainSettings.saveStructureIndex.infinity_mission_pos, ext_options, pspo2seForm.partFileType.infinity_mission, false) <= 0)
+                    if (loadFileIntoBuffer(int.Parse(lstInfinityMissions.SelectedItems[0].Tag.ToString()) * 104 + mainSettings.saveStructureIndex.infinity_mission_pos, ext_options, pspo2seForm.partFileType.infinity_mission, false) <= 0)
                         return;
-                    this.reloadEverything();
+                    reloadEverything();
                 }
             }
             else if (MessageBox.Show("Do you want to import a mission or multiple missions into available slots?", "Confirm Import", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
             {
-                int num = this.loadFileIntoBuffer(this.saveData.infinityMissions.itemsUsed * 104 + this.mainSettings.saveStructureIndex.infinity_mission_pos, ext_options, pspo2seForm.partFileType.infinity_mission, true);
+                int num = loadFileIntoBuffer(saveData.infinityMissions.itemsUsed * 104 + mainSettings.saveStructureIndex.infinity_mission_pos, ext_options, pspo2seForm.partFileType.infinity_mission, true);
                 if (num <= 0)
                     return;
-                this.saveData.infinityMissions.itemsUsed += num;
-                string hex = this.saveData.infinityMissions.itemsUsed.ToString("X1");
+                saveData.infinityMissions.itemsUsed += num;
+                string hex = saveData.infinityMissions.itemsUsed.ToString("X1");
                 while (hex.Length < 2)
                     hex = "0" + hex;
-                this.overwriteHexInBuffer(hex, this.mainSettings.saveStructureIndex.infinity_mission_pos + 10400);
-                this.reloadEverything();
+                overwriteHexInBuffer(hex, mainSettings.saveStructureIndex.infinity_mission_pos + 10400);
+                reloadEverything();
             }
             else
             {
                 if (MessageBox.Show("Do you want to overwrite the selected slot?", "Confirm Import", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) != DialogResult.OK)
                     return;
-                if (this.lstInfinityMissions.SelectedItems.Count <= 0)
+                if (lstInfinityMissions.SelectedItems.Count <= 0)
                 {
-                    int num = (int)MessageBox.Show("You must select a mission from your list to overwrite.", "Import Failed", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                    MessageBox.Show("You must select a mission from your list to overwrite.", "Import Failed", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                 }
                 else
                 {
-                    if (this.loadFileIntoBuffer(int.Parse(this.lstInfinityMissions.SelectedItems[0].Tag.ToString()) * 104 + this.mainSettings.saveStructureIndex.infinity_mission_pos, ext_options, pspo2seForm.partFileType.infinity_mission, false) <= 0)
+                    if (loadFileIntoBuffer(int.Parse(lstInfinityMissions.SelectedItems[0].Tag.ToString()) * 104 + mainSettings.saveStructureIndex.infinity_mission_pos, ext_options, pspo2seForm.partFileType.infinity_mission, false) <= 0)
                         return;
-                    this.reloadEverything();
+                    reloadEverything();
                 }
             }
         }
@@ -2245,133 +2245,133 @@ namespace pspo2seSaveEditorProgram
         {
             if (MessageBox.Show("Are you sure you want to delete the last mission in the list?", "Confirm Delete", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) != DialogResult.OK)
                 return;
-            int num = this.saveData.infinityMissions.itemsUsed * 104 + this.mainSettings.saveStructureIndex.infinity_mission_pos;
-            --this.saveData.infinityMissions.itemsUsed;
-            string hex = this.saveData.infinityMissions.itemsUsed.ToString("X1");
+            int num = saveData.infinityMissions.itemsUsed * 104 + mainSettings.saveStructureIndex.infinity_mission_pos;
+            --saveData.infinityMissions.itemsUsed;
+            string hex = saveData.infinityMissions.itemsUsed.ToString("X1");
             while (hex.Length < 2)
                 hex = "0" + hex;
-            this.overwriteHexInBuffer(hex, this.mainSettings.saveStructureIndex.infinity_mission_pos + 10400);
-            this.overwriteHexInBuffer("1198040121012040800001020100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000", this.mainSettings.saveStructureIndex.infinity_mission_pos + 104 * this.saveData.infinityMissions.itemsUsed);
-            this.txtInfinityMissionQty.Text = this.saveData.infinityMissions.itemsUsed.ToString() + "/100";
-            this.lstInfinityMissions.Items[this.lstInfinityMissions.Items.Count - 1].Remove();
+            overwriteHexInBuffer(hex, mainSettings.saveStructureIndex.infinity_mission_pos + 10400);
+            overwriteHexInBuffer("1198040121012040800001020100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000", mainSettings.saveStructureIndex.infinity_mission_pos + 104 * saveData.infinityMissions.itemsUsed);
+            txtInfinityMissionQty.Text = saveData.infinityMissions.itemsUsed.ToString() + "/100";
+            lstInfinityMissions.Items[lstInfinityMissions.Items.Count - 1].Remove();
         }
 
         private void btnModifyInfinityMission_Click(object sender, EventArgs e)
         {
-            if (this.lstInfinityMissions.SelectedItems.Count <= 0)
+            if (lstInfinityMissions.SelectedItems.Count <= 0)
             {
-                int num1 = (int)MessageBox.Show("You must select a mission from your list to modify.", "Modify Failed", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                MessageBox.Show("You must select a mission from your list to modify.", "Modify Failed", MessageBoxButtons.OK, MessageBoxIcon.Hand);
             }
             else
             {
-                this.infinityMissionForm.id = int.Parse(this.lstInfinityMissions.SelectedItems[0].Tag.ToString());
-                int num2 = (int)this.infinityMissionForm.ShowDialog((IWin32Window)this);
+                infinityMissionForm.id = int.Parse(lstInfinityMissions.SelectedItems[0].Tag.ToString());
+                int num2 = (int)infinityMissionForm.ShowDialog((IWin32Window)this);
             }
         }
 
         private void changeItemSpecial(TabPage page)
         {
-            if (this.legitVersion())
+            if (legitVersion())
                 return;
-            pspo2seForm.inventoryItemClass inventoryItemClass = page != this.tabPageStorage ? this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].inventory.item[int.Parse(this.inventoryView.SelectedItems[0].SubItems[1].Text)] : this.saveData.sharedInventory.item[int.Parse(this.storageView.SelectedItems[0].SubItems[1].Text)];
-            this.entryForm.newVal = ((int)inventoryItemClass.ability).ToString();
+            pspo2seForm.inventoryItemClass inventoryItemClass = page != tabPageStorage ? saveData.slot[lstSaveSlotView.SelectedItems[0].Index].inventory.item[int.Parse(inventoryView.SelectedItems[0].SubItems[1].Text)] : saveData.sharedInventory.item[int.Parse(storageView.SelectedItems[0].SubItems[1].Text)];
+            entryForm.newVal = ((int)inventoryItemClass.ability).ToString();
             if (inventoryItemClass.style == pspo2seForm.weaponStyleType.Tech)
             {
-                this.entryForm.description = "TEC ability";
-                this.entryForm.oldVal = (inventoryItemClass.ability + 21).ToString();
+                entryForm.description = "TEC ability";
+                entryForm.oldVal = (inventoryItemClass.ability + 21).ToString();
             }
             else
             {
-                this.entryForm.description = "ability";
-                this.entryForm.oldVal = inventoryItemClass.ability.ToString();
+                entryForm.description = "ability";
+                entryForm.oldVal = inventoryItemClass.ability.ToString();
             }
-            this.entryForm.maxLen = 1;
-            if (this.entryForm.ShowDialog((IWin32Window)this) != DialogResult.OK)
+            entryForm.maxLen = 1;
+            if (entryForm.ShowDialog((IWin32Window)this) != DialogResult.OK)
                 return;
-            string newVal = this.entryForm.newVal;
+            string newVal = entryForm.newVal;
             if (!(newVal != ((int)inventoryItemClass.ability).ToString()))
                 return;
             if (int.Parse(newVal) >= 21 || inventoryItemClass.style == pspo2seForm.weaponStyleType.Tech && int.Parse(newVal) >= 8)
             {
-                int num1 = (int)MessageBox.Show("You must enter a value lower than " + (object)8 + " for TEC weapons and " + (object)10 + " for all others.");
+                MessageBox.Show("You must enter a value lower than " + (object)8 + " for TEC weapons and " + (object)10 + " for all others.");
             }
             else if (int.Parse(newVal) < 0)
             {
-                int num2 = (int)MessageBox.Show("You must enter a value greater or equal to 0.");
+                MessageBox.Show("You must enter a value greater or equal to 0.");
             }
             else
             {
                 string hex = int.Parse(newVal).ToString("X1");
                 while (hex.Length < 2)
                     hex = "0" + hex;
-                this.overwriteHexInBuffer(hex, inventoryItemClass.id + 8);
+                overwriteHexInBuffer(hex, inventoryItemClass.id + 8);
                 inventoryItemClass.ability = (pspo2seForm.abilityType)int.Parse(newVal);
-                this.getPageFields(page);
-                this.showSelectedInventoryItem(page);
+                getPageFields(page);
+                showSelectedInventoryItem(page);
             }
         }
 
-        private void txtInventorySpecial_Click(object sender, EventArgs e) => this.changeItemSpecial(this.tabPageInventory);
+        private void txtInventorySpecial_Click(object sender, EventArgs e) => changeItemSpecial(tabPageInventory);
 
-        private void txtStorageSpecial_Click(object sender, EventArgs e) => this.changeItemSpecial(this.tabPageStorage);
+        private void txtStorageSpecial_Click(object sender, EventArgs e) => changeItemSpecial(tabPageStorage);
 
         private void btnImportMissions_Click(object sender, EventArgs e)
         {
             string ext_options = "PSPo2i Mission Pack File (*pspo2imissions)|*pspo2imissions";
-            if (MessageBox.Show("Are you sure you want to import missions overwriting all of the current missions?", "Confirm Overwrite", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel || this.loadFileIntoBuffer(290888, ext_options, pspo2seForm.partFileType.infinity_mission_pack, false) <= 0)
+            if (MessageBox.Show("Are you sure you want to import missions overwriting all of the current missions?", "Confirm Overwrite", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel || loadFileIntoBuffer(290888, ext_options, pspo2seForm.partFileType.infinity_mission_pack, false) <= 0)
                 return;
-            this.reloadEverything();
+            reloadEverything();
         }
 
         private void btnExportMissions_Click(object sender, EventArgs e)
         {
-            if (this.saveBufferDataToFile(290888, 10401, "PSPo2i Mission Pack File (*pspo2imissions)|*pspo2imissions", fileNameDefault: "Pspo2 Infinity Mission Pack"))
+            if (saveBufferDataToFile(290888, 10401, "PSPo2i Mission Pack File (*pspo2imissions)|*pspo2imissions", fileNameDefault: "Pspo2 Infinity Mission Pack"))
             {
-                int num1 = (int)MessageBox.Show("The mission pack file was exported successfully.", "Export Successful", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                MessageBox.Show("The mission pack file was exported successfully.", "Export Successful", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
             else
             {
-                int num2 = (int)MessageBox.Show("The mission pack file failed to export.", "Export Failed", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                MessageBox.Show("The mission pack file failed to export.", "Export Failed", MessageBoxButtons.OK, MessageBoxIcon.Hand);
             }
         }
 
         private void txtAllowQuitMission_Click(object sender, EventArgs e)
         {
-            if (this.legitVersion())
+            if (legitVersion())
                 return;
-            if (this.txtAllowQuitMission.Text == "Yes")
+            if (txtAllowQuitMission.Text == "Yes")
             {
-                int num1 = (int)MessageBox.Show("You can already quit missions.", "Already Unlocked", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                MessageBox.Show("You can already quit missions.", "Already Unlocked", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
             else
             {
                 if (MessageBox.Show("Are you sure you want enable quiting missions?", "Confirm Unlock", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel)
                     return;
-                int num2 = this.mainSettings.saveStructureIndex.header_size + this.mainSettings.saveStructureIndex.slot_size * this.lstSaveSlotView.SelectedItems[0].Index;
-                this.overwriteHexInBuffer("FF", this.saveData.type != pspo2seForm.SaveType.PSP2I ? num2 + 4441 : num2 + 4517);
-                this.txtAllowQuitMission.Text = "Yes";
-                this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].allow_quit_missions = "FF";
-                int num3 = (int)MessageBox.Show("The quit mission function was unlocked successfully.", "Unlock Complete", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                int num2 = mainSettings.saveStructureIndex.header_size + mainSettings.saveStructureIndex.slot_size * lstSaveSlotView.SelectedItems[0].Index;
+                overwriteHexInBuffer("FF", saveData.type != pspo2seForm.SaveType.PSP2I ? num2 + 4441 : num2 + 4517);
+                txtAllowQuitMission.Text = "Yes";
+                saveData.slot[lstSaveSlotView.SelectedItems[0].Index].allow_quit_missions = "FF";
+                MessageBox.Show("The quit mission function was unlocked successfully.", "Unlock Complete", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
         }
 
         private void showGameImage()
         {
-            switch (this.saveData.type)
+            switch (saveData.type)
             {
                 case pspo2seForm.SaveType.PSP2:
-                    this.imgSave.Image = (Image)Resources.PSP2;
-                    this.imgGameLogo.Image = (Image)Resources.PSP2_logo;
-                    this.imgSave.Show();
+                    imgSave.Image = (Image)Resources.PSP2;
+                    imgGameLogo.Image = (Image)Resources.PSP2_logo;
+                    imgSave.Show();
                     break;
                 case pspo2seForm.SaveType.PSP2I:
-                    this.imgSave.Image = (Image)Resources.PSP2i;
-                    this.imgGameLogo.Image = (Image)Resources.PSP2i_logo;
-                    this.imgSave.Show();
+                    imgSave.Image = (Image)Resources.PSP2i;
+                    imgGameLogo.Image = (Image)Resources.PSP2i_logo;
+                    imgSave.Show();
                     break;
                 default:
-                    this.imgGameLogo.Image = (Image)Resources.PSP2_logo;
-                    this.imgSave.Hide();
+                    imgGameLogo.Image = (Image)Resources.PSP2_logo;
+                    imgSave.Hide();
                     break;
             }
         }
@@ -2391,76 +2391,76 @@ namespace pspo2seSaveEditorProgram
             }
             for (int index = 0; index < 256; ++index)
             {
-                if (this.saveData.slot[slotnum].pa.items[index] != null && this.saveData.slot[slotnum].pa.items[index].hex != null && this.saveData.slot[slotnum].pa.items[index].hex == hex)
-                    return this.saveData.slot[slotnum].pa.items[index].level;
+                if (saveData.slot[slotnum].pa.items[index] != null && saveData.slot[slotnum].pa.items[index].hex != null && saveData.slot[slotnum].pa.items[index].hex == hex)
+                    return saveData.slot[slotnum].pa.items[index].level;
             }
             return "LV0";
         }
 
-        private string storyCompleteToText(bool ep1_complete, bool ep2_complete) => ep1_complete ? (this.saveData.type == pspo2seForm.SaveType.PSP2 || ep2_complete ? "Game Complete" : "Ep 1 Complete") : (ep2_complete ? "Ep 2 Complete" : "");
+        private string storyCompleteToText(bool ep1_complete, bool ep2_complete) => ep1_complete ? (saveData.type == pspo2seForm.SaveType.PSP2 || ep2_complete ? "Game Complete" : "Ep 1 Complete") : (ep2_complete ? "Ep 2 Complete" : "");
 
         private void displayCharacterInfo(int slotnum)
         {
-            if (this.saveData.slot[slotnum].name != "")
-                this.txtSlotnumloaded.Text = "Save Slot #" + (object)(slotnum + 1) + " Loaded";
+            if (saveData.slot[slotnum].name != "")
+                txtSlotnumloaded.Text = "Save Slot #" + (object)(slotnum + 1) + " Loaded";
             else
-                this.txtSlotnumloaded.Text = "No Save Slot Loaded";
-            this.txtCharacterName.Text = this.saveData.slot[slotnum].name;
-            this.txtTitle.Text = this.saveData.slot[slotnum].title;
-            this.txtPlaytime.Text = this.saveData.slot[slotnum].playtime;
-            this.txtCurType.Text = string.Concat((object)this.saveData.slot[slotnum].cur_type);
-            this.txtRace.Text = string.Concat((object)this.saveData.slot[slotnum].race);
-            this.txtSex.Text = string.Concat((object)this.saveData.slot[slotnum].sex);
-            this.txtLevel.Text = string.Concat((object)this.saveData.slot[slotnum].level);
-            this.txtExp.Text = string.Concat((object)this.saveData.slot[slotnum].exp);
-            this.txtExpNext.Text = string.Concat((object)this.saveData.slot[slotnum].exp_next);
-            this.txtLevelExpBar.Width = this.saveData.slot[slotnum].exp_percent * 2;
-            this.txtInventoryMeseta.Text = string.Concat((object)this.saveData.slot[slotnum].meseta);
-            this.txtStoryComplete.Text = this.storyCompleteToText(this.saveData.slot[slotnum].story_ep_1_complete, this.saveData.slot[slotnum].story_ep_2_complete);
-            this.txtStoryComplete.Visible = true;
-            this.txtSkipEp1Start.Text = "No";
-            if (this.saveData.slot[slotnum].skip_ep_1_start)
-                this.txtSkipEp1Start.Text = "Yes";
-            if (this.saveData.type == pspo2seForm.SaveType.PSP2I)
+                txtSlotnumloaded.Text = "No Save Slot Loaded";
+            txtCharacterName.Text = saveData.slot[slotnum].name;
+            txtTitle.Text = saveData.slot[slotnum].title;
+            txtPlaytime.Text = saveData.slot[slotnum].playtime;
+            txtCurType.Text = string.Concat((object)saveData.slot[slotnum].cur_type);
+            txtRace.Text = string.Concat((object)saveData.slot[slotnum].race);
+            txtSex.Text = string.Concat((object)saveData.slot[slotnum].sex);
+            txtLevel.Text = string.Concat((object)saveData.slot[slotnum].level);
+            txtExp.Text = string.Concat((object)saveData.slot[slotnum].exp);
+            txtExpNext.Text = string.Concat((object)saveData.slot[slotnum].exp_next);
+            txtLevelExpBar.Width = saveData.slot[slotnum].exp_percent * 2;
+            txtInventoryMeseta.Text = string.Concat((object)saveData.slot[slotnum].meseta);
+            txtStoryComplete.Text = storyCompleteToText(saveData.slot[slotnum].story_ep_1_complete, saveData.slot[slotnum].story_ep_2_complete);
+            txtStoryComplete.Visible = true;
+            txtSkipEp1Start.Text = "No";
+            if (saveData.slot[slotnum].skip_ep_1_start)
+                txtSkipEp1Start.Text = "Yes";
+            if (saveData.type == pspo2seForm.SaveType.PSP2I)
             {
-                this.txtSkipEp2Start.Text = "No";
-                if (this.saveData.slot[slotnum].skip_ep_2_start)
-                    this.txtSkipEp2Start.Text = "Yes";
+                txtSkipEp2Start.Text = "No";
+                if (saveData.slot[slotnum].skip_ep_2_start)
+                    txtSkipEp2Start.Text = "Yes";
             }
-            this.txtMissionEp1.Text = "No";
-            this.txtMissionTactical.Text = "No";
-            this.txtMissionEp2.Text = "No";
-            this.txtMissionMagashi.Text = "No";
-            this.txtEp1Complete.Text = "No";
-            this.txtEp2Complete.Text = "No";
-            this.txtAllowQuitMission.Text = "No";
-            if (this.saveData.slot[slotnum].mission_unlock_ep1)
-                this.txtMissionEp1.Text = "Yes";
-            if (this.saveData.slot[slotnum].mission_unlock_unknown)
-                this.txtMissionTactical.Text = "Yes";
-            if (this.saveData.slot[slotnum].mission_unlock_ep2)
-                this.txtMissionEp2.Text = "Yes";
-            if (this.saveData.slot[slotnum].mission_unlock_magashi)
-                this.txtMissionMagashi.Text = "Yes";
-            if (this.saveData.slot[slotnum].story_ep_1_complete)
-                this.txtEp1Complete.Text = "Yes";
-            if (this.saveData.slot[slotnum].story_ep_2_complete)
-                this.txtEp2Complete.Text = "Yes";
-            if (this.saveData.slot[slotnum].allow_quit_missions == "FF")
-                this.txtAllowQuitMission.Text = "Yes";
-            this.txtStoryEmiliaPoints.Visible = true;
-            if (this.saveData.slot[slotnum].story_ep_1_points != null)
-                this.txtStoryEmiliaPoints.Text = this.run.hexAndMathFunction.hexToInt(this.saveData.slot[slotnum].story_ep_1_points).ToString() + " Emilia Points";
-            if (this.saveData.slot[slotnum].story_ep_2_points != null)
+            txtMissionEp1.Text = "No";
+            txtMissionTactical.Text = "No";
+            txtMissionEp2.Text = "No";
+            txtMissionMagashi.Text = "No";
+            txtEp1Complete.Text = "No";
+            txtEp2Complete.Text = "No";
+            txtAllowQuitMission.Text = "No";
+            if (saveData.slot[slotnum].mission_unlock_ep1)
+                txtMissionEp1.Text = "Yes";
+            if (saveData.slot[slotnum].mission_unlock_unknown)
+                txtMissionTactical.Text = "Yes";
+            if (saveData.slot[slotnum].mission_unlock_ep2)
+                txtMissionEp2.Text = "Yes";
+            if (saveData.slot[slotnum].mission_unlock_magashi)
+                txtMissionMagashi.Text = "Yes";
+            if (saveData.slot[slotnum].story_ep_1_complete)
+                txtEp1Complete.Text = "Yes";
+            if (saveData.slot[slotnum].story_ep_2_complete)
+                txtEp2Complete.Text = "Yes";
+            if (saveData.slot[slotnum].allow_quit_missions == "FF")
+                txtAllowQuitMission.Text = "Yes";
+            txtStoryEmiliaPoints.Visible = true;
+            if (saveData.slot[slotnum].story_ep_1_points != null)
+                txtStoryEmiliaPoints.Text = run.hexAndMathFunction.hexToInt(saveData.slot[slotnum].story_ep_1_points).ToString() + " Emilia Points";
+            if (saveData.slot[slotnum].story_ep_2_points != null)
             {
-                this.txtStoryNagisaPoints.Text = this.run.hexAndMathFunction.hexToInt(this.saveData.slot[slotnum].story_ep_2_points).ToString() + " Nagisa Points";
-                this.txtStoryNagisaPoints.Visible = true;
+                txtStoryNagisaPoints.Text = run.hexAndMathFunction.hexToInt(saveData.slot[slotnum].story_ep_2_points).ToString() + " Nagisa Points";
+                txtStoryNagisaPoints.Visible = true;
             }
             else
-                this.txtStoryNagisaPoints.Visible = false;
+                txtStoryNagisaPoints.Visible = false;
         }
 
-        private int getRebirthNowPointGain(int level) => this.findRebirthBpInfoInDb(level).exp;
+        private int getRebirthNowPointGain(int level) => findRebirthBpInfoInDb(level).exp;
 
         private int getRebirthNowTypeLevelGain(int level)
         {
@@ -2475,7 +2475,7 @@ namespace pspo2seSaveEditorProgram
             return level >= 100 ? 5 : 1;
         }
 
-        private void addRebirthReward(string str, Color col) => this.lstRebirthRewards.Items.Add(new ListViewItem()
+        private void addRebirthReward(string str, Color col) => lstRebirthRewards.Items.Add(new ListViewItem()
         {
             Text = str,
             ForeColor = col
@@ -2483,107 +2483,107 @@ namespace pspo2seSaveEditorProgram
 
         private void listRebirthRewards(int level, int slot)
         {
-            if (this.chkRebirthSpoof.Checked)
+            if (chkRebirthSpoof.Checked)
                 level = 200;
-            this.comboRebirthExtend.Items.Clear();
-            this.lstRebirthRewards.Items.Clear();
+            comboRebirthExtend.Items.Clear();
+            lstRebirthRewards.Items.Clear();
             if (level < 50)
             {
-                this.addRebirthReward("Rebirth Not Available.", Color.DarkGray);
-                this.addRebirthReward("Next Rebirth in " + (object)(50 - level) + " Levels.", Color.DarkGray);
-                this.btnRebirth.Enabled = false;
-                this.comboRebirthExtend.Enabled = false;
+                addRebirthReward("Rebirth Not Available.", Color.DarkGray);
+                addRebirthReward("Next Rebirth in " + (object)(50 - level) + " Levels.", Color.DarkGray);
+                btnRebirth.Enabled = false;
+                comboRebirthExtend.Enabled = false;
             }
             else
             {
-                this.btnRebirth.Enabled = true;
-                this.comboRebirthExtend.Enabled = true;
+                btnRebirth.Enabled = true;
+                comboRebirthExtend.Enabled = true;
                 int num1 = 0;
-                this.comboRebirthExtend.Items.Add((object)("Claim " + (object)this.getRebirthNowPointGain(level) + " bonus points and 0 extend codes."));
-                for (int index = 0; index < this.saveData.slot[slot].rebirth.remaining_points + this.getRebirthNowPointGain(level); index += 5)
+                comboRebirthExtend.Items.Add((object)("Claim " + (object)getRebirthNowPointGain(level) + " bonus points and 0 extend codes."));
+                for (int index = 0; index < saveData.slot[slot].rebirth.remaining_points + getRebirthNowPointGain(level); index += 5)
                 {
                     ++num1;
                     if (num1 == 1)
-                        this.comboRebirthExtend.Items.Add((object)("Claim " + (object)(this.getRebirthNowPointGain(level) - 5 * num1) + " bonus points and " + (object)num1 + " extend code."));
+                        comboRebirthExtend.Items.Add((object)("Claim " + (object)(getRebirthNowPointGain(level) - 5 * num1) + " bonus points and " + (object)num1 + " extend code."));
                     else
-                        this.comboRebirthExtend.Items.Add((object)("Claim " + (object)(this.getRebirthNowPointGain(level) - 5 * num1) + " bonus points and " + (object)num1 + " extend codes."));
+                        comboRebirthExtend.Items.Add((object)("Claim " + (object)(getRebirthNowPointGain(level) - 5 * num1) + " bonus points and " + (object)num1 + " extend codes."));
                     if (num1 == 10)
                         break;
                 }
-                this.comboRebirthExtend.SelectedIndex = 0;
-                this.addRebirthReward("Up to " + (object)num1 + " extend codes.", Color.DarkGreen);
-                this.addRebirthReward("Up to " + (object)this.getRebirthNowPointGain(level) + " bonus points.", Color.DarkGreen);
-                if (30 + this.saveData.slot[slot].rebirth.additionalTypeLevels >= 50)
+                comboRebirthExtend.SelectedIndex = 0;
+                addRebirthReward("Up to " + (object)num1 + " extend codes.", Color.DarkGreen);
+                addRebirthReward("Up to " + (object)getRebirthNowPointGain(level) + " bonus points.", Color.DarkGreen);
+                if (30 + saveData.slot[slot].rebirth.additionalTypeLevels >= 50)
                     return;
-                int num2 = 30 + this.saveData.slot[slot].rebirth.additionalTypeLevels + this.getRebirthNowTypeLevelGain(level);
+                int num2 = 30 + saveData.slot[slot].rebirth.additionalTypeLevels + getRebirthNowTypeLevelGain(level);
                 if (num2 > 50)
                     num2 = 50;
-                this.addRebirthReward("Maximum type level " + (object)num2 + ".", Color.DarkGreen);
+                addRebirthReward("Maximum type level " + (object)num2 + ".", Color.DarkGreen);
             }
         }
 
         private void displayTypePage(int slotnum, pspo2seForm.jobType i)
         {
             bool flag = false;
-            if (this.saveData.slot[slotnum].job[(int)i].level >= 30 + this.saveData.slot[slotnum].rebirth.additionalTypeLevels)
+            if (saveData.slot[slotnum].job[(int)i].level >= 30 + saveData.slot[slotnum].rebirth.additionalTypeLevels)
                 flag = true;
             if (flag)
             {
-                this.saveData.slot[slotnum].job[(int)i].exp_to_next = 0;
-                this.saveData.slot[slotnum].job[(int)i].exp_next = this.saveData.slot[slotnum].job[(int)i].exp;
-                this.saveData.slot[slotnum].job[(int)i].exp_percent = 100;
+                saveData.slot[slotnum].job[(int)i].exp_to_next = 0;
+                saveData.slot[slotnum].job[(int)i].exp_next = saveData.slot[slotnum].job[(int)i].exp;
+                saveData.slot[slotnum].job[(int)i].exp_percent = 100;
             }
             else
             {
                 pspo2seForm.expDb_ItemClass expDbItemClass = new pspo2seForm.expDb_ItemClass();
-                pspo2seForm.expDb_ItemClass expTypeInfoInDb = this.findExpTypeInfoInDb(this.saveData.slot[slotnum].job[(int)i].level);
+                pspo2seForm.expDb_ItemClass expTypeInfoInDb = findExpTypeInfoInDb(saveData.slot[slotnum].job[(int)i].level);
                 if (expTypeInfoInDb == null)
                 {
-                    int num = (int)MessageBox.Show("could not find typeexp for type level " + (object)this.saveData.slot[slotnum].job[(int)i].level);
+                    MessageBox.Show("could not find typeexp for type level " + (object)saveData.slot[slotnum].job[(int)i].level);
                 }
-                this.saveData.slot[slotnum].job[(int)i].exp_to_next = expTypeInfoInDb.exp + expTypeInfoInDb.exp_next - this.saveData.slot[slotnum].job[(int)i].exp;
-                this.saveData.slot[slotnum].job[(int)i].exp_next = expTypeInfoInDb.exp + expTypeInfoInDb.exp_next;
-                this.saveData.slot[slotnum].job[(int)i].exp_percent = expTypeInfoInDb.exp_next != 0 ? this.run.hexAndMathFunction.getPercentage(this.saveData.slot[slotnum].job[(int)i].exp - expTypeInfoInDb.exp, expTypeInfoInDb.exp_next) : 100;
+                saveData.slot[slotnum].job[(int)i].exp_to_next = expTypeInfoInDb.exp + expTypeInfoInDb.exp_next - saveData.slot[slotnum].job[(int)i].exp;
+                saveData.slot[slotnum].job[(int)i].exp_next = expTypeInfoInDb.exp + expTypeInfoInDb.exp_next;
+                saveData.slot[slotnum].job[(int)i].exp_percent = expTypeInfoInDb.exp_next != 0 ? run.hexAndMathFunction.getPercentage(saveData.slot[slotnum].job[(int)i].exp - expTypeInfoInDb.exp, expTypeInfoInDb.exp_next) : 100;
             }
             pspo2seForm.typeSectionFields typeSectionFields1 = new pspo2seForm.typeSectionFields();
             TabPage page = new TabPage();
             switch (i)
             {
                 case pspo2seForm.jobType.Hunter:
-                    page = this.tabPageHunter;
+                    page = tabPageHunter;
                     break;
                 case pspo2seForm.jobType.Ranger:
-                    page = this.tabPageRanger;
+                    page = tabPageRanger;
                     break;
                 case pspo2seForm.jobType.Force:
-                    page = this.tabPageForce;
+                    page = tabPageForce;
                     break;
                 case pspo2seForm.jobType.Vanguard:
-                    page = this.tabPageVanguard;
+                    page = tabPageVanguard;
                     break;
                 default:
-                    int num1 = (int)MessageBox.Show("jobType " + (object)i + " not handled in displayTypePage", "Fatal Error!");
+                    MessageBox.Show("jobType " + (object)i + " not handled in displayTypePage", "Fatal Error!");
                     break;
             }
             string str = page.Name.Replace("tabPage", "");
-            pspo2seForm.typeSectionFields typeSectionFields2 = this.getTypeSectionFields(page);
-            page.Text = str + " (" + (object)this.saveData.slot[slotnum].job[(int)i].level + ")";
-            typeSectionFields2.txtLevel.Text = string.Concat((object)this.saveData.slot[slotnum].job[(int)i].level);
-            typeSectionFields2.grpExtend.Text = "Type Extend " + (object)this.saveData.slot[slotnum].job[(int)i].extendpointsused + "/" + (object)this.saveData.slot[slotnum].job[(int)i].extendpoints;
-            typeSectionFields2.txtExp.Text = "Next " + (object)this.saveData.slot[slotnum].job[(int)i].exp_to_next;
-            typeSectionFields2.expBar.Width = this.saveData.slot[slotnum].job[(int)i].exp_percent;
-            this.showTypeWeaponExtendImages(this.saveData.slot[slotnum].job[(int)i], page);
+            pspo2seForm.typeSectionFields typeSectionFields2 = getTypeSectionFields(page);
+            page.Text = str + " (" + (object)saveData.slot[slotnum].job[(int)i].level + ")";
+            typeSectionFields2.txtLevel.Text = string.Concat((object)saveData.slot[slotnum].job[(int)i].level);
+            typeSectionFields2.grpExtend.Text = "Type Extend " + (object)saveData.slot[slotnum].job[(int)i].extendpointsused + "/" + (object)saveData.slot[slotnum].job[(int)i].extendpoints;
+            typeSectionFields2.txtExp.Text = "Next " + (object)saveData.slot[slotnum].job[(int)i].exp_to_next;
+            typeSectionFields2.expBar.Width = saveData.slot[slotnum].job[(int)i].exp_percent;
+            showTypeWeaponExtendImages(saveData.slot[slotnum].job[(int)i], page);
         }
 
         private void displayTypeInfo(int slotnum)
         {
             for (int index = 0; index < 4; ++index)
-                this.displayTypePage(slotnum, (pspo2seForm.jobType)index);
+                displayTypePage(slotnum, (pspo2seForm.jobType)index);
         }
 
         private void showTypeWeaponExtendImages(pspo2seForm.jobClass type, TabPage page)
         {
-            pspo2seForm.typeWeaponRankFields weaponExtendFields = this.getTypeWeaponExtendFields(page);
+            pspo2seForm.typeWeaponRankFields weaponExtendFields = getTypeWeaponExtendFields(page);
             for (int index = 1; index <= 28; ++index)
             {
                 switch (type.weapons_extended[index])
@@ -2618,12 +2618,12 @@ namespace pspo2seSaveEditorProgram
 
         private void displaySlotInfo(int slotnum)
         {
-            if (this.saveData.type == pspo2seForm.SaveType.PSP2I)
+            if (saveData.type == pspo2seForm.SaveType.PSP2I)
             {
                 bool flag1 = true;
-                foreach (TabPage tabPage in this.tabControlMissions.TabPages)
+                foreach (TabPage tabPage in tabControlMissions.TabPages)
                 {
-                    if (tabPage == this.tabEp2Missions)
+                    if (tabPage == tabEp2Missions)
                     {
                         flag1 = false;
                         break;
@@ -2631,27 +2631,27 @@ namespace pspo2seSaveEditorProgram
                 }
                 if (flag1)
                 {
-                    this.tabControlMissions.TabPages.Add(this.tabEp2Missions);
-                    this.tabControlMissions.TabPages.Add(this.tabPageInfinityMission);
+                    tabControlMissions.TabPages.Add(tabEp2Missions);
+                    tabControlMissions.TabPages.Add(tabPageInfinityMission);
                 }
                 bool flag2 = true;
-                foreach (TabPage tabPage in this.tabArea.TabPages)
+                foreach (TabPage tabPage in tabArea.TabPages)
                 {
-                    if (tabPage == this.tabPageRebirth)
+                    if (tabPage == tabPageRebirth)
                     {
                         flag2 = false;
                         break;
                     }
                 }
                 if (flag2)
-                    this.tabArea.TabPages.Add(this.tabPageRebirth);
+                    tabArea.TabPages.Add(tabPageRebirth);
             }
             else
             {
                 bool flag1 = false;
-                foreach (TabPage tabPage in this.tabControlMissions.TabPages)
+                foreach (TabPage tabPage in tabControlMissions.TabPages)
                 {
-                    if (tabPage == this.tabEp2Missions)
+                    if (tabPage == tabEp2Missions)
                     {
                         flag1 = true;
                         break;
@@ -2659,43 +2659,43 @@ namespace pspo2seSaveEditorProgram
                 }
                 if (flag1)
                 {
-                    this.tabControlMissions.TabPages.Remove(this.tabEp2Missions);
-                    this.tabControlMissions.TabPages.Remove(this.tabPageInfinityMission);
+                    tabControlMissions.TabPages.Remove(tabEp2Missions);
+                    tabControlMissions.TabPages.Remove(tabPageInfinityMission);
                 }
                 bool flag2 = false;
-                foreach (TabPage tabPage in this.tabArea.TabPages)
+                foreach (TabPage tabPage in tabArea.TabPages)
                 {
-                    if (tabPage == this.tabPageRebirth)
+                    if (tabPage == tabPageRebirth)
                     {
                         flag2 = true;
                         break;
                     }
                 }
                 if (flag2)
-                    this.tabArea.TabPages.Remove(this.tabPageRebirth);
+                    tabArea.TabPages.Remove(tabPageRebirth);
             }
-            this.displayCharacterInfo(slotnum);
-            this.displayRebirthInfo(slotnum);
-            this.displayTypeInfo(slotnum);
-            this.displayInventory(slotnum, 1);
-            this.displaySharedStorage(1);
-            this.displayPAList(slotnum);
-            this.displayInfinityMissions();
+            displayCharacterInfo(slotnum);
+            displayRebirthInfo(slotnum);
+            displayTypeInfo(slotnum);
+            displayInventory(slotnum, 1);
+            displaySharedStorage(1);
+            displayPAList(slotnum);
+            displayInfinityMissions();
         }
 
         private void displayInfinityMissions()
         {
-            this.lstInfinityMissions.Items.Clear();
-            this.txtInfinityMissionQty.Text = this.saveData.infinityMissions.itemsUsed.ToString() + "/100";
-            for (int index = 0; index < this.saveData.infinityMissions.itemsUsed; ++index)
+            lstInfinityMissions.Items.Clear();
+            txtInfinityMissionQty.Text = saveData.infinityMissions.itemsUsed.ToString() + "/100";
+            for (int index = 0; index < saveData.infinityMissions.itemsUsed; ++index)
             {
                 ListViewItem listViewItem1 = new ListViewItem();
-                listViewItem1.Text = this.intToInfinityBoss(this.saveData.infinityMissions.slot[index].boss - 1)[1] + " @ " + this.intToInfinityArea(this.saveData.infinityMissions.slot[index].area - 1)[1];
+                listViewItem1.Text = intToInfinityBoss(saveData.infinityMissions.slot[index].boss - 1)[1] + " @ " + intToInfinityArea(saveData.infinityMissions.slot[index].area - 1)[1];
                 ListViewItem listViewItem2 = listViewItem1;
-                listViewItem2.Text = listViewItem2.Text + " (" + this.intToInfinityArea(this.saveData.infinityMissions.slot[index].area - 1)[0] + "の" + this.intToInfinityBoss(this.saveData.infinityMissions.slot[index].boss - 1)[0] + ")";
-                listViewItem1.Tag = (object)this.saveData.infinityMissions.slot[index].id;
-                listViewItem1.SubItems.Add("LV" + (object)this.saveData.infinityMissions.slot[index].level);
-                this.lstInfinityMissions.Items.Add(listViewItem1);
+                listViewItem2.Text = listViewItem2.Text + " (" + intToInfinityArea(saveData.infinityMissions.slot[index].area - 1)[0] + "の" + intToInfinityBoss(saveData.infinityMissions.slot[index].boss - 1)[0] + ")";
+                listViewItem1.Tag = (object)saveData.infinityMissions.slot[index].id;
+                listViewItem1.SubItems.Add("LV" + (object)saveData.infinityMissions.slot[index].level);
+                lstInfinityMissions.Items.Add(listViewItem1);
             }
         }
 
@@ -2780,7 +2780,7 @@ namespace pspo2seSaveEditorProgram
             int num1;
             int num2;
             int num3;
-            this.getRebirthValues(statVal, switchFlag, &num1, &num2, &num3);
+            getRebirthValues(statVal, switchFlag, &num1, &num2, &num3);
             statTextBox.Text = "+" + (object)num2;
             bpTextBox.Text = string.Concat((object)num1);
             if (statVal >= 10)
@@ -2788,7 +2788,7 @@ namespace pspo2seSaveEditorProgram
             else
                 nextTextBox.Text = "+" + (object)num3 + "pt";
             nextTextBox.ForeColor = Color.DarkGreen;
-            if (num3 > this.saveData.slot[slot].rebirth.remaining_points || statVal >= 10)
+            if (num3 > saveData.slot[slot].rebirth.remaining_points || statVal >= 10)
                 nextTextBox.ForeColor = Color.DarkRed;
             numBox.Value = (Decimal)statVal;
         }
@@ -2798,291 +2798,291 @@ namespace pspo2seSaveEditorProgram
             int num1;
             int num2;
             int num3;
-            this.getRebirthValues(val, switchFlag, &num1, &num2, &num3);
+            getRebirthValues(val, switchFlag, &num1, &num2, &num3);
             return num1;
         }
 
         private void displayRebirthInfo(int slot)
         {
-            if (this.saveData.type != pspo2seForm.SaveType.PSP2I)
+            if (saveData.type != pspo2seForm.SaveType.PSP2I)
             {
-                this.grpRebirth.Visible = false;
+                grpRebirth.Visible = false;
             }
             else
             {
-                this.grpRebirth.Visible = true;
-                int num = this.saveData.slot[slot].rebirth.remaining_points + this.getRebirthValuePtsUsed(slot, this.saveData.slot[slot].rebirth.hp, "HP") + this.getRebirthValuePtsUsed(slot, this.saveData.slot[slot].rebirth.pp, "PP") + this.getRebirthValuePtsUsed(slot, this.saveData.slot[slot].rebirth.atk, "ATK") + this.getRebirthValuePtsUsed(slot, this.saveData.slot[slot].rebirth.def, "DEF") + this.getRebirthValuePtsUsed(slot, this.saveData.slot[slot].rebirth.acc, "ACC") + this.getRebirthValuePtsUsed(slot, this.saveData.slot[slot].rebirth.eva, "EVA") + this.getRebirthValuePtsUsed(slot, this.saveData.slot[slot].rebirth.tec, "TEC") + this.getRebirthValuePtsUsed(slot, this.saveData.slot[slot].rebirth.mnd, "MND") + this.getRebirthValuePtsUsed(slot, this.saveData.slot[slot].rebirth.sta, "STA");
-                this.txtRebirthCount.Text = this.saveData.slot[slot].rebirth.count.ToString();
-                this.txtRebirthPoints.Text = "BP " + this.saveData.slot[slot].rebirth.remaining_points.ToString() + "/" + (object)num;
-                this.txtRebirthMaxType.Text = string.Concat((object)(30 + this.saveData.slot[slot].rebirth.additionalTypeLevels));
-                this.displayRebirthStatInfo(slot, this.saveData.slot[slot].rebirth.hp, "HP", this.txtRebirthHP, this.txtRebirthBpHP, this.numRebirthHP, this.txtRebirthNextHP);
-                this.displayRebirthStatInfo(slot, this.saveData.slot[slot].rebirth.pp, "PP", this.txtRebirthPP, this.txtRebirthBpPP, this.numRebirthPP, this.txtRebirthNextPP);
-                this.displayRebirthStatInfo(slot, this.saveData.slot[slot].rebirth.atk, "ATK", this.txtRebirthATK, this.txtRebirthBpATK, this.numRebirthATK, this.txtRebirthNextATK);
-                this.displayRebirthStatInfo(slot, this.saveData.slot[slot].rebirth.def, "DEF", this.txtRebirthDEF, this.txtRebirthBpDEF, this.numRebirthDEF, this.txtRebirthNextDEF);
-                this.displayRebirthStatInfo(slot, this.saveData.slot[slot].rebirth.acc, "ACC", this.txtRebirthACC, this.txtRebirthBpACC, this.numRebirthACC, this.txtRebirthNextACC);
-                this.displayRebirthStatInfo(slot, this.saveData.slot[slot].rebirth.eva, "EVA", this.txtRebirthEVA, this.txtRebirthBpEVA, this.numRebirthEVA, this.txtRebirthNextEVA);
-                this.displayRebirthStatInfo(slot, this.saveData.slot[slot].rebirth.tec, "TEC", this.txtRebirthTEC, this.txtRebirthBpTEC, this.numRebirthTEC, this.txtRebirthNextTEC);
-                this.displayRebirthStatInfo(slot, this.saveData.slot[slot].rebirth.mnd, "MND", this.txtRebirthMND, this.txtRebirthBpMND, this.numRebirthMND, this.txtRebirthNextMND);
-                this.displayRebirthStatInfo(slot, this.saveData.slot[slot].rebirth.sta, "STA", this.txtRebirthSTA, this.txtRebirthBpSTA, this.numRebirthSTA, this.txtRebirthNextSTA);
-                this.listRebirthRewards(this.saveData.slot[slot].level, slot);
+                grpRebirth.Visible = true;
+                int num = saveData.slot[slot].rebirth.remaining_points + getRebirthValuePtsUsed(slot, saveData.slot[slot].rebirth.hp, "HP") + getRebirthValuePtsUsed(slot, saveData.slot[slot].rebirth.pp, "PP") + getRebirthValuePtsUsed(slot, saveData.slot[slot].rebirth.atk, "ATK") + getRebirthValuePtsUsed(slot, saveData.slot[slot].rebirth.def, "DEF") + getRebirthValuePtsUsed(slot, saveData.slot[slot].rebirth.acc, "ACC") + getRebirthValuePtsUsed(slot, saveData.slot[slot].rebirth.eva, "EVA") + getRebirthValuePtsUsed(slot, saveData.slot[slot].rebirth.tec, "TEC") + getRebirthValuePtsUsed(slot, saveData.slot[slot].rebirth.mnd, "MND") + getRebirthValuePtsUsed(slot, saveData.slot[slot].rebirth.sta, "STA");
+                txtRebirthCount.Text = saveData.slot[slot].rebirth.count.ToString();
+                txtRebirthPoints.Text = "BP " + saveData.slot[slot].rebirth.remaining_points.ToString() + "/" + (object)num;
+                txtRebirthMaxType.Text = string.Concat((object)(30 + saveData.slot[slot].rebirth.additionalTypeLevels));
+                displayRebirthStatInfo(slot, saveData.slot[slot].rebirth.hp, "HP", txtRebirthHP, txtRebirthBpHP, numRebirthHP, txtRebirthNextHP);
+                displayRebirthStatInfo(slot, saveData.slot[slot].rebirth.pp, "PP", txtRebirthPP, txtRebirthBpPP, numRebirthPP, txtRebirthNextPP);
+                displayRebirthStatInfo(slot, saveData.slot[slot].rebirth.atk, "ATK", txtRebirthATK, txtRebirthBpATK, numRebirthATK, txtRebirthNextATK);
+                displayRebirthStatInfo(slot, saveData.slot[slot].rebirth.def, "DEF", txtRebirthDEF, txtRebirthBpDEF, numRebirthDEF, txtRebirthNextDEF);
+                displayRebirthStatInfo(slot, saveData.slot[slot].rebirth.acc, "ACC", txtRebirthACC, txtRebirthBpACC, numRebirthACC, txtRebirthNextACC);
+                displayRebirthStatInfo(slot, saveData.slot[slot].rebirth.eva, "EVA", txtRebirthEVA, txtRebirthBpEVA, numRebirthEVA, txtRebirthNextEVA);
+                displayRebirthStatInfo(slot, saveData.slot[slot].rebirth.tec, "TEC", txtRebirthTEC, txtRebirthBpTEC, numRebirthTEC, txtRebirthNextTEC);
+                displayRebirthStatInfo(slot, saveData.slot[slot].rebirth.mnd, "MND", txtRebirthMND, txtRebirthBpMND, numRebirthMND, txtRebirthNextMND);
+                displayRebirthStatInfo(slot, saveData.slot[slot].rebirth.sta, "STA", txtRebirthSTA, txtRebirthBpSTA, numRebirthSTA, txtRebirthNextSTA);
+                listRebirthRewards(saveData.slot[slot].level, slot);
             }
         }
 
         private void displayPAList(int slot)
         {
-            this.lstPAMelee.Items.Clear();
-            this.lstPABullets.Items.Clear();
-            this.lstPATechs.Items.Clear();
-            ArrayList arrayList = ArrayList.Adapter((IList)this.saveData.slot[slot].pa.items);
+            lstPAMelee.Items.Clear();
+            lstPABullets.Items.Clear();
+            lstPATechs.Items.Clear();
+            ArrayList arrayList = ArrayList.Adapter((IList)saveData.slot[slot].pa.items);
             arrayList.Sort();
-            this.saveData.slot[slot].pa.items = (pspo2seForm.inventoryItemClass[])arrayList.ToArray(typeof(pspo2seForm.inventoryItemClass));
+            saveData.slot[slot].pa.items = (pspo2seForm.inventoryItemClass[])arrayList.ToArray(typeof(pspo2seForm.inventoryItemClass));
             for (int index = 0; index < 256; ++index)
             {
-                if (!(this.saveData.slot[slot].pa.items[index].hex == ""))
+                if (!(saveData.slot[slot].pa.items[index].hex == ""))
                 {
                     ListViewItem listViewItem = new ListViewItem();
-                    listViewItem.ImageIndex = int.Parse(this.saveData.slot[slot].pa.items[index].hex.Substring(2, 2), NumberStyles.HexNumber) - 1;
-                    if (this.saveData.slot[slot].pa.items[index].hex.Substring(0, 2) == "06")
+                    listViewItem.ImageIndex = int.Parse(saveData.slot[slot].pa.items[index].hex.Substring(2, 2), NumberStyles.HexNumber) - 1;
+                    if (saveData.slot[slot].pa.items[index].hex.Substring(0, 2) == "06")
                         listViewItem.ImageIndex += 28;
                     pspo2seForm.itemDb_ItemClass itemDbItemClass = new pspo2seForm.itemDb_ItemClass();
-                    string hex = this.saveData.slot[slot].pa.items[index].hex_reversed;
-                    if (this.saveData.slot[slot].pa.items[index].hex.Substring(0, 2) == "05")
+                    string hex = saveData.slot[slot].pa.items[index].hex_reversed;
+                    if (saveData.slot[slot].pa.items[index].hex.Substring(0, 2) == "05")
                     {
                         int num = int.Parse(hex.Substring(4, 2), NumberStyles.HexNumber);
                         num -= 13;
                         string str1 = num.ToString("X1");
                         while (str1.Length < 2)
                             str1 = "0" + str1;
-                        num = int.Parse(this.saveData.slot[slot].pa.items[index].hex_reversed.Substring(2, 2), NumberStyles.HexNumber) - 1;
+                        num = int.Parse(saveData.slot[slot].pa.items[index].hex_reversed.Substring(2, 2), NumberStyles.HexNumber) - 1;
                         string str2 = num.ToString("X1");
                         while (str2.Length < 2)
                             str2 = "0" + str2;
-                        hex = this.saveData.slot[slot].pa.items[index].hex_reversed.Substring(0, 2) + str2 + str1 + this.saveData.slot[slot].pa.items[index].hex_reversed.Substring(6, 2);
+                        hex = saveData.slot[slot].pa.items[index].hex_reversed.Substring(0, 2) + str2 + str1 + saveData.slot[slot].pa.items[index].hex_reversed.Substring(6, 2);
                     }
-                    pspo2seForm.itemDb_ItemClass itemInDb = this.findItemInDb(hex);
+                    pspo2seForm.itemDb_ItemClass itemInDb = findItemInDb(hex);
                     listViewItem.Text = itemInDb.name;
                     if (itemInDb.name == "")
                         listViewItem.Text = itemInDb.name_jp;
-                    listViewItem.SubItems.Add(this.saveData.slot[slot].pa.items[index].level);
+                    listViewItem.SubItems.Add(saveData.slot[slot].pa.items[index].level);
                     listViewItem.Tag = (object)index.ToString();
-                    if (this.saveData.slot[slot].pa.items[index].hex.Substring(0, 2) == "04")
-                        this.lstPAMelee.Items.Add(listViewItem);
-                    if (this.saveData.slot[slot].pa.items[index].hex.Substring(0, 2) == "05")
-                        this.lstPABullets.Items.Add(listViewItem);
-                    if (this.saveData.slot[slot].pa.items[index].hex.Substring(0, 2) == "06")
-                        this.lstPATechs.Items.Add(listViewItem);
+                    if (saveData.slot[slot].pa.items[index].hex.Substring(0, 2) == "04")
+                        lstPAMelee.Items.Add(listViewItem);
+                    if (saveData.slot[slot].pa.items[index].hex.Substring(0, 2) == "05")
+                        lstPABullets.Items.Add(listViewItem);
+                    if (saveData.slot[slot].pa.items[index].hex.Substring(0, 2) == "06")
+                        lstPATechs.Items.Add(listViewItem);
                 }
             }
         }
 
         private void updateRebirthBufferVals(int slot)
         {
-            int num = this.mainSettings.saveStructureIndex.header_size + this.mainSettings.saveStructureIndex.slot_size * slot + 438;
+            int num = mainSettings.saveStructureIndex.header_size + mainSettings.saveStructureIndex.slot_size * slot + 438;
             for (int index = 0; index < 12; ++index)
             {
                 string hex = "";
                 switch (index)
                 {
                     case 0:
-                        hex = this.saveData.slot[slot].rebirth.count.ToString("X2");
+                        hex = saveData.slot[slot].rebirth.count.ToString("X2");
                         break;
                     case 1:
-                        hex = this.saveData.slot[slot].rebirth.remaining_points.ToString("X2");
+                        hex = saveData.slot[slot].rebirth.remaining_points.ToString("X2");
                         break;
                     case 2:
-                        hex = this.saveData.slot[slot].rebirth.atk.ToString("X2");
+                        hex = saveData.slot[slot].rebirth.atk.ToString("X2");
                         break;
                     case 3:
-                        hex = this.saveData.slot[slot].rebirth.def.ToString("X2");
+                        hex = saveData.slot[slot].rebirth.def.ToString("X2");
                         break;
                     case 4:
-                        hex = this.saveData.slot[slot].rebirth.acc.ToString("X2");
+                        hex = saveData.slot[slot].rebirth.acc.ToString("X2");
                         break;
                     case 5:
-                        hex = this.saveData.slot[slot].rebirth.eva.ToString("X2");
+                        hex = saveData.slot[slot].rebirth.eva.ToString("X2");
                         break;
                     case 6:
-                        hex = this.saveData.slot[slot].rebirth.sta.ToString("X2");
+                        hex = saveData.slot[slot].rebirth.sta.ToString("X2");
                         break;
                     case 8:
-                        hex = this.saveData.slot[slot].rebirth.tec.ToString("X2");
+                        hex = saveData.slot[slot].rebirth.tec.ToString("X2");
                         break;
                     case 9:
-                        hex = this.saveData.slot[slot].rebirth.mnd.ToString("X2");
+                        hex = saveData.slot[slot].rebirth.mnd.ToString("X2");
                         break;
                     case 10:
-                        hex = this.saveData.slot[slot].rebirth.hp.ToString("X2");
+                        hex = saveData.slot[slot].rebirth.hp.ToString("X2");
                         break;
                     case 11:
-                        hex = this.saveData.slot[slot].rebirth.pp.ToString("X2");
+                        hex = saveData.slot[slot].rebirth.pp.ToString("X2");
                         break;
                 }
                 if (hex != "")
                 {
                     while (hex.Length < 4)
                         hex = "0" + hex;
-                    this.overwriteHexInBuffer(this.run.hexAndMathFunction.reversehex(hex, 4), num + index * 2);
+                    overwriteHexInBuffer(run.hexAndMathFunction.reversehex(hex, 4), num + index * 2);
                 }
             }
         }
 
         private void initSaveBuffer()
         {
-            this.savedata_decimal_array_filled = 0;
-            this.savedata_decimal_array_read_pos = 0;
-            this.saveData = new pspo2seForm.saveDataType();
+            savedata_decimal_array_filled = 0;
+            savedata_decimal_array_read_pos = 0;
+            saveData = new pspo2seForm.saveDataType();
         }
 
         private void initSlotVars()
         {
             for (int index1 = 0; index1 < 8; ++index1)
             {
-                this.saveData.slot[index1] = new pspo2seForm.saveSlotType();
-                this.saveData.slot[index1].used = false;
-                this.saveData.slot[index1].name = "";
-                this.saveData.slot[index1].title = "-";
-                this.saveData.slot[index1].playtime = "00:00:00";
-                this.saveData.slot[index1].race = pspo2seForm.raceTypes.None;
-                this.saveData.slot[index1].sex = pspo2seForm.sexType.None;
-                this.saveData.slot[index1].cur_type = pspo2seForm.jobType.None;
-                this.saveData.slot[index1].level = 0;
-                this.saveData.slot[index1].exp = 0;
-                this.saveData.slot[index1].meseta = 0L;
-                this.saveData.slot[index1].allow_quit_missions = "";
-                this.saveData.slot[index1].story_ep_1_complete = false;
-                this.saveData.slot[index1].story_ep_1_points = "0000";
-                this.saveData.slot[index1].story_ep_1_best_end = "0000";
+                saveData.slot[index1] = new pspo2seForm.saveSlotType();
+                saveData.slot[index1].used = false;
+                saveData.slot[index1].name = "";
+                saveData.slot[index1].title = "-";
+                saveData.slot[index1].playtime = "00:00:00";
+                saveData.slot[index1].race = pspo2seForm.raceTypes.None;
+                saveData.slot[index1].sex = pspo2seForm.sexType.None;
+                saveData.slot[index1].cur_type = pspo2seForm.jobType.None;
+                saveData.slot[index1].level = 0;
+                saveData.slot[index1].exp = 0;
+                saveData.slot[index1].meseta = 0L;
+                saveData.slot[index1].allow_quit_missions = "";
+                saveData.slot[index1].story_ep_1_complete = false;
+                saveData.slot[index1].story_ep_1_points = "0000";
+                saveData.slot[index1].story_ep_1_best_end = "0000";
                 for (int index2 = 0; index2 < 4; ++index2)
                 {
-                    this.saveData.slot[index1].job[index2] = new pspo2seForm.jobClass();
-                    this.saveData.slot[index1].job[index2].level = 0;
-                    this.saveData.slot[index1].job[index2].exp = 0;
-                    this.saveData.slot[index1].job[index2].extendpoints = 0;
-                    this.saveData.slot[index1].job[index2].extendpointsused = 0;
+                    saveData.slot[index1].job[index2] = new pspo2seForm.jobClass();
+                    saveData.slot[index1].job[index2].level = 0;
+                    saveData.slot[index1].job[index2].exp = 0;
+                    saveData.slot[index1].job[index2].extendpoints = 0;
+                    saveData.slot[index1].job[index2].extendpointsused = 0;
                 }
-                this.saveData.slot[index1].inventory = new pspo2seForm.inventoryClass();
-                this.saveData.slot[index1].inventory.itemsUsed = 0;
+                saveData.slot[index1].inventory = new pspo2seForm.inventoryClass();
+                saveData.slot[index1].inventory.itemsUsed = 0;
                 for (int index2 = 0; index2 < 60; ++index2)
                 {
-                    this.saveData.slot[index1].inventory.item[index2] = new pspo2seForm.inventoryItemClass();
-                    this.saveData.slot[index1].inventory.item[index2].used = false;
-                    this.saveData.slot[index1].inventory.item[index2].type = pspo2seForm.itemType.free_slot;
-                    this.saveData.slot[index1].inventory.item[index2].hex = "";
-                    this.saveData.slot[index1].inventory.item[index2].element = pspo2seForm.elementType.Neutral;
-                    this.saveData.slot[index1].inventory.item[index2].percent = 0;
-                    this.saveData.slot[index1].inventory.item[index2].qty = 0;
-                    this.saveData.slot[index1].inventory.item[index2].qty_max = 0;
+                    saveData.slot[index1].inventory.item[index2] = new pspo2seForm.inventoryItemClass();
+                    saveData.slot[index1].inventory.item[index2].used = false;
+                    saveData.slot[index1].inventory.item[index2].type = pspo2seForm.itemType.free_slot;
+                    saveData.slot[index1].inventory.item[index2].hex = "";
+                    saveData.slot[index1].inventory.item[index2].element = pspo2seForm.elementType.Neutral;
+                    saveData.slot[index1].inventory.item[index2].percent = 0;
+                    saveData.slot[index1].inventory.item[index2].qty = 0;
+                    saveData.slot[index1].inventory.item[index2].qty_max = 0;
                 }
             }
-            this.saveData.infinityMissions.itemsUsed = 0;
+            saveData.infinityMissions.itemsUsed = 0;
             for (int index = 0; index < 100; ++index)
-                this.saveData.infinityMissions.slot[index] = new pspo2seForm.infinityMissionClass();
+                saveData.infinityMissions.slot[index] = new pspo2seForm.infinityMissionClass();
             for (int index = 0; index < 2000; ++index)
             {
-                this.saveData.sharedInventory.item[index] = new pspo2seForm.inventoryItemClass();
-                this.saveData.sharedInventory.item[index].used = false;
-                this.saveData.sharedInventory.item[index].type = pspo2seForm.itemType.free_slot;
-                this.saveData.sharedInventory.item[index].hex = "";
-                this.saveData.sharedInventory.item[index].element = pspo2seForm.elementType.Neutral;
-                this.saveData.sharedInventory.item[index].percent = 0;
-                this.saveData.sharedInventory.item[index].qty = 0;
-                this.saveData.sharedInventory.item[index].qty_max = 0;
+                saveData.sharedInventory.item[index] = new pspo2seForm.inventoryItemClass();
+                saveData.sharedInventory.item[index].used = false;
+                saveData.sharedInventory.item[index].type = pspo2seForm.itemType.free_slot;
+                saveData.sharedInventory.item[index].hex = "";
+                saveData.sharedInventory.item[index].element = pspo2seForm.elementType.Neutral;
+                saveData.sharedInventory.item[index].percent = 0;
+                saveData.sharedInventory.item[index].qty = 0;
+                saveData.sharedInventory.item[index].qty_max = 0;
             }
-            this.saveData.sharedMeseta = 0L;
+            saveData.sharedMeseta = 0L;
         }
 
         private bool validate_character_file_length(int length)
         {
-            if (this.mainSettings.saveStructureIndex.slot_size == length)
+            if (mainSettings.saveStructureIndex.slot_size == length)
                 return true;
-            int num = (int)MessageBox.Show("The character file appears to be incorrect", "File Error");
+            MessageBox.Show("The character file appears to be incorrect", "File Error");
             return false;
         }
 
         private void refreshFromBuffer()
         {
-            if (this.reloadSaveFile())
+            if (reloadSaveFile())
                 return;
-            int num = (int)MessageBox.Show("There was an error reloading the save data from the buffer");
+            MessageBox.Show("There was an error reloading the save data from the buffer");
         }
 
         public void reloadEverything()
         {
-            int index = this.lstSaveSlotView.SelectedItems[0].Index;
-            this.loadSaveFile(true);
-            this.lstSaveSlotView.Items[index].Selected = true;
+            int index = lstSaveSlotView.SelectedItems[0].Index;
+            loadSaveFile(true);
+            lstSaveSlotView.Items[index].Selected = true;
         }
 
-        private bool reloadSaveFile() => this.loadSaveFile(false);
+        private bool reloadSaveFile() => loadSaveFile(false);
 
         private bool loadSaveFile(bool reload)
         {
-            this.disableMainForm();
-            this.lstSaveSlotView.Items.Clear();
-            if (!this.parseSaveFile(this.txtFileLoc.Text, reload))
+            disableMainForm();
+            lstSaveSlotView.Items.Clear();
+            if (!parseSaveFile(txtFileLoc.Text, reload))
             {
-                this.tabArea.SelectedTab = this.tabPageInfo;
-                this.tabArea.SelectedIndex = 0;
-                this.inventoryViewPages.SelectedIndex = 0;
-                this.storageViewPages.SelectedIndex = 0;
-                this.tabArea.Enabled = false;
-                this.lstSaveSlotView.Enabled = false;
-                this.showGameImage();
-                int num = (int)MessageBox.Show("Invalid file detected [" + this.txtFileSize.Text + "]", "File Error");
-                this.enableMainForm();
+                tabArea.SelectedTab = tabPageInfo;
+                tabArea.SelectedIndex = 0;
+                inventoryViewPages.SelectedIndex = 0;
+                storageViewPages.SelectedIndex = 0;
+                tabArea.Enabled = false;
+                lstSaveSlotView.Enabled = false;
+                showGameImage();
+                MessageBox.Show("Invalid file detected [" + txtFileSize.Text + "]", "File Error");
+                enableMainForm();
                 return false;
             }
-            this.tabArea.Enabled = true;
-            this.lstSaveSlotView.Enabled = true;
-            this.showGameImage();
-            if (this.lstSaveSlotView.Items.Count > 0)
-                this.lstSaveSlotView.Items[0].Selected = true;
-            this.enableMainForm();
+            tabArea.Enabled = true;
+            lstSaveSlotView.Enabled = true;
+            showGameImage();
+            if (lstSaveSlotView.Items.Count > 0)
+                lstSaveSlotView.Items[0].Selected = true;
+            enableMainForm();
             return true;
         }
 
         public void writeNewLevelData(int newvalue)
         {
-            pspo2seForm.expDb_ItemClass expLevelInfoInDb = this.findExpLevelInfoInDb(newvalue);
-            this.overwriteHexInBuffer(expLevelInfoInDb.level.ToString("X2"), this.mainSettings.saveStructureIndex.header_size + this.mainSettings.saveStructureIndex.slot_size * this.lstSaveSlotView.SelectedItems[0].Index + 232);
+            pspo2seForm.expDb_ItemClass expLevelInfoInDb = findExpLevelInfoInDb(newvalue);
+            overwriteHexInBuffer(expLevelInfoInDb.level.ToString("X2"), mainSettings.saveStructureIndex.header_size + mainSettings.saveStructureIndex.slot_size * lstSaveSlotView.SelectedItems[0].Index + 232);
             string hex = expLevelInfoInDb.exp.ToString("X4");
             while (hex.Length < 8)
                 hex = "0" + hex;
-            this.overwriteHexInBuffer(this.run.hexAndMathFunction.reversehex(hex, 8), this.mainSettings.saveStructureIndex.header_size + this.mainSettings.saveStructureIndex.slot_size * this.lstSaveSlotView.SelectedItems[0].Index + 240);
-            this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].level = expLevelInfoInDb.level;
-            this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].exp = expLevelInfoInDb.exp;
-            this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].exp_next = expLevelInfoInDb.exp_next;
-            this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].exp_percent = 0;
-            this.lstSaveSlotView.SelectedItems[0].SubItems[1].Text = "LV" + (object)expLevelInfoInDb.level;
-            this.displaySlotInfo(this.lstSaveSlotView.SelectedItems[0].Index);
+            overwriteHexInBuffer(run.hexAndMathFunction.reversehex(hex, 8), mainSettings.saveStructureIndex.header_size + mainSettings.saveStructureIndex.slot_size * lstSaveSlotView.SelectedItems[0].Index + 240);
+            saveData.slot[lstSaveSlotView.SelectedItems[0].Index].level = expLevelInfoInDb.level;
+            saveData.slot[lstSaveSlotView.SelectedItems[0].Index].exp = expLevelInfoInDb.exp;
+            saveData.slot[lstSaveSlotView.SelectedItems[0].Index].exp_next = expLevelInfoInDb.exp_next;
+            saveData.slot[lstSaveSlotView.SelectedItems[0].Index].exp_percent = 0;
+            lstSaveSlotView.SelectedItems[0].SubItems[1].Text = "LV" + (object)expLevelInfoInDb.level;
+            displaySlotInfo(lstSaveSlotView.SelectedItems[0].Index);
         }
 
         private void jumpToLevel()
         {
-            if (this.legitVersion())
+            if (legitVersion())
                 return;
-            this.entryForm.oldVal = this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].level.ToString();
-            this.entryForm.newVal = this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].level.ToString();
-            this.entryForm.description = "character level";
-            this.entryForm.maxLen = 3;
+            entryForm.oldVal = saveData.slot[lstSaveSlotView.SelectedItems[0].Index].level.ToString();
+            entryForm.newVal = saveData.slot[lstSaveSlotView.SelectedItems[0].Index].level.ToString();
+            entryForm.description = "character level";
+            entryForm.maxLen = 3;
             bool flag = false;
             while (!flag)
             {
-                if (this.entryForm.ShowDialog((IWin32Window)this) == DialogResult.OK)
+                if (entryForm.ShowDialog((IWin32Window)this) == DialogResult.OK)
                 {
-                    int newvalue = int.Parse(this.entryForm.newVal);
+                    int newvalue = int.Parse(entryForm.newVal);
                     if (newvalue > 200)
                     {
-                        int num1 = (int)MessageBox.Show("Level 200+ is not allowed\r\nThat's just stupid right?");
+                        MessageBox.Show("Level 200+ is not allowed\r\nThat's just stupid right?");
                     }
                     else if (newvalue < 1)
                     {
-                        int num2 = (int)MessageBox.Show("Level 1 is the lowest");
+                        MessageBox.Show("Level 1 is the lowest");
                     }
                     else
                     {
-                        if (newvalue != this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].level)
-                            this.writeNewLevelData(newvalue);
+                        if (newvalue != saveData.slot[lstSaveSlotView.SelectedItems[0].Index].level)
+                            writeNewLevelData(newvalue);
                         flag = true;
                     }
                 }
@@ -3093,59 +3093,59 @@ namespace pspo2seSaveEditorProgram
 
         private void jumpToTypeLevel()
         {
-            if (this.legitVersion())
+            if (legitVersion())
                 return;
-            int index = this.lstSaveSlotView.SelectedItems[0].Index;
-            int selectedIndex = this.tabControlClasses.SelectedIndex;
-            this.entryForm.oldVal = this.saveData.slot[index].job[selectedIndex].level.ToString();
-            this.entryForm.newVal = this.saveData.slot[index].job[selectedIndex].level.ToString();
-            this.entryForm.description = "character type level";
-            this.entryForm.maxLen = 2;
+            int index = lstSaveSlotView.SelectedItems[0].Index;
+            int selectedIndex = tabControlClasses.SelectedIndex;
+            entryForm.oldVal = saveData.slot[index].job[selectedIndex].level.ToString();
+            entryForm.newVal = saveData.slot[index].job[selectedIndex].level.ToString();
+            entryForm.description = "character type level";
+            entryForm.maxLen = 2;
             bool flag = false;
             while (!flag)
             {
-                if (this.entryForm.ShowDialog((IWin32Window)this) == DialogResult.OK)
+                if (entryForm.ShowDialog((IWin32Window)this) == DialogResult.OK)
                 {
-                    int level = int.Parse(this.entryForm.newVal);
-                    if (level > 30 + this.saveData.slot[index].rebirth.additionalTypeLevels)
+                    int level = int.Parse(entryForm.newVal);
+                    if (level > 30 + saveData.slot[index].rebirth.additionalTypeLevels)
                     {
-                        int num1 = (int)MessageBox.Show("You cannot enter a level greater than " + (object)(30 + this.saveData.slot[index].rebirth.additionalTypeLevels) + ".\n\nYou will need to rebirth to increase your max type level.", "Max Level Reached", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                        MessageBox.Show("You cannot enter a level greater than " + (object)(30 + saveData.slot[index].rebirth.additionalTypeLevels) + ".\n\nYou will need to rebirth to increase your max type level.", "Max Level Reached", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                     }
                     else if (level < 1)
                     {
-                        int num2 = (int)MessageBox.Show("You must enter a level greater than 0.", "Type Level Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                        MessageBox.Show("You must enter a level greater than 0.", "Type Level Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                     }
                     else
                     {
-                        if (level != this.saveData.slot[index].job[selectedIndex].level)
+                        if (level != saveData.slot[index].job[selectedIndex].level)
                         {
-                            pspo2seForm.expDb_ItemClass expTypeInfoInDb = this.findExpTypeInfoInDb(level);
-                            int pos1 = this.mainSettings.saveStructureIndex.type_level_pos + this.mainSettings.saveStructureIndex.slot_size * index + 4 * selectedIndex;
-                            this.overwriteHexInBuffer(expTypeInfoInDb.level.ToString("X2"), pos1);
+                            pspo2seForm.expDb_ItemClass expTypeInfoInDb = findExpTypeInfoInDb(level);
+                            int pos1 = mainSettings.saveStructureIndex.type_level_pos + mainSettings.saveStructureIndex.slot_size * index + 4 * selectedIndex;
+                            overwriteHexInBuffer(expTypeInfoInDb.level.ToString("X2"), pos1);
                             int pos2 = pos1 + 2;
                             int exp = expTypeInfoInDb.exp;
                             if (exp >= 65536)
                             {
                                 exp -= 65536;
-                                this.overwriteHexInBuffer("01", pos2);
-                                this.saveData.slot[index].job[selectedIndex].scramble_exp = 1;
+                                overwriteHexInBuffer("01", pos2);
+                                saveData.slot[index].job[selectedIndex].scramble_exp = 1;
                             }
                             else
                             {
-                                this.overwriteHexInBuffer("00", pos2);
-                                this.saveData.slot[index].job[selectedIndex].scramble_exp = 0;
+                                overwriteHexInBuffer("00", pos2);
+                                saveData.slot[index].job[selectedIndex].scramble_exp = 0;
                             }
                             int pos3 = pos2 + 1;
-                            this.overwriteHexInBuffer(this.run.hexAndMathFunction.reversehex(exp.ToString("X4"), 4), pos3);
-                            int pos4 = this.mainSettings.saveStructureIndex.type_level_pos + this.mainSettings.saveStructureIndex.slot_size * index + 16 + selectedIndex * this.mainSettings.saveStructureIndex.type_extend_size;
-                            this.overwriteHexInBuffer(this.run.hexAndMathFunction.reversehex(expTypeInfoInDb.extend_points.ToString("X4"), 4), pos4);
-                            this.saveData.slot[index].job[selectedIndex].level = level;
-                            this.saveData.slot[index].job[selectedIndex].exp = expTypeInfoInDb.exp;
-                            this.saveData.slot[index].job[selectedIndex].extendpoints = expTypeInfoInDb.extend_points;
-                            this.saveData.slot[index].job[selectedIndex].exp_to_next = expTypeInfoInDb.exp + expTypeInfoInDb.exp_next - this.saveData.slot[index].job[selectedIndex].exp;
-                            this.saveData.slot[index].job[selectedIndex].exp_next = expTypeInfoInDb.exp + expTypeInfoInDb.exp_next;
-                            this.saveData.slot[index].job[selectedIndex].exp_percent = expTypeInfoInDb.exp_next != 0 ? this.run.hexAndMathFunction.getPercentage(this.saveData.slot[index].job[selectedIndex].exp - expTypeInfoInDb.exp, expTypeInfoInDb.exp_next) : 100;
-                            this.displayTypeInfo(index);
+                            overwriteHexInBuffer(run.hexAndMathFunction.reversehex(exp.ToString("X4"), 4), pos3);
+                            int pos4 = mainSettings.saveStructureIndex.type_level_pos + mainSettings.saveStructureIndex.slot_size * index + 16 + selectedIndex * mainSettings.saveStructureIndex.type_extend_size;
+                            overwriteHexInBuffer(run.hexAndMathFunction.reversehex(expTypeInfoInDb.extend_points.ToString("X4"), 4), pos4);
+                            saveData.slot[index].job[selectedIndex].level = level;
+                            saveData.slot[index].job[selectedIndex].exp = expTypeInfoInDb.exp;
+                            saveData.slot[index].job[selectedIndex].extendpoints = expTypeInfoInDb.extend_points;
+                            saveData.slot[index].job[selectedIndex].exp_to_next = expTypeInfoInDb.exp + expTypeInfoInDb.exp_next - saveData.slot[index].job[selectedIndex].exp;
+                            saveData.slot[index].job[selectedIndex].exp_next = expTypeInfoInDb.exp + expTypeInfoInDb.exp_next;
+                            saveData.slot[index].job[selectedIndex].exp_percent = expTypeInfoInDb.exp_next != 0 ? run.hexAndMathFunction.getPercentage(saveData.slot[index].job[selectedIndex].exp - expTypeInfoInDb.exp, expTypeInfoInDb.exp_next) : 100;
+                            displayTypeInfo(index);
                         }
                         flag = true;
                     }
@@ -3172,13 +3172,13 @@ namespace pspo2seSaveEditorProgram
             *numPtr = num2;
             for (int index = 0; index < bytes; ++index)
             {
-                int byte_decimal = this.readByteAndSaveInSaveBuffer(br, reload, "GET DATA", showSaveParseProgress);
+                int byte_decimal = readByteAndSaveInSaveBuffer(br, reload, "GET DATA", showSaveParseProgress);
                 if (stringBuilder2.Length == 0)
-                    stringBuilder2.Append(this.run.hexAndMathFunction.decimalByteConvert(byte_decimal, return_type.ToString()));
+                    stringBuilder2.Append(run.hexAndMathFunction.decimalByteConvert(byte_decimal, return_type.ToString()));
                 else
-                    stringBuilder2.Append(this.run.hexAndMathFunction.decimalByteConvert(byte_decimal, return_type.ToString()) ?? "");
+                    stringBuilder2.Append(run.hexAndMathFunction.decimalByteConvert(byte_decimal, return_type.ToString()) ?? "");
                 if (flag)
-                    stringBuilder1.Append(this.run.hexAndMathFunction.decimalByteConvert(byte_decimal, return_type.ToString()));
+                    stringBuilder1.Append(run.hexAndMathFunction.decimalByteConvert(byte_decimal, return_type.ToString()));
                 flag = !flag;
             }
             return return_type == pspo2seForm.saveInfoDataType.str ? stringBuilder1.ToString() : stringBuilder2.ToString();
@@ -3199,10 +3199,10 @@ namespace pspo2seSaveEditorProgram
           bool showSaveParseProgress,
           string debugHelper = "")
         {
-            string s = this.run.hexAndMathFunction.reversehex(this.brGetData(4, br, pos, pspo2seForm.saveInfoDataType.hex, reload, showSaveParseProgress), 8);
+            string s = run.hexAndMathFunction.reversehex(brGetData(4, br, pos, pspo2seForm.saveInfoDataType.hex, reload, showSaveParseProgress), 8);
             if (debugHelper != "")
             {
-                int num = (int)MessageBox.Show("[" + debugHelper + "]\r\nhex is " + s + "\r\nint32 is" + (object)int.Parse(s, NumberStyles.HexNumber));
+                MessageBox.Show("[" + debugHelper + "]\r\nhex is " + s + "\r\nint32 is" + (object)int.Parse(s, NumberStyles.HexNumber));
             }
             return int.Parse(s, NumberStyles.HexNumber);
         }
@@ -3215,10 +3215,10 @@ namespace pspo2seSaveEditorProgram
           bool showSaveParseProgress,
           string debugHelper = "")
         {
-            string s = this.run.hexAndMathFunction.reversehex(this.brGetData(bytes, br, pos, pspo2seForm.saveInfoDataType.hex, reload, showSaveParseProgress), bytes * 2);
+            string s = run.hexAndMathFunction.reversehex(brGetData(bytes, br, pos, pspo2seForm.saveInfoDataType.hex, reload, showSaveParseProgress), bytes * 2);
             if (debugHelper != "")
             {
-                int num = (int)MessageBox.Show("[" + debugHelper + "]\r\nhex is " + s + "\r\nint is" + (object)int.Parse(s, NumberStyles.HexNumber));
+                MessageBox.Show("[" + debugHelper + "]\r\nhex is " + s + "\r\nint is" + (object)int.Parse(s, NumberStyles.HexNumber));
             }
             return int.Parse(s, NumberStyles.HexNumber);
         }
@@ -3230,7 +3230,7 @@ namespace pspo2seSaveEditorProgram
           bool reload,
           bool showSaveParseProgress)
         {
-            this.brGetData(bytes, br, pos, pspo2seForm.saveInfoDataType.hex, reload, showSaveParseProgress);
+            brGetData(bytes, br, pos, pspo2seForm.saveInfoDataType.hex, reload, showSaveParseProgress);
         }
 
         public unsafe pspo2seForm.inventoryItemClass brGetItem(
@@ -3241,9 +3241,9 @@ namespace pspo2seSaveEditorProgram
             pspo2seForm.inventoryItemClass inventoryItemClass = new pspo2seForm.inventoryItemClass()
             {
                 id = *pos,
-                hex = this.brGetData(4, br, pos, pspo2seForm.saveInfoDataType.hex, reload, true)
+                hex = brGetData(4, br, pos, pspo2seForm.saveInfoDataType.hex, reload, true)
             };
-            inventoryItemClass.hex_reversed = this.run.hexAndMathFunction.reversehex(inventoryItemClass.hex, 8);
+            inventoryItemClass.hex_reversed = run.hexAndMathFunction.reversehex(inventoryItemClass.hex, 8);
             if (inventoryItemClass.hex == "00000000" || inventoryItemClass.hex == "FFFFFFFF")
             {
                 inventoryItemClass.type = pspo2seForm.itemType.free_slot;
@@ -3251,20 +3251,20 @@ namespace pspo2seSaveEditorProgram
             }
             else
             {
-                inventoryItemClass.type = this.getItemTypeFromHex(inventoryItemClass.hex);
+                inventoryItemClass.type = getItemTypeFromHex(inventoryItemClass.hex);
                 inventoryItemClass.used = true;
             }
             if (inventoryItemClass.type == pspo2seForm.itemType.Weapon)
             {
-                this.brSkipBytes(4, pos, br, reload, true);
-                inventoryItemClass.ability = (pspo2seForm.abilityType)this.brGetInt(1, pos, br, reload, true);
-                string data1 = this.brGetData(1, br, pos, pspo2seForm.saveInfoDataType.hex, reload, true);
-                inventoryItemClass.spcl_effect = this.hexToEffect(data1);
+                brSkipBytes(4, pos, br, reload, true);
+                inventoryItemClass.ability = (pspo2seForm.abilityType)brGetInt(1, pos, br, reload, true);
+                string data1 = brGetData(1, br, pos, pspo2seForm.saveInfoDataType.hex, reload, true);
+                inventoryItemClass.spcl_effect = hexToEffect(data1);
                 inventoryItemClass.inf_extended = (pspo2seForm.itemInfExtendType)int.Parse(data1.Substring(1, 1), NumberStyles.HexNumber);
-                inventoryItemClass.spcl_effect_info = this.brGetData(2, br, pos, pspo2seForm.saveInfoDataType.hex, reload, true);
-                string data2 = this.brGetData(2, br, pos, pspo2seForm.saveInfoDataType.hex, reload, true);
-                inventoryItemClass.power_add = int.Parse(this.run.hexAndMathFunction.reversehex(data2, 4), NumberStyles.HexNumber);
-                string data3 = this.brGetData(2, br, pos, pspo2seForm.saveInfoDataType.hex, reload, true);
+                inventoryItemClass.spcl_effect_info = brGetData(2, br, pos, pspo2seForm.saveInfoDataType.hex, reload, true);
+                string data2 = brGetData(2, br, pos, pspo2seForm.saveInfoDataType.hex, reload, true);
+                inventoryItemClass.power_add = int.Parse(run.hexAndMathFunction.reversehex(data2, 4), NumberStyles.HexNumber);
+                string data3 = brGetData(2, br, pos, pspo2seForm.saveInfoDataType.hex, reload, true);
                 inventoryItemClass.grinds = int.Parse(data3.Substring(0, 1), NumberStyles.HexNumber);
                 inventoryItemClass.extended = int.Parse(data3.Substring(1, 1), NumberStyles.HexNumber);
                 inventoryItemClass.locked = false;
@@ -3279,10 +3279,10 @@ namespace pspo2seSaveEditorProgram
             }
             else
             {
-                inventoryItemClass.qty = this.brGetInt32(pos, br, reload, true);
-                inventoryItemClass.qty_max = this.brGetInt32(pos, br, reload, true);
-                this.brSkipBytes(2, pos, br, reload, true);
-                string data = this.brGetData(2, br, pos, pspo2seForm.saveInfoDataType.hex, reload, true);
+                inventoryItemClass.qty = brGetInt32(pos, br, reload, true);
+                inventoryItemClass.qty_max = brGetInt32(pos, br, reload, true);
+                brSkipBytes(2, pos, br, reload, true);
+                string data = brGetData(2, br, pos, pspo2seForm.saveInfoDataType.hex, reload, true);
                 inventoryItemClass.grinds = int.Parse(data.Substring(0, 1), NumberStyles.HexNumber);
                 inventoryItemClass.extended = int.Parse(data.Substring(1, 1), NumberStyles.HexNumber);
                 inventoryItemClass.locked = false;
@@ -3290,16 +3290,16 @@ namespace pspo2seSaveEditorProgram
                     inventoryItemClass.locked = true;
                 inventoryItemClass.rarity = int.Parse(data.Substring(3, 1), NumberStyles.HexNumber);
             }
-            inventoryItemClass.pa_level = this.brGetInt(1, pos, br, reload, true);
+            inventoryItemClass.pa_level = brGetInt(1, pos, br, reload, true);
             inventoryItemClass.element = (pspo2seForm.elementType)inventoryItemClass.pa_level;
-            inventoryItemClass.percent = this.brGetInt(1, pos, br, reload, true);
-            inventoryItemClass.style = (pspo2seForm.weaponStyleType)this.brGetInt(1, pos, br, reload, true);
+            inventoryItemClass.percent = brGetInt(1, pos, br, reload, true);
+            inventoryItemClass.style = (pspo2seForm.weaponStyleType)brGetInt(1, pos, br, reload, true);
             if (inventoryItemClass.type == pspo2seForm.itemType.Weapon)
-                inventoryItemClass.hand = (pspo2seForm.weaponHandType)this.brGetInt(1, pos, br, reload, true);
+                inventoryItemClass.hand = (pspo2seForm.weaponHandType)brGetInt(1, pos, br, reload, true);
             else
-                inventoryItemClass.clothes_man = (pspo2seForm.clothesManufacturerType)this.brGetInt(1, pos, br, reload, true);
+                inventoryItemClass.clothes_man = (pspo2seForm.clothesManufacturerType)brGetInt(1, pos, br, reload, true);
             pspo2seForm.itemDb_ItemClass itemDbItemClass = new pspo2seForm.itemDb_ItemClass();
-            pspo2seForm.itemDb_ItemClass itemInDb = this.findItemInDb(inventoryItemClass.hex_reversed);
+            pspo2seForm.itemDb_ItemClass itemInDb = findItemInDb(inventoryItemClass.hex_reversed);
             inventoryItemClass.name = itemInDb.name;
             inventoryItemClass.name_jp = itemInDb.name_jp;
             inventoryItemClass.desc = itemInDb.desc;
@@ -3326,32 +3326,32 @@ namespace pspo2seSaveEditorProgram
           string debugHelper,
           bool showSaveParseProgress)
         {
-            ++this.chunkPos;
+            ++chunkPos;
             int num1 = 0;
             if (!reload)
             {
                 try
                 {
                     num1 = (int)br.ReadByte();
-                    if (this.savedata_decimal_array_filled < 301352)
+                    if (savedata_decimal_array_filled < 301352)
                     {
-                        this.savedata_decimal_array[this.savedata_decimal_array_filled] = num1;
-                        ++this.savedata_decimal_array_filled;
+                        savedata_decimal_array[savedata_decimal_array_filled] = num1;
+                        ++savedata_decimal_array_filled;
                     }
                     else
                     {
-                        int num2 = (int)MessageBox.Show("Buffer is full, trying to load a save file that is not PSPo2?", "Fatal Error!");
+                        MessageBox.Show("Buffer is full, trying to load a save file that is not PSPo2?", "Fatal Error!");
                     }
                 }
                 catch (Exception ex)
                 {
-                    int num2 = (int)MessageBox.Show("Failed to read byte, check to see if the end of the file is reached\r\n" + (object)ex, "Fatal Error");
+                    MessageBox.Show("Failed to read byte, check to see if the end of the file is reached\r\n" + (object)ex, "Fatal Error");
                 }
-                if (showSaveParseProgress && this.chunkPos >= 1024)
+                if (showSaveParseProgress && chunkPos >= 1024)
                 {
-                    this.chunkPos = 0;
-                    this.toolStripStatusLabel.Text = "Parsing Save " + (object)this.run.hexAndMathFunction.getPercentage(this.savedata_decimal_array_filled, this.toolStripProgressBar.Maximum) + "%";
-                    this.toolStripProgressBar.Value = this.savedata_decimal_array_filled;
+                    chunkPos = 0;
+                    toolStripStatusLabel.Text = "Parsing Save " + (object)run.hexAndMathFunction.getPercentage(savedata_decimal_array_filled, toolStripProgressBar.Maximum) + "%";
+                    toolStripProgressBar.Value = savedata_decimal_array_filled;
                     Application.DoEvents();
                 }
             }
@@ -3359,18 +3359,18 @@ namespace pspo2seSaveEditorProgram
             {
                 try
                 {
-                    num1 = this.savedata_decimal_array[this.savedata_decimal_array_read_pos];
-                    ++this.savedata_decimal_array_read_pos;
+                    num1 = savedata_decimal_array[savedata_decimal_array_read_pos];
+                    ++savedata_decimal_array_read_pos;
                 }
                 catch
                 {
-                    int num2 = (int)MessageBox.Show("trying to read past buffer[" + (object)this.savedata_decimal_array_filled + "] at " + (object)this.savedata_decimal_array_read_pos + " from " + debugHelper);
+                    MessageBox.Show("trying to read past buffer[" + (object)savedata_decimal_array_filled + "] at " + (object)savedata_decimal_array_read_pos + " from " + debugHelper);
                 }
-                if (showSaveParseProgress && this.chunkPos >= 1024)
+                if (showSaveParseProgress && chunkPos >= 1024)
                 {
-                    this.chunkPos = 0;
-                    this.toolStripStatusLabel.Text = "Parsing Save " + (object)this.run.hexAndMathFunction.getPercentage(this.savedata_decimal_array_read_pos, this.toolStripProgressBar.Maximum) + "%";
-                    this.toolStripProgressBar.Value = this.savedata_decimal_array_read_pos;
+                    chunkPos = 0;
+                    toolStripStatusLabel.Text = "Parsing Save " + (object)run.hexAndMathFunction.getPercentage(savedata_decimal_array_read_pos, toolStripProgressBar.Maximum) + "%";
+                    toolStripProgressBar.Value = savedata_decimal_array_read_pos;
                     Application.DoEvents();
                 }
             }
@@ -3379,20 +3379,20 @@ namespace pspo2seSaveEditorProgram
 
         public bool overwriteHexInBuffer(string hex, int pos)
         {
-            if (hex.Length / 2 + pos > this.savedata_decimal_array_filled)
+            if (hex.Length / 2 + pos > savedata_decimal_array_filled)
             {
-                int num1 = (int)MessageBox.Show("trying to overwrite hex " + hex + " over the end of the buffer " + (object)this.savedata_decimal_array_filled);
+                MessageBox.Show("trying to overwrite hex " + hex + " over the end of the buffer " + (object)savedata_decimal_array_filled);
             }
-            string[] strArray = this.run.hexAndMathFunction.addCommasToHex(hex).Split(',');
+            string[] strArray = run.hexAndMathFunction.addCommasToHex(hex).Split(',');
             int index = pos;
             foreach (string s in strArray)
             {
                 if (index > pos + hex.Length)
                 {
-                    int num2 = (int)MessageBox.Show("something went wrong with overwriting hex in the buffer");
+                    MessageBox.Show("something went wrong with overwriting hex in the buffer");
                     return false;
                 }
-                this.savedata_decimal_array[index] = (int)byte.Parse(s, NumberStyles.HexNumber);
+                savedata_decimal_array[index] = (int)byte.Parse(s, NumberStyles.HexNumber);
                 ++index;
             }
             return true;
@@ -3400,9 +3400,9 @@ namespace pspo2seSaveEditorProgram
 
         public void writeToSaveBuffer(int pos, int[] bytearray, int size, int[] bytestoadd)
         {
-            if (pos + size > this.savedata_decimal_array_filled)
+            if (pos + size > savedata_decimal_array_filled)
             {
-                int num = (int)MessageBox.Show("Trying to save bytes beyond the loaded buffer", "Fatal Error!");
+                MessageBox.Show("Trying to save bytes beyond the loaded buffer", "Fatal Error!");
             }
             else
             {
@@ -3413,14 +3413,14 @@ namespace pspo2seSaveEditorProgram
 
         public void brWriteFromBuffer(BinaryWriter writer, int posStart, int len)
         {
-            if (len + posStart <= this.savedata_decimal_array_filled)
+            if (len + posStart <= savedata_decimal_array_filled)
             {
                 for (int index = posStart; index < posStart + len; ++index)
-                    writer.Write((byte)this.savedata_decimal_array[index]);
+                    writer.Write((byte)savedata_decimal_array[index]);
             }
             else
             {
-                int num = (int)MessageBox.Show("Tried to write a file [" + (object)len + "] larger than the buffer [" + (object)this.savedata_decimal_array_filled + "]", "Fatal Error!");
+                MessageBox.Show("Tried to write a file [" + (object)len + "] larger than the buffer [" + (object)savedata_decimal_array_filled + "]", "Fatal Error!");
             }
         }
 
@@ -3446,11 +3446,11 @@ namespace pspo2seSaveEditorProgram
             saveFileDialog.Title = "PSPo2 Save Editor: Save File";
             if (fileName != "")
                 saveFileDialog.FileName = fileName;
-            if (this.legitVersion())
+            if (legitVersion())
                 saveFileDialog.Title = "PSPo2 Save Viewer: Save File";
             saveFileDialog.Filter = ext_options;
             saveFileDialog.RestoreDirectory = true;
-            return saveFileDialog.ShowDialog() == DialogResult.OK ? this.fixFileNameNoExt(saveFileDialog.FileName, ext_options) : (string)null;
+            return saveFileDialog.ShowDialog() == DialogResult.OK ? fixFileNameNoExt(saveFileDialog.FileName, ext_options) : (string)null;
         }
 
         private bool saveBufferDataToFile(
@@ -3463,13 +3463,13 @@ namespace pspo2seSaveEditorProgram
           string fileNameDefault = "")
         {
             if (path == null)
-                path = this.openSaveDialogue(ext_options, fileNameDefault);
+                path = openSaveDialogue(ext_options, fileNameDefault);
             if (path == null)
                 return false;
             string dest = path;
             try
             {
-                if (this.mainSettings.saveStructureIndex.encrypted && isSaveFile)
+                if (mainSettings.saveStructureIndex.encrypted && isSaveFile)
                     path = "data\\temp\\denc.bin";
                 using (FileStream fileStream = new FileStream(path, FileMode.Create))
                 {
@@ -3477,7 +3477,7 @@ namespace pspo2seSaveEditorProgram
                     {
                         if (addinteger != 0)
                             writer.Write((byte)addinteger);
-                        this.brWriteFromBuffer(writer, startpos, size);
+                        brWriteFromBuffer(writer, startpos, size);
                         writer.Close();
                     }
                     fileStream.Close();
@@ -3485,10 +3485,10 @@ namespace pspo2seSaveEditorProgram
             }
             catch
             {
-                int num = (int)MessageBox.Show("The file failed to save. Check it is not read only", "File stream error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                MessageBox.Show("The file failed to save. Check it is not read only", "File stream error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                 return false;
             }
-            return !this.mainSettings.saveStructureIndex.encrypted || !isSaveFile || this.encryptSaveFile(path, dest);
+            return !mainSettings.saveStructureIndex.encrypted || !isSaveFile || encryptSaveFile(path, dest);
         }
 
         private bool saveItemDataToFile(
@@ -3500,7 +3500,7 @@ namespace pspo2seSaveEditorProgram
           bool delete = false)
         {
             if (fn == "")
-                fn = this.openSaveDialogue(ext_options, itemName);
+                fn = openSaveDialogue(ext_options, itemName);
             if (fn != null)
             {
                 try
@@ -3513,14 +3513,14 @@ namespace pspo2seSaveEditorProgram
                             {
                                 if (index == 15)
                                 {
-                                    string str = this.run.hexAndMathFunction.decimalByteConvert(this.savedata_decimal_array[startpos + index], "hex");
+                                    string str = run.hexAndMathFunction.decimalByteConvert(savedata_decimal_array[startpos + index], "hex");
                                     string s = str.Length >= 2 ? "0" + str.Substring(1, 1) : "0" + str;
                                     writer.Write(byte.Parse(s, NumberStyles.HexNumber));
                                 }
                                 else
-                                    this.brWriteFromBuffer(writer, startpos + index, 1);
+                                    brWriteFromBuffer(writer, startpos + index, 1);
                                 if (delete)
-                                    this.savedata_decimal_array[startpos + index] = 0;
+                                    savedata_decimal_array[startpos + index] = 0;
                             }
                             writer.Close();
                         }
@@ -3530,7 +3530,7 @@ namespace pspo2seSaveEditorProgram
                 }
                 catch
                 {
-                    int num = (int)MessageBox.Show("The file failed to save. Check it is not read only", "File stream error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                    MessageBox.Show("The file failed to save. Check it is not read only", "File stream error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                 }
             }
             return false;
@@ -3546,26 +3546,26 @@ namespace pspo2seSaveEditorProgram
                 {
                     if (MessageBox.Show(fn + " is a required file which is missing, corrupt or out of date.\n\nDo you want to download it now?\n\n" + reason, "Required File Missing or Corrupt", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
-                        this.disableMainForm();
-                        if (this.downloadFile("http://files-ds-scene.net/retrohead/pspo2se/releases/" + fn, "data/temp\\", fn))
+                        disableMainForm();
+                        if (downloadFile("http://files-ds-scene.net/retrohead/pspo2se/releases/" + fn, "data/temp\\", fn))
                         {
                             if (System.IO.File.OpenRead("data/temp\\" + fn).Length != byteSize)
                             {
-                                int num1 = (int)MessageBox.Show(fn + " which was downloaded appears to be corrupt, please try again!", "Download Failure", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                                MessageBox.Show(fn + " which was downloaded appears to be corrupt, please try again!", "Download Failure", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                             }
                             else
                             {
                                 System.IO.File.Copy("data/temp\\" + fn, fn);
-                                int num2 = (int)MessageBox.Show(fn + " downloaded successfully.", "Download Success", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                                MessageBox.Show(fn + " downloaded successfully.", "Download Success", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                                 flag1 = false;
                                 flag2 = true;
                             }
                         }
                         else
                         {
-                            int num3 = (int)MessageBox.Show(fn + " failed to download, please check your internet connection\r\nor the site may be down!", "Download Failure", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                            MessageBox.Show(fn + " failed to download, please check your internet connection\r\nor the site may be down!", "Download Failure", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                         }
-                        this.enableMainForm();
+                        enableMainForm();
                         if (flag1 && MessageBox.Show("Do you want to retry the download now?", "Try Again?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
                             flag1 = false;
                     }
@@ -3598,29 +3598,29 @@ namespace pspo2seSaveEditorProgram
 
         private void checkDatabaseUpdate(bool download)
         {
-            this.disableMainForm();
-            if (this.downloadFile("http://files-ds-scene.net/retrohead/pspo2se/releases/databases/version.bin", "data/temp/", "Update Check"))
+            disableMainForm();
+            if (downloadFile("http://files-ds-scene.net/retrohead/pspo2se/releases/databases/version.bin", "data/temp/", "Update Check"))
             {
-                if (this.checkVersionTxt(download) && download)
-                    this.action_loadDatabases();
+                if (checkVersionTxt(download) && download)
+                    action_loadDatabases();
             }
             else
             {
-                int num = (int)MessageBox.Show("Update check failed, please check your internet connection\r\nor the site may be down!", "Update Failure", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                MessageBox.Show("Update check failed, please check your internet connection\r\nor the site may be down!", "Update Failure", MessageBoxButtons.OK, MessageBoxIcon.Hand);
             }
-            this.enableMainForm();
+            enableMainForm();
         }
 
         private void checkImagesUpdate(bool download)
         {
-            this.disableMainForm();
+            disableMainForm();
             string progressTxt = "";
             string str1 = "image_pack_version.bin";
-            if (this.downloadFile("http://files-ds-scene.net/retrohead/pspo2se/releases/" + str1, "data/temp/", "Update Check"))
+            if (downloadFile("http://files-ds-scene.net/retrohead/pspo2se/releases/" + str1, "data/temp/", "Update Check"))
             {
                 try
                 {
-                    using (StreamReader streamReader = new StreamReader((Stream)this.encryptor.createDecryptionReadStream(this.run.hexAndMathFunction.convertHexToEncryptionKey("3F0007003C00F2009D005200AF002C00"), new FileStream("data/temp/" + str1, FileMode.Open, FileAccess.Read))))
+                    using (StreamReader streamReader = new StreamReader((Stream)encryptor.createDecryptionReadStream(run.hexAndMathFunction.convertHexToEncryptionKey("3F0007003C00F2009D005200AF002C00"), new FileStream("data/temp/" + str1, FileMode.Open, FileAccess.Read))))
                     {
                         string str2;
                         if ((str2 = streamReader.ReadLine()) != null)
@@ -3630,15 +3630,15 @@ namespace pspo2seSaveEditorProgram
                 }
                 catch (Exception ex)
                 {
-                    int num = (int)MessageBox.Show(ex.Message, "checkImagesUpdate failed to parse new info", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    this.toolStripStatusLabel.Text = "Update Failed";
-                    this.enableMainForm();
+                    MessageBox.Show(ex.Message, "checkImagesUpdate failed to parse new info", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    toolStripStatusLabel.Text = "Update Failed";
+                    enableMainForm();
                     return;
                 }
                 string str3 = "";
                 try
                 {
-                    using (StreamReader streamReader = new StreamReader((Stream)this.encryptor.createDecryptionReadStream(this.run.hexAndMathFunction.convertHexToEncryptionKey("3F0007003C00F2009D005200AF002C00"), new FileStream("data/" + str1, FileMode.Open, FileAccess.Read))))
+                    using (StreamReader streamReader = new StreamReader((Stream)encryptor.createDecryptionReadStream(run.hexAndMathFunction.convertHexToEncryptionKey("3F0007003C00F2009D005200AF002C00"), new FileStream("data/" + str1, FileMode.Open, FileAccess.Read))))
                     {
                         string str2;
                         if ((str2 = streamReader.ReadLine()) != null)
@@ -3656,15 +3656,15 @@ namespace pspo2seSaveEditorProgram
                         switch (MessageBox.Show("There is a new version of the image pack available.\r\nDo you wish to update now?", "New Image Pack Available", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
                         {
                             case DialogResult.Cancel:
-                                this.enableMainForm();
+                                enableMainForm();
                                 break;
                             case DialogResult.Yes:
-                                if (!this.downloadFile("http://files-ds-scene.net/retrohead/pspo2se/releases/" + progressTxt, "data/temp/", progressTxt))
+                                if (!downloadFile("http://files-ds-scene.net/retrohead/pspo2se/releases/" + progressTxt, "data/temp/", progressTxt))
                                 {
-                                    this.toolStripStatusLabel.Text = "Update Failed";
+                                    toolStripStatusLabel.Text = "Update Failed";
                                     break;
                                 }
-                                this.toolStripStatusLabel.Text = "Unzipping Images";
+                                toolStripStatusLabel.Text = "Unzipping Images";
                                 try
                                 {
                                     Directory.Delete("data/weapon_images/", true);
@@ -3673,56 +3673,56 @@ namespace pspo2seSaveEditorProgram
                                 {
                                 }
                                 ZipUtil.UnZipFiles("data/temp/" + progressTxt, "data/", "", true);
-                                this.toolStripStatusLabel.Text = "Cleaning Up";
+                                toolStripStatusLabel.Text = "Cleaning Up";
                                 System.IO.File.Delete("data/image_pack_version.bin");
                                 System.IO.File.Move("data/temp/image_pack_version.bin", "data/image_pack_version.bin");
                                 System.IO.File.Delete("data/temp/image_pack_version.bin");
-                                this.toolStripStatusLabel.Text = "Completed: Image Pack Update";
-                                this.loadImageFloaterImages();
-                                this.enableMainForm();
-                                int num1 = (int)MessageBox.Show("The image pack was updated successfully", "Image Pack Update Completed", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                                toolStripStatusLabel.Text = "Completed: Image Pack Update";
+                                loadImageFloaterImages();
+                                enableMainForm();
+                                MessageBox.Show("The image pack was updated successfully", "Image Pack Update Completed", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                                 break;
                             case DialogResult.No:
-                                this.enableMainForm();
+                                enableMainForm();
                                 break;
                             default:
-                                int num2 = (int)MessageBox.Show("WTF!? Only yes/no buttons should be available!");
-                                this.enableMainForm();
+                                MessageBox.Show("WTF!? Only yes/no buttons should be available!");
+                                enableMainForm();
                                 break;
                         }
                     }
                     else
                     {
-                        int num3 = (int)MessageBox.Show("There is a new version of the image pack available.\r\nChoose update from the the images menu to install the latest version", "New Image Pack Available", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                        MessageBox.Show("There is a new version of the image pack available.\r\nChoose update from the the images menu to install the latest version", "New Image Pack Available", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                     }
                 }
                 else
                 {
-                    if (!this.firstboot)
+                    if (!firstboot)
                     {
-                        int num4 = (int)MessageBox.Show("The latest version of the image pack is already installed.", "Image pack is up to date", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                        MessageBox.Show("The latest version of the image pack is already installed.", "Image pack is up to date", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                     }
-                    this.enableMainForm();
+                    enableMainForm();
                 }
             }
             else
             {
-                int num5 = (int)MessageBox.Show("Update check failed, please check your internet connection\r\nor the site may be down!", "Image Pack Update Failure", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                MessageBox.Show("Update check failed, please check your internet connection\r\nor the site may be down!", "Image Pack Update Failure", MessageBoxButtons.OK, MessageBoxIcon.Hand);
             }
         }
 
         private void checkAppUpdate(bool download)
         {
-            this.disableMainForm();
+            disableMainForm();
             string newVersion = "";
             string str1 = "latest_version.bin";
-            if (this.legitVersion())
+            if (legitVersion())
                 str1 = "latest_version_viewer.bin";
-            if (this.downloadFile("http://files-ds-scene.net/retrohead/pspo2se/releases/" + str1, "data/temp/", "Update Check"))
+            if (downloadFile("http://files-ds-scene.net/retrohead/pspo2se/releases/" + str1, "data/temp/", "Update Check"))
             {
                 try
                 {
-                    using (StreamReader streamReader = new StreamReader((Stream)this.encryptor.createDecryptionReadStream(this.run.hexAndMathFunction.convertHexToEncryptionKey("3F0007003C00F2009D005200AF002C00"), new FileStream("data/temp/" + str1, FileMode.Open, FileAccess.Read))))
+                    using (StreamReader streamReader = new StreamReader((Stream)encryptor.createDecryptionReadStream(run.hexAndMathFunction.convertHexToEncryptionKey("3F0007003C00F2009D005200AF002C00"), new FileStream("data/temp/" + str1, FileMode.Open, FileAccess.Read))))
                     {
                         string str2;
                         if ((str2 = streamReader.ReadLine()) != null)
@@ -3732,27 +3732,27 @@ namespace pspo2seSaveEditorProgram
                 }
                 catch (Exception ex)
                 {
-                    int num = (int)MessageBox.Show(ex.Message, "checkAppUpdate failed to parse new info", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    this.toolStripStatusLabel.Text = "Update Failed";
-                    this.enableMainForm();
+                    MessageBox.Show(ex.Message, "checkAppUpdate failed to parse new info", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    toolStripStatusLabel.Text = "Update Failed";
+                    enableMainForm();
                     return;
                 }
                 if ("3.0 build 1008" != newVersion)
                 {
                     if (download)
                     {
-                        this.updateViewer.formSetup(newVersion);
-                        switch (this.updateViewer.ShowDialog((IWin32Window)this))
+                        updateViewer.formSetup(newVersion);
+                        switch (updateViewer.ShowDialog((IWin32Window)this))
                         {
                             case DialogResult.Cancel:
-                                this.enableMainForm();
+                                enableMainForm();
                                 break;
                             case DialogResult.Yes:
-                                string str2 = !this.legitVersion() ? "PSPo2 Save Editor" : "PSPo2 Save Viewer";
-                                if (!this.downloadFile("http://files-ds-scene.net/retrohead/pspo2se/releases/" + str2 + " v" + newVersion + ".zip", "data/temp/", str2 + " v" + newVersion + ".zip", str2 + " new.zip"))
+                                string str2 = !legitVersion() ? "PSPo2 Save Editor" : "PSPo2 Save Viewer";
+                                if (!downloadFile("http://files-ds-scene.net/retrohead/pspo2se/releases/" + str2 + " v" + newVersion + ".zip", "data/temp/", str2 + " v" + newVersion + ".zip", str2 + " new.zip"))
                                 {
-                                    this.toolStripStatusLabel.Text = "Update Failed";
-                                    this.enableMainForm();
+                                    toolStripStatusLabel.Text = "Update Failed";
+                                    enableMainForm();
                                     break;
                                 }
                                 ZipUtil.UnZipFiles("data/temp/" + str2 + " new.zip", "data/temp/", "", true);
@@ -3763,32 +3763,32 @@ namespace pspo2seSaveEditorProgram
                                 Environment.Exit(0);
                                 break;
                             case DialogResult.No:
-                                this.enableMainForm();
+                                enableMainForm();
                                 break;
                             default:
-                                int num = (int)MessageBox.Show("WTF!? Only yes/no buttons should be available!");
-                                this.enableMainForm();
+                                MessageBox.Show("WTF!? Only yes/no buttons should be available!");
+                                enableMainForm();
                                 break;
                         }
                     }
                     else
                     {
-                        int num1 = (int)MessageBox.Show("There is a new version of the application available.\r\nChoose update from the the file menu to install v" + newVersion, "New version available", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                        MessageBox.Show("There is a new version of the application available.\r\nChoose update from the the file menu to install v" + newVersion, "New version available", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                     }
                 }
                 else
                 {
-                    if (!this.firstboot)
+                    if (!firstboot)
                     {
-                        int num2 = (int)MessageBox.Show("The latest version (" + newVersion + ") is already installed.", "Application is up to date", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                        MessageBox.Show("The latest version (" + newVersion + ") is already installed.", "Application is up to date", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                     }
-                    this.enableMainForm();
+                    enableMainForm();
                 }
             }
             else
             {
-                int num = (int)MessageBox.Show("Update check failed, please check your internet connection\r\nor the site may be down!", "Update Failure", MessageBoxButtons.OK, MessageBoxIcon.Hand);
-                this.enableMainForm();
+                MessageBox.Show("Update check failed, please check your internet connection\r\nor the site may be down!", "Update Failure", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                enableMainForm();
             }
         }
 
@@ -3796,14 +3796,14 @@ namespace pspo2seSaveEditorProgram
         {
             int index1 = 0;
             int index2 = 0;
-            this.toolStripStatusLabel.Text = "Checking Version";
+            toolStripStatusLabel.Text = "Checking Version";
             Application.DoEvents();
             pspo2seForm.updateCSVInfo[] updateCsvInfoArray1 = new pspo2seForm.updateCSVInfo[20];
             try
             {
-                string encryptionKey = this.run.hexAndMathFunction.convertHexToEncryptionKey("3F0007003C00F2009D005200AF002C00");
+                string encryptionKey = run.hexAndMathFunction.convertHexToEncryptionKey("3F0007003C00F2009D005200AF002C00");
                 FileStream fs = new FileStream("data/temp/version.bin", FileMode.Open, FileAccess.Read);
-                using (StreamReader streamReader = new StreamReader((Stream)this.encryptor.createDecryptionReadStream(encryptionKey, fs)))
+                using (StreamReader streamReader = new StreamReader((Stream)encryptor.createDecryptionReadStream(encryptionKey, fs)))
                 {
                     string str;
                     while ((str = streamReader.ReadLine()) != null)
@@ -3822,17 +3822,17 @@ namespace pspo2seSaveEditorProgram
             }
             catch (Exception ex)
             {
-                int num = (int)MessageBox.Show("checkVersionTxt failed to load new info:\r\n " + ex.Message);
-                this.toolStripStatusLabel.Text = "Update Failed";
+                MessageBox.Show("checkVersionTxt failed to load new info:\r\n " + ex.Message);
+                toolStripStatusLabel.Text = "Update Failed";
                 return false;
             }
             Application.DoEvents();
             pspo2seForm.updateCSVInfo[] updateCsvInfoArray2 = new pspo2seForm.updateCSVInfo[20];
             try
             {
-                string encryptionKey = this.run.hexAndMathFunction.convertHexToEncryptionKey("3F0007003C00F2009D005200AF002C00");
+                string encryptionKey = run.hexAndMathFunction.convertHexToEncryptionKey("3F0007003C00F2009D005200AF002C00");
                 FileStream fs = new FileStream("data/databases/version.bin", FileMode.Open, FileAccess.Read);
-                using (StreamReader streamReader = new StreamReader((Stream)this.encryptor.createDecryptionReadStream(encryptionKey, fs)))
+                using (StreamReader streamReader = new StreamReader((Stream)encryptor.createDecryptionReadStream(encryptionKey, fs)))
                 {
                     string str;
                     while ((str = streamReader.ReadLine()) != null)
@@ -3853,8 +3853,8 @@ namespace pspo2seSaveEditorProgram
             {
                 if (ex.Message.Substring(0, 19) != "Could not find file")
                 {
-                    int num = (int)MessageBox.Show("checkVersionTxt failed to load cur info [" + (object)index2 + "/" + (object)20 + "]:\r\n " + ex.Message);
-                    this.toolStripStatusLabel.Text = "Update Failed";
+                    MessageBox.Show("checkVersionTxt failed to load cur info [" + (object)index2 + "/" + (object)20 + "]:\r\n " + ex.Message);
+                    toolStripStatusLabel.Text = "Update Failed";
                     return false;
                 }
                 for (int index3 = 0; index3 < 20; ++index3)
@@ -3867,8 +3867,8 @@ namespace pspo2seSaveEditorProgram
             Application.DoEvents();
             if (index1 > index2)
             {
-                int num = (int)MessageBox.Show("The application seems to be out of date.\r\nThe latest database files are incompatible with this version\r\n\r\nPlease update the application first");
-                this.toolStripStatusLabel.Text = "Update Failed";
+                MessageBox.Show("The application seems to be out of date.\r\nThe latest database files are incompatible with this version\r\n\r\nPlease update the application first");
+                toolStripStatusLabel.Text = "Update Failed";
                 return false;
             }
             string text = "";
@@ -3892,24 +3892,24 @@ namespace pspo2seSaveEditorProgram
                                 case DialogResult.No:
                                     return false;
                                 default:
-                                    int num1 = (int)MessageBox.Show("WTF!? Only yes/no buttons should be available!");
+                                    MessageBox.Show("WTF!? Only yes/no buttons should be available!");
                                     return false;
                             }
                         }
                         else
                         {
-                            int num2 = (int)MessageBox.Show("There are new database updates available.\r\nChoose update from the database menu to install them", "Updates Available", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                            MessageBox.Show("There are new database updates available.\r\nChoose update from the database menu to install them", "Updates Available", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                             return false;
                         }
                     }
-                    if (this.downloadFile("http://files-ds-scene.net/retrohead/pspo2se/releases/databases/" + updateCsvInfoArray1[index3].fn, "data/databases/", updateCsvInfoArray1[index3].fn))
+                    if (downloadFile("http://files-ds-scene.net/retrohead/pspo2se/releases/databases/" + updateCsvInfoArray1[index3].fn, "data/databases/", updateCsvInfoArray1[index3].fn))
                     {
                         text = text + updateCsvInfoArray1[index3].fn + " [Updated to " + updateCsvInfoArray1[index3].ver + "]\r\n";
                         flag1 = true;
                     }
                     else
                     {
-                        this.toolStripStatusLabel.Text = "Update Failed";
+                        toolStripStatusLabel.Text = "Update Failed";
                         return false;
                     }
                 }
@@ -3923,33 +3923,33 @@ namespace pspo2seSaveEditorProgram
             }
             if (!download)
                 return true;
-            this.toolStripStatusLabel.Text = "Update Complete";
-            int num3 = (int)MessageBox.Show(text, "Database Update Results", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            toolStripStatusLabel.Text = "Update Complete";
+            MessageBox.Show(text, "Database Update Results", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             return true;
         }
 
         public bool downloadFile(string url, string dirdest, string progressTxt, string saveas = "")
         {
-            if (!this.allowDownload)
+            if (!allowDownload)
             {
-                int num = (int)MessageBox.Show("Please wait for the current download to finish", "Download already in progress", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Please wait for the current download to finish", "Download already in progress", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
             }
-            this.allowDownload = false;
-            this.downloadedData = new byte[512000];
-            this.downloadedDataName = "";
+            allowDownload = false;
+            downloadedData = new byte[512000];
+            downloadedDataName = "";
             try
             {
                 WebResponse response = WebRequest.Create(url).GetResponse();
                 Stream responseStream = response.GetResponseStream();
                 int contentLength = (int)response.ContentLength;
-                this.toolStripProgressBar.Maximum = contentLength;
-                this.toolStripProgressBar.Value = 0;
+                toolStripProgressBar.Maximum = contentLength;
+                toolStripProgressBar.Value = 0;
                 for (int index = 3; index < url.Length; ++index)
                 {
                     if (url.Substring(url.Length - index, 1) == "/")
                     {
-                        this.downloadedDataName = url.Substring(url.Length - index + 1, url.Length - (url.Length - index) - 1);
+                        downloadedDataName = url.Substring(url.Length - index + 1, url.Length - (url.Length - index) - 1);
                         break;
                     }
                 }
@@ -3963,10 +3963,10 @@ namespace pspo2seSaveEditorProgram
                         count = responseStream.Read(buffer, 0, buffer.Length);
                         if (count == 0)
                         {
-                            this.toolStripProgressBar.Value = this.toolStripProgressBar.Maximum;
-                            this.toolStripStatusLabel.Text = "Completed: " + progressTxt + " " + (object)this.run.hexAndMathFunction.getPercentage(this.toolStripProgressBar.Value, contentLength) + "%";
+                            toolStripProgressBar.Value = toolStripProgressBar.Maximum;
+                            toolStripStatusLabel.Text = "Completed: " + progressTxt + " " + (object)run.hexAndMathFunction.getPercentage(toolStripProgressBar.Value, contentLength) + "%";
                             Application.DoEvents();
-                            this.downloadedData = memoryStream.ToArray();
+                            downloadedData = memoryStream.ToArray();
                             responseStream.Close();
                             memoryStream.Close();
                             goto label_14;
@@ -3974,25 +3974,25 @@ namespace pspo2seSaveEditorProgram
                         else
                             memoryStream.Write(buffer, 0, count);
                     }
-                    while (this.toolStripProgressBar.Value + count > this.toolStripProgressBar.Maximum);
-                    this.toolStripProgressBar.Value += count;
-                    this.toolStripStatusLabel.Text = "Downloading: " + progressTxt + " " + (object)this.run.hexAndMathFunction.getPercentage(this.toolStripProgressBar.Value, contentLength) + "%";
+                    while (toolStripProgressBar.Value + count > toolStripProgressBar.Maximum);
+                    toolStripProgressBar.Value += count;
+                    toolStripStatusLabel.Text = "Downloading: " + progressTxt + " " + (object)run.hexAndMathFunction.getPercentage(toolStripProgressBar.Value, contentLength) + "%";
                     Application.DoEvents();
                 }
             }
             catch (Exception ex)
             {
-                int num = (int)MessageBox.Show(ex.Message);
-                this.allowDownload = true;
+                MessageBox.Show(ex.Message);
+                allowDownload = true;
                 return false;
             }
         label_14:
             if (saveas != "")
-                this.downloadedDataName = saveas;
-            FileStream fileStream = new FileStream(dirdest + this.downloadedDataName, FileMode.Create);
-            fileStream.Write(this.downloadedData, 0, this.downloadedData.Length);
+                downloadedDataName = saveas;
+            FileStream fileStream = new FileStream(dirdest + downloadedDataName, FileMode.Create);
+            fileStream.Write(downloadedData, 0, downloadedData.Length);
             fileStream.Close();
-            this.allowDownload = true;
+            allowDownload = true;
             return true;
         }
 
@@ -4022,7 +4022,7 @@ namespace pspo2seSaveEditorProgram
                         case "B":
                             return pspo2seForm.greenItemType.debanride;
                         default:
-                            int num1 = (int)MessageBox.Show("Heal type item type not recognised for image: " + hex_reversed.Substring(3, 1));
+                            MessageBox.Show("Heal type item type not recognised for image: " + hex_reversed.Substring(3, 1));
                             return pspo2seForm.greenItemType.none;
                     }
                 case "3":
@@ -4030,7 +4030,7 @@ namespace pspo2seSaveEditorProgram
                 case "4":
                     return pspo2seForm.greenItemType.item;
                 default:
-                    int num2 = (int)MessageBox.Show("Green item type not recognised for image: " + hex_reversed.Substring(5, 1));
+                    MessageBox.Show("Green item type not recognised for image: " + hex_reversed.Substring(5, 1));
                     return pspo2seForm.greenItemType.none;
             }
         }
@@ -4038,131 +4038,131 @@ namespace pspo2seSaveEditorProgram
         public pspo2seForm.itemDb_ItemClass findItemInDb(string hex)
         {
             pspo2seForm.itemDb_ItemClass itemDbItemClass = new pspo2seForm.itemDb_ItemClass();
-            for (int index = 0; index < this.item_db_filled; ++index)
+            for (int index = 0; index < item_db_filled; ++index)
             {
-                if (hex == this.item_db.item[index].hex)
-                    return this.item_db.item[index];
+                if (hex == item_db.item[index].hex)
+                    return item_db.item[index];
             }
             return itemDbItemClass;
         }
 
         public string weaponEnumToName(pspo2seForm.weaponType type)
         {
-            string name = this.enumToName(string.Concat((object)type));
+            string name = enumToName(string.Concat((object)type));
             return !(name.Substring(name.Length - 1, 1) == "s") ? name + "s" : "Twin " + name;
         }
 
-        public string enumToName(string type) => this.run.hexAndMathFunction.stringToProper(type.Replace("_", " "));
+        public string enumToName(string type) => run.hexAndMathFunction.stringToProper(type.Replace("_", " "));
 
         public void addItemToDb(string csvLine)
         {
             string[] strArray = csvLine.Split('|');
-            this.item_db.item[this.item_db_filled] = new pspo2seForm.itemDb_ItemClass();
-            this.item_db.item[this.item_db_filled].id = strArray[0];
-            this.item_db.item[this.item_db_filled].hex = strArray[1];
-            this.item_db.item[this.item_db_filled].name = strArray[2];
-            this.item_db.item[this.item_db_filled].name_jp = strArray[3];
-            this.item_db.item[this.item_db_filled].desc = strArray[4];
-            this.item_db.item[this.item_db_filled].desc_jp = strArray[5];
-            this.item_db.item[this.item_db_filled].infinity_item = strArray[6];
+            item_db.item[item_db_filled] = new pspo2seForm.itemDb_ItemClass();
+            item_db.item[item_db_filled].id = strArray[0];
+            item_db.item[item_db_filled].hex = strArray[1];
+            item_db.item[item_db_filled].name = strArray[2];
+            item_db.item[item_db_filled].name_jp = strArray[3];
+            item_db.item[item_db_filled].desc = strArray[4];
+            item_db.item[item_db_filled].desc_jp = strArray[5];
+            item_db.item[item_db_filled].infinity_item = strArray[6];
             try
             {
-                this.item_db.item[this.item_db_filled].power = int.Parse(strArray[7]);
+                item_db.item[item_db_filled].power = int.Parse(strArray[7]);
             }
             catch
             {
-                this.databasesOk = false;
-                int num = (int)MessageBox.Show("row 7 [" + (object)this.item_db_filled + "] incorrect format " + strArray[7]);
+                databasesOk = false;
+                MessageBox.Show("row 7 [" + (object)item_db_filled + "] incorrect format " + strArray[7]);
             }
             try
             {
-                this.item_db.item[this.item_db_filled].acc = int.Parse(strArray[8]);
+                item_db.item[item_db_filled].acc = int.Parse(strArray[8]);
             }
             catch
             {
-                this.databasesOk = false;
-                int num = (int)MessageBox.Show("row 8 [" + (object)this.item_db_filled + "] incorrect format " + strArray[8]);
+                databasesOk = false;
+                MessageBox.Show("row 8 [" + (object)item_db_filled + "] incorrect format " + strArray[8]);
             }
-            this.item_db.item[this.item_db_filled].level = strArray[9];
+            item_db.item[item_db_filled].level = strArray[9];
             try
             {
-                this.item_db.item[this.item_db_filled].ext_power = int.Parse(strArray[10]);
+                item_db.item[item_db_filled].ext_power = int.Parse(strArray[10]);
             }
             catch
             {
-                this.databasesOk = false;
-                int num = (int)MessageBox.Show("row 10 [" + (object)this.item_db_filled + "] incorrect format " + strArray[10]);
-            }
-            try
-            {
-                this.item_db.item[this.item_db_filled].ext_acc = int.Parse(strArray[11]);
-            }
-            catch
-            {
-                this.databasesOk = false;
-                int num = (int)MessageBox.Show("row 11 [" + (object)this.item_db_filled + "] incorrect format " + strArray[11]);
-            }
-            this.item_db.item[this.item_db_filled].ext_level = strArray[12];
-            try
-            {
-                this.item_db.item[this.item_db_filled].inf_ext_power = int.Parse(strArray[13]);
-            }
-            catch
-            {
-                this.databasesOk = false;
-                int num = (int)MessageBox.Show("row 13 [" + (object)this.item_db_filled + "] incorrect format " + strArray[13]);
+                databasesOk = false;
+                MessageBox.Show("row 10 [" + (object)item_db_filled + "] incorrect format " + strArray[10]);
             }
             try
             {
-                this.item_db.item[this.item_db_filled].inf_ext_acc = int.Parse(strArray[14]);
+                item_db.item[item_db_filled].ext_acc = int.Parse(strArray[11]);
             }
             catch
             {
-                this.databasesOk = false;
-                int num = (int)MessageBox.Show("row 14 [" + (object)this.item_db_filled + "] incorrect format " + strArray[14]);
+                databasesOk = false;
+                MessageBox.Show("row 11 [" + (object)item_db_filled + "] incorrect format " + strArray[11]);
             }
-            this.item_db.item[this.item_db_filled].inf_ext_level = strArray[15];
-            this.item_db.item[this.item_db_filled].special = strArray[16];
-            this.item_db.item[this.item_db_filled].special_level = strArray[17];
-            this.item_db.item[this.item_db_filled].ext_special_level = strArray[18];
-            if (this.item_db.item[this.item_db_filled].ext_special_level == "")
-                this.item_db.item[this.item_db_filled].ext_special_level = this.item_db.item[this.item_db_filled].special_level;
-            if (this.item_db.item[this.item_db_filled].ext_special_level == "0")
-                this.item_db.item[this.item_db_filled].ext_special_level = "";
-            if (this.item_db.item[this.item_db_filled].special_level == "0")
-                this.item_db.item[this.item_db_filled].special_level = "";
+            item_db.item[item_db_filled].ext_level = strArray[12];
             try
             {
-                this.item_db.item[this.item_db_filled].rarity = int.Parse(strArray[19]);
+                item_db.item[item_db_filled].inf_ext_power = int.Parse(strArray[13]);
             }
             catch
             {
-                this.databasesOk = false;
-                int num = (int)MessageBox.Show("row 19 [" + (object)this.item_db_filled + "] incorrect format " + strArray[19]);
+                databasesOk = false;
+                MessageBox.Show("row 13 [" + (object)item_db_filled + "] incorrect format " + strArray[13]);
             }
-            ++this.item_db_filled;
+            try
+            {
+                item_db.item[item_db_filled].inf_ext_acc = int.Parse(strArray[14]);
+            }
+            catch
+            {
+                databasesOk = false;
+                MessageBox.Show("row 14 [" + (object)item_db_filled + "] incorrect format " + strArray[14]);
+            }
+            item_db.item[item_db_filled].inf_ext_level = strArray[15];
+            item_db.item[item_db_filled].special = strArray[16];
+            item_db.item[item_db_filled].special_level = strArray[17];
+            item_db.item[item_db_filled].ext_special_level = strArray[18];
+            if (item_db.item[item_db_filled].ext_special_level == "")
+                item_db.item[item_db_filled].ext_special_level = item_db.item[item_db_filled].special_level;
+            if (item_db.item[item_db_filled].ext_special_level == "0")
+                item_db.item[item_db_filled].ext_special_level = "";
+            if (item_db.item[item_db_filled].special_level == "0")
+                item_db.item[item_db_filled].special_level = "";
+            try
+            {
+                item_db.item[item_db_filled].rarity = int.Parse(strArray[19]);
+            }
+            catch
+            {
+                databasesOk = false;
+                MessageBox.Show("row 19 [" + (object)item_db_filled + "] incorrect format " + strArray[19]);
+            }
+            ++item_db_filled;
         }
 
         public void loadItemDatabase()
         {
-            this.item_db_filled = 0;
+            item_db_filled = 0;
             try
             {
-                string encryptionKey = this.run.hexAndMathFunction.convertHexToEncryptionKey("3F0007003C00F2009D005200AF002C00");
+                string encryptionKey = run.hexAndMathFunction.convertHexToEncryptionKey("3F0007003C00F2009D005200AF002C00");
                 FileStream fs = new FileStream("data/databases/items.pspo2sedb", FileMode.Open, FileAccess.Read);
-                using (StreamReader streamReader = new StreamReader((Stream)this.encryptor.createDecryptionReadStream(encryptionKey, fs)))
+                using (StreamReader streamReader = new StreamReader((Stream)encryptor.createDecryptionReadStream(encryptionKey, fs)))
                 {
                     string csvLine;
                     while ((csvLine = streamReader.ReadLine()) != null)
-                        this.addItemToDb(csvLine);
+                        addItemToDb(csvLine);
                     streamReader.Close();
                     fs.Close();
                 }
             }
             catch (Exception ex)
             {
-                this.databasesOk = false;
-                int num = (int)MessageBox.Show(ex.Message + "\r\n\r\nPlease run a database update from the menu", "Item Database Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                databasesOk = false;
+                MessageBox.Show(ex.Message + "\r\n\r\nPlease run a database update from the menu", "Item Database Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 
@@ -4181,11 +4181,11 @@ namespace pspo2seSaveEditorProgram
         private pspo2seForm.slotType getSlotTypeFromHex(string hex)
         {
             hex = hex.Substring(2, 4);
-            hex = this.run.hexAndMathFunction.reversehex(hex, 4);
+            hex = run.hexAndMathFunction.reversehex(hex, 4);
             int num1 = int.Parse(hex, NumberStyles.HexNumber);
             if (num1 < 256 || num1 > 1138)
             {
-                int num2 = (int)MessageBox.Show("Error, slot type integer not supported [" + hex + ":" + (object)num1 + "]");
+                MessageBox.Show("Error, slot type integer not supported [" + hex + ":" + (object)num1 + "]");
             }
             else
             {
@@ -4228,7 +4228,7 @@ namespace pspo2seSaveEditorProgram
                 case pspo2seForm.weaponManufacturerType.Kubara:
                     return (Image)Resources.manlogo_Kubara;
                 default:
-                    int num = (int)MessageBox.Show("weapon manufacturer not supported: " + (object)manufacturer);
+                    MessageBox.Show("weapon manufacturer not supported: " + (object)manufacturer);
                     return (Image)null;
             }
         }
@@ -4238,7 +4238,7 @@ namespace pspo2seSaveEditorProgram
           pspo2seForm.weaponManufacturerType manufacturer)
         {
             fields.img_manufaturer.Visible = true;
-            Image manufacturerImage = this.getWeaponManufacturerImage(manufacturer);
+            Image manufacturerImage = getWeaponManufacturerImage(manufacturer);
             if (manufacturerImage == null)
                 fields.img_manufaturer.Visible = false;
             else
@@ -4265,7 +4265,7 @@ namespace pspo2seSaveEditorProgram
                     fields.img_manufaturer.Image = (Image)Resources.manlogo_Miyab;
                     break;
                 default:
-                    int num = (int)MessageBox.Show("clothes manufacturer not supported: " + (object)manufacturer);
+                    MessageBox.Show("clothes manufacturer not supported: " + (object)manufacturer);
                     fields.img_manufaturer.Visible = false;
                     break;
             }
@@ -4342,7 +4342,7 @@ namespace pspo2seSaveEditorProgram
 
         private void displayWeaponImage(pspo2seForm.pageFields fields, pspo2seForm.weaponType weapon)
         {
-            Image weaponImageFromType = this.getWeaponImageFromType(weapon);
+            Image weaponImageFromType = getWeaponImageFromType(weapon);
             if (weaponImageFromType == null)
             {
                 fields.img_item.Visible = false;
@@ -4385,7 +4385,7 @@ namespace pspo2seSaveEditorProgram
                             fields.img_item.Image = (Image)Resources.clothes_set;
                             return;
                         default:
-                            int num1 = (int)MessageBox.Show("Unsupported " + (object)item_type + " type: " + (object)clothesTypes);
+                            MessageBox.Show("Unsupported " + (object)item_type + " type: " + (object)clothesTypes);
                             fields.img_item.Visible = false;
                             return;
                     }
@@ -4406,12 +4406,12 @@ namespace pspo2seSaveEditorProgram
                             fields.img_item.Image = (Image)Resources.parts_set;
                             return;
                         default:
-                            int num2 = (int)MessageBox.Show("Unsupported " + (object)item_type + " type: " + (object)partsTypes);
+                            MessageBox.Show("Unsupported " + (object)item_type + " type: " + (object)partsTypes);
                             fields.img_item.Visible = false;
                             return;
                     }
                 default:
-                    int num3 = (int)MessageBox.Show("Tried to get clothes type from a non-clothing item: " + (object)clothes_type);
+                    MessageBox.Show("Tried to get clothes type from a non-clothing item: " + (object)clothes_type);
                     break;
             }
         }
@@ -4445,15 +4445,15 @@ namespace pspo2seSaveEditorProgram
             switch (item.type)
             {
                 case pspo2seForm.itemType.Weapon:
-                    this.displayWeaponImage(fields, this.getWeaponTypeFromHex(item.hex_reversed));
-                    this.displayWeaponManufacturerImage(fields, this.getWeaponManufacturerFromHex(item.hex_reversed));
+                    displayWeaponImage(fields, getWeaponTypeFromHex(item.hex_reversed));
+                    displayWeaponManufacturerImage(fields, getWeaponManufacturerFromHex(item.hex_reversed));
                     break;
                 case pspo2seForm.itemType.Armor:
-                    this.displayWeaponImage(fields, pspo2seForm.weaponType.armor);
-                    this.displayWeaponManufacturerImage(fields, this.getWeaponManufacturerFromHex(item.hex_reversed));
+                    displayWeaponImage(fields, pspo2seForm.weaponType.armor);
+                    displayWeaponManufacturerImage(fields, getWeaponManufacturerFromHex(item.hex_reversed));
                     break;
                 case pspo2seForm.itemType.Green_Item:
-                    switch (this.getGreenItemTypeFromHex(item.hex_reversed))
+                    switch (getGreenItemTypeFromHex(item.hex_reversed))
                     {
                         case pspo2seForm.greenItemType.monomate:
                             fields.img_item.Image = (Image)Resources.item_mate;
@@ -4489,7 +4489,7 @@ namespace pspo2seSaveEditorProgram
                             fields.img_item.Image = (Image)Resources.item;
                             return;
                         default:
-                            int num1 = (int)MessageBox.Show("Green item type not recognised for image: " + (object)this.getGreenItemTypeFromHex(item.hex_reversed));
+                            MessageBox.Show("Green item type not recognised for image: " + (object)getGreenItemTypeFromHex(item.hex_reversed));
                             return;
                     }
                 case pspo2seForm.itemType.PA_Disk_Melee:
@@ -4505,16 +4505,16 @@ namespace pspo2seSaveEditorProgram
                     fields.img_item.Image = (Image)Resources.item;
                     break;
                 case pspo2seForm.itemType.Slot_Unit:
-                    this.displaySlotUnitImage(fields, this.getSlotTypeFromHex(item.hex_reversed));
-                    this.displayWeaponManufacturerImage(fields, this.getWeaponManufacturerFromHex(item.hex_reversed));
+                    displaySlotUnitImage(fields, getSlotTypeFromHex(item.hex_reversed));
+                    displayWeaponManufacturerImage(fields, getWeaponManufacturerFromHex(item.hex_reversed));
                     break;
                 case pspo2seForm.itemType.Clothes_human:
-                    this.displayClothesImage(fields, pspo2seForm.itemType.Clothes_human, this.getClothesTypeFromHex(item.hex_reversed));
-                    this.displayClothesManufacturerImage(fields, item.clothes_man);
+                    displayClothesImage(fields, pspo2seForm.itemType.Clothes_human, getClothesTypeFromHex(item.hex_reversed));
+                    displayClothesManufacturerImage(fields, item.clothes_man);
                     break;
                 case pspo2seForm.itemType.Clothes_android:
-                    this.displayClothesImage(fields, pspo2seForm.itemType.Clothes_android, this.getClothesTypeFromHex(item.hex_reversed));
-                    this.displayClothesManufacturerImage(fields, item.clothes_man);
+                    displayClothesImage(fields, pspo2seForm.itemType.Clothes_android, getClothesTypeFromHex(item.hex_reversed));
+                    displayClothesManufacturerImage(fields, item.clothes_man);
                     break;
                 case pspo2seForm.itemType.Room_Decoration:
                     fields.img_item.Image = (Image)Resources.item_decoration;
@@ -4529,7 +4529,7 @@ namespace pspo2seSaveEditorProgram
                             fields.img_item.Image = (Image)Resources.trap_ex;
                             return;
                         default:
-                            int num2 = (int)MessageBox.Show("Trap type is wrong for image, is this even a trap?");
+                            MessageBox.Show("Trap type is wrong for image, is this even a trap?");
                             return;
                     }
                 case pspo2seForm.itemType.My_Synth_Device:
@@ -4541,7 +4541,7 @@ namespace pspo2seSaveEditorProgram
                 case pspo2seForm.itemType.free_slot:
                     break;
                 default:
-                    int num3 = (int)MessageBox.Show("item type not recognised for image: " + (object)item.type);
+                    MessageBox.Show("item type not recognised for image: " + (object)item.type);
                     fields.img_item.Visible = false;
                     break;
             }
@@ -4662,7 +4662,7 @@ namespace pspo2seSaveEditorProgram
           pspo2seForm.weaponType weapon)
         {
             pspo2seForm.itemExtendType itemExtendType = pspo2seForm.itemExtendType.not_extended;
-            if (this.saveData.type == pspo2seForm.SaveType.PSP2I)
+            if (saveData.type == pspo2seForm.SaveType.PSP2I)
             {
                 switch (extend_integer)
                 {
@@ -4754,7 +4754,7 @@ namespace pspo2seSaveEditorProgram
                         }
                         break;
                     default:
-                        int num1 = (int)MessageBox.Show("Extend integer " + (object)extend_integer + " is not recognised for psp2i extend type");
+                        MessageBox.Show("Extend integer " + (object)extend_integer + " is not recognised for psp2i extend type");
                         break;
                 }
             }
@@ -4775,7 +4775,7 @@ namespace pspo2seSaveEditorProgram
                         itemExtendType = pspo2seForm.itemExtendType.dlc_extended;
                         break;
                     default:
-                        int num2 = (int)MessageBox.Show("Extend integer " + (object)extend_integer + " is not recognised for psp2 extend type");
+                        MessageBox.Show("Extend integer " + (object)extend_integer + " is not recognised for psp2 extend type");
                         break;
                 }
             }
@@ -4892,27 +4892,27 @@ namespace pspo2seSaveEditorProgram
 
         public void showSelectedInventoryItem(TabPage page)
         {
-            pspo2seForm.pageFields pageFields = this.getPageFields(page);
+            pspo2seForm.pageFields pageFields = getPageFields(page);
             bool flag = false;
             pspo2seForm.inventoryItemClass inventoryItemClass;
-            if (page == this.tabPageStorage)
+            if (page == tabPageStorage)
             {
-                if (this.storageView.SelectedItems.Count > 0)
+                if (storageView.SelectedItems.Count > 0)
                 {
-                    inventoryItemClass = this.saveData.sharedInventory.item[int.Parse(this.storageView.SelectedItems[0].SubItems[1].Text)];
+                    inventoryItemClass = saveData.sharedInventory.item[int.Parse(storageView.SelectedItems[0].SubItems[1].Text)];
                     inventoryItemClass.qty_max = 999;
                     flag = true;
                 }
                 else
-                    inventoryItemClass = this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].inventory.item[0];
+                    inventoryItemClass = saveData.slot[lstSaveSlotView.SelectedItems[0].Index].inventory.item[0];
             }
-            else if (this.inventoryView.SelectedItems.Count > 0)
+            else if (inventoryView.SelectedItems.Count > 0)
             {
-                inventoryItemClass = this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].inventory.item[int.Parse(this.inventoryView.SelectedItems[0].SubItems[1].Text)];
+                inventoryItemClass = saveData.slot[lstSaveSlotView.SelectedItems[0].Index].inventory.item[int.Parse(inventoryView.SelectedItems[0].SubItems[1].Text)];
                 flag = true;
             }
             else
-                inventoryItemClass = this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].inventory.item[0];
+                inventoryItemClass = saveData.slot[lstSaveSlotView.SelectedItems[0].Index].inventory.item[0];
             if (!inventoryItemClass.used)
             {
                 inventoryItemClass.name = "---- Free Slot ----";
@@ -4922,21 +4922,21 @@ namespace pspo2seSaveEditorProgram
             pageFields.txt_hex.Text = "0x" + inventoryItemClass.hex_reversed;
             pageFields.txt_name.Text = inventoryItemClass.name;
             pageFields.txt_name_jp.Text = inventoryItemClass.name_jp;
-            this.showButtons(pageFields, inventoryItemClass.type);
-            this.displayItemImage(pageFields, inventoryItemClass);
-            this.displayItemStars(pageFields, inventoryItemClass.rarity);
-            this.displayItemInfo(pageFields, inventoryItemClass);
+            showButtons(pageFields, inventoryItemClass.type);
+            displayItemImage(pageFields, inventoryItemClass);
+            displayItemStars(pageFields, inventoryItemClass.rarity);
+            displayItemInfo(pageFields, inventoryItemClass);
             if (!flag)
                 return;
-            this.changeImageFloater(inventoryItemClass.hex_reversed);
+            changeImageFloater(inventoryItemClass.hex_reversed);
         }
 
         private void displayWeaponExtendInfo(
           pspo2seForm.pageFields fields,
           pspo2seForm.inventoryItemClass item)
         {
-            pspo2seForm.weaponType weaponTypeFromHex = this.getWeaponTypeFromHex(item.hex_reversed);
-            pspo2seForm.itemExtendType weaponExtendType = this.getWeaponExtendType(item.extended, item.style, weaponTypeFromHex);
+            pspo2seForm.weaponType weaponTypeFromHex = getWeaponTypeFromHex(item.hex_reversed);
+            pspo2seForm.itemExtendType weaponExtendType = getWeaponExtendType(item.extended, item.style, weaponTypeFromHex);
             string str1 = "FULL";
             if (item.inf_extended == pspo2seForm.itemInfExtendType.extended)
                 str1 = "EXT FULL";
@@ -4946,7 +4946,7 @@ namespace pspo2seSaveEditorProgram
                 str1 = "EXT FULL";
             else if (item.inf_extended != pspo2seForm.itemInfExtendType.not_extended)
             {
-                int num1 = (int)MessageBox.Show("Unknown infinity extend type: " + (object)item.inf_extended);
+                MessageBox.Show("Unknown infinity extend type: " + (object)item.inf_extended);
             }
             switch (weaponExtendType)
             {
@@ -4980,7 +4980,7 @@ namespace pspo2seSaveEditorProgram
                     fields.txt_grinds.Text = item.style.ToString() + " " + (object)item.extended + " " + fields.txt_grinds.Text;
                     break;
                 default:
-                    int num2 = (int)MessageBox.Show("Unhandled extend type: " + (object)item.extended);
+                    MessageBox.Show("Unhandled extend type: " + (object)item.extended);
                     break;
             }
             Decimal num3 = new Decimal(1.0);
@@ -5001,7 +5001,7 @@ namespace pspo2seSaveEditorProgram
                     }
                     else
                     {
-                        fields.txt_atk.Text = "TEC  " + (object)(int)((Decimal)(item.power + item.ext_power + this.grindsToPowIncrease(weaponTypeFromHex, item.grinds, item.rarity)) * num3);
+                        fields.txt_atk.Text = "TEC  " + (object)(int)((Decimal)(item.power + item.ext_power + grindsToPowIncrease(weaponTypeFromHex, item.grinds, item.rarity)) * num3);
                         if (weaponTypeFromHex == pspo2seForm.weaponType.longbow)
                             fields.txt_acc.Text = "ACC  " + (object)(int)((Decimal)(item.acc + item.ext_acc) * num3);
                     }
@@ -5015,7 +5015,7 @@ namespace pspo2seSaveEditorProgram
                 }
                 else
                 {
-                    fields.txt_atk.Text = "ATK  " + (object)(int)((Decimal)(item.power + this.grindsToPowIncrease(weaponTypeFromHex, item.grinds, item.rarity) + item.ext_power) * num3);
+                    fields.txt_atk.Text = "ATK  " + (object)(int)((Decimal)(item.power + grindsToPowIncrease(weaponTypeFromHex, item.grinds, item.rarity) + item.ext_power) * num3);
                     fields.txt_acc.Text = "ACC  " + (object)(int)((Decimal)(item.acc + item.ext_acc) * num3);
                 }
                 fields.txt_level.Text = item.ext_level;
@@ -5031,7 +5031,7 @@ namespace pspo2seSaveEditorProgram
                     }
                     else
                     {
-                        fields.txt_atk.Text = "TEC  " + (object)(int)((Decimal)(item.power + item.ext_power + item.inf_ext_power + this.grindsToPowIncrease(weaponTypeFromHex, item.grinds, item.rarity)) * num3);
+                        fields.txt_atk.Text = "TEC  " + (object)(int)((Decimal)(item.power + item.ext_power + item.inf_ext_power + grindsToPowIncrease(weaponTypeFromHex, item.grinds, item.rarity)) * num3);
                         if (weaponTypeFromHex == pspo2seForm.weaponType.longbow)
                             fields.txt_acc.Text = "ACC  " + (object)(int)((Decimal)(item.acc + item.ext_acc + item.inf_ext_acc) * num3);
                     }
@@ -5045,7 +5045,7 @@ namespace pspo2seSaveEditorProgram
                 }
                 else
                 {
-                    fields.txt_atk.Text = "ATK  " + (object)(int)((Decimal)(item.power + item.ext_power + item.inf_ext_power + this.grindsToPowIncrease(weaponTypeFromHex, item.grinds, item.rarity)) * num3);
+                    fields.txt_atk.Text = "ATK  " + (object)(int)((Decimal)(item.power + item.ext_power + item.inf_ext_power + grindsToPowIncrease(weaponTypeFromHex, item.grinds, item.rarity)) * num3);
                     fields.txt_acc.Text = "ACC  " + (object)(int)((Decimal)(item.acc + item.ext_acc + item.inf_ext_acc) * num3);
                 }
                 fields.txt_level.Text = item.inf_ext_level;
@@ -5061,7 +5061,7 @@ namespace pspo2seSaveEditorProgram
                     }
                     else
                     {
-                        fields.txt_atk.Text = "TEC  " + (object)(int)((Decimal)(item.power + this.grindsToPowIncrease(weaponTypeFromHex, item.grinds, item.rarity)) * num3);
+                        fields.txt_atk.Text = "TEC  " + (object)(int)((Decimal)(item.power + grindsToPowIncrease(weaponTypeFromHex, item.grinds, item.rarity)) * num3);
                         if (weaponTypeFromHex == pspo2seForm.weaponType.longbow)
                             fields.txt_acc.Text = "ACC  " + (object)(int)((Decimal)item.acc * num3);
                     }
@@ -5075,7 +5075,7 @@ namespace pspo2seSaveEditorProgram
                 }
                 else
                 {
-                    fields.txt_atk.Text = "ATK  " + (object)(int)((Decimal)(item.power + this.grindsToPowIncrease(this.getWeaponTypeFromHex(item.hex_reversed), item.grinds, item.rarity)) * num3);
+                    fields.txt_atk.Text = "ATK  " + (object)(int)((Decimal)(item.power + grindsToPowIncrease(getWeaponTypeFromHex(item.hex_reversed), item.grinds, item.rarity)) * num3);
                     fields.txt_acc.Text = "ACC  " + (object)(int)((Decimal)item.acc * num3);
                 }
                 fields.txt_level.Text = item.level;
@@ -5105,11 +5105,11 @@ namespace pspo2seSaveEditorProgram
             {
                 fields.txt_special.Visible = true;
                 if (item.special == "Varies by element")
-                    item.special = this.getElementSpecialAsString(item.element);
+                    item.special = getElementSpecialAsString(item.element);
                 if (str1 == "FULL" || str1 == "EXT FULL")
-                    fields.txt_special.Text = "Ability  " + item.special + " " + item.ext_special_level + " " + this.abilityToJp(this.stringToAbilityEnum(item.special)) + " [Extended]";
+                    fields.txt_special.Text = "Ability  " + item.special + " " + item.ext_special_level + " " + abilityToJp(stringToAbilityEnum(item.special)) + " [Extended]";
                 else
-                    fields.txt_special.Text = "Ability  " + item.special + " " + item.special_level + " " + this.abilityToJp(this.stringToAbilityEnum(item.special));
+                    fields.txt_special.Text = "Ability  " + item.special + " " + item.special_level + " " + abilityToJp(stringToAbilityEnum(item.special));
             }
             else if (item.ability != pspo2seForm.abilityType.None)
             {
@@ -5117,9 +5117,9 @@ namespace pspo2seSaveEditorProgram
                 if (item.style == pspo2seForm.weaponStyleType.Tech)
                     str2 = (item.ability + 21).ToString().Replace("_", " ");
                 if (str1 == "FULL" || str1 == "EXT FULL")
-                    fields.txt_special.Text = "Ability  " + str2.Replace("Empow", "Empow.") + " " + item.ext_special_level + " " + this.abilityToJp(this.stringToAbilityEnum(str2)) + " [Extended]";
+                    fields.txt_special.Text = "Ability  " + str2.Replace("Empow", "Empow.") + " " + item.ext_special_level + " " + abilityToJp(stringToAbilityEnum(str2)) + " [Extended]";
                 else
-                    fields.txt_special.Text = "Ability  " + str2.Replace("Empow", "Empow.") + " " + item.special_level + " " + this.abilityToJp(this.stringToAbilityEnum(str2));
+                    fields.txt_special.Text = "Ability  " + str2.Replace("Empow", "Empow.") + " " + item.special_level + " " + abilityToJp(stringToAbilityEnum(str2));
             }
             else
                 fields.txt_special.Text = "Ability  None (なし)";
@@ -5129,7 +5129,7 @@ namespace pspo2seSaveEditorProgram
 
         public string elementToSubEnemyType(pspo2seForm.elementType element)
         {
-            string[] infinityEnemy = this.intToInfinityEnemy((int)element);
+            string[] infinityEnemy = intToInfinityEnemy((int)element);
             return infinityEnemy[1] + " (" + infinityEnemy[0] + ")";
         }
 
@@ -5452,7 +5452,7 @@ namespace pspo2seSaveEditorProgram
                         fields.img_item.Padding = new Padding(13, 0, 0, 0);
                     }
                     fields.txt_qty.Visible = false;
-                    this.displayElementImage(fields, item.element);
+                    displayElementImage(fields, item.element);
                     fields.img_element.Visible = true;
                     fields.txt_percent.Visible = true;
                     fields.txt_grinds.Visible = true;
@@ -5471,7 +5471,7 @@ namespace pspo2seSaveEditorProgram
                         {
                             if (item.spcl_effect == "Unseals" || item.spcl_effect == "Unsealed")
                             {
-                                int num = int.Parse(this.run.hexAndMathFunction.reversehex(item.spcl_effect_info, 4), NumberStyles.HexNumber);
+                                int num = int.Parse(run.hexAndMathFunction.reversehex(item.spcl_effect_info, 4), NumberStyles.HexNumber);
                                 if (num > 2000)
                                     item.spcl_effect = "Unsealed";
                                 fields.txt_effect.Text = "Effect  " + item.spcl_effect + " (Kills  " + (object)num + ")";
@@ -5484,7 +5484,7 @@ namespace pspo2seSaveEditorProgram
                         else
                             fields.txt_effect.Text = "Effect  " + item.spcl_effect;
                     }
-                    this.displayWeaponExtendInfo(fields, item);
+                    displayWeaponExtendInfo(fields, item);
                     break;
                 case pspo2seForm.itemType.Armor:
                     fields.img_item.Visible = true;
@@ -5494,7 +5494,7 @@ namespace pspo2seSaveEditorProgram
                     fields.txt_qty.Visible = false;
                     fields.txt_atk.Visible = true;
                     fields.txt_acc.Visible = true;
-                    this.displayElementImage(fields, item.element);
+                    displayElementImage(fields, item.element);
                     fields.img_element.Visible = true;
                     fields.txt_percent.Visible = true;
                     fields.txt_grinds.Visible = true;
@@ -5552,15 +5552,15 @@ namespace pspo2seSaveEditorProgram
                     fields.txt_special.Text = "Area  " + item.ext_level;
                     fields.txt_effect.Text = "Boss  " + item.level;
                     fields.txt_grinds.Text = "(+" + (object)item.percent + ")";
-                    if (item.special == this.elementToSubEnemyType(item.element))
+                    if (item.special == elementToSubEnemyType(item.element))
                     {
-                        fields.txt_atk.Text = "Main Enemy  " + this.elementToSubEnemyType(pspo2seForm.elementType.Neutral);
-                        fields.txt_acc.Text = "Sub Enemy  " + this.elementToSubEnemyType(pspo2seForm.elementType.Fire);
+                        fields.txt_atk.Text = "Main Enemy  " + elementToSubEnemyType(pspo2seForm.elementType.Neutral);
+                        fields.txt_acc.Text = "Sub Enemy  " + elementToSubEnemyType(pspo2seForm.elementType.Fire);
                     }
                     else
                     {
                         fields.txt_atk.Text = "Main Enemy  " + item.special;
-                        fields.txt_acc.Text = "Sub Enemy  " + this.elementToSubEnemyType(item.element);
+                        fields.txt_acc.Text = "Sub Enemy  " + elementToSubEnemyType(item.element);
                     }
                     fields.txt_grinds.Size = new Size(50, 18);
                     fields.txt_grinds.Location = new Point(241, 48);
@@ -5698,7 +5698,7 @@ namespace pspo2seSaveEditorProgram
                         fields.txt_effect.Visible = false;
                         fields.txt_atk.Visible = false;
                         fields.txt_acc.Visible = false;
-                        fields.txt_qty.Text = "LV" + (object)(item.pa_level + 1) + " (" + this.getSlotPALearntLevel(this.lstSaveSlotView.SelectedItems[0].Index, item.hex) + ")";
+                        fields.txt_qty.Text = "LV" + (object)(item.pa_level + 1) + " (" + getSlotPALearntLevel(lstSaveSlotView.SelectedItems[0].Index, item.hex) + ")";
                         break;
                     }
                     fields.img_item.Visible = true;
@@ -5706,14 +5706,14 @@ namespace pspo2seSaveEditorProgram
                     fields.txt_name.Padding = new Padding(26, 0, 0, 0);
                     fields.img_item.Padding = new Padding(13, 0, 0, 0);
                     fields.txt_qty.Visible = true;
-                    this.displayElementImage(fields, item.element);
+                    displayElementImage(fields, item.element);
                     fields.txt_percent.Visible = true;
                     fields.txt_grinds.Visible = true;
                     fields.txt_special.Visible = true;
                     fields.txt_effect.Visible = true;
                     fields.txt_atk.Visible = true;
                     fields.txt_acc.Visible = true;
-                    int num1 = (int)MessageBox.Show("Type not dealt with in displayItemInfo() " + this.txtInventoryHex.Text);
+                    MessageBox.Show("Type not dealt with in displayItemInfo() " + txtInventoryHex.Text);
                     fields.txt_qty.Text = item.qty.ToString() + "/" + (object)item.qty_max;
                     break;
             }
@@ -5763,16 +5763,16 @@ namespace pspo2seSaveEditorProgram
 
         private void sortInventory(int slotnum)
         {
-            ArrayList arrayList = ArrayList.Adapter((IList)this.saveData.slot[slotnum].inventory.item);
+            ArrayList arrayList = ArrayList.Adapter((IList)saveData.slot[slotnum].inventory.item);
             arrayList.Sort();
-            this.saveData.slot[slotnum].inventory.item = (pspo2seForm.inventoryItemClass[])arrayList.ToArray(typeof(pspo2seForm.inventoryItemClass));
+            saveData.slot[slotnum].inventory.item = (pspo2seForm.inventoryItemClass[])arrayList.ToArray(typeof(pspo2seForm.inventoryItemClass));
         }
 
         private void sortStorage()
         {
-            ArrayList arrayList = ArrayList.Adapter((IList)this.saveData.sharedInventory.item);
+            ArrayList arrayList = ArrayList.Adapter((IList)saveData.sharedInventory.item);
             arrayList.Sort();
-            this.saveData.sharedInventory.item = (pspo2seForm.inventoryItemClass[])arrayList.ToArray(typeof(pspo2seForm.inventoryItemClass));
+            saveData.sharedInventory.item = (pspo2seForm.inventoryItemClass[])arrayList.ToArray(typeof(pspo2seForm.inventoryItemClass));
         }
 
         private bool allowShowItem(int page, pspo2seForm.inventoryItemClass item)
@@ -5804,7 +5804,7 @@ namespace pspo2seSaveEditorProgram
                         return true;
                     break;
                 default:
-                    int num = (int)MessageBox.Show("page: " + (object)page + "not handled in allowShowItem()");
+                    MessageBox.Show("page: " + (object)page + "not handled in allowShowItem()");
                     break;
             }
             return false;
@@ -5812,46 +5812,46 @@ namespace pspo2seSaveEditorProgram
 
         private void displayInventory(int slotnum, int page)
         {
-            this.inventoryView.SelectedItems.Clear();
-            this.inventoryView.Items.Clear();
-            this.sortInventory(slotnum);
-            this.picWeaponSlot01.Image = (Image)null;
-            this.picWeaponSlot02.Image = (Image)null;
-            this.picWeaponSlot03.Image = (Image)null;
-            this.picWeaponSlot04.Image = (Image)null;
-            this.picWeaponSlot05.Image = (Image)null;
-            this.picWeaponSlot06.Image = (Image)null;
+            inventoryView.SelectedItems.Clear();
+            inventoryView.Items.Clear();
+            sortInventory(slotnum);
+            picWeaponSlot01.Image = (Image)null;
+            picWeaponSlot02.Image = (Image)null;
+            picWeaponSlot03.Image = (Image)null;
+            picWeaponSlot04.Image = (Image)null;
+            picWeaponSlot05.Image = (Image)null;
+            picWeaponSlot06.Image = (Image)null;
             int index1 = -1;
             for (int index2 = 0; index2 < 60; ++index2)
             {
                 pspo2seForm.inventoryItemClass inventoryItemClass1 = new pspo2seForm.inventoryItemClass();
-                pspo2seForm.inventoryItemClass inventoryItemClass2 = this.saveData.slot[slotnum].inventory.item[index2];
+                pspo2seForm.inventoryItemClass inventoryItemClass2 = saveData.slot[slotnum].inventory.item[index2];
                 if (inventoryItemClass2.type == pspo2seForm.itemType.Weapon && inventoryItemClass2.equipped_slot > 0)
                 {
-                    int index3 = (int)(this.getWeaponTypeFromHex(inventoryItemClass2.hex_reversed) - 1 + (int)inventoryItemClass2.element * 28);
+                    int index3 = (int)(getWeaponTypeFromHex(inventoryItemClass2.hex_reversed) - 1 + (int)inventoryItemClass2.element * 28);
                     switch (inventoryItemClass2.equipped_slot)
                     {
                         case 1:
-                            this.picWeaponSlot01.Image = this.imageListWeaponElements.Images[index3];
+                            picWeaponSlot01.Image = imageListWeaponElements.Images[index3];
                             break;
                         case 2:
-                            this.picWeaponSlot02.Image = this.imageListWeaponElements.Images[index3];
+                            picWeaponSlot02.Image = imageListWeaponElements.Images[index3];
                             break;
                         case 3:
-                            this.picWeaponSlot03.Image = this.imageListWeaponElements.Images[index3];
+                            picWeaponSlot03.Image = imageListWeaponElements.Images[index3];
                             break;
                         case 4:
-                            this.picWeaponSlot04.Image = this.imageListWeaponElements.Images[index3];
+                            picWeaponSlot04.Image = imageListWeaponElements.Images[index3];
                             break;
                         case 5:
-                            this.picWeaponSlot05.Image = this.imageListWeaponElements.Images[index3];
+                            picWeaponSlot05.Image = imageListWeaponElements.Images[index3];
                             break;
                         case 6:
-                            this.picWeaponSlot06.Image = this.imageListWeaponElements.Images[index3];
+                            picWeaponSlot06.Image = imageListWeaponElements.Images[index3];
                             break;
                     }
                 }
-                if (this.allowShowItem(page, inventoryItemClass2))
+                if (allowShowItem(page, inventoryItemClass2))
                 {
                     string str;
                     if (inventoryItemClass2.used)
@@ -5863,39 +5863,39 @@ namespace pspo2seSaveEditorProgram
                         str = "---- Free Slot ----";
                         inventoryItemClass2.rarity = -1;
                     }
-                    this.inventoryView.Items.Add(new ListViewItem()
+                    inventoryView.Items.Add(new ListViewItem()
                     {
                         Text = str,
-                        ImageIndex = this.getImageListNumber(inventoryItemClass2),
+                        ImageIndex = getImageListNumber(inventoryItemClass2),
                         SubItems = {
               string.Concat((object) index2)
             }
                     });
-                    if (this.selectInventoryItemAfterLoad != -1 && inventoryItemClass2.id == this.selectInventoryItemAfterLoad)
-                        index1 = this.inventoryView.Items.Count - 1;
+                    if (selectInventoryItemAfterLoad != -1 && inventoryItemClass2.id == selectInventoryItemAfterLoad)
+                        index1 = inventoryView.Items.Count - 1;
                 }
             }
-            this.tabPageInventory.Text = "Inventory (" + (object)this.saveData.slot[slotnum].inventory.itemsUsed + "/60)";
+            tabPageInventory.Text = "Inventory (" + (object)saveData.slot[slotnum].inventory.itemsUsed + "/60)";
             if (index1 != -1)
             {
-                this.inventoryView.Items[index1].Selected = true;
-                this.inventoryView.Items[index1].EnsureVisible();
-                this.selectInventoryItemAfterLoad = -1;
+                inventoryView.Items[index1].Selected = true;
+                inventoryView.Items[index1].EnsureVisible();
+                selectInventoryItemAfterLoad = -1;
             }
             else
             {
-                if (this.selectInventoryItemAfterLoad == -1)
+                if (selectInventoryItemAfterLoad == -1)
                     return;
                 for (int index2 = 0; index2 < 60; ++index2)
                 {
-                    if (this.saveData.slot[slotnum].inventory.item[index2].id == this.selectInventoryItemAfterLoad)
+                    if (saveData.slot[slotnum].inventory.item[index2].id == selectInventoryItemAfterLoad)
                     {
                         for (int index3 = 0; index3 < 5; ++index3)
                         {
-                            if (this.allowShowItem(index3 + 1, this.saveData.slot[slotnum].inventory.item[index2]))
+                            if (allowShowItem(index3 + 1, saveData.slot[slotnum].inventory.item[index2]))
                             {
-                                this.tabArea.SelectedIndex = 2;
-                                this.inventoryViewPages.SelectedIndex = index3;
+                                tabArea.SelectedIndex = 2;
+                                inventoryViewPages.SelectedIndex = index3;
                                 break;
                             }
                         }
@@ -5905,63 +5905,63 @@ namespace pspo2seSaveEditorProgram
             }
         }
 
-        private int getFreeInventoryItemId(int slot) => this.saveData.slot[slot].inventory.itemsUsed < 60 ? this.saveData.slot[slot].inventory.itemsUsed * 36 + 8 + slot * this.mainSettings.saveStructureIndex.slot_size + this.mainSettings.saveStructureIndex.inventory_slots_pos : -1;
+        private int getFreeInventoryItemId(int slot) => saveData.slot[slot].inventory.itemsUsed < 60 ? saveData.slot[slot].inventory.itemsUsed * 36 + 8 + slot * mainSettings.saveStructureIndex.slot_size + mainSettings.saveStructureIndex.inventory_slots_pos : -1;
 
         private void displaySharedStorage(int page)
         {
-            this.storageView.SelectedItems.Clear();
-            this.storageView.Items.Clear();
-            this.sortStorage();
-            this.saveData.sharedInventory.itemsUsed = 0;
-            this.txtStorageMeseta.Text = string.Concat((object)this.saveData.sharedMeseta);
+            storageView.SelectedItems.Clear();
+            storageView.Items.Clear();
+            sortStorage();
+            saveData.sharedInventory.itemsUsed = 0;
+            txtStorageMeseta.Text = string.Concat((object)saveData.sharedMeseta);
             int index1 = -1;
-            for (int index2 = 0; index2 < this.mainSettings.saveStructureIndex.shared_inventory_slots; ++index2)
+            for (int index2 = 0; index2 < mainSettings.saveStructureIndex.shared_inventory_slots; ++index2)
             {
-                if (this.saveData.sharedInventory.item[index2].type != pspo2seForm.itemType.free_slot)
-                    ++this.saveData.sharedInventory.itemsUsed;
-                pspo2seForm.inventoryItemClass inventoryItemClass = this.saveData.sharedInventory.item[index2];
-                if (this.allowShowItem(page, inventoryItemClass))
+                if (saveData.sharedInventory.item[index2].type != pspo2seForm.itemType.free_slot)
+                    ++saveData.sharedInventory.itemsUsed;
+                pspo2seForm.inventoryItemClass inventoryItemClass = saveData.sharedInventory.item[index2];
+                if (allowShowItem(page, inventoryItemClass))
                 {
                     string text;
                     if (inventoryItemClass.type != pspo2seForm.itemType.free_slot)
                     {
                         text = !(inventoryItemClass.name == "") || !(inventoryItemClass.name_jp != "") ? (!(inventoryItemClass.name == "") ? inventoryItemClass.name + " (" + inventoryItemClass.name_jp + ")" : "Unk_" + inventoryItemClass.hex_reversed) : inventoryItemClass.name_jp;
-                        if (this.getWeaponExtendType(inventoryItemClass.extended, inventoryItemClass.style, this.getWeaponTypeFromHex(inventoryItemClass.hex_reversed)) == pspo2seForm.itemExtendType.unknown)
+                        if (getWeaponExtendType(inventoryItemClass.extended, inventoryItemClass.style, getWeaponTypeFromHex(inventoryItemClass.hex_reversed)) == pspo2seForm.itemExtendType.unknown)
                         {
-                            int num2 = (int)MessageBox.Show("unknown extend " + text + " " + inventoryItemClass.hex_reversed);
+                            MessageBox.Show("unknown extend " + text + " " + inventoryItemClass.hex_reversed);
                         }
                     }
                     else
                         text = "---- Free Slot ----";
-                    int imageListNumber = this.getImageListNumber(inventoryItemClass);
-                    this.storageView.Items.Add(new ListViewItem(text, imageListNumber)
+                    int imageListNumber = getImageListNumber(inventoryItemClass);
+                    storageView.Items.Add(new ListViewItem(text, imageListNumber)
                     {
                         SubItems = {
               string.Concat((object) index2)
             }
                     });
-                    if (this.selectItemAfterLoad != -1 && inventoryItemClass.id == this.selectItemAfterLoad)
-                        index1 = this.storageView.Items.Count - 1;
+                    if (selectItemAfterLoad != -1 && inventoryItemClass.id == selectItemAfterLoad)
+                        index1 = storageView.Items.Count - 1;
                 }
             }
             if (index1 != -1)
             {
-                this.storageView.Items[index1].Selected = true;
-                this.storageView.Items[index1].EnsureVisible();
-                this.selectItemAfterLoad = -1;
+                storageView.Items[index1].Selected = true;
+                storageView.Items[index1].EnsureVisible();
+                selectItemAfterLoad = -1;
             }
-            else if (this.selectItemAfterLoad != -1)
+            else if (selectItemAfterLoad != -1)
             {
-                for (int index2 = 0; index2 < this.mainSettings.saveStructureIndex.shared_inventory_slots; ++index2)
+                for (int index2 = 0; index2 < mainSettings.saveStructureIndex.shared_inventory_slots; ++index2)
                 {
-                    if (this.saveData.sharedInventory.item[index2].id == this.selectItemAfterLoad)
+                    if (saveData.sharedInventory.item[index2].id == selectItemAfterLoad)
                     {
                         for (int index3 = 0; index3 < 5; ++index3)
                         {
-                            if (this.allowShowItem(index3 + 1, this.saveData.sharedInventory.item[index2]))
+                            if (allowShowItem(index3 + 1, saveData.sharedInventory.item[index2]))
                             {
-                                this.tabArea.SelectedIndex = 3;
-                                this.storageViewPages.SelectedIndex = index3;
+                                tabArea.SelectedIndex = 3;
+                                storageViewPages.SelectedIndex = index3;
                                 break;
                             }
                         }
@@ -5969,7 +5969,7 @@ namespace pspo2seSaveEditorProgram
                     }
                 }
             }
-            this.tabPageStorage.Text = "Shared (" + (object)this.saveData.sharedInventory.itemsUsed + "/" + (object)this.mainSettings.saveStructureIndex.shared_inventory_slots + ")";
+            tabPageStorage.Text = "Shared (" + (object)saveData.sharedInventory.itemsUsed + "/" + (object)mainSettings.saveStructureIndex.shared_inventory_slots + ")";
         }
 
         private int getImageListNumber(pspo2seForm.inventoryItemClass item)
@@ -5978,7 +5978,7 @@ namespace pspo2seSaveEditorProgram
             switch (item.type)
             {
                 case pspo2seForm.itemType.Weapon:
-                    num1 = (int)(this.getWeaponTypeFromHex(item.hex_reversed) - 1 + 28 * (int)this.getItemRankFromRarity(item.rarity));
+                    num1 = (int)(getWeaponTypeFromHex(item.hex_reversed) - 1 + 28 * (int)getItemRankFromRarity(item.rarity));
                     if (item.equipped_now == 1)
                     {
                         num1 += 280;
@@ -5991,7 +5991,7 @@ namespace pspo2seSaveEditorProgram
                     }
                     break;
                 case pspo2seForm.itemType.Armor:
-                    num1 = (int)this.getItemRankFromRarity(item.rarity);
+                    num1 = (int)getItemRankFromRarity(item.rarity);
                     if (item.equipped_now == 1)
                     {
                         num1 += 10;
@@ -6004,7 +6004,7 @@ namespace pspo2seSaveEditorProgram
                     }
                     break;
                 case pspo2seForm.itemType.Green_Item:
-                    switch (this.getGreenItemTypeFromHex(item.hex_reversed))
+                    switch (getGreenItemTypeFromHex(item.hex_reversed))
                     {
                         case pspo2seForm.greenItemType.monomate:
                             num1 = 3;
@@ -6040,7 +6040,7 @@ namespace pspo2seSaveEditorProgram
                             num1 = 8;
                             break;
                         default:
-                            int num2 = (int)MessageBox.Show("Green item type not recognised for image: " + (object)this.getGreenItemTypeFromHex(item.hex_reversed));
+                            MessageBox.Show("Green item type not recognised for image: " + (object)getGreenItemTypeFromHex(item.hex_reversed));
                             break;
                     }
                     if (item.equipped_now == 1)
@@ -6067,7 +6067,7 @@ namespace pspo2seSaveEditorProgram
                     num1 = 8;
                     break;
                 case pspo2seForm.itemType.Slot_Unit:
-                    num1 = (int)(this.getSlotTypeFromHex(item.hex_reversed) + 15 + (int)this.getItemRankFromRarity(item.rarity) * 4);
+                    num1 = (int)(getSlotTypeFromHex(item.hex_reversed) + 15 + (int)getItemRankFromRarity(item.rarity) * 4);
                     if (item.equipped_now == 1)
                     {
                         num1 += 40;
@@ -6080,7 +6080,7 @@ namespace pspo2seSaveEditorProgram
                     }
                     break;
                 case pspo2seForm.itemType.Clothes_human:
-                    switch (this.getClothesTypeFromHex(item.hex_reversed))
+                    switch (getClothesTypeFromHex(item.hex_reversed))
                     {
                         case 1:
                             num1 = 0;
@@ -6113,7 +6113,7 @@ namespace pspo2seSaveEditorProgram
                     }
                     break;
                 case pspo2seForm.itemType.Clothes_android:
-                    switch (this.getClothesTypeFromHex(item.hex_reversed))
+                    switch (getClothesTypeFromHex(item.hex_reversed))
                     {
                         case 1:
                             num1 = 6;
@@ -6169,109 +6169,109 @@ namespace pspo2seSaveEditorProgram
             switch (page)
             {
                 case 1:
-                    this.inventoryView.SmallImageList = this.weaponWithRankImageList;
+                    inventoryView.SmallImageList = weaponWithRankImageList;
                     break;
                 case 2:
-                    this.inventoryView.SmallImageList = this.armourImageList;
+                    inventoryView.SmallImageList = armourImageList;
                     break;
                 case 3:
-                    this.inventoryView.SmallImageList = this.itemImageList;
+                    inventoryView.SmallImageList = itemImageList;
                     break;
                 case 4:
-                    this.inventoryView.SmallImageList = this.clothesImageList;
+                    inventoryView.SmallImageList = clothesImageList;
                     break;
                 case 5:
-                    this.inventoryView.SmallImageList = this.decoImageList;
+                    inventoryView.SmallImageList = decoImageList;
                     break;
                 case 6:
-                    this.inventoryView.SmallImageList = this.decoImageList;
+                    inventoryView.SmallImageList = decoImageList;
                     break;
             }
-            this.btnInventoryDelete.Enabled = false;
-            this.btnInventoryImportSelected.Enabled = false;
-            this.btnInventoryExportSelected.Enabled = false;
-            this.chkDeleteExportInventory.Enabled = false;
-            this.btnInventoryDeposit.Enabled = false;
-            this.displayInventory(this.lstSaveSlotView.SelectedItems[0].Index, page);
+            btnInventoryDelete.Enabled = false;
+            btnInventoryImportSelected.Enabled = false;
+            btnInventoryExportSelected.Enabled = false;
+            chkDeleteExportInventory.Enabled = false;
+            btnInventoryDeposit.Enabled = false;
+            displayInventory(lstSaveSlotView.SelectedItems[0].Index, page);
             Application.DoEvents();
             switch (page - 1)
             {
                 case 0:
-                    this.openImageFloater();
+                    openImageFloater();
                     break;
                 case 1:
-                    this.closeImageFloater();
+                    closeImageFloater();
                     break;
                 case 2:
-                    this.closeImageFloater();
+                    closeImageFloater();
                     break;
                 case 3:
-                    this.closeImageFloater();
+                    closeImageFloater();
                     break;
                 case 4:
-                    this.closeImageFloater();
+                    closeImageFloater();
                     break;
                 case 5:
-                    this.closeImageFloater();
+                    closeImageFloater();
                     break;
             }
         }
 
         private void changeStoragePage(int page)
         {
-            this.btnStorageDelete.Enabled = false;
-            this.btnStorageImportSelected.Enabled = false;
-            this.btnStorageExportSelected.Enabled = false;
-            this.chkDeleteExportStorage.Enabled = false;
-            this.btnStorageWithdraw.Enabled = false;
-            this.displaySharedStorage(page);
+            btnStorageDelete.Enabled = false;
+            btnStorageImportSelected.Enabled = false;
+            btnStorageExportSelected.Enabled = false;
+            chkDeleteExportStorage.Enabled = false;
+            btnStorageWithdraw.Enabled = false;
+            displaySharedStorage(page);
             switch (page - 1)
             {
                 case 0:
-                    this.storageView.SmallImageList = this.weaponWithRankImageList;
+                    storageView.SmallImageList = weaponWithRankImageList;
                     break;
                 case 1:
-                    this.storageView.SmallImageList = this.armourImageList;
+                    storageView.SmallImageList = armourImageList;
                     break;
                 case 2:
-                    this.storageView.SmallImageList = this.itemImageList;
+                    storageView.SmallImageList = itemImageList;
                     break;
                 case 3:
-                    this.storageView.SmallImageList = this.clothesImageList;
+                    storageView.SmallImageList = clothesImageList;
                     break;
                 case 4:
-                    this.storageView.SmallImageList = this.decoImageList;
+                    storageView.SmallImageList = decoImageList;
                     break;
                 case 5:
-                    this.storageView.SmallImageList = this.decoImageList;
+                    storageView.SmallImageList = decoImageList;
                     break;
             }
             switch (page - 1)
             {
                 case 0:
-                    this.openImageFloater();
+                    openImageFloater();
                     break;
                 case 1:
-                    this.closeImageFloater();
+                    closeImageFloater();
                     break;
                 case 2:
-                    this.closeImageFloater();
+                    closeImageFloater();
                     break;
                 case 3:
-                    this.closeImageFloater();
+                    closeImageFloater();
                     break;
                 case 4:
-                    this.closeImageFloater();
+                    closeImageFloater();
                     break;
                 case 5:
-                    this.closeImageFloater();
+                    closeImageFloater();
                     break;
             }
         }
 
         public string hexToEffect(string hex)
         {
-            switch (this.saveData.type)
+            switch (saveData.type)
             {
                 case pspo2seForm.SaveType.PSP2:
                     switch (hex)
@@ -6334,7 +6334,7 @@ namespace pspo2seSaveEditorProgram
                             return "unk_" + hex;
                     }
                 default:
-                    return "hexToEffect invalid save type " + (object)this.saveData.type;
+                    return "hexToEffect invalid save type " + (object)saveData.type;
             }
         }
 
@@ -6349,14 +6349,14 @@ namespace pspo2seSaveEditorProgram
             }
             catch (Exception ex)
             {
-                int num = (int)MessageBox.Show(ex.Message, "Fatal Error!");
+                MessageBox.Show(ex.Message, "Fatal Error!");
             }
             return fileStream;
         }
 
         private string getGameIdFromSfo(string gameSave)
         {
-            FileStream fileStream = this.openFileRead(Path.Combine(Path.GetDirectoryName(gameSave), "PARAM.SFO"));
+            FileStream fileStream = openFileRead(Path.Combine(Path.GetDirectoryName(gameSave), "PARAM.SFO"));
             BinaryReader binaryReader = new BinaryReader((Stream)fileStream);
             binaryReader.ReadBytes(1296);
             byte[] bytes = binaryReader.ReadBytes(9);
@@ -6370,10 +6370,10 @@ namespace pspo2seSaveEditorProgram
             processStartInfo.FileName = "SED.exe";
             if (!System.IO.File.Exists(processStartInfo.FileName))
             {
-                int num = (int)MessageBox.Show("SED.exe is missing");
+                MessageBox.Show("SED.exe is missing");
                 return false;
             }
-            string gameIdFromSfo = this.getGameIdFromSfo(file);
+            string gameIdFromSfo = getGameIdFromSfo(file);
             if (!System.IO.File.Exists("data\\keys\\" + gameIdFromSfo + ".bin"))
             {
                 if (MessageBox.Show("You must place the '" + gameIdFromSfo + ".bin' key file in the data\\keys directory.\n\nDo you want to generate it now?", "Generate Key", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel)
@@ -6393,7 +6393,7 @@ namespace pspo2seSaveEditorProgram
                 }
                 catch (Exception ex)
                 {
-                    int num = (int)MessageBox.Show("Failed to generate the key.\n\nError: " + ex.Message);
+                    MessageBox.Show("Failed to generate the key.\n\nError: " + ex.Message);
                     return false;
                 }
             }
@@ -6412,19 +6412,19 @@ namespace pspo2seSaveEditorProgram
             processStartInfo.FileName = "SED.exe";
             if (!System.IO.File.Exists(processStartInfo.FileName))
             {
-                int num = (int)MessageBox.Show("SED.exe is missing");
+                MessageBox.Show("SED.exe is missing");
                 return false;
             }
             string path = Path.Combine(Path.GetDirectoryName(dest), "PARAM.SFO");
             if (!System.IO.File.Exists(path))
             {
-                int num = (int)MessageBox.Show("PARAM.SFO does not exist in that location.\n\nPlease choose the original location of your save file");
+                MessageBox.Show("PARAM.SFO does not exist in that location.\n\nPlease choose the original location of your save file");
                 return false;
             }
-            string gameIdFromSfo = this.getGameIdFromSfo(dest);
+            string gameIdFromSfo = getGameIdFromSfo(dest);
             if (!System.IO.File.Exists("data\\keys\\" + gameIdFromSfo + ".bin"))
             {
-                int num = (int)MessageBox.Show("You must place the '" + gameIdFromSfo + ".bin' key file in the data\\keys directory.\n\nSearch for SGKeyDumper to obtain the key for your game.");
+                MessageBox.Show("You must place the '" + gameIdFromSfo + ".bin' key file in the data\\keys directory.\n\nSearch for SGKeyDumper to obtain the key for your game.");
                 return false;
             }
             processStartInfo.Arguments = "-e \"" + file + "\" \"" + path + "\" \"" + dest + "\" data\\keys\\" + gameIdFromSfo + ".bin";
@@ -6438,30 +6438,30 @@ namespace pspo2seSaveEditorProgram
 
         private bool validate_filelength(long filelength)
         {
-            this.mainSettings.saveStructureIndex.changeSaveSettingsType(pspo2seForm.SaveType.PSP2);
-            this.mainSettings.saveStructureIndex.encrypted = false;
-            if (filelength == (long)this.mainSettings.saveStructureIndex.total_size || filelength == (long)this.mainSettings.saveStructureIndex.total_size_enc)
+            mainSettings.saveStructureIndex.changeSaveSettingsType(pspo2seForm.SaveType.PSP2);
+            mainSettings.saveStructureIndex.encrypted = false;
+            if (filelength == (long)mainSettings.saveStructureIndex.total_size || filelength == (long)mainSettings.saveStructureIndex.total_size_enc)
             {
-                this.saveData.set_type(pspo2seForm.SaveType.PSP2);
-                if (filelength == (long)this.mainSettings.saveStructureIndex.total_size_enc)
-                    this.mainSettings.saveStructureIndex.encrypted = true;
-                this.txtFileSize.Text = Convert.ToString(this.mainSettings.saveStructureIndex.total_size) + " bytes";
+                saveData.set_type(pspo2seForm.SaveType.PSP2);
+                if (filelength == (long)mainSettings.saveStructureIndex.total_size_enc)
+                    mainSettings.saveStructureIndex.encrypted = true;
+                txtFileSize.Text = Convert.ToString(mainSettings.saveStructureIndex.total_size) + " bytes";
                 return true;
             }
-            this.mainSettings.saveStructureIndex.changeSaveSettingsType(pspo2seForm.SaveType.PSP2I);
-            if (filelength == (long)this.mainSettings.saveStructureIndex.total_size || filelength == (long)this.mainSettings.saveStructureIndex.total_size_enc)
+            mainSettings.saveStructureIndex.changeSaveSettingsType(pspo2seForm.SaveType.PSP2I);
+            if (filelength == (long)mainSettings.saveStructureIndex.total_size || filelength == (long)mainSettings.saveStructureIndex.total_size_enc)
             {
-                this.saveData.set_type(pspo2seForm.SaveType.PSP2I);
-                if (filelength == (long)this.mainSettings.saveStructureIndex.total_size_enc)
-                    this.mainSettings.saveStructureIndex.encrypted = true;
-                this.txtFileSize.Text = Convert.ToString(this.mainSettings.saveStructureIndex.total_size) + " bytes";
+                saveData.set_type(pspo2seForm.SaveType.PSP2I);
+                if (filelength == (long)mainSettings.saveStructureIndex.total_size_enc)
+                    mainSettings.saveStructureIndex.encrypted = true;
+                txtFileSize.Text = Convert.ToString(mainSettings.saveStructureIndex.total_size) + " bytes";
                 return true;
             }
-            this.saveData.set_type(pspo2seForm.SaveType.NONE);
-            this.txtFileSize.Text = "0 bytes";
-            this.displaySlotInfo(0);
-            this.showGameImage();
-            this.txtFileSize.Text = Convert.ToString(filelength) + " bytes";
+            saveData.set_type(pspo2seForm.SaveType.NONE);
+            txtFileSize.Text = "0 bytes";
+            displaySlotInfo(0);
+            showGameImage();
+            txtFileSize.Text = Convert.ToString(filelength) + " bytes";
             return false;
         }
 
@@ -6474,7 +6474,7 @@ namespace pspo2seSaveEditorProgram
             int index1 = startpos;
             for (int index2 = 0; index2 < len; ++index2)
             {
-                this.savedata_decimal_array[index1] = (int)br.ReadByte();
+                savedata_decimal_array[index1] = (int)br.ReadByte();
                 ++index1;
             }
             if (type == pspo2seForm.partFileType.inventory)
@@ -6482,7 +6482,7 @@ namespace pspo2seSaveEditorProgram
                 for (int index2 = 0; index2 < 8; ++index2)
                 {
                     int num = (int)br.ReadByte();
-                    this.savedata_decimal_array[index1] = 0;
+                    savedata_decimal_array[index1] = 0;
                     ++index1;
                 }
             }
@@ -6497,9 +6497,9 @@ namespace pspo2seSaveEditorProgram
           string fn = "")
         {
             List<string> stringList = new List<string>();
-            if (this.savedata_decimal_array_filled == 0)
+            if (savedata_decimal_array_filled == 0)
             {
-                int num = (int)MessageBox.Show("nothing to load into");
+                MessageBox.Show("nothing to load into");
                 return -1;
             }
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -6512,7 +6512,7 @@ namespace pspo2seSaveEditorProgram
             else
             {
                 openFileDialog.Title = "PSPo2 Save Editor: Open File";
-                if (this.legitVersion())
+                if (legitVersion())
                     openFileDialog.Title = "PSPo2 Save Viewer: Open File";
                 openFileDialog.Filter = ext_options;
                 openFileDialog.FilterIndex = 1;
@@ -6529,19 +6529,19 @@ namespace pspo2seSaveEditorProgram
                 for (int index = 0; index < openFileDialog.FileNames.Length; ++index)
                     stringList.Add(openFileDialog.FileNames[index]);
             }
-            if (type != pspo2seForm.partFileType.infinity_mission && allowMultiSelect && stringList.Count > 60 - this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].inventory.itemsUsed)
+            if (type != pspo2seForm.partFileType.infinity_mission && allowMultiSelect && stringList.Count > 60 - saveData.slot[lstSaveSlotView.SelectedItems[0].Index].inventory.itemsUsed)
             {
-                int num = (int)MessageBox.Show("You do not have enough slots to import the selected items.", "Not Enough Slots", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                MessageBox.Show("You do not have enough slots to import the selected items.", "Not Enough Slots", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                 return -1;
             }
-            if (allowMultiSelect && type == pspo2seForm.partFileType.infinity_mission && stringList.Count > 100 - this.saveData.infinityMissions.itemsUsed)
+            if (allowMultiSelect && type == pspo2seForm.partFileType.infinity_mission && stringList.Count > 100 - saveData.infinityMissions.itemsUsed)
             {
-                int num = (int)MessageBox.Show("You do not have enough slots to import the selected items.", "Not Enough Slots", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                MessageBox.Show("You do not have enough slots to import the selected items.", "Not Enough Slots", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                 return -1;
             }
             foreach (string fileLoc in stringList)
             {
-                FileStream fileStream = this.openFileRead(fileLoc);
+                FileStream fileStream = openFileRead(fileLoc);
                 if (fileStream == null)
                     return -1;
                 BinaryReader br = new BinaryReader((Stream)fileStream);
@@ -6549,9 +6549,9 @@ namespace pspo2seSaveEditorProgram
                 switch (type)
                 {
                     case pspo2seForm.partFileType.character:
-                        if (!this.validate_character_file_length(length))
+                        if (!validate_character_file_length(length))
                         {
-                            int num = (int)MessageBox.Show("File does not appear to be a valid character file");
+                            MessageBox.Show("File does not appear to be a valid character file");
                             fileStream.Close();
                             return -1;
                         }
@@ -6559,28 +6559,28 @@ namespace pspo2seSaveEditorProgram
                     case pspo2seForm.partFileType.inventory:
                         if (length != 2161)
                         {
-                            int num = (int)MessageBox.Show("File does not appear to be a valid inventory file");
+                            MessageBox.Show("File does not appear to be a valid inventory file");
                             fileStream.Close();
                             return -1;
                         }
-                        this.savedata_decimal_array[this.mainSettings.saveStructureIndex.inventory_slots_used_pos + this.mainSettings.saveStructureIndex.slot_size * this.lstSaveSlotView.SelectedItems[0].Index] = (int)br.ReadByte();
+                        savedata_decimal_array[mainSettings.saveStructureIndex.inventory_slots_used_pos + mainSettings.saveStructureIndex.slot_size * lstSaveSlotView.SelectedItems[0].Index] = (int)br.ReadByte();
                         for (int index1 = 0; index1 < 60; ++index1)
                         {
                             int index2 = startpos + index1 * 36;
                             for (int index3 = 0; index3 < 8; ++index3)
                             {
                                 int num = (int)br.ReadByte();
-                                this.savedata_decimal_array[index2] = 0;
+                                savedata_decimal_array[index2] = 0;
                                 ++index2;
                             }
-                            this.loadObjectIntoBuffer(br, index2, 20, pspo2seForm.partFileType.inventory);
+                            loadObjectIntoBuffer(br, index2, 20, pspo2seForm.partFileType.inventory);
                         }
                         fileStream.Close();
                         return 1;
                     case pspo2seForm.partFileType.storage:
-                        if (length != this.mainSettings.saveStructureIndex.shared_inventory_slots * 20)
+                        if (length != mainSettings.saveStructureIndex.shared_inventory_slots * 20)
                         {
-                            int num = (int)MessageBox.Show("File does not appear to be a valid storage file");
+                            MessageBox.Show("File does not appear to be a valid storage file");
                             fileStream.Close();
                             return -1;
                         }
@@ -6588,33 +6588,33 @@ namespace pspo2seSaveEditorProgram
                     case pspo2seForm.partFileType.item:
                         if (length != 20)
                         {
-                            int num = (int)MessageBox.Show("File does not appear to be a valid item file");
+                            MessageBox.Show("File does not appear to be a valid item file");
                             fileStream.Close();
                             return -1;
                         }
                         if (allowMultiSelect)
                         {
-                            startpos = this.getFreeInventoryItemId(this.lstSaveSlotView.SelectedItems[0].Index);
+                            startpos = getFreeInventoryItemId(lstSaveSlotView.SelectedItems[0].Index);
                             if (startpos < 0)
                             {
-                                int num = (int)MessageBox.Show("Error: Trying to load an item but there are no available slots");
+                                MessageBox.Show("Error: Trying to load an item but there are no available slots");
                                 return -1;
                             }
-                            this.selectInventoryItemAfterLoad = startpos;
-                            this.overwriteHexInBuffer("0000000000000000", startpos + 20);
-                            this.overwriteHexInBuffer("00000000", startpos - 8);
-                            ++this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].inventory.itemsUsed;
-                            string hex = this.saveData.slot[this.lstSaveSlotView.SelectedItems[0].Index].inventory.itemsUsed.ToString("X1");
+                            selectInventoryItemAfterLoad = startpos;
+                            overwriteHexInBuffer("0000000000000000", startpos + 20);
+                            overwriteHexInBuffer("00000000", startpos - 8);
+                            ++saveData.slot[lstSaveSlotView.SelectedItems[0].Index].inventory.itemsUsed;
+                            string hex = saveData.slot[lstSaveSlotView.SelectedItems[0].Index].inventory.itemsUsed.ToString("X1");
                             while (hex.Length < 2)
                                 hex = "0" + hex;
-                            this.overwriteHexInBuffer(hex, this.mainSettings.saveStructureIndex.inventory_slots_used_pos + this.mainSettings.saveStructureIndex.slot_size * this.lstSaveSlotView.SelectedItems[0].Index);
+                            overwriteHexInBuffer(hex, mainSettings.saveStructureIndex.inventory_slots_used_pos + mainSettings.saveStructureIndex.slot_size * lstSaveSlotView.SelectedItems[0].Index);
                             break;
                         }
                         break;
                     case pspo2seForm.partFileType.infinity_mission:
                         if (length != 104)
                         {
-                            int num = (int)MessageBox.Show("File does not appear to be a valid infinity mission file");
+                            MessageBox.Show("File does not appear to be a valid infinity mission file");
                             fileStream.Close();
                             return -1;
                         }
@@ -6622,17 +6622,17 @@ namespace pspo2seSaveEditorProgram
                     case pspo2seForm.partFileType.infinity_mission_pack:
                         if (length != 10401)
                         {
-                            int num = (int)MessageBox.Show("File does not appear to be a valid infinity mission pack file");
+                            MessageBox.Show("File does not appear to be a valid infinity mission pack file");
                             fileStream.Close();
                             return -1;
                         }
                         break;
                     default:
-                        int num1 = (int)MessageBox.Show("file " + (object)type + " is not supported");
+                        MessageBox.Show("file " + (object)type + " is not supported");
                         fileStream.Close();
                         return -1;
                 }
-                this.loadObjectIntoBuffer(br, startpos, length, type);
+                loadObjectIntoBuffer(br, startpos, length, type);
                 fileStream.Close();
                 if (type == pspo2seForm.partFileType.infinity_mission && allowMultiSelect)
                     startpos += 104;
@@ -6651,81 +6651,81 @@ namespace pspo2seSaveEditorProgram
             int num1 = pos;
             if (pos > item_position)
             {
-                int num2 = (int)MessageBox.Show("Requested position " + (object)pos + " is greater than the predicted item pos" + (object)item_position);
+                MessageBox.Show("Requested position " + (object)pos + " is greater than the predicted item pos" + (object)item_position);
                 return 0;
             }
             while (num1 < item_position)
-                this.brSkipBytes(1, &num1, br, reload, showSaveParseProgress);
+                brSkipBytes(1, &num1, br, reload, showSaveParseProgress);
             return num1;
         }
 
         private unsafe bool parseSaveFile(string fileLoc, bool reload)
         {
-            this.chunkPos = 0;
+            chunkPos = 0;
             FileStream fileStream = (FileStream)null;
             BinaryReader br = (BinaryReader)null;
             if (!reload)
             {
-                this.initSaveBuffer();
-                this.initSlotVars();
-                fileStream = this.openFileRead(fileLoc);
+                initSaveBuffer();
+                initSlotVars();
+                fileStream = openFileRead(fileLoc);
                 if (fileStream == null)
                     return false;
                 br = new BinaryReader((Stream)fileStream, Encoding.BigEndianUnicode);
-                if (!this.validate_filelength(br.BaseStream.Length))
+                if (!validate_filelength(br.BaseStream.Length))
                 {
                     fileStream.Close();
                     return false;
                 }
-                if (this.mainSettings.saveStructureIndex.encrypted)
+                if (mainSettings.saveStructureIndex.encrypted)
                 {
                     fileStream.Close();
                     if (System.IO.File.Exists("data\\temp\\denc.bin"))
                         System.IO.File.Delete("data\\temp\\denc.bin");
-                    if (!this.decryptSaveFile(fileLoc))
+                    if (!decryptSaveFile(fileLoc))
                     {
-                        int num = (int)MessageBox.Show("There was an error decrypting the save file.");
+                        MessageBox.Show("There was an error decrypting the save file.");
                         return false;
                     }
-                    fileStream = this.openFileRead("data\\temp\\denc.bin");
+                    fileStream = openFileRead("data\\temp\\denc.bin");
                     br = new BinaryReader((Stream)fileStream, Encoding.BigEndianUnicode);
                 }
-                this.saveData.size = (int)br.BaseStream.Length;
+                saveData.size = (int)br.BaseStream.Length;
             }
             else
             {
-                this.initSlotVars();
-                this.savedata_decimal_array_read_pos = 0;
-                this.saveData.size = this.savedata_decimal_array_filled;
+                initSlotVars();
+                savedata_decimal_array_read_pos = 0;
+                saveData.size = savedata_decimal_array_filled;
             }
-            this.toolStripStatusLabel.Text = "Parsing Save 0%";
-            this.toolStripProgressBar.Maximum = this.saveData.size;
-            this.toolStripProgressBar.Value = 0;
+            toolStripStatusLabel.Text = "Parsing Save 0%";
+            toolStripProgressBar.Maximum = saveData.size;
+            toolStripProgressBar.Value = 0;
             int pos = 0;
-            this.parseHeaderInfo(br, &pos, reload);
+            parseHeaderInfo(br, &pos, reload);
             for (int slot = 0; slot < 8; ++slot)
             {
-                if (!this.parseSlotInfo(slot, br, &pos, reload))
+                if (!parseSlotInfo(slot, br, &pos, reload))
                 {
                     fileStream?.Close();
                     return false;
                 }
             }
-            if (!this.parseCharacterSharedStorageSlotsInfo(br, &pos, reload))
+            if (!parseCharacterSharedStorageSlotsInfo(br, &pos, reload))
             {
                 fileStream?.Close();
                 return false;
             }
-            if (!this.parseInfinityMissionSlotsInfo(br, &pos, reload))
+            if (!parseInfinityMissionSlotsInfo(br, &pos, reload))
             {
                 fileStream?.Close();
                 return false;
             }
-            int totalSize = this.mainSettings.saveStructureIndex.total_size;
-            pos = this.adjustPosition(pos, br, totalSize, reload, "end of file", true);
+            int totalSize = mainSettings.saveStructureIndex.total_size;
+            pos = adjustPosition(pos, br, totalSize, reload, "end of file", true);
             fileStream?.Close();
-            this.toolStripStatusLabel.Text = "Save File Loaded";
-            this.toolStripProgressBar.Value = this.toolStripProgressBar.Maximum;
+            toolStripStatusLabel.Text = "Save File Loaded";
+            toolStripProgressBar.Value = toolStripProgressBar.Maximum;
             return true;
         }
 
@@ -6733,10 +6733,10 @@ namespace pspo2seSaveEditorProgram
         {
             if (*pos > 0)
             {
-                int num = (int)MessageBox.Show("Already scanned past the header", "scan error");
+                MessageBox.Show("Already scanned past the header", "scan error");
                 return false;
             }
-            this.brSkipBytes(this.mainSettings.saveStructureIndex.header_size, pos, br, reload, true);
+            brSkipBytes(mainSettings.saveStructureIndex.header_size, pos, br, reload, true);
             return true;
         }
 
@@ -6746,7 +6746,7 @@ namespace pspo2seSaveEditorProgram
           int* pos,
           bool reload)
         {
-            this.brSkipBytes(24, pos, br, reload, true);
+            brSkipBytes(24, pos, br, reload, true);
             return true;
         }
 
@@ -6756,8 +6756,8 @@ namespace pspo2seSaveEditorProgram
           int* pos,
           bool reload)
         {
-            this.saveData.slot[slot].pa.count = this.brGetInt(1, pos, br, reload, true);
-            this.brSkipBytes(10, pos, br, reload, true);
+            saveData.slot[slot].pa.count = brGetInt(1, pos, br, reload, true);
+            brSkipBytes(10, pos, br, reload, true);
             return true;
         }
 
@@ -6768,15 +6768,15 @@ namespace pspo2seSaveEditorProgram
           bool reload,
           int* filled)
         {
-            string data = this.brGetData(4, br, pos, pspo2seForm.saveInfoDataType.hex, reload, true);
+            string data = brGetData(4, br, pos, pspo2seForm.saveInfoDataType.hex, reload, true);
             if (!(data != "00000000"))
                 return;
-            this.saveData.slot[slot].pa.items[*filled] = new pspo2seForm.inventoryItemClass();
-            this.saveData.slot[slot].pa.items[*filled].hex = data.Substring(0, 6) + "00";
-            this.saveData.slot[slot].pa.items[*filled].hex_reversed = this.run.hexAndMathFunction.reversehex(this.saveData.slot[slot].pa.items[*filled].hex, 8);
+            saveData.slot[slot].pa.items[*filled] = new pspo2seForm.inventoryItemClass();
+            saveData.slot[slot].pa.items[*filled].hex = data.Substring(0, 6) + "00";
+            saveData.slot[slot].pa.items[*filled].hex_reversed = run.hexAndMathFunction.reversehex(saveData.slot[slot].pa.items[*filled].hex, 8);
             string s = data.Substring(6, 2);
-            this.saveData.slot[slot].pa.items[*filled].level = "LV" + (object)(int.Parse(s, NumberStyles.HexNumber) + 1);
-            this.saveData.slot[slot].pa.items[*filled].id = *filled;
+            saveData.slot[slot].pa.items[*filled].level = "LV" + (object)(int.Parse(s, NumberStyles.HexNumber) + 1);
+            saveData.slot[slot].pa.items[*filled].id = *filled;
             int* numPtr = filled;
             int num = *numPtr + 1;
             *numPtr = num;
@@ -6791,116 +6791,116 @@ namespace pspo2seSaveEditorProgram
             int num = 0;
             for (int index = 0; index < 256; ++index)
             {
-                this.saveData.slot[slot].pa.items[index] = new pspo2seForm.inventoryItemClass();
-                this.saveData.slot[slot].pa.items[index].hex = "";
-                this.saveData.slot[slot].pa.items[index].hex_reversed = "";
+                saveData.slot[slot].pa.items[index] = new pspo2seForm.inventoryItemClass();
+                saveData.slot[slot].pa.items[index].hex = "";
+                saveData.slot[slot].pa.items[index].hex_reversed = "";
             }
             for (int index = 0; index < 136; ++index)
-                this.parseCharacterPADiskLearnt(slot, br, pos, reload, &num);
-            if (this.saveData.type == pspo2seForm.SaveType.PSP2I)
+                parseCharacterPADiskLearnt(slot, br, pos, reload, &num);
+            if (saveData.type == pspo2seForm.SaveType.PSP2I)
             {
                 for (int index = 0; index < 6; ++index)
-                    this.parseCharacterPADiskLearnt(slot, br, pos, reload, &num);
+                    parseCharacterPADiskLearnt(slot, br, pos, reload, &num);
             }
             return true;
         }
 
         private unsafe bool parseSlotInfo(int slot, BinaryReader br, int* pos, bool reload)
         {
-            int item_position = this.mainSettings.saveStructureIndex.slots_position + this.mainSettings.saveStructureIndex.slot_size * slot;
-            *pos = this.adjustPosition(*pos, br, item_position, reload, "Save Slot " + (object)slot, true);
-            if (!this.parseCharacterInfo(slot, br, pos, reload) || !this.parseCharacterTypeLevelInfo(slot, br, pos, reload) || (!this.parseCharacterTypeExtraInfo(slot, br, pos, reload) || !this.parseCharacterRebirthInfo(slot, br, pos, reload)) || (!this.parseCharacterInventoryCountInfo(slot, br, pos, reload) || !this.parseCharacterPADisksLearntCount(slot, br, pos, reload) || (!this.parseCharacterItemPaletteInfo(slot, br, pos, reload) || !this.parseCharacterPADisksLearnt(slot, br, pos, reload))) || (!this.parseCharacterInventorySlotsInfo(slot, br, pos, reload) || !this.parseCharacterStoryInfo(slot, br, pos, reload)))
+            int item_position = mainSettings.saveStructureIndex.slots_position + mainSettings.saveStructureIndex.slot_size * slot;
+            *pos = adjustPosition(*pos, br, item_position, reload, "Save Slot " + (object)slot, true);
+            if (!parseCharacterInfo(slot, br, pos, reload) || !parseCharacterTypeLevelInfo(slot, br, pos, reload) || (!parseCharacterTypeExtraInfo(slot, br, pos, reload) || !parseCharacterRebirthInfo(slot, br, pos, reload)) || (!parseCharacterInventoryCountInfo(slot, br, pos, reload) || !parseCharacterPADisksLearntCount(slot, br, pos, reload) || (!parseCharacterItemPaletteInfo(slot, br, pos, reload) || !parseCharacterPADisksLearnt(slot, br, pos, reload))) || (!parseCharacterInventorySlotsInfo(slot, br, pos, reload) || !parseCharacterStoryInfo(slot, br, pos, reload)))
                 return false;
-            if (this.saveData.slot[slot].level == 0 || this.saveData.slot[slot].level > 200)
-                this.saveData.slot[slot].level = 1;
-            if (this.saveData.slot[slot].level == 200)
+            if (saveData.slot[slot].level == 0 || saveData.slot[slot].level > 200)
+                saveData.slot[slot].level = 1;
+            if (saveData.slot[slot].level == 200)
             {
-                this.saveData.slot[slot].exp_next = 0;
-                this.saveData.slot[slot].exp_percent = 100;
+                saveData.slot[slot].exp_next = 0;
+                saveData.slot[slot].exp_percent = 100;
             }
             else
             {
                 pspo2seForm.expDb_ItemClass expDbItemClass = new pspo2seForm.expDb_ItemClass();
-                pspo2seForm.expDb_ItemClass expLevelInfoInDb = this.findExpLevelInfoInDb(this.saveData.slot[slot].level);
+                pspo2seForm.expDb_ItemClass expLevelInfoInDb = findExpLevelInfoInDb(saveData.slot[slot].level);
                 if (expLevelInfoInDb == null)
                 {
-                    int num = (int)MessageBox.Show("could not find exp for level " + (object)this.saveData.slot[slot].level);
+                    MessageBox.Show("could not find exp for level " + (object)saveData.slot[slot].level);
                 }
-                this.saveData.slot[slot].exp_next = expLevelInfoInDb.exp + expLevelInfoInDb.exp_next - this.saveData.slot[slot].exp;
-                this.saveData.slot[slot].exp_percent = this.run.hexAndMathFunction.getPercentage(this.saveData.slot[slot].exp - expLevelInfoInDb.exp, expLevelInfoInDb.exp_next);
+                saveData.slot[slot].exp_next = expLevelInfoInDb.exp + expLevelInfoInDb.exp_next - saveData.slot[slot].exp;
+                saveData.slot[slot].exp_percent = run.hexAndMathFunction.getPercentage(saveData.slot[slot].exp - expLevelInfoInDb.exp, expLevelInfoInDb.exp_next);
             }
             ListViewItem listViewItem;
-            if (this.saveData.slot[slot].name == "---- Free Slot ----")
+            if (saveData.slot[slot].name == "---- Free Slot ----")
             {
-                listViewItem = new ListViewItem(this.saveData.slot[slot].name, 2);
+                listViewItem = new ListViewItem(saveData.slot[slot].name, 2);
             }
             else
             {
-                listViewItem = new ListViewItem(this.saveData.slot[slot].name, (int)this.saveData.slot[slot].sex);
-                listViewItem.SubItems.Add("LV" + (object)this.saveData.slot[slot].level);
-                listViewItem.SubItems.Add(string.Concat((object)this.saveData.slot[slot].race));
-                listViewItem.SubItems.Add(string.Concat((object)this.saveData.slot[slot].cur_type));
-                listViewItem.SubItems.Add(this.storyCompleteToText(this.saveData.slot[slot].story_ep_1_complete, this.saveData.slot[slot].story_ep_2_complete) ?? "");
+                listViewItem = new ListViewItem(saveData.slot[slot].name, (int)saveData.slot[slot].sex);
+                listViewItem.SubItems.Add("LV" + (object)saveData.slot[slot].level);
+                listViewItem.SubItems.Add(string.Concat((object)saveData.slot[slot].race));
+                listViewItem.SubItems.Add(string.Concat((object)saveData.slot[slot].cur_type));
+                listViewItem.SubItems.Add(storyCompleteToText(saveData.slot[slot].story_ep_1_complete, saveData.slot[slot].story_ep_2_complete) ?? "");
             }
-            this.lstSaveSlotView.Items.Add(listViewItem);
+            lstSaveSlotView.Items.Add(listViewItem);
             return true;
         }
 
         private unsafe bool parseCharacterInfo(int slot, BinaryReader br, int* pos, bool reload)
         {
-            this.saveData.slot[slot].rebirth = new pspo2seForm.rebirthType();
-            int item_position = this.mainSettings.saveStructureIndex.slots_position + this.mainSettings.saveStructureIndex.slot_size * slot;
-            *pos = this.adjustPosition(*pos, br, item_position, reload, "Character info " + (object)slot, true);
-            this.saveData.slot[slot].used = true;
-            this.saveData.slot[slot].name = "";
+            saveData.slot[slot].rebirth = new pspo2seForm.rebirthType();
+            int item_position = mainSettings.saveStructureIndex.slots_position + mainSettings.saveStructureIndex.slot_size * slot;
+            *pos = adjustPosition(*pos, br, item_position, reload, "Character info " + (object)slot, true);
+            saveData.slot[slot].used = true;
+            saveData.slot[slot].name = "";
             for (int index = 0; index < 32; ++index)
             {
-                uint num = uint.Parse(this.run.hexAndMathFunction.reversehex(this.brGetData(2, br, pos, pspo2seForm.saveInfoDataType.hex, reload, true), 4), NumberStyles.HexNumber);
-                this.saveData.slot[slot].name += Encoding.UTF32.GetString(BitConverter.GetBytes(num));
+                uint num = uint.Parse(run.hexAndMathFunction.reversehex(brGetData(2, br, pos, pspo2seForm.saveInfoDataType.hex, reload, true), 4), NumberStyles.HexNumber);
+                saveData.slot[slot].name += Encoding.UTF32.GetString(BitConverter.GetBytes(num));
             }
-            if (this.saveData.slot[slot].name.Substring(0, 10) == "イーサン・ウェーバー")
+            if (saveData.slot[slot].name.Substring(0, 10) == "イーサン・ウェーバー")
             {
-                this.saveData.slot[slot].name = "---- Free Slot ----";
-                this.saveData.slot[slot].used = false;
+                saveData.slot[slot].name = "---- Free Slot ----";
+                saveData.slot[slot].used = false;
                 return true;
             }
-            this.saveData.slot[slot].title = "";
+            saveData.slot[slot].title = "";
             for (int index = 0; index < 32; ++index)
             {
-                uint num = uint.Parse(this.run.hexAndMathFunction.reversehex(this.brGetData(2, br, pos, pspo2seForm.saveInfoDataType.hex, reload, true), 4), NumberStyles.HexNumber);
-                this.saveData.slot[slot].title += Encoding.UTF32.GetString(BitConverter.GetBytes(num));
+                uint num = uint.Parse(run.hexAndMathFunction.reversehex(brGetData(2, br, pos, pspo2seForm.saveInfoDataType.hex, reload, true), 4), NumberStyles.HexNumber);
+                saveData.slot[slot].title += Encoding.UTF32.GetString(BitConverter.GetBytes(num));
             }
-            this.saveData.slot[slot].race = (pspo2seForm.raceTypes)this.brGetInt(1, pos, br, reload, true);
-            this.saveData.slot[slot].sex = (pspo2seForm.sexType)this.brGetInt(1, pos, br, reload, true);
-            this.saveData.slot[slot].cur_type = (pspo2seForm.jobType)this.brGetInt(1, pos, br, reload, true);
-            this.brSkipBytes(101, pos, br, reload, true);
-            this.saveData.slot[slot].level = this.brGetInt(2, pos, br, reload, true);
-            this.brSkipBytes(6, pos, br, reload, true);
-            this.saveData.slot[slot].exp = this.brGetInt32(pos, br, reload, true);
-            this.saveData.slot[slot].meseta = (long)this.brGetInt32(pos, br, reload, true);
-            int num1 = this.brGetInt(4, pos, br, reload, true);
+            saveData.slot[slot].race = (pspo2seForm.raceTypes)brGetInt(1, pos, br, reload, true);
+            saveData.slot[slot].sex = (pspo2seForm.sexType)brGetInt(1, pos, br, reload, true);
+            saveData.slot[slot].cur_type = (pspo2seForm.jobType)brGetInt(1, pos, br, reload, true);
+            brSkipBytes(101, pos, br, reload, true);
+            saveData.slot[slot].level = brGetInt(2, pos, br, reload, true);
+            brSkipBytes(6, pos, br, reload, true);
+            saveData.slot[slot].exp = brGetInt32(pos, br, reload, true);
+            saveData.slot[slot].meseta = (long)brGetInt32(pos, br, reload, true);
+            int num1 = brGetInt(4, pos, br, reload, true);
             int num2 = num1 / 3600;
             int num3 = num1 - num2 * 3600;
             int num4 = num3 / 60;
             int num5 = num3 - num4 * 60;
-            this.saveData.slot[slot].playtime = this.intTo2digitString(num2, 2) + ":" + this.intTo2digitString(num4, 2) + ":" + this.intTo2digitString(num5, 2);
-            this.brSkipBytes(31, pos, br, reload, true);
-            this.saveData.slot[slot].rebirth.additionalTypeLevels = this.brGetInt(1, pos, br, reload, true);
+            saveData.slot[slot].playtime = intTo2digitString(num2, 2) + ":" + intTo2digitString(num4, 2) + ":" + intTo2digitString(num5, 2);
+            brSkipBytes(31, pos, br, reload, true);
+            saveData.slot[slot].rebirth.additionalTypeLevels = brGetInt(1, pos, br, reload, true);
             return true;
         }
 
         private unsafe void parseTypeInfo(int slot, int job, int* pos, BinaryReader br, bool reload)
         {
-            this.saveData.slot[slot].job[job].job = (pspo2seForm.jobType)job;
-            this.saveData.slot[slot].job[job].level = this.brGetInt(1, pos, br, reload, true);
-            this.saveData.slot[slot].job[job].scramble_exp = this.brGetInt(1, pos, br, reload, true);
-            if (this.saveData.slot[slot].job[job].scramble_exp == 1)
+            saveData.slot[slot].job[job].job = (pspo2seForm.jobType)job;
+            saveData.slot[slot].job[job].level = brGetInt(1, pos, br, reload, true);
+            saveData.slot[slot].job[job].scramble_exp = brGetInt(1, pos, br, reload, true);
+            if (saveData.slot[slot].job[job].scramble_exp == 1)
             {
-                string s = this.run.hexAndMathFunction.reversehex(this.brGetData(2, br, pos, pspo2seForm.saveInfoDataType.hex, reload, true), 4);
-                this.saveData.slot[slot].job[job].exp = int.Parse(s, NumberStyles.HexNumber) + 65536;
+                string s = run.hexAndMathFunction.reversehex(brGetData(2, br, pos, pspo2seForm.saveInfoDataType.hex, reload, true), 4);
+                saveData.slot[slot].job[job].exp = int.Parse(s, NumberStyles.HexNumber) + 65536;
             }
             else
-                this.saveData.slot[slot].job[job].exp = this.brGetInt(2, pos, br, reload, true);
+                saveData.slot[slot].job[job].exp = brGetInt(2, pos, br, reload, true);
         }
 
         private unsafe bool parseCharacterTypeLevelInfo(
@@ -6909,12 +6909,12 @@ namespace pspo2seSaveEditorProgram
           int* pos,
           bool reload)
         {
-            int item_position = this.mainSettings.saveStructureIndex.type_level_pos + this.mainSettings.saveStructureIndex.slot_size * slot;
-            *pos = this.adjustPosition(*pos, br, item_position, reload, "parseCharacterTypeLevelInfo slot " + (object)slot, true);
-            this.parseTypeInfo(slot, 0, pos, br, reload);
-            this.parseTypeInfo(slot, 1, pos, br, reload);
-            this.parseTypeInfo(slot, 2, pos, br, reload);
-            this.parseTypeInfo(slot, 3, pos, br, reload);
+            int item_position = mainSettings.saveStructureIndex.type_level_pos + mainSettings.saveStructureIndex.slot_size * slot;
+            *pos = adjustPosition(*pos, br, item_position, reload, "parseCharacterTypeLevelInfo slot " + (object)slot, true);
+            parseTypeInfo(slot, 0, pos, br, reload);
+            parseTypeInfo(slot, 1, pos, br, reload);
+            parseTypeInfo(slot, 2, pos, br, reload);
+            parseTypeInfo(slot, 3, pos, br, reload);
             return true;
         }
 
@@ -6924,48 +6924,48 @@ namespace pspo2seSaveEditorProgram
           int* pos,
           bool reload)
         {
-            if (this.saveData.type == pspo2seForm.SaveType.PSP2)
+            if (saveData.type == pspo2seForm.SaveType.PSP2)
             {
-                this.brSkipBytes(2, pos, br, reload, true);
+                brSkipBytes(2, pos, br, reload, true);
                 return true;
             }
             for (int index = 0; index < 12; ++index)
             {
-                string s = this.run.hexAndMathFunction.reversehex(this.brGetData(2, br, pos, pspo2seForm.saveInfoDataType.hex, reload, true), 4);
+                string s = run.hexAndMathFunction.reversehex(brGetData(2, br, pos, pspo2seForm.saveInfoDataType.hex, reload, true), 4);
                 switch (index)
                 {
                     case 0:
-                        this.saveData.slot[slot].rebirth.count = int.Parse(s, NumberStyles.HexNumber);
+                        saveData.slot[slot].rebirth.count = int.Parse(s, NumberStyles.HexNumber);
                         break;
                     case 1:
-                        this.saveData.slot[slot].rebirth.remaining_points = int.Parse(s, NumberStyles.HexNumber);
+                        saveData.slot[slot].rebirth.remaining_points = int.Parse(s, NumberStyles.HexNumber);
                         break;
                     case 2:
-                        this.saveData.slot[slot].rebirth.atk = int.Parse(s, NumberStyles.HexNumber);
+                        saveData.slot[slot].rebirth.atk = int.Parse(s, NumberStyles.HexNumber);
                         break;
                     case 3:
-                        this.saveData.slot[slot].rebirth.def = int.Parse(s, NumberStyles.HexNumber);
+                        saveData.slot[slot].rebirth.def = int.Parse(s, NumberStyles.HexNumber);
                         break;
                     case 4:
-                        this.saveData.slot[slot].rebirth.acc = int.Parse(s, NumberStyles.HexNumber);
+                        saveData.slot[slot].rebirth.acc = int.Parse(s, NumberStyles.HexNumber);
                         break;
                     case 5:
-                        this.saveData.slot[slot].rebirth.eva = int.Parse(s, NumberStyles.HexNumber);
+                        saveData.slot[slot].rebirth.eva = int.Parse(s, NumberStyles.HexNumber);
                         break;
                     case 6:
-                        this.saveData.slot[slot].rebirth.sta = int.Parse(s, NumberStyles.HexNumber);
+                        saveData.slot[slot].rebirth.sta = int.Parse(s, NumberStyles.HexNumber);
                         break;
                     case 8:
-                        this.saveData.slot[slot].rebirth.tec = int.Parse(s, NumberStyles.HexNumber);
+                        saveData.slot[slot].rebirth.tec = int.Parse(s, NumberStyles.HexNumber);
                         break;
                     case 9:
-                        this.saveData.slot[slot].rebirth.mnd = int.Parse(s, NumberStyles.HexNumber);
+                        saveData.slot[slot].rebirth.mnd = int.Parse(s, NumberStyles.HexNumber);
                         break;
                     case 10:
-                        this.saveData.slot[slot].rebirth.hp = int.Parse(s, NumberStyles.HexNumber);
+                        saveData.slot[slot].rebirth.hp = int.Parse(s, NumberStyles.HexNumber);
                         break;
                     case 11:
-                        this.saveData.slot[slot].rebirth.pp = int.Parse(s, NumberStyles.HexNumber);
+                        saveData.slot[slot].rebirth.pp = int.Parse(s, NumberStyles.HexNumber);
                         break;
                 }
             }
@@ -6974,59 +6974,59 @@ namespace pspo2seSaveEditorProgram
 
         private unsafe bool parseCharacterStoryInfo(int slot, BinaryReader br, int* pos, bool reload)
         {
-            int item_position1 = this.mainSettings.saveStructureIndex.header_size + this.mainSettings.saveStructureIndex.slot_size * slot + 3182;
-            if (this.saveData.type == pspo2seForm.SaveType.PSP2I)
-                item_position1 = this.mainSettings.saveStructureIndex.header_size + this.mainSettings.saveStructureIndex.slot_size * slot + 3242;
-            *pos = this.adjustPosition(*pos, br, item_position1, reload, "parseCharacterStoryInfo slot " + (object)slot, true);
-            string data1 = this.brGetData(1, br, pos, pspo2seForm.saveInfoDataType.hex, reload, true);
-            this.saveData.slot[slot].mission_unlock_magashi = false;
+            int item_position1 = mainSettings.saveStructureIndex.header_size + mainSettings.saveStructureIndex.slot_size * slot + 3182;
+            if (saveData.type == pspo2seForm.SaveType.PSP2I)
+                item_position1 = mainSettings.saveStructureIndex.header_size + mainSettings.saveStructureIndex.slot_size * slot + 3242;
+            *pos = adjustPosition(*pos, br, item_position1, reload, "parseCharacterStoryInfo slot " + (object)slot, true);
+            string data1 = brGetData(1, br, pos, pspo2seForm.saveInfoDataType.hex, reload, true);
+            saveData.slot[slot].mission_unlock_magashi = false;
             if (data1 == "1F")
-                this.saveData.slot[slot].mission_unlock_magashi = true;
-            int item_position2 = this.mainSettings.saveStructureIndex.story_info_pos + this.mainSettings.saveStructureIndex.slot_size * slot;
-            *pos = this.adjustPosition(*pos, br, item_position2, reload, "parseCharacterStoryInfo slot " + (object)slot, true);
-            if (this.saveData.type == pspo2seForm.SaveType.PSP2I)
-                this.saveData.slot[slot].story_ep_2_points = this.brGetData(2, br, pos, pspo2seForm.saveInfoDataType.hex, reload, true);
-            this.brSkipBytes(158, pos, br, reload, true);
-            this.saveData.slot[slot].mission_unlock_ep1 = this.brGetData(2, br, pos, pspo2seForm.saveInfoDataType.hex, reload, true) == "204E";
-            this.brSkipBytes(34, pos, br, reload, true);
-            this.saveData.slot[slot].story_ep_1_points = this.brGetData(2, br, pos, pspo2seForm.saveInfoDataType.hex, reload, true);
-            this.brSkipBytes(14, pos, br, reload, true);
-            this.saveData.slot[slot].mission_unlock_unknown = this.brGetData(2, br, pos, pspo2seForm.saveInfoDataType.hex, reload, true) == "204E";
-            this.brSkipBytes(50, pos, br, reload, true);
-            this.saveData.slot[slot].story_ep_1_act = this.run.hexAndMathFunction.hexToInt(this.brGetData(1, br, pos, pspo2seForm.saveInfoDataType.hex, reload, true));
-            this.brSkipBytes(7, pos, br, reload, true);
-            if (this.saveData.type == pspo2seForm.SaveType.PSP2I)
+                saveData.slot[slot].mission_unlock_magashi = true;
+            int item_position2 = mainSettings.saveStructureIndex.story_info_pos + mainSettings.saveStructureIndex.slot_size * slot;
+            *pos = adjustPosition(*pos, br, item_position2, reload, "parseCharacterStoryInfo slot " + (object)slot, true);
+            if (saveData.type == pspo2seForm.SaveType.PSP2I)
+                saveData.slot[slot].story_ep_2_points = brGetData(2, br, pos, pspo2seForm.saveInfoDataType.hex, reload, true);
+            brSkipBytes(158, pos, br, reload, true);
+            saveData.slot[slot].mission_unlock_ep1 = brGetData(2, br, pos, pspo2seForm.saveInfoDataType.hex, reload, true) == "204E";
+            brSkipBytes(34, pos, br, reload, true);
+            saveData.slot[slot].story_ep_1_points = brGetData(2, br, pos, pspo2seForm.saveInfoDataType.hex, reload, true);
+            brSkipBytes(14, pos, br, reload, true);
+            saveData.slot[slot].mission_unlock_unknown = brGetData(2, br, pos, pspo2seForm.saveInfoDataType.hex, reload, true) == "204E";
+            brSkipBytes(50, pos, br, reload, true);
+            saveData.slot[slot].story_ep_1_act = run.hexAndMathFunction.hexToInt(brGetData(1, br, pos, pspo2seForm.saveInfoDataType.hex, reload, true));
+            brSkipBytes(7, pos, br, reload, true);
+            if (saveData.type == pspo2seForm.SaveType.PSP2I)
             {
-                this.saveData.slot[slot].mission_unlock_ep2 = this.brGetData(2, br, pos, pspo2seForm.saveInfoDataType.hex, reload, true) == "204E";
-                this.brSkipBytes(891, pos, br, reload, true);
+                saveData.slot[slot].mission_unlock_ep2 = brGetData(2, br, pos, pspo2seForm.saveInfoDataType.hex, reload, true) == "204E";
+                brSkipBytes(891, pos, br, reload, true);
             }
             else
-                this.brSkipBytes(893, pos, br, reload, true);
-            this.saveData.slot[slot].allow_quit_missions = this.brGetData(1, br, pos, pspo2seForm.saveInfoDataType.hex, reload, true);
-            this.brSkipBytes(4, pos, br, reload, true);
-            this.brSkipBytes(32, pos, br, reload, true);
-            this.brSkipBytes(10, pos, br, reload, true);
-            this.brSkipBytes(32, pos, br, reload, true);
-            if (this.saveData.type == pspo2seForm.SaveType.PSP2I)
-                this.brSkipBytes(52, pos, br, reload, true);
+                brSkipBytes(893, pos, br, reload, true);
+            saveData.slot[slot].allow_quit_missions = brGetData(1, br, pos, pspo2seForm.saveInfoDataType.hex, reload, true);
+            brSkipBytes(4, pos, br, reload, true);
+            brSkipBytes(32, pos, br, reload, true);
+            brSkipBytes(10, pos, br, reload, true);
+            brSkipBytes(32, pos, br, reload, true);
+            if (saveData.type == pspo2seForm.SaveType.PSP2I)
+                brSkipBytes(52, pos, br, reload, true);
             else
-                this.brSkipBytes(940, pos, br, reload, true);
-            string data2 = this.brGetData(3, br, pos, pspo2seForm.saveInfoDataType.hex, reload, true);
-            this.saveData.slot[slot].skip_ep_1_start = false;
+                brSkipBytes(940, pos, br, reload, true);
+            string data2 = brGetData(3, br, pos, pspo2seForm.saveInfoDataType.hex, reload, true);
+            saveData.slot[slot].skip_ep_1_start = false;
             if (data2 == "90AB1E")
-                this.saveData.slot[slot].skip_ep_1_start = true;
-            if (this.saveData.type == pspo2seForm.SaveType.PSP2I)
+                saveData.slot[slot].skip_ep_1_start = true;
+            if (saveData.type == pspo2seForm.SaveType.PSP2I)
             {
-                this.brSkipBytes(33, pos, br, reload, true);
-                string data3 = this.brGetData(3, br, pos, pspo2seForm.saveInfoDataType.hex, reload, true);
-                this.saveData.slot[slot].skip_ep_2_start = false;
+                brSkipBytes(33, pos, br, reload, true);
+                string data3 = brGetData(3, br, pos, pspo2seForm.saveInfoDataType.hex, reload, true);
+                saveData.slot[slot].skip_ep_2_start = false;
                 if (data3 == "78AF1E")
-                    this.saveData.slot[slot].skip_ep_2_start = true;
-                this.brSkipBytes(17710, pos, br, reload, true);
+                    saveData.slot[slot].skip_ep_2_start = true;
+                brSkipBytes(17710, pos, br, reload, true);
             }
             else
-                this.brSkipBytes(17714, pos, br, reload, true);
-            string data4 = this.brGetData(1, br, pos, pspo2seForm.saveInfoDataType.hex, reload, true);
+                brSkipBytes(17714, pos, br, reload, true);
+            string data4 = brGetData(1, br, pos, pspo2seForm.saveInfoDataType.hex, reload, true);
             int num = 0;
             try
             {
@@ -7035,12 +7035,12 @@ namespace pspo2seSaveEditorProgram
             catch
             {
             }
-            this.saveData.slot[slot].story_ep_1_complete = false;
-            this.saveData.slot[slot].story_ep_2_complete = false;
+            saveData.slot[slot].story_ep_1_complete = false;
+            saveData.slot[slot].story_ep_2_complete = false;
             if (num == 1 || num == 3)
-                this.saveData.slot[slot].story_ep_1_complete = true;
+                saveData.slot[slot].story_ep_1_complete = true;
             if (num == 2 || num == 3)
-                this.saveData.slot[slot].story_ep_2_complete = true;
+                saveData.slot[slot].story_ep_2_complete = true;
             return true;
         }
 
@@ -7050,24 +7050,24 @@ namespace pspo2seSaveEditorProgram
           int* pos,
           bool reload)
         {
-            int item_position1 = this.mainSettings.saveStructureIndex.type_level_pos + this.mainSettings.saveStructureIndex.slot_size * slot + 16;
-            *pos = this.adjustPosition(*pos, br, item_position1, reload, "parseCharacterTypeExtraInfo slot " + (object)slot, true);
+            int item_position1 = mainSettings.saveStructureIndex.type_level_pos + mainSettings.saveStructureIndex.slot_size * slot + 16;
+            *pos = adjustPosition(*pos, br, item_position1, reload, "parseCharacterTypeExtraInfo slot " + (object)slot, true);
             for (int index = 0; index < 4; ++index)
             {
-                int item_position2 = this.mainSettings.saveStructureIndex.type_level_pos + this.mainSettings.saveStructureIndex.slot_size * slot + 16 + index * this.mainSettings.saveStructureIndex.type_extend_size;
-                *pos = this.adjustPosition(*pos, br, item_position2, (reload ? 1 : 0) != 0, "parseCharacterTypeExtraInfo slot " + (object)slot + " job " + (object)index, true);
-                this.saveData.slot[slot].job[index].extendpoints = this.brGetInt(2, pos, br, reload, true);
-                this.saveData.slot[slot].job[index].extendpointsused = this.brGetInt(2, pos, br, reload, true);
-                this.saveData.slot[slot].job[index].attachedAbilities = this.brGetData(10, br, pos, pspo2seForm.saveInfoDataType.hex, reload, true);
-                if (this.saveData.type == pspo2seForm.SaveType.PSP2I)
-                    this.saveData.slot[slot].job[index].attachedAbilities += this.brGetData(2, br, pos, pspo2seForm.saveInfoDataType.hex, reload, true);
+                int item_position2 = mainSettings.saveStructureIndex.type_level_pos + mainSettings.saveStructureIndex.slot_size * slot + 16 + index * mainSettings.saveStructureIndex.type_extend_size;
+                *pos = adjustPosition(*pos, br, item_position2, (reload ? 1 : 0) != 0, "parseCharacterTypeExtraInfo slot " + (object)slot + " job " + (object)index, true);
+                saveData.slot[slot].job[index].extendpoints = brGetInt(2, pos, br, reload, true);
+                saveData.slot[slot].job[index].extendpointsused = brGetInt(2, pos, br, reload, true);
+                saveData.slot[slot].job[index].attachedAbilities = brGetData(10, br, pos, pspo2seForm.saveInfoDataType.hex, reload, true);
+                if (saveData.type == pspo2seForm.SaveType.PSP2I)
+                    saveData.slot[slot].job[index].attachedAbilities += brGetData(2, br, pos, pspo2seForm.saveInfoDataType.hex, reload, true);
             }
-            string str = this.run.hexAndMathFunction.halfByteSwap(this.brGetData(58, br, pos, pspo2seForm.saveInfoDataType.hex, reload, true));
+            string str = run.hexAndMathFunction.halfByteSwap(brGetData(58, br, pos, pspo2seForm.saveInfoDataType.hex, reload, true));
             int index1 = 0;
             int index2 = 0;
             for (int startIndex = 0; startIndex < str.Length && index1 < 4; ++startIndex)
             {
-                this.saveData.slot[slot].job[index1].weapons_extended[index2] = (pspo2seForm.extendRankType)int.Parse(str.Substring(startIndex, 1));
+                saveData.slot[slot].job[index1].weapons_extended[index2] = (pspo2seForm.extendRankType)int.Parse(str.Substring(startIndex, 1));
                 ++index2;
                 if (index2 > 28)
                 {
@@ -7084,9 +7084,9 @@ namespace pspo2seSaveEditorProgram
           int* pos,
           bool reload)
         {
-            int item_position = this.mainSettings.saveStructureIndex.inventory_slots_used_pos + this.mainSettings.saveStructureIndex.slot_size * slot;
-            *pos = this.adjustPosition(*pos, br, item_position, reload, "parseCharacterInventoryCountInfo slot " + (object)slot, true);
-            this.saveData.slot[slot].inventory.itemsUsed = this.brGetInt(1, pos, br, reload, true);
+            int item_position = mainSettings.saveStructureIndex.inventory_slots_used_pos + mainSettings.saveStructureIndex.slot_size * slot;
+            *pos = adjustPosition(*pos, br, item_position, reload, "parseCharacterInventoryCountInfo slot " + (object)slot, true);
+            saveData.slot[slot].inventory.itemsUsed = brGetInt(1, pos, br, reload, true);
             return true;
         }
 
@@ -7096,28 +7096,28 @@ namespace pspo2seSaveEditorProgram
           int* pos,
           bool reload)
         {
-            int item_position = this.mainSettings.saveStructureIndex.inventory_slots_pos + this.mainSettings.saveStructureIndex.slot_size * slot;
-            *pos = this.adjustPosition(*pos, br, item_position, reload, "parseCharacterInventoryCountInfo slot " + (object)slot, true);
+            int item_position = mainSettings.saveStructureIndex.inventory_slots_pos + mainSettings.saveStructureIndex.slot_size * slot;
+            *pos = adjustPosition(*pos, br, item_position, reload, "parseCharacterInventoryCountInfo slot " + (object)slot, true);
             for (int index = 0; index < 60; ++index)
             {
-                string data = this.brGetData(8, br, pos, pspo2seForm.saveInfoDataType.hex, reload, true);
+                string data = brGetData(8, br, pos, pspo2seForm.saveInfoDataType.hex, reload, true);
                 string s1 = data.Substring(8, 2);
                 string str = data.Substring(2, 2);
                 string s2 = data.Substring(0, 2);
-                this.saveData.slot[slot].inventory.item[index] = this.brGetItem(pos, br, reload);
-                this.saveData.slot[slot].inventory.item[index].data_id = int.Parse(s1, NumberStyles.HexNumber);
-                this.saveData.slot[slot].inventory.item[index].equipped_now = int.Parse(s2, NumberStyles.HexNumber);
-                this.saveData.slot[slot].inventory.item[index].equipped_slot = int.Parse(str) == 0 ? 0 : this.run.hexAndMathFunction.hex2binary(str).Length;
-                if (index >= this.saveData.slot[slot].inventory.itemsUsed)
+                saveData.slot[slot].inventory.item[index] = brGetItem(pos, br, reload);
+                saveData.slot[slot].inventory.item[index].data_id = int.Parse(s1, NumberStyles.HexNumber);
+                saveData.slot[slot].inventory.item[index].equipped_now = int.Parse(s2, NumberStyles.HexNumber);
+                saveData.slot[slot].inventory.item[index].equipped_slot = int.Parse(str) == 0 ? 0 : run.hexAndMathFunction.hex2binary(str).Length;
+                if (index >= saveData.slot[slot].inventory.itemsUsed)
                 {
-                    this.saveData.slot[slot].inventory.item[index].hex = "FFFFFFFF";
-                    this.saveData.slot[slot].inventory.item[index].hex_reversed = "FFFFFFFF";
-                    this.saveData.slot[slot].inventory.item[index].type = pspo2seForm.itemType.free_slot;
-                    this.saveData.slot[slot].inventory.item[index].used = false;
-                    this.brSkipBytes(8, pos, br, reload, true);
+                    saveData.slot[slot].inventory.item[index].hex = "FFFFFFFF";
+                    saveData.slot[slot].inventory.item[index].hex_reversed = "FFFFFFFF";
+                    saveData.slot[slot].inventory.item[index].type = pspo2seForm.itemType.free_slot;
+                    saveData.slot[slot].inventory.item[index].used = false;
+                    brSkipBytes(8, pos, br, reload, true);
                 }
                 else
-                    this.brSkipBytes(8, pos, br, reload, true);
+                    brSkipBytes(8, pos, br, reload, true);
             }
             return true;
         }
@@ -7127,86 +7127,86 @@ namespace pspo2seSaveEditorProgram
           int* pos,
           bool reload)
         {
-            int sharedInventoryPos = this.mainSettings.saveStructureIndex.shared_inventory_pos;
-            *pos = this.adjustPosition(*pos, br, sharedInventoryPos, reload, nameof(parseCharacterSharedStorageSlotsInfo), true);
-            this.saveData.sharedInventory.itemsUsed = 0;
-            for (int index = 0; index < this.mainSettings.saveStructureIndex.shared_inventory_slots; ++index)
-                this.saveData.sharedInventory.item[index] = this.brGetItem(pos, br, reload);
-            this.saveData.sharedMeseta = (long)this.brGetInt32(pos, br, reload, true);
+            int sharedInventoryPos = mainSettings.saveStructureIndex.shared_inventory_pos;
+            *pos = adjustPosition(*pos, br, sharedInventoryPos, reload, nameof(parseCharacterSharedStorageSlotsInfo), true);
+            saveData.sharedInventory.itemsUsed = 0;
+            for (int index = 0; index < mainSettings.saveStructureIndex.shared_inventory_slots; ++index)
+                saveData.sharedInventory.item[index] = brGetItem(pos, br, reload);
+            saveData.sharedMeseta = (long)brGetInt32(pos, br, reload, true);
             return true;
         }
 
         private unsafe bool parseInfinityMissionSlotsInfo(BinaryReader br, int* pos, bool reload)
         {
-            if (this.saveData.type == pspo2seForm.SaveType.PSP2)
+            if (saveData.type == pspo2seForm.SaveType.PSP2)
                 return true;
-            int infinityMissionPos = this.mainSettings.saveStructureIndex.infinity_mission_pos;
-            *pos = this.adjustPosition(*pos, br, infinityMissionPos, reload, nameof(parseInfinityMissionSlotsInfo), true);
-            this.saveData.infinityMissions.itemsUsed = 0;
+            int infinityMissionPos = mainSettings.saveStructureIndex.infinity_mission_pos;
+            *pos = adjustPosition(*pos, br, infinityMissionPos, reload, nameof(parseInfinityMissionSlotsInfo), true);
+            saveData.infinityMissions.itemsUsed = 0;
             for (int index1 = 0; index1 < 100; ++index1)
             {
-                this.saveData.infinityMissions.slot[index1] = new pspo2seForm.infinityMissionClass();
-                string data = this.brGetData(104, br, pos, pspo2seForm.saveInfoDataType.hex, reload, true);
-                this.saveData.infinityMissions.slot[index1].hex = data;
-                this.saveData.infinityMissions.slot[index1].id = index1;
-                this.saveData.infinityMissions.slot[index1].area = int.Parse(data.Substring(1, 1), NumberStyles.HexNumber);
+                saveData.infinityMissions.slot[index1] = new pspo2seForm.infinityMissionClass();
+                string data = brGetData(104, br, pos, pspo2seForm.saveInfoDataType.hex, reload, true);
+                saveData.infinityMissions.slot[index1].hex = data;
+                saveData.infinityMissions.slot[index1].id = index1;
+                saveData.infinityMissions.slot[index1].area = int.Parse(data.Substring(1, 1), NumberStyles.HexNumber);
                 int num1 = int.Parse(data.Substring(3, 1) + data.Substring(0, 1), NumberStyles.HexNumber);
-                this.saveData.infinityMissions.slot[index1].length = 0;
+                saveData.infinityMissions.slot[index1].length = 0;
                 for (; num1 >= 64; num1 -= 64)
-                    ++this.saveData.infinityMissions.slot[index1].length;
-                this.saveData.infinityMissions.slot[index1].boss = num1;
-                this.saveData.infinityMissions.slot[index1].enemy_2 = int.Parse(data.Substring(7, 1), NumberStyles.HexNumber);
-                this.saveData.infinityMissions.slot[index1].enemy_table_1 = int.Parse(data.Substring(2, 1), NumberStyles.HexNumber);
-                this.saveData.infinityMissions.slot[index1].unk_enemy_table_1_mod = false;
-                if (this.saveData.infinityMissions.slot[index1].enemy_table_1 >= 8)
+                    ++saveData.infinityMissions.slot[index1].length;
+                saveData.infinityMissions.slot[index1].boss = num1;
+                saveData.infinityMissions.slot[index1].enemy_2 = int.Parse(data.Substring(7, 1), NumberStyles.HexNumber);
+                saveData.infinityMissions.slot[index1].enemy_table_1 = int.Parse(data.Substring(2, 1), NumberStyles.HexNumber);
+                saveData.infinityMissions.slot[index1].unk_enemy_table_1_mod = false;
+                if (saveData.infinityMissions.slot[index1].enemy_table_1 >= 8)
                 {
-                    this.saveData.infinityMissions.slot[index1].enemy_table_1 -= 8;
-                    this.saveData.infinityMissions.slot[index1].unk_enemy_table_1_mod = true;
+                    saveData.infinityMissions.slot[index1].enemy_table_1 -= 8;
+                    saveData.infinityMissions.slot[index1].unk_enemy_table_1_mod = true;
                 }
-                this.saveData.infinityMissions.slot[index1].unk_table_2_mod = int.Parse(data.Substring(5, 1), NumberStyles.HexNumber);
-                this.saveData.infinityMissions.slot[index1].unk_table_2_unk_mod = 0;
-                while (this.saveData.infinityMissions.slot[index1].unk_table_2_mod >= 4)
+                saveData.infinityMissions.slot[index1].unk_table_2_mod = int.Parse(data.Substring(5, 1), NumberStyles.HexNumber);
+                saveData.infinityMissions.slot[index1].unk_table_2_unk_mod = 0;
+                while (saveData.infinityMissions.slot[index1].unk_table_2_mod >= 4)
                 {
-                    this.saveData.infinityMissions.slot[index1].unk_table_2_mod -= 4;
-                    ++this.saveData.infinityMissions.slot[index1].unk_table_2_unk_mod;
+                    saveData.infinityMissions.slot[index1].unk_table_2_mod -= 4;
+                    ++saveData.infinityMissions.slot[index1].unk_table_2_unk_mod;
                 }
-                this.saveData.infinityMissions.slot[index1].area_1_map = int.Parse(data.Substring(6, 1), NumberStyles.HexNumber);
-                this.saveData.infinityMissions.slot[index1].area_2_map = int.Parse(data.Substring(9, 1), NumberStyles.HexNumber);
-                this.saveData.infinityMissions.slot[index1].area_3_map = int.Parse(data.Substring(8, 1), NumberStyles.HexNumber);
-                this.saveData.infinityMissions.slot[index1].enemy_level = int.Parse(data.Substring(10, 2), NumberStyles.HexNumber);
-                this.saveData.infinityMissions.slot[index1].unk_enemy_level_mod = 0;
-                while (this.saveData.infinityMissions.slot[index1].enemy_level >= 64)
+                saveData.infinityMissions.slot[index1].area_1_map = int.Parse(data.Substring(6, 1), NumberStyles.HexNumber);
+                saveData.infinityMissions.slot[index1].area_2_map = int.Parse(data.Substring(9, 1), NumberStyles.HexNumber);
+                saveData.infinityMissions.slot[index1].area_3_map = int.Parse(data.Substring(8, 1), NumberStyles.HexNumber);
+                saveData.infinityMissions.slot[index1].enemy_level = int.Parse(data.Substring(10, 2), NumberStyles.HexNumber);
+                saveData.infinityMissions.slot[index1].unk_enemy_level_mod = 0;
+                while (saveData.infinityMissions.slot[index1].enemy_level >= 64)
                 {
-                    this.saveData.infinityMissions.slot[index1].enemy_level -= 64;
-                    ++this.saveData.infinityMissions.slot[index1].unk_enemy_level_mod;
+                    saveData.infinityMissions.slot[index1].enemy_level -= 64;
+                    ++saveData.infinityMissions.slot[index1].unk_enemy_level_mod;
                 }
                 int num2 = (int)Math.Floor((double)int.Parse(data.Substring(4, 1), NumberStyles.HexNumber) / 2.0);
-                this.saveData.infinityMissions.slot[index1].enemy_1 = num2;
+                saveData.infinityMissions.slot[index1].enemy_1 = num2;
                 int num3 = (int)Math.Ceiling((double)int.Parse(data.Substring(4, 1), NumberStyles.HexNumber) / 2.0);
-                this.saveData.infinityMissions.slot[index1].unk_enemy_1_mod = num3 - this.saveData.infinityMissions.slot[index1].enemy_1;
-                this.saveData.infinityMissions.slot[index1].createdBy = "";
+                saveData.infinityMissions.slot[index1].unk_enemy_1_mod = num3 - saveData.infinityMissions.slot[index1].enemy_1;
+                saveData.infinityMissions.slot[index1].createdBy = "";
                 for (int index2 = 0; index2 < 32; ++index2)
                 {
-                    uint num4 = uint.Parse(this.run.hexAndMathFunction.reversehex(data.Substring(index2 * 4 + 32, 4), 4), NumberStyles.HexNumber);
-                    this.saveData.infinityMissions.slot[index1].createdBy += Encoding.UTF32.GetString(BitConverter.GetBytes(num4));
+                    uint num4 = uint.Parse(run.hexAndMathFunction.reversehex(data.Substring(index2 * 4 + 32, 4), 4), NumberStyles.HexNumber);
+                    saveData.infinityMissions.slot[index1].createdBy += Encoding.UTF32.GetString(BitConverter.GetBytes(num4));
                 }
-                this.saveData.infinityMissions.slot[index1].mergePoints = int.Parse(data.Substring(184, 2), NumberStyles.HexNumber);
+                saveData.infinityMissions.slot[index1].mergePoints = int.Parse(data.Substring(184, 2), NumberStyles.HexNumber);
                 if (int.Parse(data.Substring(186, 2), NumberStyles.HexNumber) >= 128)
-                    this.saveData.infinityMissions.slot[index1].mergePoints += (int.Parse(data.Substring(186, 2), NumberStyles.HexNumber) - 128) * 256;
+                    saveData.infinityMissions.slot[index1].mergePoints += (int.Parse(data.Substring(186, 2), NumberStyles.HexNumber) - 128) * 256;
                 else if (int.Parse(data.Substring(186, 2), NumberStyles.HexNumber) < 128)
-                    this.saveData.infinityMissions.slot[index1].mergePoints += int.Parse(data.Substring(187, 1), NumberStyles.HexNumber) * 256;
-                this.saveData.infinityMissions.slot[index1].clearCount_c = int.Parse(this.run.hexAndMathFunction.reversehex(data.Substring(188, 4), 4), NumberStyles.HexNumber);
-                this.saveData.infinityMissions.slot[index1].clearCount_b = int.Parse(this.run.hexAndMathFunction.reversehex(data.Substring(192, 4), 4), NumberStyles.HexNumber);
-                this.saveData.infinityMissions.slot[index1].clearCount_a = int.Parse(this.run.hexAndMathFunction.reversehex(data.Substring(196, 4), 4), NumberStyles.HexNumber);
-                this.saveData.infinityMissions.slot[index1].clearCount_s = int.Parse(this.run.hexAndMathFunction.reversehex(data.Substring(200, 4), 4), NumberStyles.HexNumber);
-                this.saveData.infinityMissions.slot[index1].clearCount_inf = int.Parse(this.run.hexAndMathFunction.reversehex(data.Substring(204, 4), 4), NumberStyles.HexNumber);
-                this.saveData.infinityMissions.slot[index1].level = this.saveData.infinityMissions.slot[index1].enemy_table_1 + this.saveData.infinityMissions.slot[index1].enemy_level / 10;
-                if (this.saveData.infinityMissions.slot[index1].unk_enemy_table_1_mod)
-                    ++this.saveData.infinityMissions.slot[index1].level;
-                if (this.saveData.infinityMissions.slot[index1].length > 2)
-                    this.saveData.infinityMissions.slot[index1].level += 10;
+                    saveData.infinityMissions.slot[index1].mergePoints += int.Parse(data.Substring(187, 1), NumberStyles.HexNumber) * 256;
+                saveData.infinityMissions.slot[index1].clearCount_c = int.Parse(run.hexAndMathFunction.reversehex(data.Substring(188, 4), 4), NumberStyles.HexNumber);
+                saveData.infinityMissions.slot[index1].clearCount_b = int.Parse(run.hexAndMathFunction.reversehex(data.Substring(192, 4), 4), NumberStyles.HexNumber);
+                saveData.infinityMissions.slot[index1].clearCount_a = int.Parse(run.hexAndMathFunction.reversehex(data.Substring(196, 4), 4), NumberStyles.HexNumber);
+                saveData.infinityMissions.slot[index1].clearCount_s = int.Parse(run.hexAndMathFunction.reversehex(data.Substring(200, 4), 4), NumberStyles.HexNumber);
+                saveData.infinityMissions.slot[index1].clearCount_inf = int.Parse(run.hexAndMathFunction.reversehex(data.Substring(204, 4), 4), NumberStyles.HexNumber);
+                saveData.infinityMissions.slot[index1].level = saveData.infinityMissions.slot[index1].enemy_table_1 + saveData.infinityMissions.slot[index1].enemy_level / 10;
+                if (saveData.infinityMissions.slot[index1].unk_enemy_table_1_mod)
+                    ++saveData.infinityMissions.slot[index1].level;
+                if (saveData.infinityMissions.slot[index1].length > 2)
+                    saveData.infinityMissions.slot[index1].level += 10;
             }
-            this.saveData.infinityMissions.itemsUsed = int.Parse(this.brGetData(1, br, pos, pspo2seForm.saveInfoDataType.hex, reload, true), NumberStyles.HexNumber);
+            saveData.infinityMissions.itemsUsed = int.Parse(brGetData(1, br, pos, pspo2seForm.saveInfoDataType.hex, reload, true), NumberStyles.HexNumber);
             return true;
         }
 
@@ -7444,7 +7444,7 @@ namespace pspo2seSaveEditorProgram
             public int clearCount_s;
             public int clearCount_inf;
 
-            public int CompareTo(object obj) => obj is pspo2seForm.infinityMissionClass ? this.hex.CompareTo(((pspo2seForm.infinityMissionClass)obj).hex) : throw new ArgumentException("Object is not of type infinityMissionClass.");
+            public int CompareTo(object obj) => obj is pspo2seForm.infinityMissionClass ? hex.CompareTo(((pspo2seForm.infinityMissionClass)obj).hex) : throw new ArgumentException("Object is not of type infinityMissionClass.");
         }
 
         public class infinityMissionSlotsClass
@@ -7462,7 +7462,7 @@ namespace pspo2seSaveEditorProgram
             public pspo2seForm.infinityMissionSlotsClass infinityMissions = new pspo2seForm.infinityMissionSlotsClass();
             public long sharedMeseta;
 
-            public void set_type(pspo2seForm.SaveType new_type) => this.type = new_type;
+            public void set_type(pspo2seForm.SaveType new_type) => type = new_type;
         }
 
         public enum saveInfoDataType
@@ -7774,7 +7774,7 @@ namespace pspo2seSaveEditorProgram
             public string special_level;
             public string ext_special_level;
 
-            public int CompareTo(object obj) => obj is pspo2seForm.inventoryItemClass ? this.hex.CompareTo(((pspo2seForm.inventoryItemClass)obj).hex) : throw new ArgumentException("Object is not of type inventoryItemClass.");
+            public int CompareTo(object obj) => obj is pspo2seForm.inventoryItemClass ? hex.CompareTo(((pspo2seForm.inventoryItemClass)obj).hex) : throw new ArgumentException("Object is not of type inventoryItemClass.");
         }
 
         public class inventoryClass
@@ -7797,6 +7797,69 @@ namespace pspo2seSaveEditorProgram
             item,
             infinity_mission,
             infinity_mission_pack,
+        }
+
+        private void TxtStoryNagisaPoints_Click(object sender, EventArgs e)
+        {
+            if (legitVersion())
+                return;
+            entryForm.oldVal = run.hexAndMathFunction.hexToInt(saveData.slot[lstSaveSlotView.SelectedItems[0].Index].story_ep_2_points).ToString();
+            entryForm.newVal = run.hexAndMathFunction.hexToInt(saveData.slot[lstSaveSlotView.SelectedItems[0].Index].story_ep_2_points).ToString();
+            entryForm.description = "emilia points";
+            entryForm.maxLen = 4;
+            if (entryForm.ShowDialog((IWin32Window)this) != DialogResult.OK)
+                return;
+            long num1 = long.Parse(entryForm.newVal);
+            if (num1 != saveData.sharedMeseta && num1 <= 65535L)
+            {
+                string hex = num1.ToString("X2");
+                while (hex.Length < 4)
+                    hex = "0" + hex;
+                hex = run.hexAndMathFunction.reversehex(hex, 4);
+                int pos = mainSettings.saveStructureIndex.story_info_pos + mainSettings.saveStructureIndex.slot_size * lstSaveSlotView.SelectedItems[0].Index;
+
+                overwriteHexInBuffer(hex, pos);
+                saveData.slot[lstSaveSlotView.SelectedItems[0].Index].story_ep_2_points = hex;
+                txtStoryNagisaPoints.Text = run.hexAndMathFunction.hexToInt(saveData.slot[lstSaveSlotView.SelectedItems[0].Index].story_ep_2_points).ToString() + " Nagisa Points";
+
+            }
+            else
+            {
+                if (num1 <= 65535L)
+                    return;
+                MessageBox.Show("You must enter a value less than or equal to 65,535");
+            }
+        }
+
+        private void TxtStoryEmiliaPoints_Click(object sender, EventArgs e)
+        {
+            if (legitVersion())
+                return;
+            entryForm.oldVal = run.hexAndMathFunction.hexToInt(saveData.slot[lstSaveSlotView.SelectedItems[0].Index].story_ep_1_points).ToString();
+            entryForm.newVal = run.hexAndMathFunction.hexToInt(saveData.slot[lstSaveSlotView.SelectedItems[0].Index].story_ep_1_points).ToString();
+            entryForm.description = "emilia points";
+            entryForm.maxLen = 4;
+            if (entryForm.ShowDialog((IWin32Window)this) != DialogResult.OK)
+                return;
+            long num1 = long.Parse(entryForm.newVal);
+            if (num1 != saveData.sharedMeseta && num1 <= 65535L)
+            {
+                string hex = num1.ToString("X2");
+                while (hex.Length < 4)
+                    hex = "0" + hex;
+                hex = run.hexAndMathFunction.reversehex(hex, 4);
+                int pos = mainSettings.saveStructureIndex.story_info_pos + mainSettings.saveStructureIndex.slot_size * lstSaveSlotView.SelectedItems[0].Index;
+
+                overwriteHexInBuffer(hex, saveData.type != SaveType.PSP2I ? pos + 194 : pos + 196);
+                saveData.slot[lstSaveSlotView.SelectedItems[0].Index].story_ep_1_points = hex;
+                txtStoryEmiliaPoints.Text = run.hexAndMathFunction.hexToInt(saveData.slot[lstSaveSlotView.SelectedItems[0].Index].story_ep_1_points).ToString() + " Emilia Points";
+            }
+            else
+            {
+                if (num1 <= 65535L)
+                    return;
+                MessageBox.Show("You must enter a value less than or equal to 65,535");
+            }
         }
     }
 }
