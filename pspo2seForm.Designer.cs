@@ -5690,7 +5690,7 @@ namespace pspo2seSaveEditorProgram
             // 
             this.txtInventoryInfinityItemText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtInventoryInfinityItemText.AutoSize = true;
-            this.txtInventoryInfinityItemText.Location = new System.Drawing.Point(274, 32);
+            this.txtInventoryInfinityItemText.Location = new System.Drawing.Point(251, 35);
             this.txtInventoryInfinityItemText.Name = "txtInventoryInfinityItemText";
             this.txtInventoryInfinityItemText.Size = new System.Drawing.Size(13, 13);
             this.txtInventoryInfinityItemText.TabIndex = 50;

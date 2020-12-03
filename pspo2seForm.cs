@@ -1519,13 +1519,10 @@ namespace pspo2seSaveEditorProgram
                 while (hex1.Length < 2)
                     hex1 = "0" + hex1;
                 string hex2 = run.hexAndMathFunction.reversehex(hex1, 2);
-                string str1 = "";
-                for (int index = 0; index < 20; ++index)
-                    str1 += run.hexAndMathFunction.decimalByteConvert(savedata_decimal_array[inventoryItemClass.id + index], "hex");
+                //string str1 = "";
+                //for (int index = 0; index < 20; ++index)
+                //    str1 += run.hexAndMathFunction.decimalByteConvert(savedata_decimal_array[inventoryItemClass.id + index], "hex");
                 overwriteHexInBuffer(hex2, inventoryItemClass.id + 17);
-                string str2 = "";
-                for (int index = 0; index < 20; ++index)
-                    str2 += run.hexAndMathFunction.decimalByteConvert(savedata_decimal_array[inventoryItemClass.id + index], "hex");
                 inventoryItemClass.percent = int.Parse(newVal);
                 if (page == tabPageStorage)
                     txtStoragePercent.Text = inventoryItemClass.percent.ToString() + "%";
