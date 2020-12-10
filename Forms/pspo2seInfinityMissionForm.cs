@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 
 namespace pspo2seSaveEditorProgram
@@ -16,7 +17,32 @@ namespace pspo2seSaveEditorProgram
             set => this.loadedId = value;
         }
 
-        public pspo2seInfinityMissionForm() => this.InitializeComponent();
+
+        private void exportImageLists()
+        {
+            for (int x = 0; x < imgListMaps.Images.Count; x++)
+            {
+                System.IO.Directory.CreateDirectory("imgListMaps");
+                Image temp = imgListMaps.Images[x];
+                temp.Save("imgListMaps/image" + x + ".png");
+            }
+            for (int x = 0; x < imgListAreaThemes.Images.Count; x++)
+            {
+                System.IO.Directory.CreateDirectory("imgListAreaThemes");
+                Image temp = imgListAreaThemes.Images[x];
+                temp.Save("imgListAreaThemes/image" + x + ".png");
+            }
+            for (int x = 0; x < imgListBoss.Images.Count; x++)
+            {
+                Directory.CreateDirectory("imgListBoss");
+                Image temp = imgListBoss.Images[x];
+                temp.Save("imgListBoss/image" + x + ".png");
+            }
+        }
+        public pspo2seInfinityMissionForm()
+        {
+            this.InitializeComponent();
+        }
 
         private void pspo2seInfinityMissionForm_FormClosing(object sender, FormClosingEventArgs e)
         {

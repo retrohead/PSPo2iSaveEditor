@@ -735,56 +735,9 @@ namespace pspo2seSaveEditorProgram
         }
 
         public bool legitVersion() => false;
-
-        private void exportImageLists()
-        {
-            for (int x = 0; x < decoImageList.Images.Count; x++)
-            {
-                Directory.CreateDirectory("decoImageList");
-                Image temp = decoImageList.Images[x];
-                temp.Save("decoImageList/image" + x + ".png");
-            }
-            for (int x = 0; x < weaponWithRankImageList.Images.Count; x++)
-            {
-                Directory.CreateDirectory("WeaponWithRank");
-                Image temp = weaponWithRankImageList.Images[x];
-                temp.Save("WeaponWithRank/image" + x + ".png");
-            }
-            for (int x = 0; x < imageListWeaponElements.Images.Count; x++)
-            {
-                Directory.CreateDirectory("WeaponElements");
-                Image temp = imageListWeaponElements.Images[x];
-                temp.Save("WeaponElements/image" + x + ".png");
-            }
-            for (int x = 0; x < armourImageList.Images.Count; x++)
-            {
-                Directory.CreateDirectory("armourImageList");
-                Image temp = armourImageList.Images[x];
-                temp.Save("armourImageList/image" + x + ".png");
-            }
-            for (int x = 0; x < itemImageList.Images.Count; x++)
-            {
-                Directory.CreateDirectory("itemImageList");
-                Image temp = itemImageList.Images[x];
-                temp.Save("itemImageList/image" + x + ".png");
-            }
-            for (int x = 0; x < clothesImageList.Images.Count; x++)
-            {
-                Directory.CreateDirectory("clothesImageList");
-                Image temp = clothesImageList.Images[x];
-                temp.Save("clothesImageList/image" + x + ".png");
-            }
-            for (int x = 0; x < paImageList.Images.Count; x++)
-            {
-                Directory.CreateDirectory("paImageList");
-                Image temp = paImageList.Images[x];
-                temp.Save("paImageList/image" + x + ".png");
-            }
-        }
         public pspo2seForm()
         {
             InitializeComponent();
-            exportImageLists();
             if (!Directory.Exists(Directory.GetCurrentDirectory() + "\\data"))
             {
                 Directory.CreateDirectory(Directory.GetCurrentDirectory() + "\\data\\databases");
