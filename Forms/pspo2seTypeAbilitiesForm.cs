@@ -24,130 +24,130 @@ namespace pspo2seSaveEditorProgram
 
         public pspo2seForm.jobClass[] oldJobs
         {
-            get => this.oldJobInfo;
-            set => this.oldJobInfo = value;
+            get => oldJobInfo;
+            set => oldJobInfo = value;
         }
 
         public pspo2seForm.jobClass newJob
         {
-            get => this.newJobInfo;
-            set => this.newJobInfo = value;
+            get => newJobInfo;
+            set => newJobInfo = value;
         }
 
         public pspo2seForm.jobType selectedJob
         {
-            get => this.selected_job;
-            set => this.selected_job = value;
+            get => selected_job;
+            set => selected_job = value;
         }
 
         public int max_abilities
         {
-            get => this.parent_max_abilities;
-            set => this.parent_max_abilities = value;
+            get => parent_max_abilities;
+            set => parent_max_abilities = value;
         }
 
         public string character_name
         {
-            get => this.char_name;
-            set => this.char_name = value;
+            get => char_name;
+            set => char_name = value;
         }
 
         public pspo2seAbilityDb abilityDb
         {
-            get => this.parentsAbilityDb;
-            set => this.parentsAbilityDb = value;
+            get => parentsAbilityDb;
+            set => parentsAbilityDb = value;
         }
 
         public pspo2seForm.SaveType saveType
         {
-            get => this.save_type;
-            set => this.save_type = value;
+            get => save_type;
+            set => save_type = value;
         }
 
         public pspo2seTypeAbilitiesForm()
         {
-            this.InitializeComponent();
-            this.radioBtnReal.Checked = true;
-            this.radioBtnFake.Checked = false;
+            InitializeComponent();
+            radioBtnReal.Checked = true;
+            radioBtnFake.Checked = false;
         }
 
         public void loadCurrentTypeInformation()
         {
-            if (this.oldJobs[(int)this.selected_job] == null)
+            if (oldJobs[(int)selected_job] == null)
             {
                 int num = (int)MessageBox.Show("Current job information was not set");
-                this.DialogResult = DialogResult.Cancel;
-                this.Dispose();
+                DialogResult = DialogResult.Cancel;
+                Dispose();
             }
             else
             {
-                this.newJob = this.oldJobs[(int)this.selected_job];
-                this.listTypeAbilities();
-                this.txtTypeName.Text = this.newJob.job.ToString();
-                this.txtTypeLevel.Text = "LV" + (object)this.newJob.level;
+                newJob = oldJobs[(int)selected_job];
+                listTypeAbilities();
+                txtTypeName.Text = newJob.job.ToString();
+                txtTypeLevel.Text = "LV" + (object)newJob.level;
             }
         }
 
         private void resetTypeAbilitySlots()
         {
-            this.imgSlot1.Image = (Image)Resources.TypeAbilitiesFree;
-            this.imgSlot2.Image = (Image)Resources.TypeAbilitiesFree;
-            this.imgSlot3.Image = (Image)Resources.TypeAbilitiesFree;
-            this.imgSlot4.Image = (Image)Resources.TypeAbilitiesFree;
-            this.imgSlot5.Image = (Image)Resources.TypeAbilitiesFree;
-            this.imgSlot6.Image = (Image)Resources.TypeAbilitiesFree;
-            this.imgSlot7.Image = (Image)Resources.TypeAbilitiesFree;
-            this.imgSlot8.Image = (Image)Resources.TypeAbilitiesFree;
-            this.imgSlot9.Image = (Image)Resources.TypeAbilitiesFree;
-            this.imgSlot10.Image = (Image)Resources.TypeAbilitiesFree;
-            this.imgSlot11.Image = (Image)Resources.TypeAbilitiesFree;
-            this.imgSlot12.Image = (Image)Resources.TypeAbilitiesFree;
-            this.imgSlot1.Visible = true;
-            this.imgSlot2.Visible = true;
-            this.imgSlot3.Visible = true;
-            this.imgSlot4.Visible = true;
-            this.imgSlot5.Visible = false;
-            this.imgSlot6.Visible = false;
-            this.imgSlot7.Visible = false;
-            this.imgSlot8.Visible = false;
-            this.imgSlot9.Visible = false;
-            this.imgSlot10.Visible = false;
-            this.imgSlot11.Visible = false;
-            this.imgSlot12.Visible = false;
+            imgSlot1.Image = (Image)Resources.TypeAbilitiesFree;
+            imgSlot2.Image = (Image)Resources.TypeAbilitiesFree;
+            imgSlot3.Image = (Image)Resources.TypeAbilitiesFree;
+            imgSlot4.Image = (Image)Resources.TypeAbilitiesFree;
+            imgSlot5.Image = (Image)Resources.TypeAbilitiesFree;
+            imgSlot6.Image = (Image)Resources.TypeAbilitiesFree;
+            imgSlot7.Image = (Image)Resources.TypeAbilitiesFree;
+            imgSlot8.Image = (Image)Resources.TypeAbilitiesFree;
+            imgSlot9.Image = (Image)Resources.TypeAbilitiesFree;
+            imgSlot10.Image = (Image)Resources.TypeAbilitiesFree;
+            imgSlot11.Image = (Image)Resources.TypeAbilitiesFree;
+            imgSlot12.Image = (Image)Resources.TypeAbilitiesFree;
+            imgSlot1.Visible = true;
+            imgSlot2.Visible = true;
+            imgSlot3.Visible = true;
+            imgSlot4.Visible = true;
+            imgSlot5.Visible = false;
+            imgSlot6.Visible = false;
+            imgSlot7.Visible = false;
+            imgSlot8.Visible = false;
+            imgSlot9.Visible = false;
+            imgSlot10.Visible = false;
+            imgSlot11.Visible = false;
+            imgSlot12.Visible = false;
         }
 
         private void allowedAbilitySlotsLogic()
         {
-            this.allowedSlots = 4;
-            int num = this.newJob.level;
-            if (!this.legitMode)
-                num = this.saveType != pspo2seForm.SaveType.PSP2I ? 30 : 31;
+            allowedSlots = 4;
+            int num = newJob.level;
+            if (!legitMode)
+                num = saveType != pspo2seForm.SaveType.PSP2I ? 30 : 31;
             for (int index = 1; index <= num; ++index)
             {
                 switch (index)
                 {
                     case 5:
-                        this.imgSlot5.Visible = true;
-                        ++this.allowedSlots;
+                        imgSlot5.Visible = true;
+                        ++allowedSlots;
                         break;
                     case 10:
-                        this.imgSlot6.Visible = true;
-                        ++this.allowedSlots;
+                        imgSlot6.Visible = true;
+                        ++allowedSlots;
                         break;
                     case 15:
-                        this.imgSlot7.Visible = true;
-                        ++this.allowedSlots;
+                        imgSlot7.Visible = true;
+                        ++allowedSlots;
                         break;
                     case 20:
-                        this.imgSlot8.Visible = true;
-                        ++this.allowedSlots;
+                        imgSlot8.Visible = true;
+                        ++allowedSlots;
                         break;
                     case 31:
-                        this.imgSlot9.Visible = true;
-                        this.imgSlot10.Visible = true;
-                        this.imgSlot11.Visible = true;
-                        this.imgSlot12.Visible = true;
-                        this.allowedSlots = 12;
+                        imgSlot9.Visible = true;
+                        imgSlot10.Visible = true;
+                        imgSlot11.Visible = true;
+                        imgSlot12.Visible = true;
+                        allowedSlots = 12;
                         break;
                 }
             }
@@ -155,24 +155,24 @@ namespace pspo2seSaveEditorProgram
 
         private void usedSlotsLogic()
         {
-            this.allowEdit = true;
-            this.usedSlots = 0;
-            if (!this.legitMode)
+            allowEdit = true;
+            usedSlots = 0;
+            if (!legitMode)
             {
-                this.allowedSlots = this.saveType != pspo2seForm.SaveType.PSP2I ? 8 : 12;
-                this.usedSlots = this.allowedSlots;
-                for (int index = 0; index < this.listOfAbilitiesSlotCount; ++index)
+                allowedSlots = saveType != pspo2seForm.SaveType.PSP2I ? 8 : 12;
+                usedSlots = allowedSlots;
+                for (int index = 0; index < listOfAbilitiesSlotCount; ++index)
                 {
-                    if (this.listOfAbilities[index].name == "No Ability")
-                        --this.usedSlots;
+                    if (listOfAbilities[index].name == "No Ability")
+                        --usedSlots;
                 }
             }
             else
             {
-                for (int index = 0; index < this.listViewAbilities.Items.Count; ++index)
+                for (int index = 0; index < listViewAbilities.Items.Count; ++index)
                 {
-                    pspo2seAbilityDb.abilityDb_AbilitiyClass abilityInDb = this.abilityDb.findAbilityInDb(this.listViewAbilities.Items[index].SubItems[2].Text);
-                    if (this.saveType == pspo2seForm.SaveType.PSP2I)
+                    pspo2seAbilityDb.abilityDb_AbilitiyClass abilityInDb = abilityDb.findAbilityInDb(listViewAbilities.Items[index].SubItems[2].Text);
+                    if (saveType == pspo2seForm.SaveType.PSP2I)
                     {
                         abilityInDb.slots = abilityInDb.slots_inf;
                         abilityInDb.hu_lvl = abilityInDb.hu_lvl_inf;
@@ -181,55 +181,55 @@ namespace pspo2seSaveEditorProgram
                         abilityInDb.va_lvl = abilityInDb.va_lvl_inf;
                     }
                     if (abilityInDb.slots > 0)
-                        this.usedSlots += abilityInDb.slots;
+                        usedSlots += abilityInDb.slots;
                     else if (abilityInDb.name != "No Ability")
                     {
                         int num = (int)MessageBox.Show("You have an ability equipped with unknown slot costs\r\nYou will be unable to add abilities at the moment\r\nbut you can still remove the unknown ability.\r\n\r\nPlease wait for a future abilities database update\r\nfor full functionality\r\n\r\nThe offending ability is " + abilityInDb.name + " [" + abilityInDb.hex + "]", "Database Info Missing", MessageBoxButtons.OK, MessageBoxIcon.Hand);
-                        this.allowEdit = false;
-                        this.usedSlots = 0;
+                        allowEdit = false;
+                        usedSlots = 0;
                         break;
                     }
                 }
             }
-            for (int index = 1; index <= this.usedSlots; ++index)
+            for (int index = 1; index <= usedSlots; ++index)
             {
                 switch (index)
                 {
                     case 1:
-                        this.imgSlot1.Image = (Image)Resources.TypeAbilitiesUsed;
+                        imgSlot1.Image = (Image)Resources.TypeAbilitiesUsed;
                         break;
                     case 2:
-                        this.imgSlot2.Image = (Image)Resources.TypeAbilitiesUsed;
+                        imgSlot2.Image = (Image)Resources.TypeAbilitiesUsed;
                         break;
                     case 3:
-                        this.imgSlot3.Image = (Image)Resources.TypeAbilitiesUsed;
+                        imgSlot3.Image = (Image)Resources.TypeAbilitiesUsed;
                         break;
                     case 4:
-                        this.imgSlot4.Image = (Image)Resources.TypeAbilitiesUsed;
+                        imgSlot4.Image = (Image)Resources.TypeAbilitiesUsed;
                         break;
                     case 5:
-                        this.imgSlot5.Image = (Image)Resources.TypeAbilitiesUsed;
+                        imgSlot5.Image = (Image)Resources.TypeAbilitiesUsed;
                         break;
                     case 6:
-                        this.imgSlot6.Image = (Image)Resources.TypeAbilitiesUsed;
+                        imgSlot6.Image = (Image)Resources.TypeAbilitiesUsed;
                         break;
                     case 7:
-                        this.imgSlot7.Image = (Image)Resources.TypeAbilitiesUsed;
+                        imgSlot7.Image = (Image)Resources.TypeAbilitiesUsed;
                         break;
                     case 8:
-                        this.imgSlot8.Image = (Image)Resources.TypeAbilitiesUsed;
+                        imgSlot8.Image = (Image)Resources.TypeAbilitiesUsed;
                         break;
                     case 9:
-                        this.imgSlot9.Image = (Image)Resources.TypeAbilitiesUsed;
+                        imgSlot9.Image = (Image)Resources.TypeAbilitiesUsed;
                         break;
                     case 10:
-                        this.imgSlot10.Image = (Image)Resources.TypeAbilitiesUsed;
+                        imgSlot10.Image = (Image)Resources.TypeAbilitiesUsed;
                         break;
                     case 11:
-                        this.imgSlot11.Image = (Image)Resources.TypeAbilitiesUsed;
+                        imgSlot11.Image = (Image)Resources.TypeAbilitiesUsed;
                         break;
                     case 12:
-                        this.imgSlot12.Image = (Image)Resources.TypeAbilitiesUsed;
+                        imgSlot12.Image = (Image)Resources.TypeAbilitiesUsed;
                         break;
                 }
             }
@@ -237,66 +237,66 @@ namespace pspo2seSaveEditorProgram
 
         private void typeAbilitySlotLogic()
         {
-            this.resetTypeAbilitySlots();
-            this.allowedAbilitySlotsLogic();
-            this.usedSlotsLogic();
-            if (!this.allowEdit)
-                this.txtUsedSlots.Text = "unk_/" + (object)this.allowedSlots;
+            resetTypeAbilitySlots();
+            allowedAbilitySlotsLogic();
+            usedSlotsLogic();
+            if (!allowEdit)
+                txtUsedSlots.Text = "unk_/" + (object)allowedSlots;
             else
-                this.txtUsedSlots.Text = this.usedSlots.ToString() + "/" + (object)this.allowedSlots;
+                txtUsedSlots.Text = usedSlots.ToString() + "/" + (object)allowedSlots;
         }
 
         private void listTypeAbilities()
         {
-            this.chkListAll.Visible = false;
-            this.view = pspo2seTypeAbilitiesForm.viewType.equipped;
-            this.btnChange.Text = "add";
-            this.btnRemove.Text = "remove";
-            this.listViewAbilities.Items.Clear();
-            this.listOfAbilitiesSlotCount = 0;
-            for (int index = 0; index < this.max_abilities; ++index)
+            chkListAll.Visible = false;
+            view = pspo2seTypeAbilitiesForm.viewType.equipped;
+            btnChange.Text = "add";
+            btnRemove.Text = "remove";
+            listViewAbilities.Items.Clear();
+            listOfAbilitiesSlotCount = 0;
+            for (int index = 0; index < max_abilities; ++index)
             {
-                pspo2seAbilityDb.abilityDb_AbilitiyClass abilityInDb = this.abilityDb.findAbilityInDb(this.newJob.attachedAbilities.Substring(index * 2, 2));
+                pspo2seAbilityDb.abilityDb_AbilitiyClass abilityInDb = abilityDb.findAbilityInDb(newJob.attachedAbilities.Substring(index * 2, 2));
                 if (abilityInDb.name == "")
                     abilityInDb.name = abilityInDb.name_jp;
                 if (abilityInDb.hex != "")
                 {
-                    if (this.saveType == pspo2seForm.SaveType.PSP2I)
+                    if (saveType == pspo2seForm.SaveType.PSP2I)
                         abilityInDb.slots = abilityInDb.slots_inf;
                     if (abilityInDb.slots != 0)
                     {
-                        ListViewItem listViewItem = !this.legitMode ? new ListViewItem("1", 0) : new ListViewItem(string.Concat((object)abilityInDb.slots), 0);
+                        ListViewItem listViewItem = !legitMode ? new ListViewItem("1", 0) : new ListViewItem(string.Concat((object)abilityInDb.slots), 0);
                         listViewItem.SubItems.Add(abilityInDb.name);
                         listViewItem.SubItems.Add(abilityInDb.hex);
-                        this.listViewAbilities.Items.Add(listViewItem);
+                        listViewAbilities.Items.Add(listViewItem);
                     }
-                    this.listOfAbilities[this.listOfAbilitiesSlotCount] = new pspo2seTypeAbilitiesForm.abilitySlotsType();
-                    this.listOfAbilities[this.listOfAbilitiesSlotCount].hex = abilityInDb.hex;
-                    this.listOfAbilities[this.listOfAbilitiesSlotCount].name = abilityInDb.name;
-                    ++this.listOfAbilitiesSlotCount;
+                    listOfAbilities[listOfAbilitiesSlotCount] = new pspo2seTypeAbilitiesForm.abilitySlotsType();
+                    listOfAbilities[listOfAbilitiesSlotCount].hex = abilityInDb.hex;
+                    listOfAbilities[listOfAbilitiesSlotCount].name = abilityInDb.name;
+                    ++listOfAbilitiesSlotCount;
                 }
             }
-            this.txtAbilityName.Text = this.newJob.attachedAbilities;
-            this.txtCharName.Text = this.character_name;
-            this.typeAbilitySlotLogic();
-            this.showSelectedAbility();
+            txtAbilityName.Text = newJob.attachedAbilities;
+            txtCharName.Text = character_name;
+            typeAbilitySlotLogic();
+            showSelectedAbility();
         }
 
         private void listAvailableTypeAbilities()
         {
             if (Program.form.legitVersion())
-                this.chkListAll.Visible = false;
+                chkListAll.Visible = false;
             else
-                this.chkListAll.Visible = true;
-            this.view = pspo2seTypeAbilitiesForm.viewType.available;
-            this.btnChange.Text = "apply";
-            this.btnRemove.Text = "cancel";
-            this.listViewAbilities.Items.Clear();
-            this.listOfAbilitiesSlotCount = 0;
-            for (int index = 0; index < this.abilityDb.ability_db_filled; ++index)
+                chkListAll.Visible = true;
+            view = pspo2seTypeAbilitiesForm.viewType.available;
+            btnChange.Text = "apply";
+            btnRemove.Text = "cancel";
+            listViewAbilities.Items.Clear();
+            listOfAbilitiesSlotCount = 0;
+            for (int index = 0; index < abilityDb.ability_db_filled; ++index)
             {
-                pspo2seAbilityDb.abilityDb_AbilitiyClass abilityDbAbilitiyClass = this.abilityDb.ability_db.ability[index];
-                if (this.saveType == pspo2seForm.SaveType.PSP2I)
+                pspo2seAbilityDb.abilityDb_AbilitiyClass abilityDbAbilitiyClass = abilityDb.ability_db.ability[index];
+                if (saveType == pspo2seForm.SaveType.PSP2I)
                 {
                     abilityDbAbilitiyClass.slots = abilityDbAbilitiyClass.slots_inf;
                     abilityDbAbilitiyClass.hu_lvl = abilityDbAbilitiyClass.hu_lvl_inf;
@@ -311,11 +311,11 @@ namespace pspo2seSaveEditorProgram
                     bool flag = false;
                     if (abilityDbAbilitiyClass.slots != 0)
                     {
-                        if (!this.canFindAbilityInAttached(abilityDbAbilitiyClass.hex))
+                        if (!canFindAbilityInAttached(abilityDbAbilitiyClass.hex))
                         {
-                            if (!this.chkListAll.Checked)
+                            if (!chkListAll.Checked)
                             {
-                                if (abilityDbAbilitiyClass.hu_lvl <= this.oldJobs[0].level && abilityDbAbilitiyClass.hu_lvl > 0 || abilityDbAbilitiyClass.ra_lvl <= this.oldJobs[1].level && abilityDbAbilitiyClass.ra_lvl > 0 || (abilityDbAbilitiyClass.fo_lvl <= this.oldJobs[2].level && abilityDbAbilitiyClass.fo_lvl > 0 || abilityDbAbilitiyClass.va_lvl <= this.oldJobs[3].level && abilityDbAbilitiyClass.va_lvl > 0) || abilityDbAbilitiyClass.hu_lvl == 0 && abilityDbAbilitiyClass.ra_lvl == 0 && (abilityDbAbilitiyClass.fo_lvl == 0 && abilityDbAbilitiyClass.va_lvl == 0))
+                                if (abilityDbAbilitiyClass.hu_lvl <= oldJobs[0].level && abilityDbAbilitiyClass.hu_lvl > 0 || abilityDbAbilitiyClass.ra_lvl <= oldJobs[1].level && abilityDbAbilitiyClass.ra_lvl > 0 || (abilityDbAbilitiyClass.fo_lvl <= oldJobs[2].level && abilityDbAbilitiyClass.fo_lvl > 0 || abilityDbAbilitiyClass.va_lvl <= oldJobs[3].level && abilityDbAbilitiyClass.va_lvl > 0) || abilityDbAbilitiyClass.hu_lvl == 0 && abilityDbAbilitiyClass.ra_lvl == 0 && (abilityDbAbilitiyClass.fo_lvl == 0 && abilityDbAbilitiyClass.va_lvl == 0))
                                     flag = true;
                             }
                             else
@@ -323,112 +323,112 @@ namespace pspo2seSaveEditorProgram
                         }
                         if (flag)
                         {
-                            ListViewItem listViewItem = !this.legitMode ? new ListViewItem("1", 0) : new ListViewItem(string.Concat((object)abilityDbAbilitiyClass.slots), 0);
+                            ListViewItem listViewItem = !legitMode ? new ListViewItem("1", 0) : new ListViewItem(string.Concat((object)abilityDbAbilitiyClass.slots), 0);
                             listViewItem.SubItems.Add(abilityDbAbilitiyClass.name);
                             listViewItem.SubItems.Add(abilityDbAbilitiyClass.hex);
-                            this.listViewAbilities.Items.Add(listViewItem);
+                            listViewAbilities.Items.Add(listViewItem);
                         }
                     }
-                    this.listOfAbilities[this.listOfAbilitiesSlotCount] = new pspo2seTypeAbilitiesForm.abilitySlotsType();
-                    this.listOfAbilities[this.listOfAbilitiesSlotCount].hex = abilityDbAbilitiyClass.hex;
-                    this.listOfAbilities[this.listOfAbilitiesSlotCount].name = abilityDbAbilitiyClass.name;
-                    this.listOfAbilities[this.listOfAbilitiesSlotCount].valid = flag;
-                    ++this.listOfAbilitiesSlotCount;
+                    listOfAbilities[listOfAbilitiesSlotCount] = new pspo2seTypeAbilitiesForm.abilitySlotsType();
+                    listOfAbilities[listOfAbilitiesSlotCount].hex = abilityDbAbilitiyClass.hex;
+                    listOfAbilities[listOfAbilitiesSlotCount].name = abilityDbAbilitiyClass.name;
+                    listOfAbilities[listOfAbilitiesSlotCount].valid = flag;
+                    ++listOfAbilitiesSlotCount;
                 }
             }
-            this.txtAbilityName.Text = this.newJob.attachedAbilities;
-            this.txtCharName.Text = this.character_name;
-            this.showSelectedAbility();
+            txtAbilityName.Text = newJob.attachedAbilities;
+            txtCharName.Text = character_name;
+            showSelectedAbility();
         }
 
         public void showSelectedAbility()
         {
             pspo2seAbilityDb.abilityDb_AbilitiyClass abilityDbAbilitiyClass = new pspo2seAbilityDb.abilityDb_AbilitiyClass();
-            if (this.listViewAbilities.SelectedItems.Count == 0)
+            if (listViewAbilities.SelectedItems.Count == 0)
             {
-                if (this.listViewAbilities.Items.Count > 0)
+                if (listViewAbilities.Items.Count > 0)
                 {
-                    this.listViewAbilities.Items[0].Selected = true;
-                    abilityDbAbilitiyClass = this.abilityDb.findAbilityInDb(this.listViewAbilities.Items[0].SubItems[2].Text);
+                    listViewAbilities.Items[0].Selected = true;
+                    abilityDbAbilitiyClass = abilityDb.findAbilityInDb(listViewAbilities.Items[0].SubItems[2].Text);
                 }
             }
             else
-                abilityDbAbilitiyClass = this.abilityDb.findAbilityInDb(this.listViewAbilities.SelectedItems[0].SubItems[2].Text);
-            this.txtAbilityName.Text = abilityDbAbilitiyClass.name;
-            this.txtAbilityName_jp.Text = abilityDbAbilitiyClass.name_jp;
-            this.txtAbilityDesc.Text = abilityDbAbilitiyClass.desc;
-            this.imgAbilityCost.Visible = true;
+                abilityDbAbilitiyClass = abilityDb.findAbilityInDb(listViewAbilities.SelectedItems[0].SubItems[2].Text);
+            txtAbilityName.Text = abilityDbAbilitiyClass.name;
+            txtAbilityName_jp.Text = abilityDbAbilitiyClass.name_jp;
+            txtAbilityDesc.Text = abilityDbAbilitiyClass.desc;
+            imgAbilityCost.Visible = true;
             switch (abilityDbAbilitiyClass.slots)
             {
                 case 1:
-                    this.imgAbilityCost.Image = (Image)Resources.TypeAbilities_cost_1;
+                    imgAbilityCost.Image = (Image)Resources.TypeAbilities_cost_1;
                     break;
                 case 2:
-                    this.imgAbilityCost.Image = (Image)Resources.TypeAbilities_cost_2;
+                    imgAbilityCost.Image = (Image)Resources.TypeAbilities_cost_2;
                     break;
                 case 3:
-                    this.imgAbilityCost.Image = (Image)Resources.TypeAbilities_cost_3;
+                    imgAbilityCost.Image = (Image)Resources.TypeAbilities_cost_3;
                     break;
                 case 4:
-                    this.imgAbilityCost.Image = (Image)Resources.TypeAbilities_cost_4;
+                    imgAbilityCost.Image = (Image)Resources.TypeAbilities_cost_4;
                     break;
                 default:
-                    this.imgAbilityCost.Visible = false;
+                    imgAbilityCost.Visible = false;
                     break;
             }
         }
 
         private void listViewAbilities_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (this.listViewAbilities.SelectedItems.Count <= 0)
+            if (listViewAbilities.SelectedItems.Count <= 0)
                 return;
-            this.showSelectedAbility();
+            showSelectedAbility();
         }
 
         private void pspo2seTypeAbilitiesForm_Load(object sender, EventArgs e)
         {
             if (Program.form.legitVersion())
             {
-                this.radioBtnReal.Visible = false;
-                this.radioBtnFake.Visible = false;
+                radioBtnReal.Visible = false;
+                radioBtnFake.Visible = false;
             }
-            this.loadCurrentTypeInformation();
+            loadCurrentTypeInformation();
         }
 
         private void radioBtnReal_CheckedChanged(object sender, EventArgs e)
         {
-            if (!this.radioBtnReal.Checked)
+            if (!radioBtnReal.Checked)
                 return;
-            this.legitMode = true;
-            this.listTypeAbilities();
-            this.typeAbilitySlotLogic();
+            legitMode = true;
+            listTypeAbilities();
+            typeAbilitySlotLogic();
         }
 
         private void radioBtnFake_CheckedChanged(object sender, EventArgs e)
         {
-            if (!this.radioBtnFake.Checked)
+            if (!radioBtnFake.Checked)
                 return;
-            this.legitMode = false;
-            this.listTypeAbilities();
-            this.typeAbilitySlotLogic();
+            legitMode = false;
+            listTypeAbilities();
+            typeAbilitySlotLogic();
         }
 
         private int findAbilityPos(string hex)
         {
-            for (int index = 0; index < this.max_abilities; ++index)
+            for (int index = 0; index < max_abilities; ++index)
             {
-                if (this.newJob.attachedAbilities.Substring(index * 2, 2) == hex)
+                if (newJob.attachedAbilities.Substring(index * 2, 2) == hex)
                     return index * 2;
             }
-            int num = (int)MessageBox.Show("Fatal Error!\r\nThe selected ability " + hex + " was not found in the attached abilities\r\n" + this.newJob.attachedAbilities);
+            int num = (int)MessageBox.Show("Fatal Error!\r\nThe selected ability " + hex + " was not found in the attached abilities\r\n" + newJob.attachedAbilities);
             return 0;
         }
 
         private bool canFindAbilityInAttached(string hex)
         {
-            for (int index = 0; index < this.max_abilities; ++index)
+            for (int index = 0; index < max_abilities; ++index)
             {
-                if (this.newJob.attachedAbilities.Substring(index * 2, 2) == hex)
+                if (newJob.attachedAbilities.Substring(index * 2, 2) == hex)
                     return true;
             }
             return false;
@@ -436,28 +436,28 @@ namespace pspo2seSaveEditorProgram
 
         private void removeAbility(string hex)
         {
-            int abilityPos = this.findAbilityPos(hex);
-            string str1 = this.newJob.attachedAbilities.Substring(0, abilityPos);
-            string str2 = this.newJob.attachedAbilities.Substring(abilityPos + 2, this.newJob.attachedAbilities.Length - str1.Length - 2);
-            this.newJob.attachedAbilities = str1 + "00" + str2;
-            this.listTypeAbilities();
+            int abilityPos = findAbilityPos(hex);
+            string str1 = newJob.attachedAbilities.Substring(0, abilityPos);
+            string str2 = newJob.attachedAbilities.Substring(abilityPos + 2, newJob.attachedAbilities.Length - str1.Length - 2);
+            newJob.attachedAbilities = str1 + "00" + str2;
+            listTypeAbilities();
         }
 
         private void addAbility(string hex)
         {
-            int abilityPos = this.findAbilityPos("00");
-            string str1 = this.newJob.attachedAbilities.Substring(0, abilityPos);
-            string str2 = this.newJob.attachedAbilities.Substring(abilityPos + 2, this.newJob.attachedAbilities.Length - str1.Length - 2);
-            this.newJob.attachedAbilities = str1 + hex + str2;
+            int abilityPos = findAbilityPos("00");
+            string str1 = newJob.attachedAbilities.Substring(0, abilityPos);
+            string str2 = newJob.attachedAbilities.Substring(abilityPos + 2, newJob.attachedAbilities.Length - str1.Length - 2);
+            newJob.attachedAbilities = str1 + hex + str2;
         }
 
         private void btnRemove_Click(object sender, EventArgs e)
         {
-            if (this.view == pspo2seTypeAbilitiesForm.viewType.equipped)
+            if (view == pspo2seTypeAbilitiesForm.viewType.equipped)
             {
-                if (this.listViewAbilities.SelectedItems.Count > 0)
+                if (listViewAbilities.SelectedItems.Count > 0)
                 {
-                    this.removeAbility(this.listViewAbilities.SelectedItems[0].SubItems[2].Text);
+                    removeAbility(listViewAbilities.SelectedItems[0].SubItems[2].Text);
                 }
                 else
                 {
@@ -465,25 +465,25 @@ namespace pspo2seSaveEditorProgram
                 }
             }
             else
-                this.listTypeAbilities();
+                listTypeAbilities();
         }
 
         private void btnChange_Click(object sender, EventArgs e)
         {
             bool flag = false;
-            if (this.view == pspo2seTypeAbilitiesForm.viewType.equipped)
+            if (view == pspo2seTypeAbilitiesForm.viewType.equipped)
             {
-                if (!this.allowEdit)
+                if (!allowEdit)
                 {
                     int num1 = (int)MessageBox.Show("You must remove any unknown abilities first!\r\nPlease wait for a database update for better functionality", "Unknown ability detected", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                 }
-                else if (this.usedSlots >= this.allowedSlots)
+                else if (usedSlots >= allowedSlots)
                 {
                     if (Program.form.legitVersion())
                     {
                         int num2 = (int)MessageBox.Show("You have reached the maximum slots\r\nRemove an ability to add a new one", "Maximum Slots Reached", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     }
-                    else if (this.radioBtnFake.Checked)
+                    else if (radioBtnFake.Checked)
                     {
                         int num3 = (int)MessageBox.Show("You have reached the maximum slots\r\nRemove an ability to add a new one", "Maximum Slots Reached", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     }
@@ -493,22 +493,22 @@ namespace pspo2seSaveEditorProgram
                     }
                 }
                 else
-                    this.listAvailableTypeAbilities();
+                    listAvailableTypeAbilities();
             }
             else
             {
-                pspo2seAbilityDb.abilityDb_AbilitiyClass abilityInDb = this.abilityDb.findAbilityInDb(this.listViewAbilities.SelectedItems[0].SubItems[2].Text);
-                if (this.legitMode)
+                pspo2seAbilityDb.abilityDb_AbilitiyClass abilityInDb = abilityDb.findAbilityInDb(listViewAbilities.SelectedItems[0].SubItems[2].Text);
+                if (legitMode)
                 {
-                    if (this.usedSlots + abilityInDb.slots <= this.allowedSlots)
+                    if (usedSlots + abilityInDb.slots <= allowedSlots)
                         flag = true;
                 }
-                else if (this.allowedSlots > this.usedSlots)
+                else if (allowedSlots > usedSlots)
                     flag = true;
                 if (flag)
                 {
-                    this.addAbility(abilityInDb.hex);
-                    this.listTypeAbilities();
+                    addAbility(abilityInDb.hex);
+                    listTypeAbilities();
                 }
                 else
                 {
@@ -517,7 +517,7 @@ namespace pspo2seSaveEditorProgram
             }
         }
 
-        private void chkListAll_CheckedChanged(object sender, EventArgs e) => this.listAvailableTypeAbilities();
+        private void chkListAll_CheckedChanged(object sender, EventArgs e) => listAvailableTypeAbilities();
 
         private enum viewType
         {
